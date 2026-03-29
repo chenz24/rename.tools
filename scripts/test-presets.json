@@ -1,0 +1,581 @@
+{
+  "presets": [
+    {
+      "name": "🎯 基础序列号测试",
+      "description": "最简单的序列号添加 - 001, 002, 003",
+      "category": "test",
+      "rules": [
+        {
+          "type": "sequence",
+          "config": {
+            "seqType": "numeric",
+            "start": 1,
+            "step": 1,
+            "padding": 3,
+            "position": "start",
+            "template": "",
+            "scope": "global",
+            "sortBeforeNumbering": false,
+            "preserveOriginal": false,
+            "hierarchical": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "📁 文件夹独立编号",
+      "description": "每个文件夹内独立编号 01, 02",
+      "category": "test",
+      "rules": [
+        {
+          "type": "sequence",
+          "config": {
+            "seqType": "numeric",
+            "start": 1,
+            "step": 1,
+            "padding": 2,
+            "position": "start",
+            "template": "",
+            "scope": "perFolder",
+            "sortBeforeNumbering": false,
+            "preserveOriginal": false,
+            "hierarchical": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "🔢 层级编号演示",
+      "description": "生成 1.1, 1.2, 2.1 这样的层级编号",
+      "category": "test",
+      "rules": [
+        {
+          "type": "sequence",
+          "config": {
+            "seqType": "numeric",
+            "start": 1,
+            "step": 1,
+            "padding": 1,
+            "position": "start",
+            "template": "{n}_{name}",
+            "scope": "perFolder",
+            "sortBeforeNumbering": true,
+            "sortBy": "name",
+            "sortOrder": "asc",
+            "naturalSort": true,
+            "preserveOriginal": false,
+            "hierarchical": true,
+            "hierarchySeparator": "."
+          }
+        }
+      ]
+    },
+    {
+      "name": "🔤 字母序列",
+      "description": "使用字母 A, B, C 作为序列号",
+      "category": "test",
+      "rules": [
+        {
+          "type": "sequence",
+          "config": {
+            "seqType": "alpha",
+            "start": 1,
+            "step": 1,
+            "padding": 0,
+            "position": "start",
+            "template": "",
+            "scope": "global",
+            "sortBeforeNumbering": false,
+            "preserveOriginal": false,
+            "hierarchical": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "♻️ 保留并重格式化数字",
+      "description": "提取文件名中的数字并格式化为统一宽度",
+      "category": "test",
+      "rules": [
+        {
+          "type": "sequence",
+          "config": {
+            "seqType": "numeric",
+            "start": 1,
+            "step": 1,
+            "padding": 3,
+            "position": "start",
+            "template": "{n}_{name}",
+            "scope": "global",
+            "sortBeforeNumbering": false,
+            "preserveOriginal": true,
+            "preservePattern": "(\\d+)",
+            "hierarchical": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "🧹 清理特殊字符",
+      "description": "移除多余空格和符号，统一格式",
+      "category": "test",
+      "rules": [
+        {
+          "type": "removeCleanup",
+          "config": {
+            "mode": "cleanup",
+            "direction": "start",
+            "count": 0,
+            "rangeStart": 0,
+            "rangeEnd": 0,
+            "removeDigits": false,
+            "removeSymbols": true,
+            "removeSpaces": true,
+            "removeChinese": false,
+            "removeEnglish": false
+          }
+        },
+        {
+          "type": "caseStyle",
+          "config": {
+            "mode": "lowercase",
+            "style": "spaceToUnderscore"
+          }
+        }
+      ]
+    },
+    {
+      "name": "📅 添加日期前缀",
+      "description": "在文件名前添加当前日期 {date}",
+      "category": "test",
+      "rules": [
+        {
+          "type": "insert",
+          "config": {
+            "text": "{date}_",
+            "position": "start",
+            "index": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "📷 照片整理方案",
+      "description": "移除 IMG_ 前缀，按文件夹编号",
+      "category": "scenario",
+      "rules": [
+        {
+          "type": "findReplace",
+          "config": {
+            "find": "IMG_",
+            "replace": "",
+            "caseSensitive": false,
+            "matchAll": true,
+            "usePosition": false,
+            "fromEnd": false,
+            "positionStart": 0,
+            "positionCount": 1
+          }
+        },
+        {
+          "type": "sequence",
+          "config": {
+            "seqType": "numeric",
+            "start": 1,
+            "step": 1,
+            "padding": 3,
+            "position": "start",
+            "template": "{n}_{name}",
+            "scope": "perFolder",
+            "sortBeforeNumbering": true,
+            "sortBy": "name",
+            "sortOrder": "asc",
+            "naturalSort": true,
+            "preserveOriginal": false,
+            "hierarchical": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "🎬 创作者素材整理",
+      "description": "REC→Scene, 文件夹+序号命名",
+      "category": "scenario",
+      "rules": [
+        {
+          "type": "findReplace",
+          "config": {
+            "find": "REC",
+            "replace": "Scene",
+            "caseSensitive": false,
+            "matchAll": true,
+            "usePosition": false
+          }
+        },
+        {
+          "type": "findReplace",
+          "config": {
+            "find": "AUDIO_",
+            "replace": "Audio_",
+            "caseSensitive": false,
+            "matchAll": true,
+            "usePosition": false
+          }
+        },
+        {
+          "type": "sequence",
+          "config": {
+            "seqType": "numeric",
+            "start": 1,
+            "step": 1,
+            "padding": 2,
+            "position": "start",
+            "template": "{folderName}_{n}_{name}",
+            "scope": "perFolder",
+            "sortBeforeNumbering": false,
+            "preserveOriginal": false,
+            "hierarchical": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "🎨 项目资产规范命名",
+      "description": "转为 kebab-case 并添加序号",
+      "category": "scenario",
+      "rules": [
+        {
+          "type": "caseStyle",
+          "config": {
+            "mode": "lowercase",
+            "style": "spaceToDash"
+          }
+        },
+        {
+          "type": "sequence",
+          "config": {
+            "seqType": "numeric",
+            "start": 1,
+            "step": 1,
+            "padding": 2,
+            "position": "start",
+            "template": "{n}_{name}",
+            "scope": "perCategory",
+            "sortBeforeNumbering": true,
+            "sortBy": "name",
+            "sortOrder": "asc",
+            "naturalSort": true,
+            "preserveOriginal": false,
+            "hierarchical": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "🔍 扩展名分组编号",
+      "description": "不同扩展名独立编号序列",
+      "category": "test",
+      "rules": [
+        {
+          "type": "sequence",
+          "config": {
+            "seqType": "numeric",
+            "start": 1,
+            "step": 1,
+            "padding": 2,
+            "position": "start",
+            "template": "{n}_{name}",
+            "scope": "perExtension",
+            "sortBeforeNumbering": false,
+            "preserveOriginal": false,
+            "hierarchical": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "🏛️ 罗马数字序列",
+      "description": "使用 I, II, III, IV 编号",
+      "category": "test",
+      "rules": [
+        {
+          "type": "sequence",
+          "config": {
+            "seqType": "roman",
+            "start": 1,
+            "step": 1,
+            "padding": 0,
+            "position": "start",
+            "template": "{n}_{name}",
+            "scope": "global",
+            "sortBeforeNumbering": false,
+            "preserveOriginal": false,
+            "hierarchical": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "📝 正则提取测试",
+      "description": "提取特定模式的数字，如 _001.",
+      "category": "test",
+      "rules": [
+        {
+          "type": "sequence",
+          "config": {
+            "seqType": "numeric",
+            "start": 1,
+            "step": 1,
+            "padding": 3,
+            "position": "start",
+            "template": "Photo_{n}",
+            "scope": "global",
+            "sortBeforeNumbering": false,
+            "preserveOriginal": true,
+            "preservePattern": "_(\\d+)\\.",
+            "hierarchical": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "🎵 音乐文件整理 (刮削)",
+      "description": "使用 media. 变量: 序号-歌曲名-艺术家",
+      "category": "scenario",
+      "rules": [
+        {
+          "type": "removeCleanup",
+          "config": {
+            "mode": "cleanup",
+            "removeDigits": false,
+            "removeSymbols": true,
+            "removeSpaces": true,
+            "removeChinese": false,
+            "removeEnglish": false
+          }
+        },
+        {
+          "type": "sequence",
+          "config": {
+            "seqType": "numeric",
+            "start": 1,
+            "step": 1,
+            "padding": 2,
+            "position": "start",
+            "template": "{n}-{name}-{media.artist}",
+            "scope": "global",
+            "sortBeforeNumbering": true,
+            "sortBy": "name",
+            "sortOrder": "asc",
+            "naturalSort": true,
+            "preserveOriginal": false,
+            "hierarchical": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "🎬 电影整理 (年份格式)",
+      "description": "电影名 (年份).ext - 清理种子站点标记",
+      "category": "scenario",
+      "rules": [
+        {
+          "type": "regex",
+          "config": {
+            "pattern": "\\.(1080p|2160p|4k|720p|bluray|web-dl|x264|x265|hevc|aac|\\[.*?\\]|\\(.*?\\)).*?(?=\\.[^.]+$)",
+            "replacement": "",
+            "flags": "gi"
+          }
+        },
+        {
+          "type": "caseStyle",
+          "config": {
+            "mode": "titlecase",
+            "style": "none"
+          }
+        },
+        {
+          "type": "regex",
+          "config": {
+            "pattern": "\\.(\\d{4})\\.",
+            "replacement": " ($1).",
+            "flags": "g"
+          }
+        }
+      ]
+    },
+    {
+      "name": "📺 电视剧集整理",
+      "description": "Show.Name.S01E01.ext 标准格式",
+      "category": "scenario",
+      "rules": [
+        {
+          "type": "regex",
+          "config": {
+            "pattern": "(s\\d{2}e\\d{2}).*?(?=\\.[^.]+$)",
+            "replacement": "$1",
+            "flags": "i"
+          }
+        },
+        {
+          "type": "caseStyle",
+          "config": {
+            "mode": "titlecase",
+            "style": "none"
+          }
+        },
+        {
+          "type": "regex",
+          "config": {
+            "pattern": "\\.",
+            "replacement": " ",
+            "flags": "g"
+          }
+        },
+        {
+          "type": "regex",
+          "config": {
+            "pattern": " (s\\d{2}e\\d{2})\\.(",
+            "replacement": ".$1.",
+            "flags": "i"
+          }
+        }
+      ]
+    },
+    {
+      "name": "📷 照片日期+序号管理",
+      "description": "Landing Page 照片场景: {date}_{n}_{name}",
+      "category": "landing-page",
+      "rules": [
+        {
+          "type": "findReplace",
+          "config": {
+            "find": "IMG_",
+            "replace": "",
+            "caseSensitive": false,
+            "matchAll": true,
+            "usePosition": false
+          }
+        },
+        {
+          "type": "findReplace",
+          "config": {
+            "find": "DSC_",
+            "replace": "",
+            "caseSensitive": false,
+            "matchAll": true,
+            "usePosition": false
+          }
+        },
+        {
+          "type": "sequence",
+          "config": {
+            "seqType": "numeric",
+            "start": 1,
+            "step": 1,
+            "padding": 2,
+            "position": "start",
+            "template": "{date}_{n}_{name}",
+            "scope": "global",
+            "sortBeforeNumbering": true,
+            "sortBy": "name",
+            "sortOrder": "asc",
+            "naturalSort": true,
+            "preserveOriginal": false,
+            "hierarchical": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "💻 代码文件 kebab-case",
+      "description": "Landing Page 代码场景: 统一转为 kebab-case",
+      "category": "landing-page",
+      "rules": [
+        {
+          "type": "caseStyle",
+          "config": {
+            "mode": "lowercase",
+            "style": "spaceToDash"
+          }
+        },
+        {
+          "type": "regex",
+          "config": {
+            "pattern": "([a-z])([A-Z])",
+            "replacement": "$1-$2",
+            "flags": "g"
+          }
+        },
+        {
+          "type": "regex",
+          "config": {
+            "pattern": "_",
+            "replacement": "-",
+            "flags": "g"
+          }
+        },
+        {
+          "type": "caseStyle",
+          "config": {
+            "mode": "lowercase",
+            "style": "none"
+          }
+        }
+      ]
+    },
+    {
+      "name": "📄 文档按季度归档",
+      "description": "Landing Page 文档场景: 年份-季度/年份-月份-类型-描述",
+      "category": "landing-page",
+      "rules": [
+        {
+          "type": "findReplace",
+          "config": {
+            "find": "final",
+            "replace": "",
+            "caseSensitive": false,
+            "matchAll": true,
+            "usePosition": false
+          }
+        },
+        {
+          "type": "findReplace",
+          "config": {
+            "find": "version",
+            "replace": "",
+            "caseSensitive": false,
+            "matchAll": true,
+            "usePosition": false
+          }
+        },
+        {
+          "type": "removeCleanup",
+          "config": {
+            "mode": "cleanup",
+            "removeDigits": false,
+            "removeSymbols": true,
+            "removeSpaces": true,
+            "removeChinese": false,
+            "removeEnglish": false
+          }
+        },
+        {
+          "type": "caseStyle",
+          "config": {
+            "mode": "lowercase",
+            "style": "spaceToDash"
+          }
+        },
+        {
+          "type": "insert",
+          "config": {
+            "text": "2024-",
+            "position": "start",
+            "index": 0
+          }
+        }
+      ]
+    }
+  ]
+}

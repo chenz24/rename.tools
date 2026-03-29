@@ -1,0 +1,18 @@
+{
+    "i18n-ally.localesPaths": [
+        "messages",
+        "src/i18n"
+    ],
+    "i18n-ally.sourceLanguage": "zh",
+    // 1. 保存时自动运行 Biome 修复代码 (lint)
+  "editor.codeActionsOnSave": {
+    "quickfix.biome": "explicit",
+    "source.fixAll.biome": "explicit",
+    "source.organizeImports.biome": "explicit" // 自动整理导入
+  },
+  // 2. 将 Biome 设置为默认格式化工具
+  "editor.defaultFormatter": "biomejs.biome",
+  // 3. 保存时自动格式化
+  "editor.formatOnSave": true
+
+}

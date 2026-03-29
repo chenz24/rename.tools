@@ -1,0 +1,1043 @@
+{
+	"metadata": {
+		"title": "Rename.Tools - 免费在线批量重命名工具 | 无需上传，本地处理，隐私安全",
+		"description": "免费在线批量文件重命名工具，支持正则表达式、序号生成、规则链组合。实时预览，一键重命名数千文件。100%本地处理，无需上传，零追踪，隐私安全有保障。",
+		"app": {
+			"title": "Rename.Tools | 在线批量文件重命名工具 - 免费、快速、隐私安全",
+			"description": "在浏览器中瞬间重命名数千文件，支持正则表达式、序号生成、规则链组合。实时预览、撤销/重做、元数据提取。100%本地处理，文件不离开您的设备。永久免费。"
+		},
+		"about": {
+			"title": "关于 - Rename.Tools",
+			"description": "了解 Rename.Tools，这是一个基于 Next.js、React 和现代 Web 技术构建的浏览器端批量文件重命名工具。"
+		},
+		"features": {
+			"title": "功能特性 - Rename.Tools",
+			"description": "探索所有功能：正则表达式、序号生成、大小写转换、自定义 JavaScript、元数据提取等。"
+		},
+		"privacy": {
+			"title": "隐私政策 - Rename.Tools",
+			"description": "我们的隐私政策：我们不收集任何数据。所有文件操作都在您的浏览器本地运行。"
+		},
+		"terms": {
+			"title": "服务条款 - Rename.Tools",
+			"description": "使用 Rename.Tools 批量文件重命名工具的服务条款。"
+		},
+		"disclaimer": {
+			"title": "免责声明 - Rename.Tools",
+			"description": "Rename.Tools 用户的重要免责声明和责任信息。"
+		}
+	},
+	"header": {
+		"home": "首页",
+		"app": "应用",
+		"features": "功能",
+		"about": "关于",
+		"theme": "切换主题",
+		"language": "语言"
+	},
+	"home": {
+		"heroTitle": "批量重命名数千文件，\n直接在浏览器中完成。",
+		"heroFeature1": "7 种规则类型",
+		"heroFeature2": "实时预览",
+		"heroFeature3": "零上传",
+		"heroDescription": "组合正则、序号、大小写转换为强大的规则链。所有操作均在浏览器本地运行——文件永远不会离开你的设备。",
+		"cta": "开始重命名",
+		"viewOnGithub": "在 GitHub 查看",
+		"githubStars": "开源项目",
+		"onGithub": "托管于 GitHub",
+		"learnMore": "了解工作原理",
+		"trustLocal": "100% 本地处理",
+		"trustLocalDesc": "文件永远不离开你的设备，所有操作在浏览器内完成",
+		"trustPrivacy": "零数据收集",
+		"trustPrivacyDesc": "无需账号，无追踪，不收集任何文件信息",
+		"trustSpeed": "1000+ 文件",
+		"trustSpeedDesc": "大批量处理，实时预览即时反馈",
+		"trustOpen": "开源项目",
+		"trustOpenDesc": "完全透明，社区驱动",
+		"featureBadge": "批量重命名工具",
+		"featureTitle": "强大的规则链，\n精准与速度兼得",
+		"featureDesc": "通过组合多条规则构建复杂的重命名操作。每条规则按顺序执行——查找替换、正则、序号、大小写转换——全部支持实时预览，提交前即可查看效果。",
+		"feat1Title": "查找与替换",
+		"feat1Desc": "全局或按位置替换文本，支持大小写敏感选项",
+		"feat2Title": "正则表达式",
+		"feat2Desc": "完整的正则支持，包括捕获组和反向引用",
+		"feat3Title": "自动序号",
+		"feat3Desc": "自定义起始值、步长和补零的序号生成",
+		"feat4Title": "大小写转换",
+		"feat4Desc": "全大写、全小写、首字母大写，以及空格转横线等样式转换",
+		"feat5Title": "自定义 JavaScript",
+		"feat5Desc": "编写自定义转换函数，灵活性无限",
+		"feat6Title": "规则模板",
+		"feat6Desc": "一键应用常用操作预设，如去除括号内容",
+		"feat7Title": "实时冲突检测",
+		"feat7Desc": "重命名前即刻发现重复文件名",
+		"feat8Title": "扩展名控制",
+		"feat8Desc": "选择是否将扩展名纳入规则处理",
+		"previewBadge": "实时预览",
+		"previewTitle": "每次变更，\n尽在掌握",
+		"previewDesc": "无需猜测，无需冒险。你添加的每条规则都会立即更新预览。原始名、新名称、冲突信息——全部实时呈现。确认无误后，一键执行。",
+		"prev1Title": "即时反馈",
+		"prev1Desc": "输入即见效果，无需等待或刷新",
+		"prev2Title": "冲突警告",
+		"prev2Desc": "重复文件名检测，避免覆盖事故",
+		"prev3Title": "筛选视图",
+		"prev3Desc": "显示全部文件、仅受影响的，或仅冲突项",
+		"prev4Title": "一键执行",
+		"prev4Desc": "确认后直接重命名所有文件，无需运行脚本",
+		"prev5Title": "撤销与重做",
+		"prev5Desc": "支持界面上的撤销和重做操作，轻松回退或重新应用批量重命名",
+		"privacyBadge": "隐私优先架构",
+		"privacyTitle": "你的文件，始终属于你。",
+		"privacyDesc": "不同于其他需要上传或服务端处理的工具，Rename.Tools 完全运行在你的浏览器中。我们使用 File System Access API 直接读取和重命名文件——数据从不传输、存储或记录。",
+		"priv1Title": "无需上传",
+		"priv1Desc": "通过浏览器 API 直接从设备访问文件",
+		"priv2Title": "无服务端处理",
+		"priv2Desc": "所有重命名逻辑作为客户端 JavaScript 运行",
+		"priv3Title": "无数据留存",
+		"priv3Desc": "关闭标签页即清除一切——零持久化",
+		"priv4Title": "导出脚本",
+		"priv4Desc": "生成 bash 或 PowerShell 脚本用于离线执行",
+		"privacyQuote": "每一个工具都应该默认尊重你的数据。Rename.Tools 不仅承诺隐私，从架构上就不可能让你的文件离开浏览器。",
+		"stepsTitle": "30 秒即可上手",
+		"step1Title": "导入文件",
+		"step1Desc": "拖放文件或文件夹，或使用文件选择器。支持任何文件类型。",
+		"step2Title": "构建规则",
+		"step2Desc": "添加规则并组合成规则链。配置时预览实时更新。",
+		"step3Title": "执行完成",
+		"step3Desc": "检查预览，点击重命名。文件直接在设备上完成重命名。",
+		"teamTitle": "为重命名文件的你而生",
+		"teamDesc": "Rename.Tools 由一位厌倦了逐个重命名文件的开发者打造。每个功能都源于真实需求。",
+		"team1Title": "永久免费",
+		"team1Desc": "无试用期，无付费墙，无高级版",
+		"team2Title": "键盘优先",
+		"team2Desc": "专为追求效率的高级用户设计",
+		"team3Title": "离线可用",
+		"team3Desc": "首次加载后无需网络连接",
+		"team4Title": "社区驱动",
+		"team4Desc": "欢迎在 GitHub 上提交功能请求",
+		"ctaTitle": "别再一个一个重命名文件了。",
+		"ctaDesc": "Rename.Tools 让你精准、自信地批量重命名数千文件。无需注册，无需下载，无需上传。",
+		"ctaButton": "立即开始重命名",
+		"ctaSubtext": "永久免费 • 无需注册 • 离线可用",
+		"faqTitle": "常见问题",
+		"faqSubtitle": "关于 Rename.Tools 你需要了解的一切，以及它如何帮助你规模化管理文件命名。",
+		"faq1Q": "Rename.Tools 真的免费吗？",
+		"faq1A": "是的，完全免费且开源。没有高级版、没有试用期、没有隐藏费用。完整源代码在 GitHub 上以 MIT 许可协议公开。",
+		"faq2Q": "我的文件会被上传到服务器吗？",
+		"faq2A": "不会。Rename.Tools 完全在浏览器中运行。文件通过 File System Access API 访问，从不离开你的设备。不存在任何服务端处理。",
+		"faq3Q": "支持哪些浏览器？",
+		"faq3A": "Rename.Tools 在基于 Chromium 的浏览器（Chrome、Edge、Brave、Arc）中效果最佳，这些浏览器支持 File System Access API 进行直接重命名。在其他浏览器中，你可以使用示例测试模式或导出重命名脚本。",
+		"faq4Q": "可以撤销重命名操作吗?",
+		"faq4A": "可以!Rename.Tools 支持界面上的撤销(Undo)和重做(Redo)功能,让你可以轻松回退或重新应用批量重命名操作。此外,我们还提供「导出撤销脚本」功能,可以生成脚本来反转重命名操作。建议在执行前始终使用预览验证更改。",
+		"faq5Q": "可以处理多少文件？",
+		"faq5A": "Rename.Tools 可以在单次批处理中处理数千个文件。即使文件集很大，实时预览也能即时更新。性能取决于你的浏览器和设备能力。",
+		"faq6Q": "可以使用正则表达式重命名吗？",
+		"faq6A": "可以！完整的正则表达式支持，包括捕获组、反向引用和标志。你可以将正则规则与其他规则类型组合在规则链中，实现复杂的转换操作。",
+		"useCases": {
+			"badge": "应用场景",
+			"title": "适用于任何工作流",
+			"desc": "无论是整理照片、管理媒体库，还是清理项目文件——Rename.Tools 都能满足你的需求。",
+			"ruleChainLabel": "规则链",
+			"previewLabel": "预览",
+			"originalLabel": "原文件名",
+			"newNameLabel": "新文件名",
+			"ruleType": {
+				"findReplace": "查找替换",
+				"regex": "正则",
+				"sequence": "序号",
+				"caseStyle": "大小写",
+				"insert": "插入",
+				"removeCleanup": "删除"
+			},
+			"photos": {
+				"tab": "照片管理",
+				"title": "数秒内整理成千上万张照片",
+				"desc": "用日期重命名旅行照片、添加地点前缀，或将相机文件名如 DSC_0001.jpg 转换为有意义的名称。"
+			},
+			"videos": {
+				"tab": "视频整理",
+				"title": "轻松管理视频文件",
+				"desc": "清理下载的视频名称、为剧集添加集数编号，或统一媒体库的命名规范。"
+			},
+			"music": {
+				"tab": "音乐文件",
+				"title": "整理你的音乐库",
+				"desc": "格式化曲目名称、添加艺术家前缀、清理下载文件名，或为媒体服务器准备文件。"
+			},
+			"code": {
+				"tab": "代码项目",
+				"title": "重构文件结构",
+				"desc": "批量重命名组件、转换命名规范（驼峰转横线），或为部署准备资源文件。"
+			},
+			"archives": {
+				"tab": "文档归档",
+				"title": "驯服混乱的文档",
+				"desc": "添加日期前缀、移除版本后缀、跨部门统一命名，或为存档准备文件。"
+			}
+		},
+		"rulesShowcase": {
+			"badge": "支持的规则",
+			"title": "可自由组合的规则能力",
+			"desc": "从简单文本清理到高级模式转换，你可以按任意顺序组合规则，并在应用前实时预览结果。",
+			"findReplace": {
+				"tab": "查找替换",
+				"title": "快速查找并替换文本",
+				"desc": "支持全局替换或单次替换，快速清理前后缀，并统一文件命名规范。"
+			},
+			"regex": {
+				"tab": "正则表达式",
+				"title": "用正则处理复杂模式",
+				"desc": "通过捕获组和反向引用完成复杂转换，适用于日期、批次号等结构化命名。"
+			},
+			"sequence": {
+				"tab": "自动序号",
+				"title": "轻松完成批量编号",
+				"desc": "支持设置起始值、步长和补零位数，让文件顺序清晰、可排序。"
+			},
+			"caseStyle": {
+				"tab": "大小写风格",
+				"title": "转换大小写与命名风格",
+				"desc": "在大写/小写/标题格式之间切换，并支持空格、横线、下划线等风格转换。"
+			},
+			"customJs": {
+				"tab": "自定义 JS",
+				"title": "使用自定义 JavaScript 逻辑",
+				"desc": "当内置规则不够用时，可编写自定义函数实现更灵活的重命名流程。"
+			},
+			"templates": {
+				"tab": "规则模板",
+				"title": "套用现成规则模板",
+				"desc": "从去括号、清理下载文件名等常用模板快速开始，再按需微调。"
+			}
+		}
+	},
+	"features": {
+		"heroTitle": "每一个功能，\n完整呈现",
+		"heroDesc": "从强大的规则链到智能自动化，深入了解 Rename.Tools 作为最全面的浏览器端批量重命名工具的每一项能力。",
+		"cta": "免费开始使用",
+		"category": {
+			"rules": "规则系统",
+			"preview": "预览与工作流",
+			"automation": "模板与自动化",
+			"privacy": "隐私与安全"
+		},
+		"rules": {
+			"title": "7 种规则类型，\n自由组合。",
+			"desc": "通过链式组合多条规则构建复杂的重命名操作。每条规则按顺序执行——查找替换、正则表达式、序号、大小写转换、插入、删除和自定义 JavaScript 可任意组合。"
+		},
+		"findReplace": {
+			"title": "查找与替换",
+			"desc": "全局或按精确位置替换文本。支持大小写敏感开关、仅替换首个或全部替换模式，以及按字符索引的位置替换。",
+			"capabilities": {
+				"c1": "全局替换或仅替换首个匹配",
+				"c2": "大小写敏感和不敏感模式",
+				"c3": "按字符索引的位置替换",
+				"c4": "从文件名头部或尾部开始替换",
+				"c5": "可作用于名称、扩展名或完整文件名"
+			},
+			"before": "IMG_20240315_vacation (1).jpg",
+			"after": "vacation_20240315.jpg",
+			"bestFor": "快速文本清理和标准化"
+		},
+		"insert": {
+			"title": "添加/插入文本",
+			"desc": "在文件名的开头、末尾或任意字符位置插入文本。支持日期、时间、文件夹名和序号等动态变量。",
+			"capabilities": {
+				"c1": "在开头、末尾或指定字符位置插入",
+				"c2": "动态变量：'{date}'、'{time}'、'{folderName}'",
+				"c3": "与序号结合实现结构化命名",
+				"c4": "元数据变量：EXIF 日期、相机型号、音频标签",
+				"c5": "与其他规则叠加实现复杂前缀/后缀"
+			},
+			"before": "report.pdf",
+			"after": "2024-03-15_report.pdf",
+			"bestFor": "添加日期前缀、版本标签或结构化命名"
+		},
+		"sequence": {
+			"title": "自动序号",
+			"desc": "添加序列编号，完全控制类型、起始值、步长、补零、作用域和排序。支持数字、字母和罗马数字序列。",
+			"capabilities": {
+				"c1": "数字、字母 (A-Z) 和罗马数字序列",
+				"c2": "自定义起始值、步长和补零位数",
+				"c3": "作用域：全局、按文件夹、按扩展名、按文件类型",
+				"c4": "编号前按名称、大小、日期或扩展名排序",
+				"c5": "层级编号 (1.1, 1.2) 适用于嵌套文件夹",
+				"c6": "格式模板，支持 '{name}'_'{n}' 等变量",
+				"c7": "从文件名中保留原始编号"
+			},
+			"before": "photo.jpg, sunset.jpg, beach.jpg",
+			"after": "001_photo.jpg, 002_sunset.jpg, 003_beach.jpg",
+			"bestFor": "用统一编号整理大批量文件"
+		},
+		"caseStyle": {
+			"title": "大小写与风格转换",
+			"desc": "在 8 种大小写风格之间转换，包括开发者友好的格式。大小写变更与分隔符转换组合，完成命名规范统一。",
+			"capabilities": {
+				"c1": "全大写、全小写、首字母大写、句首大写",
+				"c2": "开发者风格：camelCase、PascalCase、kebab-case、snake_case",
+				"c3": "分隔符转换：空格 ↔ 横线 ↔ 下划线",
+				"c4": "大小写 + 分隔符一步完成",
+				"c5": "可作用于名称、扩展名或完整文件名"
+			},
+			"before": "My Vacation Photos.jpg",
+			"after": "my-vacation-photos.jpg",
+			"bestFor": "统一项目中的命名规范"
+		},
+		"regex": {
+			"title": "正则表达式",
+			"desc": "完整的正则表达式支持，包括捕获组、反向引用和标志控制。最强大的规则类型，适用于复杂的模式转换。",
+			"capabilities": {
+				"c1": "完整 JavaScript 正则，支持捕获组 ($1, $2...)",
+				"c2": "可配置标志：全局 (g)、不区分大小写 (i)、多行 (m)",
+				"c3": "反向引用，重新排列文件名各部分",
+				"c4": "删除模式：括号、尾部数字、特殊字符",
+				"c5": "提取并重组日期、ID 和元数据"
+			},
+			"before": "2024-03-15 Trip to Paris [DRAFT].docx",
+			"after": "Trip_to_Paris_2024-03-15.docx",
+			"bestFor": "需要模式匹配的复杂转换"
+		},
+		"customJs": {
+			"title": "自定义 JavaScript",
+			"desc": "编写你自己的转换函数，可访问文件名、扩展名、索引、文件大小和修改时间。当内置规则无法满足需求时使用。",
+			"capabilities": {
+				"c1": "完整的 JavaScript 函数，rename(options) API",
+				"c2": "可访问：文件名、扩展名、索引、大小、修改时间",
+				"c3": "内置代码编辑器，支持语法高亮",
+				"c4": "包含 6 个即用代码示例",
+				"c5": "AI 提示词生成器——复制到 ChatGPT/Claude 获取代码帮助",
+				"c6": "沙箱执行，确保安全"
+			},
+			"before": "DSC_0042.CR2",
+			"after": "2024-03-15_sunset_042.CR2",
+			"bestFor": "为高级用户提供无限灵活性"
+		},
+		"removeCleanup": {
+			"title": "删除与清洗",
+			"desc": "按数量、范围或类型删除字符。快捷清洗模式一键去除数字、符号、空格、中文或英文字符。",
+			"capabilities": {
+				"c1": "从头部或尾部删除 N 个字符",
+				"c2": "删除指定索引范围内的字符",
+				"c3": "快捷清洗：去除数字、符号、空格、中文或英文",
+				"c4": "多选：一次通过组合多种清洗类型",
+				"c5": "作用域控制：应用于名称、扩展名或完整文件名"
+			},
+			"before": "  [2024] report (final v3).pdf",
+			"after": "report.pdf",
+			"bestFor": "去除不需要的字符和文件杂乱信息"
+		},
+		"preview": {
+			"title": "每个变更，\n执行前尽收眼底",
+			"desc": "无需猜测，无需冒险。你添加的每条规则都会立即更新预览。原始名、新名称和冲突信息——全部实时呈现。"
+		},
+		"previewFeatures": {
+			"livePreview": {
+				"title": "即时实时预览",
+				"desc": "输入即见效果。每次规则修改都会立即更新整个文件列表——无需刷新按钮，无需等待。"
+			},
+			"conflictDetection": {
+				"title": "冲突检测",
+				"desc": "自动检测两个文件是否会获得相同名称，防止数据丢失。冲突项以红色高亮显示，可自动修复。"
+			},
+			"filterViews": {
+				"title": "智能筛选视图",
+				"desc": "在显示全部文件、仅受影响文件或仅冲突项之间切换。工作流的每个阶段只关注最重要的信息。"
+			},
+			"extensionControl": {
+				"title": "扩展名作用域控制",
+				"desc": "规则可作用于仅文件名、仅扩展名或完整文件名。精细控制防止意外更改文件类型。"
+			},
+			"undoRedo": {
+				"title": "撤销与重做",
+				"desc": "内置撤销和重做支持。执行后发现错误？一键回退整个批次操作。"
+			},
+			"oneClickExecute": {
+				"title": "一键执行",
+				"desc": "预览确认无误后，直接执行所有重命名——通过 File System Access API 在你的设备上直接完成。"
+			},
+			"advancedFilter": {
+				"title": "高级文件过滤",
+				"desc": "按文件名、扩展名、大小或修改日期过滤文件，支持包含、开头是、正则匹配、大于等条件。可使用 AND/OR 逻辑组合。"
+			},
+			"sorting": {
+				"title": "灵活排序",
+				"desc": "重命名前按导入顺序、名称 (A-Z/Z-A) 或扩展名排序。自然排序确保正确顺序 (1, 2, 10 而非 1, 10, 2)。"
+			}
+		},
+		"automation": {
+			"title": "模板与自动化，\n节省你的时间",
+			"desc": "从一键预设到智能文件检测，Rename.Tools 用强大的自动化功能减少重复工作。"
+		},
+		"automationFeatures": {
+			"templateLibrary": {
+				"title": "11 个内置模板",
+				"desc": "常用任务的即用规则模板：删除括号、添加日期前缀、格式化剧集名、清理下载文件名、camelCase 转 kebab-case 等。"
+			},
+			"userPresets": {
+				"title": "自定义用户预设",
+				"desc": "将规则链保存为可重用预设，支持名称、描述、标签和分类。固定收藏以便快速访问。"
+			},
+			"presetManagement": {
+				"title": "导入、导出与分享",
+				"desc": "将预设导出为 JSON 文件，从同事导入，生成分享链接。你的工作流完全可移植。"
+			},
+			"intelligentSuggestions": {
+				"title": "智能建议",
+				"desc": "自动检测文件类型（照片、音乐、视频剧集、文档），并推荐针对你的文件量身定制的最佳重命名规则。"
+			},
+			"mediaScraper": {
+				"title": "TMDb 影视刮削",
+				"desc": "将视频文件与 The Movie Database 的剧集信息匹配。自动识别剧名、季数和剧集标题，实现完美的媒体库命名。"
+			},
+			"metadataExtraction": {
+				"title": "元数据提取",
+				"desc": "读取照片的 EXIF 数据（日期、相机、分辨率）和音乐文件的音频标签（艺术家、专辑、曲目）。在重命名模板中使用元数据变量。"
+			},
+			"scriptExport": {
+				"title": "脚本导出",
+				"desc": "将整个重命名操作导出为 Bash、PowerShell 或 CSV。生成撤销脚本以反转任何操作。适用于 CI/CD 管道或远程服务器。"
+			}
+		},
+		"privacy": {
+			"title": "你的文件，\n从不离开浏览器",
+			"desc": "Rename.Tools 从架构上就不可能从服务器访问你的文件。一切通过 File System Access API 在本地运行。"
+		},
+		"privacyFeatures": {
+			"localProcessing": {
+				"title": "100% 本地处理",
+				"desc": "所有文件操作作为客户端 JavaScript 在浏览器中运行。无后端、无文件操作 API 调用、无服务端处理。"
+			},
+			"noUpload": {
+				"title": "零上传架构",
+				"desc": "你的文件永远不会被上传到任何地方。我们使用 File System Access API 直接在你的设备上读取和重命名文件。"
+			},
+			"noRetention": {
+				"title": "无数据留存",
+				"desc": "关闭标签页即清除一切。没有文件数据被持久化——只有语言、主题和保存的预设留在 localStorage。"
+			},
+			"offlineReady": {
+				"title": "离线可用",
+				"desc": "首次页面加载后，Rename.Tools 完全支持离线使用。重命名操作无需网络连接。"
+			},
+			"openSource": {
+				"title": "完全开源",
+				"desc": "每一行代码都在 GitHub 上以 AGPL-3.0 许可证开放。亲自验证我们的隐私声明——无隐藏追踪，无分析脚本。"
+			},
+			"freeForever": {
+				"title": "永久免费",
+				"desc": "无试用期、无高级版、无付费墙。每个功能对每个人开放。无需注册。"
+			}
+		},
+		"ctaTitle": "准备好更智能地重命名了吗？",
+		"ctaDesc": "加入数千用户的行列，用 Rename.Tools 节省数小时时间。免费、隐私、直接在浏览器中运行。",
+		"ctaButton": "立即开始重命名",
+		"ctaSubtext": "永久免费 • 无需注册 • 离线可用",
+		"bestFor": "适用场景",
+		"capabilities": "核心能力",
+		"example": "示例",
+		"before": "之前",
+		"after": "之后"
+	},
+	"rename": {
+		"app": {
+			"title": "批量重命名",
+			"privacyBadge": "隐私安全",
+			"privacyDesc": "所有操作均在浏览器本地运行。无上传，无内容读取，关闭即清除。",
+			"browserCompat": "浏览器兼容性",
+			"browserCompatOk": "你的浏览器支持 File System Access API，可直接在本地重命名。",
+			"browserCompatFail": "你的浏览器不支持 File System Access API，请使用示例测试模式或导出脚本。",
+			"language": "语言",
+			"theme": "主题",
+			"light": "浅色",
+			"dark": "深色",
+			"settings": "设置",
+			"preferences": "偏好设置",
+			"preferencesDesc": "配置应用的全局参数和行为。",
+			"preferencesPlaceholder": "更多设置选项即将推出..."
+		},
+		"files": {
+			"title": "文件列表",
+			"importFiles": "导入文件",
+			"importFolder": "导入文件夹",
+			"clear": "清空",
+			"dropHint": "拖放文件或文件夹到此处",
+			"search": "搜索文件名…",
+			"selectAll": "全选",
+			"deselectAll": "取消全选",
+			"total": "总计",
+			"selected": "已选",
+			"items": "个",
+			"filter": "筛选",
+			"filtered": "已筛选",
+			"filterByExt": "按扩展名筛选",
+			"noFiles": "暂无文件。导入文件或文件夹以开始。",
+			"loadMetadata": "加载文件元数据（EXIF、音频标签）",
+			"scrapeMedia": "从 TMDb 匹配剧集信息",
+			"loadingMetadata": "正在加载元数据",
+			"sampleMode": "示例测试模式",
+			"sampleGenerate": "随机生成示例",
+			"sampleHint": "输入文件名（每行一个）以测试规则",
+			"samplePlaceholder": "photo_001.jpg\nIMG_20240101.png\nreport (final).docx",
+			"sort": "排序",
+			"sortByImport": "按导入顺序",
+			"sortByNameAsc": "名称 A-Z",
+			"sortByNameDesc": "名称 Z-A",
+			"sortByExtAsc": "按扩展名 A-Z",
+			"sortByExtDesc": "按扩展名 Z-A",
+			"loadingFiles": "正在加载 {count} 个文件...",
+			"scanningFiles": "正在扫描文件..."
+		},
+		"filter": {
+			"title": "文件过滤",
+			"fieldName": "文件名",
+			"fieldExtension": "扩展名",
+			"fieldSize": "文件大小",
+			"fieldModified": "修改时间",
+			"opContains": "包含",
+			"opNotContains": "不包含",
+			"opEquals": "等于",
+			"opNotEquals": "不等于",
+			"opStartsWith": "开头是",
+			"opEndsWith": "结尾是",
+			"opRegex": "正则匹配",
+			"opGreaterThan": "大于",
+			"opLessThan": "小于",
+			"logicAnd": "且",
+			"logicOr": "或",
+			"caseSensitive": "区分大小写",
+			"valuePlaceholder": "输入值...",
+			"placeholderName": "输入文件名...",
+			"placeholderExtension": "如 jpg, png, pdf",
+			"placeholderSize": "如 100KB, 5MB, 1GB",
+			"placeholderModified": "选择日期",
+			"where": "条件",
+			"addCondition": "添加条件",
+			"noConditions": "暂无筛选条件，点击添加",
+			"clearAll": "清除全部"
+		},
+		"rules": {
+			"title": "规则链",
+			"addRule": "添加规则",
+			"noRules": "暂无规则。点击上方添加。",
+			"enabled": "已启用",
+			"disabled": "已禁用",
+			"remove": "删除",
+			"clone": "克隆",
+			"types": {
+				"findReplace": "查找替换",
+				"insert": "添加/插入",
+				"sequence": "序号",
+				"caseStyle": "大小写/样式",
+				"regex": "正则替换",
+				"customJs": "自定义 JS",
+				"removeCleanup": "删除/清洗"
+			},
+			"findReplace": {
+				"find": "查找",
+				"replace": "替换为",
+				"caseSensitive": "区分大小写",
+				"matchAll": "全部替换",
+				"usePosition": "按位置",
+				"position": "位置",
+				"fromStart": "从头部",
+				"fromEnd": "从尾部",
+				"count": "字符数"
+			},
+			"insert": {
+				"text": "插入文本",
+				"position": "位置",
+				"atStart": "开头",
+				"atEnd": "末尾",
+				"atIndex": "指定位置",
+				"index": "第 N 个字符之后",
+				"variables": "可用变量"
+			},
+			"sequence": {
+				"seqType": "序列类型",
+				"numeric": "数字 (1, 2, 3...)",
+				"alpha": "字母 (A, B, C...)",
+				"roman": "罗马数字 (I, II, III...)",
+				"start": "起始值",
+				"step": "步长",
+				"padding": "补零位数",
+				"position": "插入位置",
+				"atStart": "开头",
+				"atEnd": "末尾",
+				"replaceAll": "替换整个文件名",
+				"template": "格式模板（可选）",
+				"templatePlaceholder": "例如 Photo_'{n}'_'{date}'",
+				"templateHint": "可用变量",
+				"scope": "编号作用域",
+				"scopeGlobal": "全局（跨所有文件）",
+				"scopePerFolder": "按文件夹分组",
+				"scopePerExtension": "按扩展名分组",
+				"scopePerCategory": "按文件类别分组",
+				"sortBeforeNumbering": "编号前先排序",
+				"sortBy": "排序依据",
+				"sortByName": "文件名",
+				"sortBySize": "文件大小",
+				"sortByModified": "修改时间",
+				"sortByExtension": "扩展名",
+				"sortOrder": "排序方向",
+				"sortAsc": "升序",
+				"sortDesc": "降序",
+				"naturalSort": "自然排序 (1, 2, 10 而非 1, 10, 2)",
+				"preserveOriginal": "保留原有序号",
+				"preservePattern": "提取模式（正则）",
+				"preservePatternHint": "使用捕获组提取数字，例如 (\\d+)",
+				"hierarchical": "层级编号（如 1.1, 1.2）",
+				"hierarchySeparator": "分隔符"
+			},
+			"caseStyle": {
+				"mode": "模式",
+				"general": "通用",
+				"developer": "开发者",
+				"uppercase": "全大写",
+				"lowercase": "全小写",
+				"titlecase": "首字母大写",
+				"sentencecase": "句首大写",
+				"camelCase": "驼峰命名",
+				"PascalCase": "帕斯卡命名",
+				"kebab-case": "短横线命名",
+				"snake_case": "下划线命名",
+				"style": "样式转换",
+				"none": "无",
+				"spaceToDash": "空格 → 横线",
+				"spaceToUnderscore": "空格 → 下划线",
+				"dashToSpace": "横线 → 空格",
+				"underscoreToSpace": "下划线 → 空格"
+			},
+			"regex": {
+				"pattern": "正则表达式",
+				"replacement": "替换为",
+				"flags": "标志",
+				"flagsHint": "如 g, i, m"
+			},
+			"customJs": {
+				"code": "代码",
+				"hint": "定义 rename(options) 函数，返回新文件名",
+				"insertExample": "插入示例",
+				"cancel": "取消",
+				"confirm": "确定",
+				"error": "语法错误",
+				"expandedTitle": "自定义 JavaScript 编辑器",
+				"aiPromptTitle": "AI 提示词",
+				"aiPromptDesc": "复制以下模板发送给 AI (如 ChatGPT、Claude) 来生成重命名代码：",
+				"copyPrompt": "复制提示词",
+				"examples": {
+					"datePrefix": "日期前缀",
+					"sequenceNumber": "序号格式化",
+					"extractNumbers": "提取数字",
+					"cleanupName": "清理文件名",
+					"conditionalPrefix": "条件前缀",
+					"useModifiedTime": "使用修改时间"
+				}
+			},
+			"removeCleanup": {
+				"mode": "模式",
+				"chars": "按字符数",
+				"range": "按范围",
+				"cleanup": "快捷清洗",
+				"direction": "方向",
+				"fromStart": "从头部",
+				"fromEnd": "从尾部",
+				"count": "字符数",
+				"rangeStart": "起始位置",
+				"rangeEnd": "结束位置",
+				"removeDigits": "数字",
+				"removeSymbols": "符号",
+				"removeSpaces": "空格",
+				"removeChinese": "中文",
+				"removeEnglish": "英文"
+			},
+			"extensionScope": "作用域",
+			"scopeName": "名称",
+			"scopeExtension": "扩展名",
+			"scopeFull": "全名",
+			"templateTitle": "规则模板",
+			"templates": {
+				"removeBrackets": {
+					"name": "删除括号及内容",
+					"desc": "删除 ()、[]、'{}' 及其内容"
+				},
+				"datePrefix": {
+					"name": "添加日期前缀",
+					"desc": "在文件名前添加 YYYY-MM-DD_"
+				},
+				"photoCleanup": {
+					"name": "照片文件整理",
+					"desc": "将 IMG_ 替换为 Photo_ 并添加序号"
+				},
+				"lowercaseDash": {
+					"name": "小写 + 横线",
+					"desc": "转为小写并将空格替换为横线"
+				},
+				"removeExtraSpaces": {
+					"name": "删除多余空格",
+					"desc": "合并连续空格为一个"
+				},
+				"tvShowFormat": {
+					"name": "影视剧集格式",
+					"desc": "格式化剧集编号为 S01E01 - 标题"
+				},
+				"musicFormat": {
+					"name": "音乐曲目格式",
+					"desc": "格式化曲目编号为 01. 标题"
+				},
+				"documentVersion": {
+					"name": "文档版本号",
+					"desc": "添加版本号后缀如 _v1"
+				},
+				"downloadCleanup": {
+					"name": "下载文件清理",
+					"desc": "删除 (1)、copy 和来源标签"
+				},
+				"camelToKebab": {
+					"name": "驼峰转短横线",
+					"desc": "转换为 kebab-case 格式"
+				},
+				"addBackupSuffix": {
+					"name": "添加备份后缀",
+					"desc": "在文件名后添加 _backup"
+				}
+			},
+			"savePreset": "保存预设",
+			"clear": "清除规则"
+		},
+		"templateEditor": {
+			"placeholder": "点击下方按钮添加变量或文本...",
+			"inputText": "输入文本...",
+			"addText": "添加文本",
+			"commonVars": "常用变量",
+			"metadata": "元数据",
+			"dragHint": "拖拽调整顺序",
+			"variables": {
+				"name": "原文件名",
+				"n": "序号",
+				"date": "日期",
+				"time": "时间",
+				"datetime": "日期时间",
+				"timestamp": "时间戳",
+				"folderName": "文件夹名",
+				"exifDate": "EXIF日期",
+				"exifCamera": "相机型号",
+				"mediaArtist": "艺术家",
+				"mediaTitle": "标题",
+				"mediaAlbum": "专辑",
+				"mediaYear": "年份",
+				"mediaTrack": "曲目号"
+			}
+		},
+		"presets": {
+			"quickAccess": "快速访问",
+			"systemTemplates": "系统模板",
+			"myPresets": "我的预设",
+			"noPinned": "暂无固定项。固定模板或预设以便快速访问。",
+			"noPresets": "还没有保存的预设。保存您的规则链以供重复使用。",
+			"noPresetsTitle": "还没有预设",
+			"noPresetsDesc": "预设可以保存您常用的规则组合，方便快速应用到不同的文件批次。",
+			"howToCreate": "创建预设",
+			"howToCreateDesc": "在规则面板中配置好规则后，点击「保存为预设」按钮即可保存。",
+			"howToImport": "导入预设",
+			"howToImportDesc": "点击下方按钮导入之前导出的预设文件（.json 格式）。",
+			"howToCreateSimple": "在规则面板配置规则后点击「保存为预设」",
+			"howToImportSimple": "或点击下方按钮导入已有的预设文件",
+			"importPresets": "导入预设文件",
+			"searchPlaceholder": "搜索预设...",
+			"sortRecent": "最近使用",
+			"sortFrequent": "最常使用",
+			"sortName": "名称",
+			"sortCreated": "创建时间",
+			"categoryAll": "全部分类",
+			"categoryPhoto": "照片",
+			"categoryDocument": "文档",
+			"categoryCode": "代码",
+			"categoryVideo": "视频",
+			"categoryMusic": "音乐",
+			"categoryGeneral": "通用",
+			"import": "导入",
+			"export": "导出",
+			"apply": "应用",
+			"uses": "次使用",
+			"justNow": "刚刚",
+			"hoursAgo": "{hours}小时前",
+			"daysAgo": "{days}天前",
+			"importSuccess": "成功导入 {count} 个预设",
+			"importError": "导入预设失败",
+			"shareCopied": "分享链接已复制到剪贴板！",
+			"pinned": "已固定",
+			"unpinned": "已取消固定",
+			"saveSuccess": "预设已保存",
+			"saveSuccessDesc": "预设「{name}」已成功保存",
+			"saveAsPreset": "保存为预设",
+			"saveDescription": "将当前 {count} 条规则保存为可重用预设",
+			"presetName": "预设名称",
+			"presetNamePlaceholder": "例如：照片清理工作流",
+			"description": "描述",
+			"optional": "可选",
+			"descriptionPlaceholder": "这个预设做什么？",
+			"category": "分类",
+			"selectCategory": "选择分类",
+			"tags": "标签",
+			"tagsPlaceholder": "照片, 清理, 批量",
+			"tagsHint": "用逗号分隔标签",
+			"cancel": "取消",
+			"save": "保存"
+		},
+		"preview": {
+			"title": "预览",
+			"index": "#",
+			"original": "原始名",
+			"arrow": "→",
+			"newName": "新名称",
+			"showAll": "全部",
+			"showAffected": "仅受影响",
+			"showConflicts": "仅冲突",
+			"affected": "受影响",
+			"conflicts": "冲突",
+			"noConflict": "无冲突",
+			"total": "合计",
+			"items": "个文件",
+			"autoFix": "自动修复",
+			"resetAutoFix": "重置修复"
+		},
+		"metadata": {
+			"title": "文件元数据",
+			"image": {
+				"dateTime": "日期",
+				"camera": "相机",
+				"resolution": "分辨率",
+				"aperture": "光圈",
+				"exposure": "曝光",
+				"focal": "焦距",
+				"noData": "无 EXIF 数据"
+			},
+			"media": {
+				"title": "标题",
+				"artist": "艺术家",
+				"album": "专辑",
+				"year": "年份",
+				"genre": "流派",
+				"track": "曲目",
+				"duration": "时长",
+				"bitrate": "比特率",
+				"codec": "编码",
+				"noData": "无音频标签"
+			}
+		},
+		"intelligence": {
+			"apply": "应用",
+			"startMatch": "开始匹配",
+			"metadataEnhanced": "元数据",
+			"scenarios": {
+				"photo_collection": "检测到照片集合",
+				"music_library": "检测到音乐库",
+				"video_series": "检测到视频系列",
+				"document_archive": "检测到文档归档",
+				"video_scrape": "检测到剧集文件"
+			},
+			"descriptions": {
+				"photo_collection": "按日期和序号整理照片",
+				"music_library": "按艺术家、专辑和曲目号格式化",
+				"video_series": "按顺序编号剧集",
+				"document_archive": "按日期和序号前缀归档文档",
+				"video_scrape": "可从 TMDb 自动获取剧名、季集号、剧集标题"
+			}
+		},
+		"scraper": {
+			"title": "影视媒体刮削",
+			"description": "从 TMDb 匹配视频文件的剧集信息",
+			"cancel": "取消",
+			"apply": "应用",
+			"startSearch": "搜索 TMDb",
+			"searching": "正在搜索 TMDb...",
+			"searchingProgress": "正在搜索 {current}/{total}...",
+			"noGroups": "未在所选视频文件中检测到剧集命名模式",
+			"groupsHint": "从文件名中识别到以下剧集，搜索前可修改标题。",
+			"files": "个文件",
+			"season": "第",
+			"noMatch": "未找到匹配",
+			"matchedCount": "已匹配 {matched}/{total} 个文件",
+			"selectAll": "全选",
+			"deselectAll": "取消全选",
+			"outputFormat": "输出格式",
+			"customTemplate": "自定义模板...",
+			"retry": "重试",
+			"error": "搜索失败：{message}",
+			"selectShow": "选择剧集",
+			"noResults": "无结果",
+			"confidence": {
+				"high": "高",
+				"medium": "中",
+				"low": "低",
+				"none": "无"
+			},
+			"filter": {
+				"all": "全部",
+				"matched": "已匹配",
+				"unmatched": "未匹配"
+			},
+			"steps": {
+				"parse": "识别",
+				"match": "搜索",
+				"confirm": "确认"
+			},
+			"apiKey": {
+				"title": "配置 TMDb API Key",
+				"description": "影视刮削功能需要一个免费的 TMDb API Key，密钥仅存储在本地浏览器中。",
+				"howToGet": "如何获取免费 API Key：",
+				"step1": "访问 themoviedb.org 注册免费账号",
+				"step2": "进入 Settings → API → Create API Key",
+				"step3": "复制 API Read Access Token（v4 auth）",
+				"goToTmdb": "前往 TMDb",
+				"label": "API Read Access Token",
+				"placeholder": "eyJhbGciOiJIUzI1NiJ9...",
+				"required": "请输入 API Key",
+				"invalid": "API Key 无效，请检查后重试。",
+				"network": "网络错误，请检查网络连接。",
+				"timeout": "请求超时，请重试。",
+				"unknown": "验证失败，请重试。",
+				"localOnly": "你的 API Key 仅存储在浏览器本地，不会发送到我们的服务器。",
+				"cancel": "取消",
+				"save": "保存并继续"
+			}
+		},
+		"execute": {
+			"execute": "执行重命名",
+			"clear": "清除规则",
+			"refresh": "刷新预览",
+			"confirmTitle": "确认重命名",
+			"confirmDesc": "即将重命名 {count} 个文件。",
+			"confirmWarning": "注意：重命名会更改文件的修改时间。",
+			"cancel": "取消",
+			"confirm": "确认",
+			"exportPlan": "导出方案",
+			"exportMap": "导出映射",
+			"exportScript": "导出脚本",
+			"exportPowerShell": "导出 PowerShell",
+			"exportCSV": "导出 CSV",
+			"exportReverse": "导出撤销脚本",
+			"progress": "进度",
+			"log": "执行日志",
+			"success": "成功",
+			"failed": "失败",
+			"skipped": "跳过",
+			"timestampWarning": "我已了解：重命名将更改文件修改时间戳",
+			"undo": "撤销",
+			"redo": "重做",
+			"undoHint": "撤销上次批量重命名",
+			"redoHint": "重做上次撤销的操作",
+			"activationRequired": "浏览器权限已过期 — 点击此处继续重命名"
+		}
+	},
+	"about": {
+		"title": "关于此项目",
+		"description": "Rename.Tools 是一款强大的浏览器端文件批量重命名工具。所有操作在本地浏览器中运行，全面保护你的隐私。",
+		"techStack": "技术栈",
+		"items": {
+			"framework": "框架：Next.js 16 + App Router",
+			"styling": "样式：Tailwind CSS 4",
+			"components": "组件：shadcn/ui",
+			"i18n": "国际化：next-intl",
+			"linting": "代码检查与格式化：Biome",
+			"theme": "主题：next-themes 暗黑模式"
+		},
+		"backHome": "返回首页"
+	},
+	"notFound": {
+		"title": "404",
+		"description": "你访问的页面不存在或已被移动。",
+		"backHome": "返回首页"
+	},
+	"error": {
+		"title": "出了点问题",
+		"description": "发生了意外错误，请重试。",
+		"retry": "重试"
+	},
+	"loading": {
+		"text": "加载中..."
+	},
+	"footer": {
+		"tagline": "强大的浏览器端批量重命名工具。支持正则、规则链、实时预览，所有操作本地完成，隐私无忧。",
+		"privacyBadge": "100% 本地处理，零数据上传",
+		"legalTitle": "法律条款",
+		"resourcesTitle": "资源",
+		"features": "全部功能",
+		"terms": "服务条款",
+		"privacyPolicy": "隐私政策",
+		"disclaimer": "免责声明",
+		"reportIssue": "问题反馈",
+		"changelog": "更新日志",
+		"allRightsReserved": "保留所有权利。",
+		"madeWith": "用",
+		"madeIn": "打造"
+	},
+	"legal": {
+		"backToHome": "返回首页",
+		"lastUpdated": "最后更新",
+		"termsTitle": "服务条款",
+		"termsIntro": "欢迎使用 Rename.Tools。请在使用本服务前仔细阅读以下条款。使用本服务即表示你同意受这些条款的约束。",
+		"termsAcceptance": "1. 接受条款",
+		"termsAcceptanceDesc": "访问和使用 Rename.Tools（以下简称「本服务」）即表示你同意受这些服务条款的约束。如果你不同意任何条款，请立即停止使用本服务。本服务面向全球用户提供，你需确保使用本服务符合你所在地区的法律法规。",
+		"termsService": "2. 服务描述",
+		"termsServiceDesc": "Rename.Tools 是一款免费的浏览器端文件批量重命名工具。本服务的核心特点包括：所有文件处理均在用户本地浏览器中完成；我们不收集、存储或传输任何用户文件数据；支持多种重命名规则，包括正则表达式、序号生成、大小写转换等；提供实时预览功能，让用户在执行前确认结果。",
+		"termsUserConduct": "3. 用户行为准则",
+		"termsUserConductDesc": "使用本服务时，你同意：不将本服务用于任何非法目的；不尝试破坏、干扰或绕过本服务的安全措施；不滥用本服务或以任何方式损害其他用户的利益；对自己使用本服务的行为和结果承担全部责任。",
+		"termsIntellectual": "4. 知识产权",
+		"termsIntellectualDesc": "Rename.Tools 的源代码根据 MIT 许可协议开源。你可以自由使用、修改和分发源代码，但须保留原始版权声明。本服务的商标、标识和品牌名称归其各自所有者所有。",
+		"termsDisclaimer": "5. 责任限制",
+		"termsDisclaimerDesc": "本服务按「现状」和「可用」基础提供，不附带任何明示或暗示的担保。在法律允许的最大范围内，我们不对以下情况承担责任：因使用或无法使用本服务导致的任何直接、间接、附带、特殊或后果性损害；任何数据丢失、文件损坏或系统故障；任何第三方的行为或内容。",
+		"termsLiability": "6. 使用风险",
+		"termsLiabilityDesc": "批量重命名操作通常是不可逆的。你明确承认并同意：使用本服务的风险完全由你自行承担；你有责任在执行重命名操作前通过预览功能仔细验证结果；强烈建议在操作前备份重要文件；我们不对因操作失误导致的任何损失承担责任。",
+		"termsChanges": "7. 条款变更",
+		"termsChangesDesc": "我们保留随时修改这些服务条款的权利，恕不另行通知。修改后的条款将在本页面发布时立即生效。你有责任定期查看本页面以了解任何变更。在条款修改后继续使用本服务，即表示你接受修订后的条款。",
+		"termsTermination": "8. 服务终止",
+		"termsTerminationDesc": "我们保留在不事先通知的情况下，因任何原因暂停或终止本服务的权利。服务终止后，这些条款中关于责任限制、知识产权和免责声明的规定将继续有效。",
+		"termsGoverning": "9. 适用法律",
+		"termsGoverningDesc": "这些服务条款受中华人民共和国法律管辖并据其解释。因本条款引起的任何争议，双方应首先友好协商解决；协商不成的，任何一方均可向有管辖权的人民法院提起诉讼。",
+		"termsContact": "10. 联系方式",
+		"termsContactDesc": "如对这些服务条款有任何疑问或建议，请通过以下方式联系我们：GitHub Issues（推荐）：https://github.com/chenz24/rename.tools/issues",
+		"privacyTitle": "隐私政策",
+		"privacyIntro": "我们深知隐私对你的重要性。本隐私政策说明 Rename.Tools 如何处理你的信息。简而言之：我们不收集你的任何数据。",
+		"privacyLocalTitle": "1. 本地处理原则",
+		"privacyLocalDesc": "Rename.Tools 采用纯浏览器端架构，这意味着：所有文件操作都在你的设备本地完成；你的文件永远不会被上传到任何服务器；文件内容、文件名和元数据都不会离开你的浏览器；即使在离线状态下，本服务也能正常工作（首次加载后）。",
+		"privacyNoCollection": "2. 我们不收集的信息",
+		"privacyNoCollectionDesc": "我们明确声明不收集以下信息：你的文件内容、文件名或任何文件元数据；你的个人身份信息（姓名、邮箱、电话等）；你的设备信息或浏览器指纹；你的 IP 地址或地理位置；你的使用行为或浏览历史。",
+		"privacyNoStorage": "3. 数据存储",
+		"privacyNoStorageDesc": "本服务不会将任何用户数据持久化存储到远程服务器。在本地浏览器中，我们仅存储：语言偏好设置（localStorage）；主题设置（localStorage）；你自愿保存的重命名规则预设（localStorage）。关闭浏览器标签页后，所有临时数据（包括文件列表和当前规则配置）都会被自动清除。你可以随时通过浏览器设置清除所有本地存储的数据。",
+		"privacyCookies": "4. Cookie 使用",
+		"privacyCookiesDesc": "本服务仅使用必要的功能性 Cookie 来存储你的语言和主题偏好。这些 Cookie：不包含任何个人身份信息；不用于跟踪或分析目的；不会与任何第三方共享；你可以通过浏览器设置随时删除。",
+		"privacyThirdParty": "5. 第三方服务",
+		"privacyThirdPartyDesc": "TMDb API 集成：如果你选择使用影视元数据刮削功能，需要配置 TMDb API 密钥。该密钥仅存储在你的浏览器本地存储中，不会发送到我们的服务器。API 调用直接从你的浏览器发起到 TMDb 服务器，我们不参与或记录这些通信。托管服务：本网站托管在 Vercel 上。Vercel 可能会收集标准的服务器日志（如 IP 地址、访问时间），这些日志由 Vercel 根据其隐私政策管理，我们无法访问这些数据。",
+		"privacySecurity": "6. 安全措施",
+		"privacySecurityDesc": "虽然我们不存储你的数据，但我们仍采取以下措施保护服务安全：使用 HTTPS 加密所有网络通信；定期更新依赖项以修复已知安全漏洞；开源代码接受社区审查；不使用任何第三方跟踪或分析脚本。",
+		"privacyChildren": "7. 儿童隐私",
+		"privacyChildrenDesc": "本服务不专门针对 13 岁以下儿童。由于我们不收集任何个人信息，因此不存在儿童隐私数据的收集问题。",
+		"privacyChanges": "8. 政策变更",
+		"privacyChangesDesc": "我们可能会不时更新本隐私政策以反映服务变化或法律要求。任何重大变更将在本页面公布。我们建议你定期查看本页面以了解最新的隐私实践。",
+		"privacyRights": "9. 你的权利",
+		"privacyRightsDesc": "由于我们不收集或存储你的个人数据，传统的数据主体权利（如访问、更正、删除）在技术上不适用。但是，你始终可以：清除浏览器本地存储来删除所有本地保存的偏好设置；选择不使用需要第三方 API 的功能；查看我们的开源代码以验证我们的隐私声明。",
+		"privacyContact": "10. 联系我们",
+		"privacyContactDesc": "如对本隐私政策有任何疑问，请通过 GitHub Issues 联系我们。",
+		"disclaimerTitle": "免责声明",
+		"disclaimerIntro": "使用 Rename.Tools 前，请仔细阅读以下免责声明。使用本服务即表示你理解并接受这些条款。",
+		"disclaimerGeneral": "1. 一般免责声明",
+		"disclaimerGeneralDesc": "Rename.Tools 是一款免费开源工具，旨在帮助用户高效地批量重命名文件。本工具按「现状」提供，我们不对其功能的完整性、准确性或适用性作出任何明示或暗示的保证。使用本工具的风险完全由用户自行承担。",
+		"disclaimerRisk": "2. 操作风险警告",
+		"disclaimerRiskDesc": "批量文件重命名是一项具有潜在风险的操作。请注意：重命名操作通常是不可逆的，一旦执行可能无法撤销；错误的重命名规则可能导致文件名混乱或丢失原有的文件组织结构；某些系统文件或程序依赖的文件被重命名后可能导致系统或应用程序故障；在某些文件系统中，文件名的更改可能影响文件的修改时间戳。",
+		"disclaimerBackup": "3. 数据备份建议",
+		"disclaimerBackupDesc": "我们强烈建议：在执行任何批量重命名操作前，对目标文件进行完整备份；使用本工具提供的预览功能仔细检查预期结果；对于重要文件，先在测试文件集上验证规则的正确性；考虑使用本工具提供的「导出撤销脚本」功能，以便在需要时还原文件名。",
+		"disclaimerNoWarranty": "4. 无担保声明",
+		"disclaimerNoWarrantyDesc": "在法律允许的最大范围内：本工具不附带任何形式的担保，无论是明示的还是暗示的；我们不保证本工具将满足你的特定需求；我们不保证本工具的运行将不会中断、及时、安全或无错误；我们不保证使用本工具获得的结果将是准确或可靠的；我们不对任何数据丢失、文件损坏、系统故障或其他损害承担责任。",
+		"disclaimerLiability": "5. 责任限制",
+		"disclaimerLiabilityDesc": "无论在任何情况下，Rename.Tools 的开发者和贡献者都不对以下情况承担责任：因使用或无法使用本工具而导致的任何直接、间接、附带、特殊、惩罚性或后果性损害；任何利润损失、数据丢失或业务中断；任何第三方索赔。即使我们已被告知此类损害的可能性，上述限制仍然适用。",
+		"disclaimerOpenSource": "6. 开源许可",
+		"disclaimerOpenSourceDesc": "Rename.Tools 根据 GNU Affero General Public License v3.0 (AGPL-3.0) 开源。这意味着：你可以自由使用、复制、修改和分发本软件；你可以将其用于商业或非商业目的；你必须在所有副本中保留版权声明和许可声明；如果你在服务器上修改并运行本软件，你必须向用户公开源代码；本软件按「现状」提供，不附带任何担保。",
+		"disclaimerThirdParty": "7. 第三方内容",
+		"disclaimerThirdPartyDesc": "本工具可能包含或链接到第三方内容、库或服务。我们不对任何第三方内容的准确性、完整性或可用性负责。使用第三方服务（如 TMDb API）时，你还需遵守相应服务的使用条款。",
+		"disclaimerJurisdiction": "8. 司法管辖",
+		"disclaimerJurisdictionDesc": "本免责声明受中华人民共和国法律管辖。如果本声明的任何部分被认定为无效或不可执行，其余部分仍然有效。",
+		"disclaimerAcknowledgment": "9. 确认声明",
+		"disclaimerAcknowledgmentDesc": "使用 Rename.Tools 即表示你确认：你已阅读并理解本免责声明；你同意受本免责声明的约束；你理解批量重命名操作的风险；你将对自己使用本工具的行为和结果负责。"
+	}
+}
