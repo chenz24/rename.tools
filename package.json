@@ -7,8 +7,8 @@
 	},
 	"scripts": {
 		"dev": "next dev --turbopack",
-		"build": "opennextjs-cloudflare build",
-		"build:next": "next build",
+		"build": "next build",
+		"build:cf": "opennextjs-cloudflare build",
 		"start": "next start",
 		"lint": "biome lint .",
 		"format": "biome format --write .",
