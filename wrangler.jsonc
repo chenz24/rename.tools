@@ -3,6 +3,7 @@
 	"main": ".open-next/worker.js",
 	"name": "rename-tools",
 	"compatibility_date": "2026-03-20",
+	"keep_names": false,
 	"compatibility_flags": ["nodejs_compat"],
 	"routes": [
     { "pattern": "rename.tools", "custom_domain": true }
