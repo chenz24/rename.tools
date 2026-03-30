@@ -8,8 +8,10 @@ export default function manifest(): MetadataRoute.Manifest {
 			"Free browser-based batch file renaming tool with regex, sequences, and rule chains. 100% local processing.",
 		start_url: "/",
 		display: "standalone",
+		orientation: "any",
 		background_color: "#ffffff",
 		theme_color: "#667eea",
+		categories: ["utilities", "productivity"],
 		icons: [
 			{
 				src: "/icon-192.png",
