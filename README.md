@@ -11,6 +11,8 @@ Regex, rule chains, live preview — all processed locally for total privacy.
 
 [Live Demo](https://rename.tools) · [Report Bug](https://github.com/chenz24/rename.tools/issues) · [Request Feature](https://github.com/chenz24/rename.tools/issues)
 
+English | [简体中文](./README_zh.md)
+
 </div>
 
 ---
