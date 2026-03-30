@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Offline - Rename.Tools</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: #f8fafc;
+      color: #1e293b;
+    }
+    @media (prefers-color-scheme: dark) {
+      body { background: #0f172a; color: #e2e8f0; }
+      .card { background: #1e293b; box-shadow: 0 4px 24px rgba(0,0,0,0.3); }
+      .retry-btn { background: #667eea; }
+      .retry-btn:hover { background: #5a6fd6; }
+    }
+    .card {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-radius: 1rem;
+      background: white;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      max-width: 420px;
+      width: 90%;
+    }
+    .icon { font-size: 3.5rem; margin-bottom: 1rem; }
+    h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+    p { color: #64748b; line-height: 1.6; margin-bottom: 1.5rem; }
+    .retry-btn {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+    .retry-btn:hover { background: #5a6fd6; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon">📡</div>
+    <h1>You're Offline</h1>
+    <p>It seems you've lost your internet connection. Please check your network and try again.</p>
+    <button class="retry-btn" onclick="window.location.reload()">Retry</button>
+  </div>
+</body>
+</html>
