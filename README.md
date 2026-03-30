@@ -29,7 +29,7 @@ Regex, rule chains, live preview — all processed locally for total privacy.
 
 ## 🖼️ Screenshot
 
-![Rename.Tools Interface](public/product_screenshot.png)
+![Rename.Tools Interface](public/screenshots/product_screenshot.png)
 
 ## 🚀 Getting Started
 
