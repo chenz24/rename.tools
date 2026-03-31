@@ -362,7 +362,20 @@
 			"preferences": "Preferences",
 			"preferencesDesc": "Configure global application settings and behaviors.",
 			"preferencesPlaceholder": "More settings coming soon...",
-			"kofiTooltip": "Small coffee, big motivation. Thanks for the support ☕"
+			"kofiTooltip": "Small coffee, big motivation. Thanks for the support ☕",
+			"tmdb": {
+				"title": "TMDB API Key",
+				"configured": "✓ Configured",
+				"description": "Used for automatic movie/TV show metadata matching. You can get a free API Key at themoviedb.org.",
+				"placeholder": "Enter TMDB API Key",
+				"clear": "Clear",
+				"validating": "Validating...",
+				"save": "Save",
+				"errorInvalid": "API Key is invalid",
+				"errorNetwork": "Network error, please retry",
+				"errorTimeout": "Validation timed out",
+				"errorUnknown": "Unknown error"
+			}
 		},
 		"files": {
 			"title": "File List",

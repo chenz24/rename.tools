@@ -491,7 +491,7 @@ export function TemplateLibrary({ onApply, trigger }: Props) {
 										<div className="pt-4 space-y-4">
 											<div className="text-left space-y-3">
 												<div className="flex items-center gap-3 text-sm">
-													<div className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
+													<div className="shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
 														<span className="text-xs font-semibold text-primary">1</span>
 													</div>
 													<span className="text-muted-foreground">
@@ -499,7 +499,7 @@ export function TemplateLibrary({ onApply, trigger }: Props) {
 													</span>
 												</div>
 												<div className="flex items-center gap-3 text-sm">
-													<div className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
+													<div className="shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
 														<span className="text-xs font-semibold text-primary">2</span>
 													</div>
 													<span className="text-muted-foreground">

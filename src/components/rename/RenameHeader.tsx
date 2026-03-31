@@ -151,14 +151,12 @@ export function RenameHeader() {
 						<div className="space-y-3">
 							<div className="flex items-center gap-2 text-sm font-medium text-foreground">
 								<Film className="h-4 w-4 text-violet-500" />
-								<span>TMDB API Key</span>
+								<span>{t("tmdb.title")}</span>
 								{tmdbConfig.isConfigured && (
-									<span className="ml-auto text-xs text-emerald-500">✓ 已配置</span>
+									<span className="ml-auto text-xs text-emerald-500">{t("tmdb.configured")}</span>
 								)}
 							</div>
-							<p className="text-xs text-muted-foreground">
-								用于电影/电视剧元数据自动匹配功能。您可以在 themoviedb.org 获取免费 API Key。
-							</p>
+							<p className="text-xs text-muted-foreground">{t("tmdb.description")}</p>
 
 							{tmdbConfig.isConfigured ? (
 								<div className="flex items-center gap-2">
@@ -171,7 +169,7 @@ export function RenameHeader() {
 										className="h-7 text-xs"
 										onClick={handleClearApiKey}
 									>
-										清除
+										{t("tmdb.clear")}
 									</Button>
 								</div>
 							) : (
@@ -184,7 +182,7 @@ export function RenameHeader() {
 												setApiKeyInput(e.target.value);
 												setApiKeyError(null);
 											}}
-											placeholder="输入 TMDB API Key"
+											placeholder={t("tmdb.placeholder")}
 											className="flex-1 rounded-md border border-input bg-transparent px-3 py-1 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring"
 										/>
 										<Button
@@ -193,15 +191,15 @@ export function RenameHeader() {
 											onClick={handleSaveApiKey}
 											disabled={!apiKeyInput.trim() || tmdbConfig.isValidating}
 										>
-											{tmdbConfig.isValidating ? "验证中..." : "保存"}
+											{tmdbConfig.isValidating ? t("tmdb.validating") : t("tmdb.save")}
 										</Button>
 									</div>
 									{apiKeyError && (
 										<p className="text-xs text-red-500">
-											{apiKeyError === "invalid" && "API Key 无效"}
-											{apiKeyError === "network" && "网络错误，请重试"}
-											{apiKeyError === "timeout" && "验证超时"}
-											{apiKeyError === "unknown" && "未知错误"}
+											{apiKeyError === "invalid" && t("tmdb.errorInvalid")}
+											{apiKeyError === "network" && t("tmdb.errorNetwork")}
+											{apiKeyError === "timeout" && t("tmdb.errorTimeout")}
+											{apiKeyError === "unknown" && t("tmdb.errorUnknown")}
 										</p>
 									)}
 								</div>

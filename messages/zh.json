@@ -362,7 +362,20 @@
 			"preferences": "偏好设置",
 			"preferencesDesc": "配置应用的全局参数和行为。",
 			"preferencesPlaceholder": "更多设置选项即将推出...",
-			"kofiTooltip": "小小咖啡，大大动力。感谢支持 ☕"
+			"kofiTooltip": "小小咖啡，大大动力。感谢支持 ☕",
+			"tmdb": {
+				"title": "TMDB API Key",
+				"configured": "✓ 已配置",
+				"description": "用于电影/电视剧元数据自动匹配功能。您可以在 themoviedb.org 获取免费 API Key。",
+				"placeholder": "输入 TMDB API Key",
+				"clear": "清除",
+				"validating": "验证中...",
+				"save": "保存",
+				"errorInvalid": "API Key 无效",
+				"errorNetwork": "网络错误，请重试",
+				"errorTimeout": "验证超时",
+				"errorUnknown": "未知错误"
+			}
 		},
 		"files": {
 			"title": "文件列表",

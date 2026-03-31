@@ -105,7 +105,7 @@ function DiffOriginal({ segments }: { segments: DiffSegment[] }) {
 					return (
 						<span
 							key={`${seg.type}-${i}`}
-							className="bg-destructive/20 text-destructive line-through rounded-sm px-[1px]"
+							className="bg-destructive/20 text-destructive line-through rounded-sm px-px"
 						>
 							{seg.text}
 						</span>
