@@ -149,8 +149,9 @@ async function staleWhileRevalidate(request) {
   const fetchPromise = fetch(request)
     .then((response) => {
       if (response.ok) {
+        const cloned = response.clone();
         caches.open(DYNAMIC_CACHE).then((cache) => {
-          cache.put(request, response.clone());
+          cache.put(request, cloned);
         });
       }
       return response;

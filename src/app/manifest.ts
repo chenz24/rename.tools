@@ -30,5 +30,21 @@ export default function manifest(): MetadataRoute.Manifest {
 				purpose: "maskable",
 			},
 		],
+		screenshots: [
+			{
+				src: "/screenshots/product_screenshot.png",
+				sizes: "3348x1844",
+				type: "image/png",
+				form_factor: "wide",
+				label: "Rename.Tools - Batch File Renaming",
+			},
+			{
+				src: "/screenshots/product_screenshot_dark.png",
+				sizes: "3354x1852",
+				type: "image/png",
+				form_factor: "wide",
+				label: "Rename.Tools - Dark Mode",
+			},
+		],
 	};
 }
