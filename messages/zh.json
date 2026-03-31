@@ -361,7 +361,8 @@
 			"settings": "设置",
 			"preferences": "偏好设置",
 			"preferencesDesc": "配置应用的全局参数和行为。",
-			"preferencesPlaceholder": "更多设置选项即将推出..."
+			"preferencesPlaceholder": "更多设置选项即将推出...",
+			"kofiTooltip": "小小咖啡，大大动力。感谢支持 ☕"
 		},
 		"files": {
 			"title": "文件列表",

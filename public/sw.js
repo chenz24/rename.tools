@@ -68,8 +68,7 @@ function isStaticAsset(url) {
 function isApiOrInternal(url) {
   return (
     url.pathname.startsWith('/api/') ||
-    url.pathname.startsWith('/_next/data/') ||
-    url.pathname.startsWith('/_next/webpack')
+    url.pathname.startsWith('/_next/')
   );
 }
 

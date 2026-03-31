@@ -28,7 +28,7 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Textarea } from "@/components/ui/textarea";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import type { MetadataLoadProgress } from "@/hooks/useMetadataLoader";
 import type { SortMode } from "@/hooks/useRenameStore";
 import type { FileEntry, FilterCondition } from "@/lib/rename/types";
@@ -320,111 +320,104 @@ export function FilePanel({
 			<div className="border-b bg-muted/20 px-3 py-3 flex items-center gap-2">
 				<h2 className="text-sm font-medium text-foreground">{t("title")}</h2>
 				<div className="ml-auto flex items-center gap-1">
-					<TooltipProvider>
-						{apiSupported ? (
-							<>
-								<Tooltip>
-									<TooltipTrigger asChild>
-										<Button
-											size="sm"
-											variant="outline"
-											className="h-7 w-7 p-0"
-											onClick={importFiles}
-										>
-											<FileUp className="h-3.5 w-3.5" />
-										</Button>
-									</TooltipTrigger>
-									<TooltipContent>
-										<p>{t("importFiles")}</p>
-									</TooltipContent>
-								</Tooltip>
-								<Tooltip>
-									<TooltipTrigger asChild>
-										<Button
-											size="sm"
-											variant="outline"
-											className="h-7 w-7 p-0"
-											onClick={importFolder}
-										>
-											<FolderOpen className="h-3.5 w-3.5" />
-										</Button>
-									</TooltipTrigger>
-									<TooltipContent>
-										<p>{t("importFolder")}</p>
-									</TooltipContent>
-								</Tooltip>
-							</>
-						) : (
-							<Button
-								size="sm"
-								variant="outline"
-								className="gap-1 text-xs h-7"
-								onClick={() => setSampleMode(!sampleMode)}
-							>
-								{t("sampleMode")}
-							</Button>
-						)}
-						{allFiles.length > 0 && onLoadMetadata && (
+					{apiSupported ? (
+						<>
+							<Tooltip>
+								<TooltipTrigger asChild>
+									<Button size="sm" variant="outline" className="h-7 w-7 p-0" onClick={importFiles}>
+										<FileUp className="h-3.5 w-3.5" />
+									</Button>
+								</TooltipTrigger>
+								<TooltipContent>
+									<p>{t("importFiles")}</p>
+								</TooltipContent>
+							</Tooltip>
 							<Tooltip>
 								<TooltipTrigger asChild>
 									<Button
 										size="sm"
-										variant={hasMetadata ? "default" : "outline"}
+										variant="outline"
 										className="h-7 w-7 p-0"
-										onClick={onLoadMetadata}
-										disabled={metadataProgress?.state === "loading"}
+										onClick={importFolder}
 									>
-										{metadataProgress?.state === "loading" ? (
-											<Loader2 className="h-3.5 w-3.5 animate-spin" />
-										) : (
-											<Database className="h-3.5 w-3.5" />
-										)}
+										<FolderOpen className="h-3.5 w-3.5" />
 									</Button>
 								</TooltipTrigger>
 								<TooltipContent>
-									<p>
-										{metadataProgress?.state === "loading"
-											? `${t("loadingMetadata")} (${metadataProgress.current}/${metadataProgress.total})`
-											: t("loadMetadata")}
-									</p>
+									<p>{t("importFolder")}</p>
 								</TooltipContent>
 							</Tooltip>
-						)}
-						{allFiles.length > 0 && hasVideoFiles && onOpenScraper && (
-							<Tooltip>
-								<TooltipTrigger asChild>
-									<Button
-										size="sm"
-										variant={hasScrapedData ? "default" : "outline"}
-										className="h-7 w-7 p-0"
-										onClick={onOpenScraper}
-										disabled={scraperLoading}
-									>
-										{scraperLoading ? (
-											<Loader2 className="h-3.5 w-3.5 animate-spin" />
-										) : (
-											<Clapperboard className="h-3.5 w-3.5" />
-										)}
-									</Button>
-								</TooltipTrigger>
-								<TooltipContent>
-									<p>{t("scrapeMedia")}</p>
-								</TooltipContent>
-							</Tooltip>
-						)}
-						{allFiles.length > 0 && (
-							<Tooltip>
-								<TooltipTrigger asChild>
-									<Button size="sm" variant="ghost" onClick={onClear} className="h-7 w-7 p-0">
-										<Trash2 className="h-3.5 w-3.5 text-destructive" />
-									</Button>
-								</TooltipTrigger>
-								<TooltipContent>
-									<p>{t("clear")}</p>
-								</TooltipContent>
-							</Tooltip>
-						)}
-					</TooltipProvider>
+						</>
+					) : (
+						<Button
+							size="sm"
+							variant="outline"
+							className="gap-1 text-xs h-7"
+							onClick={() => setSampleMode(!sampleMode)}
+						>
+							{t("sampleMode")}
+						</Button>
+					)}
+					{allFiles.length > 0 && onLoadMetadata && (
+						<Tooltip>
+							<TooltipTrigger asChild>
+								<Button
+									size="sm"
+									variant={hasMetadata ? "default" : "outline"}
+									className="h-7 w-7 p-0"
+									onClick={onLoadMetadata}
+									disabled={metadataProgress?.state === "loading"}
+								>
+									{metadataProgress?.state === "loading" ? (
+										<Loader2 className="h-3.5 w-3.5 animate-spin" />
+									) : (
+										<Database className="h-3.5 w-3.5" />
+									)}
+								</Button>
+							</TooltipTrigger>
+							<TooltipContent>
+								<p>
+									{metadataProgress?.state === "loading"
+										? `${t("loadingMetadata")} (${metadataProgress.current}/${metadataProgress.total})`
+										: t("loadMetadata")}
+								</p>
+							</TooltipContent>
+						</Tooltip>
+					)}
+					{allFiles.length > 0 && hasVideoFiles && onOpenScraper && (
+						<Tooltip>
+							<TooltipTrigger asChild>
+								<Button
+									size="sm"
+									variant={hasScrapedData ? "default" : "outline"}
+									className="h-7 w-7 p-0"
+									onClick={onOpenScraper}
+									disabled={scraperLoading}
+								>
+									{scraperLoading ? (
+										<Loader2 className="h-3.5 w-3.5 animate-spin" />
+									) : (
+										<Clapperboard className="h-3.5 w-3.5" />
+									)}
+								</Button>
+							</TooltipTrigger>
+							<TooltipContent>
+								<p>{t("scrapeMedia")}</p>
+							</TooltipContent>
+						</Tooltip>
+					)}
+					{allFiles.length > 0 && (
+						<Tooltip>
+							<TooltipTrigger asChild>
+								<Button size="sm" variant="ghost" onClick={onClear} className="h-7 w-7 p-0">
+									<Trash2 className="h-3.5 w-3.5 text-destructive" />
+								</Button>
+							</TooltipTrigger>
+							<TooltipContent>
+								<p>{t("clear")}</p>
+							</TooltipContent>
+						</Tooltip>
+					)}
 				</div>
 			</div>
 

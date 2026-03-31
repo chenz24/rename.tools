@@ -361,7 +361,8 @@
 			"settings": "Settings",
 			"preferences": "Preferences",
 			"preferencesDesc": "Configure global application settings and behaviors.",
-			"preferencesPlaceholder": "More settings coming soon..."
+			"preferencesPlaceholder": "More settings coming soon...",
+			"kofiTooltip": "Small coffee, big motivation. Thanks for the support ☕"
 		},
 		"files": {
 			"title": "File List",
