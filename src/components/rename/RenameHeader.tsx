@@ -1,6 +1,6 @@
 "use client";
 
-import { Film, Moon, Settings, Sun } from "lucide-react";
+import { Coffee, Film, Moon, Settings, Sun } from "lucide-react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
@@ -20,6 +20,7 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useTmdbConfig } from "@/hooks/useTmdbConfig";
 import { usePathname, useRouter } from "@/i18n/navigation";
 
@@ -78,6 +79,22 @@ export function RenameHeader() {
 
 				{/* Right: Controls */}
 				<div className="flex items-center gap-0.5">
+					<Tooltip>
+						<TooltipTrigger asChild>
+							<Button
+								variant="ghost"
+								size="icon"
+								asChild
+								className="h-8 w-8 text-slate-300 hover:bg-slate-800 hover:text-slate-100"
+								aria-label="Support us on Ko-fi"
+							>
+								<a href="https://ko-fi.com/bryanchen0621" target="_blank" rel="noopener noreferrer">
+									<Coffee />
+								</a>
+							</Button>
+						</TooltipTrigger>
+						<TooltipContent>{t("kofiTooltip")}</TooltipContent>
+					</Tooltip>
 					{/* Theme Toggle */}
 					<Button
 						variant="ghost"

@@ -282,7 +282,6 @@ export function JsCodeEditor({
 	value,
 	onChange,
 	onValidate,
-	placeholder,
 	className = "",
 	minHeight = 120,
 	maxHeight = 300,
