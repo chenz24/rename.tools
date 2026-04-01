@@ -1,18 +1,28 @@
-import { Github, Heart, Shield } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { Github, Heart, Languages, Shield } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 
 export function Footer() {
 	const t = useTranslations("footer");
+	const _locale = useLocale();
 	const year = new Date().getFullYear();
+
+	const _languages = [
+		{ code: "en", name: "English", nativeName: "English" },
+		{ code: "zh", name: "Chinese", nativeName: "中文" },
+		{ code: "ja", name: "Japanese", nativeName: "日本語" },
+		{ code: "es", name: "Spanish", nativeName: "Español" },
+		{ code: "fr", name: "French", nativeName: "Français" },
+		{ code: "ko", name: "Korean", nativeName: "한국어" },
+	];
 
 	return (
 		<footer className="border-t bg-muted/30">
 			<div className="mx-auto max-w-5xl px-6 py-12">
 				{/* Main Footer Content */}
-				<div className="grid grid-cols-1 gap-8 md:grid-cols-4">
+				<div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5">
 					{/* Brand Column */}
-					<div className="md:col-span-2">
+					<div className="sm:col-span-2">
 						<Link
 							href="/"
 							className="inline-flex items-center gap-2 text-lg font-semibold text-foreground"
@@ -106,6 +116,32 @@ export function Footer() {
 									{t("changelog")}
 								</a>
 							</li>
+						</ul>
+					</div>
+
+					{/* Languages */}
+					<div>
+						<h4 className="mb-4 flex items-center gap-1.5 text-sm font-semibold text-foreground">
+							<Languages className="h-4 w-4" />
+							{t("languagesTitle")}
+						</h4>
+						<ul className="space-y-2.5 text-sm">
+							{_languages.map((lang) => (
+								<li key={lang.code}>
+									<Link
+										href="/"
+										locale={lang.code}
+										className={`transition-colors hover:text-foreground ${
+											_locale === lang.code
+												? "font-medium text-foreground"
+												: "text-muted-foreground"
+										}`}
+										hrefLang={lang.code}
+									>
+										{lang.nativeName}
+									</Link>
+								</li>
+							))}
 						</ul>
 					</div>
 				</div>
