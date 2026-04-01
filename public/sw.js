@@ -1,5 +1,5 @@
 // Rename.Tools Service Worker - Offline PWA Support
-const CACHE_VERSION = 'v1';
+const CACHE_VERSION = 'v1.1';
 const STATIC_CACHE = `rename-tools-static-${CACHE_VERSION}`;
 const DYNAMIC_CACHE = `rename-tools-dynamic-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
@@ -68,7 +68,7 @@ function isStaticAsset(url) {
 function isApiOrInternal(url) {
   return (
     url.pathname.startsWith('/api/') ||
-    url.pathname.startsWith('/_next/')
+    (url.pathname.startsWith('/_next/') && !url.pathname.startsWith('/_next/static/'))
   );
 }
 
