@@ -880,11 +880,12 @@
 		"text": "加载中..."
 	},
 	"footer": {
-		"tagline": "强大的浏览器端批量重命名工具。支持正则、规则链、实时预览，所有操作本地完成，隐私无忧。",
+		"tagline": "强大的浏览器端批量重命名工具。支持正则表达式、规则链、实时预览 — 所有处理均在本地完成，完全保护隐私。",
 		"privacyBadge": "100% 本地处理，零数据上传",
-		"legalTitle": "法律条款",
+		"legalTitle": "法律",
 		"resourcesTitle": "资源",
-		"features": "全部功能",
+		"languagesTitle": "语言",
+		"features": "所有功能",
 		"terms": "服务条款",
 		"privacyPolicy": "隐私政策",
 		"disclaimer": "免责声明",

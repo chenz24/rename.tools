@@ -130,6 +130,18 @@ export function RenameHeader() {
 							<DropdownMenuItem onClick={() => switchLocale("zh")} disabled={locale === "zh"}>
 								中文
 							</DropdownMenuItem>
+							<DropdownMenuItem onClick={() => switchLocale("ja")} disabled={locale === "ja"}>
+								日本語
+							</DropdownMenuItem>
+							<DropdownMenuItem onClick={() => switchLocale("es")} disabled={locale === "es"}>
+								Español
+							</DropdownMenuItem>
+							<DropdownMenuItem onClick={() => switchLocale("fr")} disabled={locale === "fr"}>
+								Français
+							</DropdownMenuItem>
+							<DropdownMenuItem onClick={() => switchLocale("ko")} disabled={locale === "ko"}>
+								한국어
+							</DropdownMenuItem>
 						</DropdownMenuContent>
 					</DropdownMenu>
 				</div>

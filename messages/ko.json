@@ -1,0 +1,966 @@
+{
+	"metadata": {
+		"title": "Rename.Tools - 무료 온라인 일괄 파일 이름 변경 도구 | 업로드 없음, 개인정보 우선, 로컬 처리",
+		"description": "정규식, 시퀀스, 규칙 체인을 갖춘 무료 브라우저 기반 일괄 파일 이름 변경 도구. 실시간 미리보기로 수천 개의 파일을 즉시 이름 변경. 100% 로컬 처리 - 업로드 없음, 추적 없음, 완전한 개인정보 보호 보장.",
+		"app": {
+			"title": "Rename.Tools | 온라인 일괄 파일 이름 변경 도구 - 무료, 빠름 & 안전",
+			"description": "정규식, 시퀀스, 규칙 체인으로 브라우저에서 수천 개의 파일을 즉시 이름 변경. 실시간 미리보기, 실행 취소/다시 실행 지원, 메타데이터 추출. 100% 로컬 처리 - 파일이 기기를 떠나지 않습니다. 영원히 무료."
+		},
+		"about": {
+			"title": "소개 - Rename.Tools",
+			"description": "Next.js, React 및 최신 웹 기술로 구축된 브라우저 기반 일괄 파일 이름 변경 도구 Rename.Tools에 대해 알아보세요."
+		},
+		"features": {
+			"title": "기능 - Rename.Tools",
+			"description": "모든 기능 살펴보기: 정규식 패턴, 시퀀스, 대소문자 변환, 사용자 정의 JavaScript, 메타데이터 추출 등."
+		},
+		"privacy": {
+			"title": "개인정보 보호정책 - Rename.Tools",
+			"description": "개인정보 보호정책: 데이터를 수집하지 않습니다. 모든 파일 작업은 브라우저에서 로컬로 실행됩니다."
+		},
+		"terms": {
+			"title": "서비스 약관 - Rename.Tools",
+			"description": "Rename.Tools 일괄 파일 이름 변경 도구 사용에 대한 서비스 약관."
+		},
+		"disclaimer": {
+			"title": "면책 조항 - Rename.Tools",
+			"description": "Rename.Tools 사용자를 위한 중요한 면책 조항 및 책임 정보."
+		}
+	},
+	"header": {
+		"home": "홈",
+		"app": "앱",
+		"features": "기능",
+		"about": "소개",
+		"theme": "테마 전환",
+		"language": "언어"
+	},
+	"home": {
+		"heroTitle": "수천 개의 파일 이름을 변경하세요.\n브라우저에서 바로.",
+		"heroFeature1": "7가지 규칙 유형",
+		"heroFeature2": "실시간 미리보기",
+		"heroFeature3": "업로드 제로",
+		"heroDescription": "정규식, 시퀀스, 대소문자 변환을 강력한 규칙 체인으로 결합하세요. 모든 작업은 브라우저에서 로컬로 실행됩니다 — 파일이 기기를 떠나지 않습니다.",
+		"cta": "이름 변경 시작",
+		"viewOnGithub": "GitHub에서 보기",
+		"githubStars": "오픈소스",
+		"onGithub": "GitHub에서",
+		"highlightBadge": "Rename.Tools를 선택하는 이유",
+		"highlightTitle": "필요한 모든 것,\n불필요한 것은 없이",
+		"highlightDesc": "일괄 이름 변경을 빠르고 안전하며 예측 가능하게 만들기 위해 설계된 집중된 기능 세트.",
+		"hl1Title": "규칙 체인",
+		"hl1Desc": "7가지 규칙 유형 — 찾기 및 바꾸기, 정규식, 시퀀스, 대소문자 변환, 삽입, 제거, 사용자 정의 JS — 를 원하는 순서로 결합",
+		"hl2Title": "실시간 미리보기",
+		"hl2Desc": "입력하는 동안 모든 변경 사항이 즉시 업데이트됩니다. 원본 이름, 새 이름, 충돌을 실시간으로 확인",
+		"hl3Title": "충돌 감지",
+		"hl3Desc": "이름 변경 전에 중복된 파일 이름을 자동으로 감지하여 우발적인 덮어쓰기 방지",
+		"hl4Title": "100% 로컬 & 프라이빗",
+		"hl4Desc": "파일이 기기를 떠나지 않습니다. 업로드 없음, 서버 처리 없음, 데이터 보유 없음 — 탭을 닫으면 모든 것이 사라집니다",
+		"hl5Title": "실행 취소 및 스크립트 내보내기",
+		"hl5Desc": "내장된 실행 취소/다시 실행 지원, 또한 오프라인 실행 또는 롤백을 위해 Bash 또는 PowerShell 스크립트로 내보내기",
+		"hl6Title": "무료 및 오픈소스",
+		"hl6Desc": "가입 없음, 평가판 없음, 유료화 없음. GitHub에서 완전히 투명한 코드, 커뮤니티 주도",
+		"ctaTitle": "파일 이름을 하나씩 변경하는 것을 멈추세요.",
+		"ctaDesc": "Rename.Tools는 정확하고 확신을 가지고 수천 개의 파일 이름을 변경할 수 있는 힘을 제공합니다. 가입 없음, 다운로드 없음, 업로드 없음.",
+		"ctaButton": "지금 이름 변경 시작",
+		"ctaSubtext": "영원히 무료 • 가입 불필요 • 오프라인 작동",
+		"faqTitle": "자주 묻는 질문",
+		"faqSubtitle": "Rename.Tools에 대해 알아야 할 모든 것과 대규모 파일 이름 관리에 도움이 되는 방법.",
+		"faq1Q": "Rename.Tools는 정말 무료인가요?",
+		"faq1A": "네, 완전히 무료이며 오픈소스입니다. 프리미엄 등급, 평가판, 숨겨진 비용이 없습니다. 전체 소스 코드는 AGPL-3.0 라이선스 하에 GitHub에서 사용할 수 있습니다.",
+		"faq2Q": "내 파일이 서버에 업로드되나요?",
+		"faq2A": "아니요. Rename.Tools는 전적으로 브라우저에서 실행됩니다. 파일은 File System Access API를 통해 액세스되며 기기를 떠나지 않습니다. 서버 측 처리는 전혀 없습니다.",
+		"faq3Q": "왜 사용하기 안전한가요?",
+		"faq3A": "Rename.Tools는 구조적으로 서버에서 파일에 액세스할 수 없습니다. 모든 처리는 File System Access API를 통해 브라우저에서 로컬로 이루어집니다. 데이터가 전송, 저장 또는 기록되지 않습니다. 코드는 완전히 오픈소스이므로 직접 확인할 수 있습니다. 또한 내장된 실행 취소 및 실시간 미리보기로 변경 사항을 항상 검토하고 되돌릴 수 있습니다.",
+		"faq4Q": "어떤 브라우저가 지원되나요?",
+		"faq4A": "Rename.Tools는 직접 이름 변경을 위해 File System Access API를 지원하는 Chromium 기반 브라우저(Chrome, Edge, Brave, Arc)에서 가장 잘 작동합니다. 다른 브라우저에서는 샘플 테스트 모드를 사용하거나 이름 변경 스크립트를 내보낼 수 있습니다.",
+		"faq5Q": "몇 개의 파일을 처리할 수 있나요?",
+		"faq5A": "Rename.Tools는 한 번에 수천 개의 파일을 처리할 수 있습니다. 대용량 파일 세트에서도 실시간으로 미리보기가 업데이트됩니다. 성능은 브라우저 및 기기 기능에 따라 다릅니다.",
+		"useCases": {
+			"badge": "사용 사례",
+			"title": "모든 워크플로우에 완벽",
+			"desc": "사진 정리, 미디어 라이브러리 관리, 프로젝트 파일 정리 등 — Rename.Tools는 귀하의 요구에 맞게 조정됩니다.",
+			"ruleChainLabel": "규칙 체인",
+			"previewLabel": "미리보기",
+			"originalLabel": "원본",
+			"newNameLabel": "새 이름",
+			"ruleType": {
+				"findReplace": "찾기 및 바꾸기",
+				"regex": "정규식",
+				"sequence": "시퀀스",
+				"caseStyle": "대소문자/스타일",
+				"insert": "삽입",
+				"removeCleanup": "제거"
+			},
+			"photos": {
+				"tab": "사진 라이브러리",
+				"title": "몇 초 만에 수천 장의 사진 정리",
+				"desc": "휴가 사진에 날짜를 추가하거나, 위치 접두사를 추가하거나, DSC_0001.jpg와 같은 카메라 파일을 의미 있는 이름으로 일관되게 지정하세요."
+			},
+			"videos": {
+				"tab": "비디오 컨텍션",
+				"title": "비디오 파일을 쉽게 관리",
+				"desc": "다운로드한 비디오 이름을 정리하거나, 시리즈에 에피소드 번호를 추가하거나, 미디어 라이브러리 명명 규칙을 표준화하세요."
+			},
+			"music": {
+				"tab": "음악 파일",
+				"title": "음악 라이브러리 정리",
+				"desc": "트랙 이름을 포맷하거나, 아티스트 접두사를 추가하거나, 다운로드한 파일 이름을 정리하거나, 미디어 서버용 파일을 준비하세요."
+			},
+			"code": {
+				"tab": "코드 프로젝트",
+				"title": "파일 구조 리팩토링",
+				"desc": "컴포넌트를 일괄 이름 변경하거나, 명명 규칙을 변환(camelCase에서 kebab-case로)하거나, 배포용 자산을 준비하세요."
+			},
+			"archives": {
+				"tab": "문서 아카이브",
+				"title": "문서 혼란을 정리",
+				"desc": "날짜 접두사를 추가하거나, 버전 접미사를 제거하거나, 부서 간 명명을 표준화하거나, 보관용 파일을 준비하세요."
+			}
+		}
+	},
+	"features": {
+		"heroTitle": "모든 기능,\n완전한 세부 정보",
+		"heroDesc": "강력한 규칙 체인부터 지능형 자동화까지, Rename.Tools를 가장 완벽한 브라우저 기반 일괄 이름 변경 도구로 만드는 모든 기능을 탐색하세요.",
+		"cta": "이름 변경 시작 — 무료",
+		"category": {
+			"rules": "규칙 시스템",
+			"preview": "미리보기 및 워크플로우",
+			"automation": "템플릿 및 자동화",
+			"privacy": "개인정보 보호 및 보안"
+		},
+		"rules": {
+			"title": "7가지 규칙 유형.\n자유롭게 결합하세요.",
+			"desc": "여러 규칙을 체인하여 복잡한 이름 변경 작업을 구축하세요. 각 규칙은 순서대로 처리됩니다 — 찾기 및 바꾸기, 정규식, 시퀀스, 대소문자 변환, 삽입, 제거, 사용자 정의 JavaScript를 원하는 조합으로 혼합하세요."
+		},
+		"findReplace": {
+			"title": "찾기 및 바꾸기",
+			"desc": "텍스트를 전체적으로 또는 정확한 위치에서 바꾸세요. 대소문자 구분 토글, 처음 바꾸기 또는 모두 바꾸기 모드, 문자 인덱스에 의한 위치 바꾸기를 지원합니다.",
+			"capabilities": {
+				"c1": "전체 또는 처음 일치 바꾸기",
+				"c2": "대소문자 구분 및 구분 없음 모드",
+				"c3": "문자 인덱스에 의한 위치 바꾸기",
+				"c4": "파일 이름의 시작 또는 끝에서 바꾸기",
+				"c5": "이름, 확장자 또는 전체 파일 이름에 작동"
+			},
+			"before": "IMG_20240315_vacation (1).jpg",
+			"after": "vacation_20240315.jpg",
+			"bestFor": "빠른 텍스트 정리 및 표준화"
+		},
+		"insert": {
+			"title": "텍스트 추가 / 삽입",
+			"desc": "시작, 끝 또는 모든 문자 위치에 텍스트를 삽입하세요. 날짜, 시간, 폴더 이름, 시퀀스 번호와 같은 동적 변수를 지원합니다.",
+			"capabilities": {
+				"c1": "시작, 끝 또는 특정 문자 인덱스에 삽입",
+				"c2": "동적 변수: '{date}', '{time}', '{folderName}'",
+				"c3": "구조화된 명명을 위해 시퀀스 번호와 결합",
+				"c4": "메타데이터 변수: EXIF 날짜, 카메라 모델, 오디오 태그",
+				"c5": "복잡한 접두사/접미사를 위해 다른 규칙과 쌓기"
+			},
+			"before": "report.pdf",
+			"after": "2024-03-15_report.pdf",
+			"bestFor": "날짜 접두사, 버전 태그 또는 구조화된 명명 추가"
+		},
+		"sequence": {
+			"title": "자동 시퀀스",
+			"desc": "유형, 시작 값, 단계, 패딩, 범위, 정렬에 대한 완전한 제어로 순차 번호를 추가하세요. 숫자, 알파벳, 로마 숫자 시퀀스를 지원합니다.",
+			"capabilities": {
+				"c1": "숫자, 알파벳(A-Z), 로마 숫자 시퀀스",
+				"c2": "사용자 지정 시작 값, 단계 크기, 0 패딩",
+				"c3": "범위: 전체, 폴더별, 확장자별 또는 카테고리별",
+				"c4": "번호 매기기 전에 이름, 크기, 날짜 또는 확장자로 정렬",
+				"c5": "중첩된 폴더를 위한 계층적 번호 매기기(1.1, 1.2)",
+				"c6": "'{name}'_'{n}'과 같은 변수로 포맷 템플릿",
+				"c7": "파일 이름의 원래 번호 보존"
+			},
+			"before": "photo.jpg, sunset.jpg, beach.jpg",
+			"after": "001_photo.jpg, 002_sunset.jpg, 003_beach.jpg",
+			"bestFor": "일관된 번호로 대용량 배치 정리"
+		},
+		"caseStyle": {
+			"title": "대소문자 및 스타일 변환",
+			"desc": "개발자 친화적 형식을 포함하여 8가지 대소문자 스타일 간에 파일 이름을 변환하세요. 완전한 명명 규칙 개편을 위해 대소문자 변경과 구분 기호 변환을 결합하세요.",
+			"capabilities": {
+				"c1": "대문자, 소문자, 제목 대소문자, 문장 대소문자",
+				"c2": "개발자 스타일: camelCase, PascalCase, kebab-case, snake_case",
+				"c3": "구분 기호 변환: 공백 ↔ 대시 ↔ 밑줄",
+				"c4": "단일 작업에서 대소문자 + 구분 기호 결합",
+				"c5": "이름만, 확장자만 또는 전체 파일 이름에 적용"
+			},
+			"before": "My Vacation Photos.jpg",
+			"after": "my-vacation-photos.jpg",
+			"bestFor": "프로젝트 간 명명 규칙 표준화"
+		},
+		"regex": {
+			"title": "정규식 패턴",
+			"desc": "캐프처 그룹, 역참조, 플래그 제어를 포함한 완전한 정규식 지원. 복잡한 패턴 변환을 위한 가장 강력한 규칙 유형.",
+			"capabilities": {
+				"c1": "캐프처 그룹($1, $2...)이 있는 전체 JavaScript 정규식",
+				"c2": "구성 가능한 플래그: 전역(g), 대소문자 구분 없음(i), 다중 라인(m)",
+				"c3": "파일 이름 부분을 재배열하기 위한 역참조",
+				"c4": "패턴 제거: 괄호, 후행 숫자, 특수 문자",
+				"c5": "날짜, ID, 메타데이터 추출 및 재구성"
+			},
+			"before": "2024-03-15 Trip to Paris [DRAFT].docx",
+			"after": "Trip_to_Paris_2024-03-15.docx",
+			"bestFor": "패턴 매칭이 필요한 복잡한 변환"
+		},
+		"customJs": {
+			"title": "사용자 정의 JavaScript",
+			"desc": "파일 이름, 확장자, 인덱스, 파일 크기, 수정 시간에 대한 전체 액세스로 자체 변환 함수를 작성하세요. 내장 규칙이 충분하지 않을 때를 위해.",
+			"capabilities": {
+				"c1": "rename(options) API가 있는 전체 JavaScript 함수",
+				"c2": "액세스: filename, extension, index, size, modifiedTime",
+				"c3": "구문 강조 표시가 있는 내장 코드 편집기",
+				"c4": "6가지 바로 사용 가능한 코드 예제 포함",
+				"c5": "AI 프롬프트 생성기 — 코드 도움을 위해 ChatGPT/Claude에 복사",
+				"c6": "안전을 위한 샌드박스 실행"
+			},
+			"before": "DSC_0042.CR2",
+			"after": "2024-03-15_sunset_042.CR2",
+			"bestFor": "고급 사용자를 위한 무제한한 유연성"
+		},
+		"removeCleanup": {
+			"title": "제거 및 정리",
+			"desc": "개수, 범위 또는 유형별로 문자를 제거하세요. 빠른 정리 모드는 한 번의 클릭으로 숫자, 기호, 공백, 한글 또는 영문자를 제거합니다.",
+			"capabilities": {
+				"c1": "시작 또는 끝에서 N개의 문자 제거",
+				"c2": "특정 인덱스 범위 내의 문자 제거",
+				"c3": "빠른 정리: 숫자, 기호, 공백, 한글 또는 영문자 제거",
+				"c4": "다중 선택: 한 번에 정리 유형 결합",
+				"c5": "범위 제어: 이름, 확장자 또는 전체 파일 이름에 적용"
+			},
+			"before": "  [2024] report (final v3).pdf",
+			"after": "report.pdf",
+			"bestFor": "원치 않는 문자 및 파일 잡동 제거"
+		},
+		"preview": {
+			"title": "모든 변경 사항을 확인하세요\n발생하기 전에",
+			"desc": "추측 없음, 사고 없음. 추가하는 모든 규칙이 미리보기를 즉시 업데이트합니다. 원본 이름, 새 이름, 모든 충돌을 실시간으로 확인하세요."
+		},
+		"previewFeatures": {
+			"livePreview": {
+				"title": "즉시 실시간 미리보기",
+				"desc": "입력하는 동안 변경 사항이 나타납니다. 모든 규칙 수정이 전체 파일 목록을 즉시 업데이트합니다 — 새로 고침 버튼 없음, 대기 없음."
+			},
+			"conflictDetection": {
+				"title": "충돌 감지",
+				"desc": "두 파일이 동일한 이름을 가지게 될 때를 자동으로 감지하여 데이터 손실을 방지합니다. 충돌은 빨간색으로 강조 표시되며 자동 수정을 사용할 수 있습니다."
+			},
+			"filterViews": {
+				"title": "스마트 필터 뷰",
+				"desc": "모든 파일, 영향을 받는 파일만 또는 충돌만 표시하도록 전환하세요. 워크플로우의 각 단계에서 중요한 것에 집중하세요."
+			},
+			"extensionControl": {
+				"title": "확장자 범위 제어",
+				"desc": "파일 이름만, 확장자만 또는 전체 파일 이름에 규칙을 적용하세요. 세밀한 제어로 실수로 파일 유형을 변경하는 것을 방지합니다."
+			},
+			"undoRedo": {
+				"title": "실행 취소 및 다시 실행",
+				"desc": "내장된 실행 취소 및 다시 실행 지원. 실행 후 실수했나요? 한 번의 클릭으로 전체 배치를 되돌리세요."
+			},
+			"oneClickExecute": {
+				"title": "원클릭 실행",
+				"desc": "미리보기가 올바른 것으로 보이면 모든 이름 변경을 직접 실행하세요 — File System Access API를 통해 기기에서 파일 이름이 변경됩니다."
+			},
+			"advancedFilter": {
+				"title": "고급 파일 필터링",
+				"desc": "포함, 시작, 정규식 일치, 보다 큼 등의 조건을 사용하여 이름, 확장자, 크기 또는 수정 날짜로 파일을 필터링하세요. AND/OR 논리와 결합하세요."
+			},
+			"sorting": {
+				"title": "유연한 정렬",
+				"desc": "이름 변경 전에 가져오기 순서, 이름(A-Z/Z-A) 또는 확장자로 파일을 정렬하세요. 자연 정렬은 올바른 순서를 보장합니다(1, 10, 2 대신 1, 2, 10)."
+			}
+		},
+		"automation": {
+			"title": "시간을 절약하세요\n템플릿 및 자동화로",
+			"desc": "원클릭 프리셋부터 지능형 파일 감지까지, Rename.Tools는 강력한 자동화 기능으로 반복 작업을 줄입니다."
+		},
+		"automationFeatures": {
+			"templateLibrary": {
+				"title": "11개의 내장 템플릿",
+				"desc": "일반적인 작업을 위한 바로 사용 가능한 규칙 템플릿: 괄호 제거, 날짜 접두사 추가, TV 쇼 포맷, 다운로드 이름 정리, camelCase를 kebab-case로 변환 등."
+			},
+			"userPresets": {
+				"title": "사용자 정의 프리셋",
+				"desc": "규칙 체인을 이름, 설명, 태그, 카테고리가 있는 재사용 가능한 프리셋으로 저장하세요. 빠른 액세스를 위해 즐겨찾기를 고정하세요."
+			},
+			"presetManagement": {
+				"title": "가져오기, 내보내기 및 공유",
+				"desc": "프리셋을 JSON 파일로 내보내고, 동료로부터 가져오고, 공유 가능한 URL을 생성하세요. 워크플로우는 완전히 이식 가능합니다."
+			},
+			"intelligentSuggestions": {
+				"title": "지능형 제안",
+				"desc": "파일 유형(사진, 음악, 비디오 시리즈, 문서)을 자동으로 감지하고 파일에 맞춤화된 최적의 이름 변경 규칙을 제안합니다."
+			},
+			"mediaScraper": {
+				"title": "TMDb 미디어 스크래퍼",
+				"desc": "The Movie Database의 TV 쇼 정보와 비디오 파일을 매칭하세요. 완벽한 미디어 라이브러리 명명을 위해 쇼 이름, 시즌, 에피소드 제목을 자동 감지합니다."
+			},
+			"metadataExtraction": {
+				"title": "메타데이터 추출",
+				"desc": "사진에서 EXIF 데이터(날짜, 카메라, 해상도)를 읽고 음악 파일에서 오디오 태그(아티스트, 앨범, 트랙)를 읽으세요. 이름 변경 템플릿에서 메타데이터 변수를 사용하세요."
+			},
+			"scriptExport": {
+				"title": "스크립트 내보내기",
+				"desc": "전체 이름 변경 작업을 Bash, PowerShell 또는 CSV로 내보내세요. 모든 작업을 되돌리기 위한 실행 취소 스크립트를 생성하세요. CI/CD 파이프라인 또는 원격 서버에 완벽합니다."
+			}
+		},
+		"privacy": {
+			"title": "파일이 절대\n브라우저를 떠나지 않습니다",
+			"desc": "Rename.Tools는 구조적으로 서버에서 파일에 액세스할 수 없습니다. 모든 것이 File System Access API를 통해 로컬로 실행됩니다."
+		},
+		"privacyFeatures": {
+			"localProcessing": {
+				"title": "100% 로컬 처리",
+				"desc": "모든 파일 작업은 브라우저에서 클라이언트 측 JavaScript로 실행됩니다. 백엔드 없음, 파일 작업을 위한 API 호출 없음, 서버 측 처리 없음."
+			},
+			"noUpload": {
+				"title": "제로 업로드 아키텍처",
+				"desc": "파일이 어디에도 업로드되지 않습니다. File System Access API를 사용하여 기기에서 직접 파일을 읽고 이름을 변경합니다."
+			},
+			"noRetention": {
+				"title": "데이터 보유 없음",
+				"desc": "탭을 닫으면 모든 것이 사라집니다. 파일 데이터는 유지되지 않습니다 — 언어, 테마, 저장된 프리셋만 localStorage에 남습니다."
+			},
+			"offlineReady": {
+				"title": "오프라인 작동",
+				"desc": "초기 페이지 로드 후 Rename.Tools는 완전히 오프라인으로 작동합니다. 이름 변경 작업에 인터넷 연결이 필요하지 않습니다."
+			},
+			"openSource": {
+				"title": "완전한 오픈소스",
+				"desc": "모든 코드 라인은 AGPL-3.0 하에 GitHub에서 공개됩니다. 개인정보 보호 주장을 직접 확인하세요 — 숨겨진 추적 없음, 분석 스크립트 없음."
+			},
+			"freeForever": {
+				"title": "영원히 무료",
+				"desc": "평가판 없음, 프리미엄 등급 없음, 유료화 없음. 모든 기능을 모두가 사용할 수 있습니다. 가입 불필요."
+			}
+		},
+		"ctaTitle": "더 스마트하게 이름을 변경할 준비가 되셨나요?",
+		"ctaDesc": "Rename.Tools로 시간을 절약하는 수천 명의 사용자와 함께하세요. 무료, 프라이빗, 브라우저에서 바로 실행됩니다.",
+		"ctaButton": "지금 이름 변경 시작",
+		"ctaSubtext": "영원히 무료 • 가입 불필요 • 오프라인 작동",
+		"bestFor": "최적 용도",
+		"capabilities": "주요 기능",
+		"example": "예제",
+		"before": "이전",
+		"after": "이후"
+	},
+	"rename": {
+		"app": {
+			"title": "일괄 이름 변경",
+			"privacyBadge": "개인정보 보호 안전",
+			"privacyDesc": "모든 작업은 브라우저에서 로컬로 실행됩니다. 업로드 없음, 콘텐츠 읽기 없음, 닫을 때 삭제됨.",
+			"browserCompat": "브라우저 호환성",
+			"browserCompatOk": "브라우저가 직접 로컬 이름 변경을 위한 File System Access API를 지원합니다.",
+			"browserCompatFail": "브라우저가 File System Access API를 지원하지 않습니다. 샘플 테스트 모드를 사용하거나 스크립트를 내보내세요.",
+			"language": "언어",
+			"theme": "테마",
+			"light": "밝게",
+			"dark": "어둡게",
+			"settings": "설정",
+			"preferences": "환경설정",
+			"preferencesDesc": "전역 애플리케이션 설정 및 동작을 구성합니다.",
+			"preferencesPlaceholder": "곳 더 많은 설정이 추가됩니다...",
+			"kofiTooltip": "작은 커피, 큰 동기 부여. 지원에 감사드립니다 ☕",
+			"tmdb": {
+				"title": "TMDB API 키",
+				"configured": "✓ 구성됨",
+				"description": "자동 영화/TV 쇼 메타데이터 매칭에 사용됩니다. themoviedb.org에서 무료 API 키를 받을 수 있습니다.",
+				"placeholder": "TMDB API 키 입력",
+				"clear": "지우기",
+				"validating": "확인 중...",
+				"save": "저장",
+				"errorInvalid": "API 키가 유효하지 않습니다",
+				"errorNetwork": "네트워크 오류, 다시 시도하세요",
+				"errorTimeout": "확인 시간 초과",
+				"errorUnknown": "알 수 없는 오류"
+			}
+		},
+		"files": {
+			"title": "파일 목록",
+			"importFiles": "파일 가져오기",
+			"importFolder": "폴더 가져오기",
+			"clear": "지우기",
+			"dropHint": "파일 또는 폴더를 여기에 드롭하세요",
+			"search": "파일 이름 검색…",
+			"selectAll": "모두 선택",
+			"deselectAll": "모두 선택 해제",
+			"total": "총",
+			"selected": "선택됨",
+			"items": "",
+			"filter": "필터",
+			"filtered": "필터됨",
+			"filterByExt": "확장자로 필터",
+			"noFiles": "아직 파일이 없습니다. 시작하려면 파일 또는 폴더를 가져오세요.",
+			"loadMetadata": "파일 메타데이터 로드 (EXIF, 오디오 태그)",
+			"scrapeMedia": "TMDb에서 TV 쇼 매칭",
+			"loadingMetadata": "메타데이터 로드 중",
+			"sampleMode": "샘플 테스트 모드",
+			"sampleGenerate": "랜덤 샘플 생성",
+			"sampleHint": "규칙을 테스트하려면 파일 이름을 입력하세요 (한 줄에 하나씩)",
+			"samplePlaceholder": "photo_001.jpg\nIMG_20240101.png\nreport (final).docx",
+			"sort": "정렬",
+			"sortByImport": "가져오기 순서",
+			"sortByNameAsc": "이름 A-Z",
+			"sortByNameDesc": "이름 Z-A",
+			"sortByExtAsc": "확장자 A-Z",
+			"sortByExtDesc": "확장자 Z-A",
+			"loadingFiles": "{count}개 파일 로드 중...",
+			"scanningFiles": "파일 스캔 중..."
+		},
+		"filter": {
+			"title": "파일 필터",
+			"fieldName": "파일 이름",
+			"fieldExtension": "확장자",
+			"fieldSize": "파일 크기",
+			"fieldModified": "수정 시간",
+			"opContains": "포함",
+			"opNotContains": "포함하지 않음",
+			"opEquals": "같음",
+			"opNotEquals": "같지 않음",
+			"opStartsWith": "시작",
+			"opEndsWith": "끝",
+			"opRegex": "정규식 일치",
+			"opGreaterThan": "보다 큼",
+			"opLessThan": "보다 작음",
+			"logicAnd": "AND",
+			"logicOr": "OR",
+			"caseSensitive": "대소문자 구분",
+			"valuePlaceholder": "값 입력...",
+			"placeholderName": "파일 이름 입력...",
+			"placeholderExtension": "예: jpg, png, pdf",
+			"placeholderSize": "예: 100KB, 5MB, 1GB",
+			"placeholderModified": "날짜 선택",
+			"where": "조건",
+			"addCondition": "조건 추가",
+			"noConditions": "필터 조건이 없습니다. 클릭하여 추가",
+			"clearAll": "모두 지우기"
+		},
+		"rules": {
+			"title": "규칙 체인",
+			"addRule": "규칙 추가",
+			"noRules": "아직 규칙이 없습니다. 위를 클릭하여 추가하세요.",
+			"enabled": "활성화됨",
+			"disabled": "비활성화됨",
+			"remove": "제거",
+			"clone": "복제",
+			"types": {
+				"findReplace": "찾기 및 바꾸기",
+				"insert": "추가/삽입",
+				"sequence": "시퀀스",
+				"caseStyle": "대소문자/스타일",
+				"regex": "정규식 바꾸기",
+				"customJs": "사용자 정의 JS",
+				"removeCleanup": "제거/정리"
+			},
+			"findReplace": {
+				"find": "찾기",
+				"replace": "바꾸기",
+				"caseSensitive": "대소문자 구분",
+				"matchAll": "모두 바꾸기",
+				"usePosition": "위치별",
+				"position": "위치",
+				"fromStart": "시작부터",
+				"fromEnd": "끝부터",
+				"count": "문자 수"
+			},
+			"insert": {
+				"text": "텍스트 삽입",
+				"position": "위치",
+				"atStart": "시작",
+				"atEnd": "끝",
+				"atIndex": "인덱스에",
+				"index": "N번째 문자 뒤",
+				"variables": "사용 가능한 변수"
+			},
+			"sequence": {
+				"seqType": "시퀀스 유형",
+				"numeric": "숫자 (1, 2, 3...)",
+				"alpha": "알파벳 (A, B, C...)",
+				"roman": "로마 (I, II, III...)",
+				"start": "시작 값",
+				"step": "단계",
+				"padding": "0 패딩",
+				"position": "삽입 위치",
+				"atStart": "시작",
+				"atEnd": "끝",
+				"replaceAll": "전체 이름 바꾸기",
+				"template": "포맷 템플릿 (선택 사항)",
+				"templatePlaceholder": "예: Photo_'{n}'_'{date}'",
+				"templateHint": "사용 가능한 변수",
+				"scope": "번호 매기기 범위",
+				"scopeGlobal": "전체 (모든 파일)",
+				"scopePerFolder": "폴더별",
+				"scopePerExtension": "확장자별",
+				"scopePerCategory": "파일 카테고리별",
+				"sortBeforeNumbering": "번호 매기기 전 정렬",
+				"sortBy": "정렬 기준",
+				"sortByName": "파일 이름",
+				"sortBySize": "파일 크기",
+				"sortByModified": "수정 시간",
+				"sortByExtension": "확장자",
+				"sortOrder": "순서",
+				"sortAsc": "오름차순",
+				"sortDesc": "내림차순",
+				"naturalSort": "자연 정렬 (1, 10, 2가 아닌 1, 2, 10)",
+				"preserveOriginal": "원래 번호 보존",
+				"preservePattern": "패턴 추출 (정규식)",
+				"preservePatternHint": "번호를 추출하려면 캐프처 그룹을 사용하세요, 예: (\\d+)",
+				"hierarchical": "계층적 번호 매기기 (예: 1.1, 1.2)",
+				"hierarchySeparator": "구분 기호"
+			},
+			"caseStyle": {
+				"mode": "모드",
+				"general": "일반",
+				"developer": "개발자",
+				"uppercase": "대문자",
+				"lowercase": "소문자",
+				"titlecase": "제목 대소문자",
+				"sentencecase": "문장 대소문자",
+				"camelCase": "camelCase",
+				"PascalCase": "PascalCase",
+				"kebab-case": "kebab-case",
+				"snake_case": "snake_case",
+				"style": "스타일 변환",
+				"none": "없음",
+				"spaceToDash": "공백 → 대시",
+				"spaceToUnderscore": "공백 → 밑줄",
+				"dashToSpace": "대시 → 공백",
+				"underscoreToSpace": "밑줄 → 공백"
+			},
+			"regex": {
+				"pattern": "정규식 패턴",
+				"replacement": "바꾸기",
+				"flags": "플래그",
+				"flagsHint": "예: g, i, m"
+			},
+			"customJs": {
+				"code": "코드",
+				"hint": "rename(options) 함수를 정의하고 새 파일 이름을 반환하세요",
+				"insertExample": "예제 삽입",
+				"cancel": "취소",
+				"confirm": "확인",
+				"error": "구문 오류",
+				"expandedTitle": "사용자 정의 JavaScript 편집기",
+				"aiPromptTitle": "AI 프롬프트",
+				"aiPromptDesc": "이름 변경 코드를 생성하려면 이 템플릿을 AI(ChatGPT, Claude 등)에 보내세요:",
+				"copyPrompt": "프롬프트 복사",
+				"examples": {
+					"datePrefix": "날짜 접두사",
+					"sequenceNumber": "시퀀스 번호",
+					"extractNumbers": "숫자 추출",
+					"cleanupName": "이름 정리",
+					"conditionalPrefix": "조건부 접두사",
+					"useModifiedTime": "수정 시간 사용"
+				}
+			},
+			"removeCleanup": {
+				"mode": "모드",
+				"chars": "문자 수별",
+				"range": "범위별",
+				"cleanup": "빠른 정리",
+				"direction": "방향",
+				"fromStart": "시작부터",
+				"fromEnd": "끝부터",
+				"count": "문자 수",
+				"rangeStart": "시작 위치",
+				"rangeEnd": "끝 위치",
+				"removeDigits": "숫자",
+				"removeSymbols": "기호",
+				"removeSpaces": "공백",
+				"removeChinese": "한글",
+				"removeEnglish": "영문자"
+			},
+			"extensionScope": "범위",
+			"scopeName": "이름",
+			"scopeExtension": "확장자",
+			"scopeFull": "전체",
+			"templateTitle": "규칙 템플릿",
+			"templates": {
+				"removeBrackets": {
+					"name": "괄호 및 내용 제거",
+					"desc": "(), [], '{}' 및 그 내용 삭제"
+				},
+				"datePrefix": {
+					"name": "날짜 접두사 추가",
+					"desc": "오늘 날짜를 YYYY-MM-DD_로 앞에 추가"
+				},
+				"photoCleanup": {
+					"name": "사진 파일 정리",
+					"desc": "IMG_를 Photo_로 바꾸고 시퀀스 추가"
+				},
+				"lowercaseDash": {
+					"name": "소문자 + 대시",
+					"desc": "소문자로 변환하고 공백을 대시로"
+				},
+				"removeExtraSpaces": {
+					"name": "추가 공백 제거",
+					"desc": "연속된 공백을 하나로 병합"
+				},
+				"tvShowFormat": {
+					"name": "TV 쇼 포맷",
+					"desc": "에피소드 번호를 S01E01 - 제목으로 포맷"
+				},
+				"musicFormat": {
+					"name": "음악 트랙 포맷",
+					"desc": "트랙 번호를 01. 제목으로 포맷"
+				},
+				"documentVersion": {
+					"name": "문서 버전 관리",
+					"desc": "_v1과 같은 버전 번호 접미사 추가"
+				},
+				"downloadCleanup": {
+					"name": "다운로드 정리",
+					"desc": "(1), copy, 소스 태그 제거"
+				},
+				"camelToKebab": {
+					"name": "camelCase를 kebab-case로",
+					"desc": "kebab-case 포맷으로 변환"
+				},
+				"addBackupSuffix": {
+					"name": "백업 접미사 추가",
+					"desc": "파일 이름에 _backup 추가"
+				}
+			},
+			"savePreset": "프리셋 저장",
+			"clear": "규칙 지우기"
+		},
+		"templateEditor": {
+			"placeholder": "아래 버튼을 클릭하여 변수 또는 텍스트를 추가하세요...",
+			"inputText": "텍스트 입력...",
+			"addText": "텍스트 추가",
+			"commonVars": "변수",
+			"metadata": "메타데이터",
+			"dragHint": "드래그하여 순서 변경",
+			"variables": {
+				"name": "원본 파일 이름",
+				"n": "시퀀스 번호",
+				"date": "날짜",
+				"time": "시간",
+				"datetime": "날짜 및 시간",
+				"timestamp": "타임스탬프",
+				"folderName": "폴더 이름",
+				"exifDate": "EXIF 날짜",
+				"exifCamera": "카메라 모델",
+				"mediaArtist": "아티스트",
+				"mediaTitle": "제목",
+				"mediaAlbum": "앨범",
+				"mediaYear": "년도",
+				"mediaTrack": "트랙 번호"
+			}
+		},
+		"presets": {
+			"quickAccess": "빠른 액세스",
+			"systemTemplates": "시스템 템플릿",
+			"myPresets": "내 프리셋",
+			"noPinned": "고정된 항목이 없습니다. 빠른 액세스를 위해 템플릿 또는 프리셋을 고정하세요.",
+			"noPresets": "아직 저장된 프리셋이 없습니다. 재사용을 위해 규칙 체인을 저장하세요.",
+			"noPresetsTitle": "아직 프리셋이 없음",
+			"noPresetsDesc": "프리셋을 사용하면 다양한 파일 배치에서 빠른 재사용을 위해 좋아하는 규칙 조합을 저장할 수 있습니다.",
+			"howToCreate": "프리셋 만들기",
+			"howToCreateDesc": "규칙 패널에서 규칙을 구성한 다음 \"프리셋으로 저장\" 버튼을 클릭하세요.",
+			"howToImport": "프리셋 가져오기",
+			"howToImportDesc": "아래 버튼을 클릭하여 이전에 내보낸 프리셋 파일(.json 형식)을 가져오세요.",
+			"howToCreateSimple": "규칙 패널에서 규칙을 구성한 다음 \"프리셋으로 저장\"을 클릭하세요",
+			"howToImportSimple": "또는 아래 버튼을 사용하여 기존 프리셋 파일을 가져오세요",
+			"importPresets": "프리셋 파일 가져오기",
+			"searchPlaceholder": "프리셋 검색...",
+			"sortRecent": "최근",
+			"sortFrequent": "가장 많이 사용됨",
+			"sortName": "이름",
+			"sortCreated": "생성됨",
+			"categoryAll": "모든 카테고리",
+			"categoryPhoto": "사진",
+			"categoryDocument": "문서",
+			"categoryCode": "코드",
+			"categoryVideo": "비디오",
+			"categoryMusic": "음악",
+			"categoryGeneral": "일반",
+			"import": "가져오기",
+			"export": "내보내기",
+			"apply": "적용",
+			"uses": "사용",
+			"justNow": "방금",
+			"hoursAgo": "{hours}시간 전",
+			"daysAgo": "{days}일 전",
+			"importSuccess": "{count}개의 프리셋을 성공적으로 가져왔습니다",
+			"importError": "프리셋 가져오기 실패",
+			"shareCopied": "공유 링크가 클립보드에 복사되었습니다!",
+			"pinned": "고정됨",
+			"unpinned": "고정 해제됨",
+			"saveSuccess": "프리셋 저장됨",
+			"saveSuccessDesc": "프리셋 \"{name}\"이(가) 성공적으로 저장되었습니다",
+			"saveAsPreset": "프리셋으로 저장",
+			"saveDescription": "현재 {count}개의 규칙을 재사용 가능한 프리셋으로 저장",
+			"presetName": "프리셋 이름",
+			"presetNamePlaceholder": "예: 사진 정리 워크플로우",
+			"description": "설명",
+			"optional": "선택 사항",
+			"descriptionPlaceholder": "이 프리셋은 무엇을 하나요?",
+			"category": "카테고리",
+			"selectCategory": "카테고리 선택",
+			"tags": "태그",
+			"tagsPlaceholder": "사진, 정리, 일괄",
+			"tagsHint": "태그를 쉼표로 구분하세요",
+			"cancel": "취소",
+			"save": "저장"
+		},
+		"preview": {
+			"title": "미리보기",
+			"index": "#",
+			"original": "원본",
+			"arrow": "→",
+			"newName": "새 이름",
+			"showAll": "모두 표시",
+			"showAffected": "영향받는 파일만",
+			"showConflicts": "충돌만",
+			"affected": "영향받음",
+			"conflicts": "충돌",
+			"noConflict": "충돌 없음",
+			"total": "총",
+			"items": "파일",
+			"autoFix": "자동 수정",
+			"resetAutoFix": "수정 취소"
+		},
+		"metadata": {
+			"title": "파일 메타데이터",
+			"image": {
+				"dateTime": "날짜",
+				"camera": "카메라",
+				"resolution": "해상도",
+				"aperture": "조리개",
+				"exposure": "노출",
+				"focal": "초점 거리",
+				"noData": "EXIF 데이터 없음"
+			},
+			"media": {
+				"title": "제목",
+				"artist": "아티스트",
+				"album": "앨범",
+				"year": "년도",
+				"genre": "장르",
+				"track": "트랙",
+				"duration": "재생 시간",
+				"bitrate": "비트레이트",
+				"codec": "코덱",
+				"noData": "오디오 태그 없음"
+			}
+		},
+		"intelligence": {
+			"apply": "적용",
+			"startMatch": "매칭 시작",
+			"metadataEnhanced": "메타데이터",
+			"scenarios": {
+				"photo_collection": "사진 컨렉션 감지됨",
+				"music_library": "음악 라이브러리 감지됨",
+				"video_series": "비디오 시리즈 감지됨",
+				"document_archive": "문서 아카이브 감지됨",
+				"video_scrape": "TV 쇼 파일 감지됨"
+			},
+			"descriptions": {
+				"photo_collection": "날짜 및 시퀀스 번호로 사진 정리",
+				"music_library": "아티스트, 앨범, 트랙 번호로 트랙 포맷",
+				"video_series": "순차 정렬로 에피소드 번호 매기기",
+				"document_archive": "날짜 및 시퀀스 접두사로 문서 보관",
+				"video_scrape": "TMDb에서 쇼 이름, 시즌, 에피소드 제목 자동 매칭"
+			}
+		},
+		"scraper": {
+			"title": "미디어 스크래퍼",
+			"description": "TMDb의 TV 쇼 정보와 비디오 파일 매칭",
+			"cancel": "취소",
+			"apply": "적용",
+			"startSearch": "TMDb 검색",
+			"searching": "TMDb 검색 중...",
+			"searchingProgress": "{current}/{total} 검색 중...",
+			"noGroups": "선택한 비디오 파일에서 TV 쇼 패턴이 감지되지 않았습니다",
+			"groupsHint": "파일 이름에서 다음 쇼가 감지되었습니다. 검색하기 전에 필요한 경우 제목을 편집하세요.",
+			"files": "파일",
+			"season": "시즌",
+			"noMatch": "일치하는 항목을 찾을 수 없음",
+			"matchedCount": "{matched}/{total}개 파일 매칭됨",
+			"selectAll": "모두 선택",
+			"deselectAll": "모두 선택 해제",
+			"outputFormat": "출력 포맷",
+			"customTemplate": "사용자 정의 템플릿...",
+			"retry": "다시 시도",
+			"error": "검색 실패: {message}",
+			"selectShow": "쇼 선택",
+			"noResults": "결과 없음",
+			"confidence": {
+				"high": "높음",
+				"medium": "보통",
+				"low": "낮음",
+				"none": "없음"
+			},
+			"filter": {
+				"all": "모두",
+				"matched": "매칭됨",
+				"unmatched": "매칭 안됨"
+			},
+			"steps": {
+				"parse": "감지",
+				"match": "검색",
+				"confirm": "확인"
+			},
+			"apiKey": {
+				"title": "TMDb API 키 구성",
+				"description": "미디어 스크래핑에는 무료 TMDb API 키가 필요합니다. 키는 브라우저에만 로컬로 저장됩니다.",
+				"howToGet": "무료 API 키를 받는 방법:",
+				"step1": "themoviedb.org를 방문하여 무료 계정을 만드세요",
+				"step2": "설정 → API → API 키 만들기로 이동",
+				"step3": "API Read Access Token(v4 인증)을 복사하세요",
+				"goToTmdb": "TMDb로 이동",
+				"label": "API Read Access Token",
+				"placeholder": "eyJhbGciOiJIUzI1NiJ9...",
+				"required": "API 키가 필요합니다",
+				"invalid": "API 키가 유효하지 않습니다. 확인하고 다시 시도하세요.",
+				"network": "네트워크 오류. 연결을 확인하세요.",
+				"timeout": "요청 시간 초과. 다시 시도하세요.",
+				"unknown": "확인 실패. 다시 시도하세요.",
+				"localOnly": "API 키는 브라우저 저장소에 로컬로 저장되며 서버로 전송되지 않습니다.",
+				"cancel": "취소",
+				"save": "저장 및 계속"
+			}
+		},
+		"execute": {
+			"execute": "이름 변경 실행",
+			"clear": "규칙 지우기",
+			"refresh": "미리보기 새로 고침",
+			"confirmTitle": "이름 변경 확인",
+			"confirmDesc": "{count}개의 파일 이름을 변경하려고 합니다.",
+			"confirmWarning": "참고: 이름 변경은 파일 수정 시간을 변경합니다.",
+			"cancel": "취소",
+			"confirm": "확인",
+			"exportPlan": "계획 내보내기",
+			"exportMap": "매핑 내보내기",
+			"exportScript": "스크립트 내보내기",
+			"exportPowerShell": "PowerShell 내보내기",
+			"exportCSV": "CSV 내보내기",
+			"exportReverse": "실행 취소 스크립트 내보내기",
+			"progress": "진행 상황",
+			"log": "실행 로그",
+			"success": "성공",
+			"failed": "실패",
+			"skipped": "건너뛀",
+			"timestampWarning": "이해함: 이름 변경은 파일 수정 타임스탬프를 변경합니다",
+			"undo": "실행 취소",
+			"redo": "다시 실행",
+			"undoHint": "마지막 이름 변경 배치 취소",
+			"redoHint": "취소한 마지막 배치 다시 실행",
+			"activationRequired": "브라우저 권한 만료 — 이름 변경을 계속하려면 여기를 클릭하세요"
+		}
+	},
+	"about": {
+		"title": "프로젝트 소개",
+		"description": "Rename.Tools는 강력한 브라우저 기반 일괄 파일 이름 변경 도구입니다. 모든 작업은 완전한 개인정보 보호를 위해 브라우저에서 로컬로 실행됩니다.",
+		"techStack": "기술 스택",
+		"items": {
+			"framework": "프레임워크: App Router가 있는 Next.js 16",
+			"styling": "스타일링: Tailwind CSS 4",
+			"components": "컴포넌트: shadcn/ui",
+			"i18n": "국제화: next-intl",
+			"linting": "린팅 및 포매팅: Biome",
+			"theme": "테마: 다크 모드가 있는 next-themes"
+		},
+		"backHome": "홈으로 돌아가기"
+	},
+	"notFound": {
+		"title": "404",
+		"description": "찾으시는 페이지가 존재하지 않거나 이동되었습니다.",
+		"backHome": "홈으로 돌아가기"
+	},
+	"error": {
+		"title": "문제가 발생했습니다",
+		"description": "예상치 못한 오류가 발생했습니다. 다시 시도하세요.",
+		"retry": "다시 시도"
+	},
+	"loading": {
+		"text": "로드 중..."
+	},
+	"footer": {
+		"tagline": "강력한 브라우저 기반 일괄 이름 변경 도구. 정규식, 규칙 체인, 실시간 미리보기 지원 — 모든 처리는 완전한 개인정보 보호로 로컬에서 수행됩니다.",
+		"privacyBadge": "100% 로컬 처리, 데이터 업로드 제로",
+		"legalTitle": "법률",
+		"resourcesTitle": "리소스",
+		"languagesTitle": "언어",
+		"features": "모든 기능",
+		"terms": "서비스 약관",
+		"privacyPolicy": "개인정보 보호정책",
+		"disclaimer": "면책 조항",
+		"reportIssue": "문제 보고",
+		"changelog": "변경 로그",
+		"allRightsReserved": "모든 권리 보유.",
+		"madeWith": "만든 도구",
+		"madeIn": "개발자들에 의해"
+	},
+	"legal": {
+		"backToHome": "홈으로 돌아가기",
+		"lastUpdated": "마지막 업데이트",
+		"termsTitle": "서비스 약관",
+		"termsIntro": "Rename.Tools에 오신 것을 환영합니다. 서비스를 사용하기 전에 이 약관을 주의 깊게 읽어주세요. 이 서비스를 사용하면 이 약관에 동의하는 것입니다.",
+		"termsAcceptance": "1. 약관 동의",
+		"termsAcceptanceDesc": "Rename.Tools(이하 \"서비스\")에 액세스하고 사용함으로써 귀하는 본 서비스 약관에 구속되는 데 동의합니다. 이러한 약관 중 어느 것에도 동의하지 않는 경우 즉시 서비스 사용을 중단하십시오. 서비스는 전 세계 사용자가 사용할 수 있으며, 귀하의 사용이 귀하의 관할 권에서 적용 가능한 법률 및 규정을 준수하는지 확인할 책임이 있습니다.",
+		"termsService": "2. 서비스 설명",
+		"termsServiceDesc": "Rename.Tools는 무료 브라우저 기반 일괄 파일 이름 변경 도구입니다. 본 서비스의 주요 기능은 다음과 같습니다: 모든 파일 처리는 브라우저에서 로컬로 수행됩니다; 사용자 파일 데이터를 수집, 저장 또는 전송하지 않습니다; 정규식, 시퀀스 생성, 대소문자 변환을 포함한 다양한 이름 변경 규칙을 지원합니다; 실행 전에 결과를 확인하는 실시간 미리보기 기능.",
+		"termsUserConduct": "3. 사용자 행동",
+		"termsUserConductDesc": "본 서비스를 사용할 때 귀하는 다음에 동의합니다: 불법적인 목적으로 서비스를 사용하지 않음; 서비스의 보안 조치를 손상, 방해 또는 우회하려고 시도하지 않음; 서비스를 남용하거나 다른 사용자의 이익을 해치지 않음; 서비스 사용 및 그 결과에 대해 전적으로 책임을 짐니다.",
+		"termsIntellectual": "4. 지적 재산권",
+		"termsIntellectualDesc": "Rename.Tools의 소스 코드는 AGPL-3.0 라이선스 하에 오픈소스입니다. 원래의 저작권 표시를 유지하고 네트워크 사용에 대한 AGPL-3.0 요구 사항을 준수하는 한 소스 코드를 자유롭게 사용, 수정 및 배포할 수 있습니다. 본 서비스의 상표, 로고 및 브랜드 이름은 각 소유자에게 속합니다.",
+		"termsDisclaimer": "5. 책임 제한",
+		"termsDisclaimerDesc": "서비스는 명시적 또는 묵시적 보증 없이 \"현상 그대로\" 및 \"사용 가능한 대로\" 제공됩니다. 법이 허용하는 최대 범위 내에서 다음에 대해 책임을 지지 않습니다: 서비스의 사용 또는 사용 불능으로 인해 발생하는 직접적, 간접적, 부수적, 특별 또는 결과적 손해; 데이터 손실, 파일 손상 또는 시스템 장애; 제3자의 행위 또는 콘텐츠.",
+		"termsLiability": "6. 위험 부담",
+		"termsLiabilityDesc": "일괄 이름 변경 작업은 일반적으로 되돌릴 수 없습니다. 귀하는 명시적으로 다음을 인정하고 동의합니다: 서비스를 전적으로 자신의 위험 부담하에 사용합니다; 이름 변경 작업을 실행하기 전에 미리보기 기능을 통해 결과를 주의 깊게 확인할 책임이 있습니다; 모든 작업 전에 중요한 파일을 백업할 것을 강력히 권장합니다; 작업 오류로 인한 손실에 대해 책임을 지지 않습니다.",
+		"termsChanges": "7. 약관 변경",
+		"termsChangesDesc": "사전 통지 없이 언제든지 본 서비스 약관을 수정할 권리를 보유합니다. 수정된 약관은 본 페이지에 게시되는 즉시 효력을 발생합니다. 변경 사항을 주기적으로 확인할 책임은 귀하에게 있습니다. 수정 후 서비스를 계속 사용하면 수정된 약관에 동의하는 것으로 간주됩니다.",
+		"termsTermination": "8. 서비스 종료",
+		"termsTerminationDesc": "사전 통지 없이 언제든지 어떤 이유로든 서비스를 일시 중단하거나 종료할 권리를 보유합니다. 종료 시 책임 제한, 지적 재산권 및 면책 조항에 관한 규정은 계속 유효합니다.",
+		"termsGoverning": "9. 준거법",
+		"termsGoverningDesc": "본 서비스 약관은 적용 가능한 법률에 따라 규율되고 해석됩니다. 본 약관에서 발생하는 모든 분쟁은 먼저 우호적인 협상을 통해 해결해야 합니다; 협상이 실패하면 어느 당사자든 관할 법원에 분쟁을 제기할 수 있습니다.",
+		"termsContact": "10. 연락처",
+		"termsContactDesc": "본 서비스 약관에 대해 질문이나 제안이 있으신 경우 다음을 통해 연락해 주세요: GitHub Issues(권장): https://github.com/chenz24/rename.tools/issues",
+		"privacyTitle": "개인정보 보호정책",
+		"privacyIntro": "개인정보 보호가 귀하에게 얼마나 중요한지 이해합니다. 본 개인정보 보호정책은 Rename.Tools가 귀하의 정보를 처리하는 방법을 설명합니다. 간단히 말해: 귀하의 데이터를 수집하지 않습니다.",
+		"privacyLocalTitle": "1. 로컬 처리 원칙",
+		"privacyLocalDesc": "Rename.Tools는 순수한 브라우저 측 아키텍처를 사용합니다. 이는 다음을 의미합니다: 모든 파일 작업은 귀하의 기기에서 로컬로 수행됩니다; 귀하의 파일은 절대 서버에 업로드되지 않습니다; 파일 내용, 파일 이름, 메타데이터는 브라우저를 떠나지 않습니다; 서비스는 초기 로드 후 오프라인으로 작동합니다.",
+		"privacyNoCollection": "2. 수집하지 않는 정보",
+		"privacyNoCollectionDesc": "명시적으로 수집하지 않는 정보: 귀하의 파일 내용, 파일 이름 또는 모든 파일 메타데이터; 귀하의 개인 정보(이름, 이메일, 전화번호 등); 귀하의 기기 정보 또는 브라우저 지문; 귀하의 IP 주소 또는 지리적 위치; 귀하의 사용 행동 또는 브라우징 기록.",
+		"privacyNoStorage": "3. 데이터 저장",
+		"privacyNoStorageDesc": "본 서비스는 사용자 데이터를 원격 서버에 저장하지 않습니다. 로컬 브라우저에서만 다음을 저장합니다: 언어 기본 설정(localStorage); 테마 설정(localStorage); 자발적으로 저장한 이름 변경 규칙 프리셋(localStorage). 브라우저 탭을 닫으면 모든 임시 데이터(파일 목록 및 현재 규칙 구성 포함)가 자동으로 삭제됩니다. 브라우저 설정을 통해 언제든지 로컬에 저장된 모든 데이터를 삭제할 수 있습니다.",
+		"privacyCookies": "4. 쿠키 사용",
+		"privacyCookiesDesc": "본 서비스는 언어 및 테마 기본 설정을 저장하기 위해 필수 기능 쿠키만 사용합니다. 이러한 쿠키는: 개인 식별 정보를 포함하지 않습니다; 추적 또는 분석 목적으로 사용되지 않습니다; 제3자와 공유되지 않습니다; 브라우저 설정을 통해 언제든지 삭제할 수 있습니다.",
+		"privacyThirdParty": "5. 제3자 서비스",
+		"privacyThirdPartyDesc": "TMDb API 통합: 미디어 메타데이터 스크래핑 기능을 사용하기로 선택한 경우 TMDb API 키를 구성해야 합니다. 이 키는 브라우저의 로컬 저장소에만 저장되며 서버로 전송되지 않습니다. API 호출은 브라우저에서 TMDb 서버로 직접 이루어집니다; 이러한 통신에 참여하거나 기록하지 않습니다. 호스팅: 본 웹사이트는 Vercel에서 호스팅됩니다. Vercel은 표준 서버 로그(IP 주소 및 액세스 시간 등)를 수집할 수 있으며, 이는 Vercel의 개인정보 보호정책에 따라 관리됩니다. 이 데이터에 액세스할 수 없습니다.",
+		"privacySecurity": "6. 보안 조치",
+		"privacySecurityDesc": "귀하의 데이터를 저장하지 않지만 서비스 보안을 보호하기 위해 다음 조치를 취합니다: 모든 네트워크 통신을 암호화하기 위해 HTTPS 사용; 알려진 보안 취약점을 수정하기 위해 정기적으로 종속성 업데이트; 커뮤니티 검토 대상 오픈소스 코드; 제3자 추적 또는 분석 스크립트 사용 안 함.",
+		"privacyChildren": "7. 어린이 개인정보 보호",
+		"privacyChildrenDesc": "본 서비스는 13세 미만의 어린이를 특별히 대상으로 하지 않습니다. 개인 정보를 수집하지 않으므로 어린이의 개인정보 데이터를 수집하는 문제가 없습니다.",
+		"privacyChanges": "8. 정책 변경",
+		"privacyChangesDesc": "서비스 변경 또는 법적 요구 사항을 반영하기 위해 때때로 본 개인정보 보호정책을 업데이트할 수 있습니다. 중요한 변경 사항은 본 페이지에 게시됩니다. 개인정보 보호 관행에 대한 정보를 유지하기 위해 주기적으로 본 페이지를 검토할 것을 권장합니다.",
+		"privacyRights": "9. 귀하의 권리",
+		"privacyRightsDesc": "귀하의 개인 데이터를 수집하거나 저장하지 않으므로 전통적인 데이터 주체 권리(액세스, 수정, 삭제 등)는 기술적으로 적용되지 않습니다. 그러나 항상 다음을 수행할 수 있습니다: 브라우저의 로컬 저장소를 삭제하여 로컬에 저장된 모든 기본 설정 삭제; 제3자 API가 필요한 기능을 사용하지 않기로 선택; 개인정보 보호 주장을 확인하기 위해 오픈소스 코드 검토.",
+		"privacyContact": "10. 문의하기",
+		"privacyContactDesc": "본 개인정보 보호정책에 대해 질문이 있으시면 GitHub Issues를 통해 문의해 주세요.",
+		"disclaimerTitle": "면책 조항",
+		"disclaimerIntro": "Rename.Tools를 사용하기 전에 본 면책 조항을 주의 깊게 읽어주세요. 본 서비스를 사용함으로써 귀하는 이러한 조항을 이해하고 수락함을 인정합니다.",
+		"disclaimerGeneral": "1. 일반 면책 조항",
+		"disclaimerGeneralDesc": "Rename.Tools는 사용자가 효율적으로 파일 이름을 일괄 변경할 수 있도록 설계된 무료 오픈소스 도구입니다. 본 도구는 \"현상 그대로\" 제공되며, 완전성, 정확성 또는 적합성에 대해 명시적 또는 묵시적 보증을 하지 않습니다. 본 도구의 사용은 전적으로 귀하의 위험 부담입니다.",
+		"disclaimerRisk": "2. 작업 위험 경고",
+		"disclaimerRiskDesc": "일괄 파일 이름 변경은 잠재적 위험이 있는 작업입니다. 다음 사항에 유의하세요: 이름 변경 작업은 일반적으로 되돌릴 수 없으며 실행 후 취소할 수 없습니다; 잘못된 이름 변경 규칙은 파일 이름 혼란 또는 원래 파일 구성 손실을 초래할 수 있습니다; 특정 시스템 파일 또는 프로그램이 의존하는 파일의 이름을 변경하면 시스템 또는 애플리케이션 장애가 발생할 수 있습니다; 일부 파일 시스템에서는 파일 이름 변경이 파일 수정 타임스탬프에 영향을 줄 수 있습니다.",
+		"disclaimerBackup": "3. 데이터 백업 권장 사항",
+		"disclaimerBackupDesc": "다음을 강력히 권장합니다: 일괄 이름 변경 작업을 실행하기 전에 대상 파일의 완전한 백업 수행; 본 도구에서 제공하는 미리보기 기능을 사용하여 예상 결과를 주의 깊게 확인; 중요한 파일의 경우 먼저 테스트 파일 세트에서 규칙 정확성 확인; 필요한 경우 파일 이름을 복원하기 위해 본 도구에서 제공하는 \"실행 취소 스크립트 내보내기\" 기능 사용 고려.",
+		"disclaimerNoWarranty": "4. 무보증 성명",
+		"disclaimerNoWarrantyDesc": "법이 허용하는 최대 범위 내에서: 본 도구는 명시적이든 묵시적이든 어떠한 종류의 보증도 제공하지 않습니다; 본 도구가 귀하의 특정 요구 사항을 충족할 것이라고 보증하지 않습니다; 본 도구의 작동이 중단되지 않고, 적시에, 안전하거나 오류가 없을 것이라고 보증하지 않습니다; 본 도구를 사용하여 얻은 결과가 정확하거나 신뢰할 수 있을 것이라고 보증하지 않습니다; 데이터 손실, 파일 손상, 시스템 장애 또는 기타 손해에 대해 책임을 지지 않습니다.",
+		"disclaimerLiability": "5. 책임 제한",
+		"disclaimerLiabilityDesc": "어떠한 경우에도 Rename.Tools의 개발자 및 기여자는 다음에 대해 책임을 지지 않습니다: 본 도구의 사용 또는 사용 불능으로 인해 발생하는 직접적, 간접적, 부수적, 특별, 징벌적 또는 결과적 손해; 이익 손실, 데이터 손실 또는 사업 중단; 제3자 청구. 이러한 제한은 그러한 손해의 가능성에 대해 통지받은 경우에도 적용됩니다.",
+		"disclaimerOpenSource": "6. 오픈소스 라이선스",
+		"disclaimerOpenSourceDesc": "Rename.Tools는 GNU Affero General Public License v3.0(AGPL-3.0) 하에 오픈소스입니다. 이는 다음을 의미합니다: 본 소프트웨어를 자유롭게 사용, 복사, 수정 및 배포할 수 있습니다; 상업적 또는 비상업적 목적으로 사용할 수 있습니다; 모든 사본에 저작권 표시 및 라이선스 표시를 유지해야 합니다; 네트워크 서버에서 소프트웨어를 수정하고 실행하는 경우 사용자에게 소스 코드를 제공해야 합니다; 본 소프트웨어는 어떠한 보증 없이 \"현상 그대로\" 제공됩니다.",
+		"disclaimerThirdParty": "7. 제3자 콘텐츠",
+		"disclaimerThirdPartyDesc": "본 도구는 제3자 콘텐츠, 라이브러리 또는 서비스를 포함하거나 링크할 수 있습니다. 제3자 콘텐츠의 정확성, 완전성 또는 가용성에 대해 책임을 지지 않습니다. 제3자 서비스(예: TMDb API)를 사용할 때는 해당 서비스의 서비스 약관도 준수해야 합니다.",
+		"disclaimerJurisdiction": "8. 관할권",
+		"disclaimerJurisdictionDesc": "본 면책 조항은 적용 가능한 법률에 따라 규율됩니다. 본 성명의 일부가 무효이거나 집행 불가능한 것으로 판명되는 경우 나머지 부분은 계속 유효합니다.",
+		"disclaimerAcknowledgment": "9. 확인",
+		"disclaimerAcknowledgmentDesc": "Rename.Tools를 사용함으로써 귀하는 다음을 인정합니다: 본 면책 조항을 읽고 이해했습니다; 본 면책 조항에 구속되는 데 동의합니다; 일괄 이름 변경 작업의 위험을 이해합니다; 본 도구의 사용 및 그 결과에 대해 책임을 집니다."
+	}
+}

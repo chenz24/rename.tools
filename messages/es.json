@@ -1,0 +1,963 @@
+{
+	"metadata": {
+		"title": "Rename.Tools - Renombrador de Archivos por Lotes Gratis | Sin Subida, Privacidad Primero, Procesamiento Local",
+		"description": "Herramienta gratuita de renombrado de archivos por lotes basada en navegador con regex, secuencias y cadenas de reglas. Renombre miles de archivos al instante con vista previa en vivo. 100% procesamiento local - sin subida, sin rastreo, garantía de privacidad completa.",
+		"app": {
+			"title": "Rename.Tools | Renombrador de Archivos por Lotes en Línea - Gratis, Rápido, Privado",
+			"description": "Renombre miles de archivos al instante en su navegador con regex, secuencias y cadenas de reglas. Vista previa en tiempo real, soporte para deshacer/rehacer, extracción de metadatos. 100% procesamiento local - los archivos nunca salen de su dispositivo. Gratis para siempre."
+		},
+		"about": {
+			"title": "Acerca de - Rename.Tools",
+			"description": "Conozca Rename.Tools, una herramienta de renombrado de archivos por lotes basada en navegador construida con Next.js, React y tecnologías web modernas."
+		},
+		"features": {
+			"title": "Características - Rename.Tools",
+			"description": "Explore todas las características: patrones regex, secuencias, conversión de mayúsculas/minúsculas, JavaScript personalizado, extracción de metadatos y más."
+		},
+		"privacy": {
+			"title": "Política de Privacidad - Rename.Tools",
+			"description": "Nuestra política de privacidad: recopilamos cero datos. Todas las operaciones de archivos se ejecutan localmente en su navegador."
+		},
+		"terms": {
+			"title": "Términos de Servicio - Rename.Tools",
+			"description": "Términos de servicio para la herramienta de renombrado de archivos por lotes Rename.Tools."
+		},
+		"disclaimer": {
+			"title": "Descargo de Responsabilidad - Rename.Tools",
+			"description": "Información importante de descargo de responsabilidad y responsabilidad para usuarios de Rename.Tools."
+		}
+	},
+	"header": {
+		"home": "Inicio",
+		"app": "App",
+		"features": "Características",
+		"about": "Acerca de",
+		"theme": "Cambiar tema",
+		"language": "Idioma"
+	},
+	"home": {
+		"heroTitle": "Renombre miles de archivos.\nDirectamente en su navegador.",
+		"heroFeature1": "7 Tipos de Reglas",
+		"heroFeature2": "Vista Previa en Vivo",
+		"heroFeature3": "Cero Subidas",
+		"heroDescription": "Combine regex, secuencias y conversión de mayúsculas/minúsculas en poderosas cadenas de reglas. Cada operación se ejecuta localmente en su navegador — sus archivos nunca salen de su dispositivo.",
+		"cta": "Comenzar a Renombrar",
+		"viewOnGithub": "Ver en GitHub",
+		"githubStars": "Código Abierto",
+		"onGithub": "en GitHub",
+		"highlightBadge": "Por Qué Rename.Tools",
+		"highlightTitle": "Todo lo que necesita,\nnada que no necesite",
+		"highlightDesc": "Un conjunto enfocado de capacidades diseñadas para hacer el renombrado por lotes rápido, seguro y predecible.",
+		"hl1Title": "Cadenas de Reglas",
+		"hl1Desc": "Combine 7 tipos de reglas — buscar y reemplazar, regex, secuencias, conversión de mayúsculas/minúsculas, insertar, eliminar y JS personalizado — en cualquier orden",
+		"hl2Title": "Vista Previa en Vivo",
+		"hl2Desc": "Cada cambio se actualiza instantáneamente mientras escribe. Vea nombres originales, nuevos nombres y conflictos en tiempo real",
+		"hl3Title": "Detección de Conflictos",
+		"hl3Desc": "Detecta automáticamente nombres de archivo duplicados antes de renombrar, evitando sobrescrituras accidentales",
+		"hl4Title": "100% Local y Privado",
+		"hl4Desc": "Los archivos nunca salen de su dispositivo. Sin subidas, sin procesamiento en servidor, sin retención de datos — cierre la pestaña y todo desaparece",
+		"hl5Title": "Deshacer y Exportar Script",
+		"hl5Desc": "Soporte integrado para deshacer/rehacer, además de exportar como scripts Bash o PowerShell para ejecución offline o reversión",
+		"hl6Title": "Gratis y Código Abierto",
+		"hl6Desc": "Sin registro, sin pruebas, sin muros de pago. Código completamente transparente en GitHub, impulsado por la comunidad",
+		"ctaTitle": "Deje de renombrar archivos uno por uno.",
+		"ctaDesc": "Rename.Tools le da el poder de renombrar miles de archivos con precisión y confianza. Sin registro, sin descargas, sin subidas.",
+		"ctaButton": "Comenzar a Renombrar Ahora",
+		"ctaSubtext": "Gratis para siempre • Sin registro • Funciona sin conexión",
+		"faqTitle": "Preguntas frecuentes",
+		"faqSubtitle": "Todo lo que necesita saber sobre Rename.Tools y cómo le ayuda a gestionar nombres de archivos a gran escala.",
+		"faq1Q": "¿Rename.Tools es realmente gratis?",
+		"faq1A": "Sí, completamente gratis y de código abierto. No hay niveles premium, ni pruebas, ni tarifas ocultas. El código fuente completo está disponible en GitHub bajo la licencia AGPL-3.0.",
+		"faq2Q": "¿Se suben mis archivos a un servidor?",
+		"faq2A": "No. Rename.Tools se ejecuta completamente en su navegador. Sus archivos se acceden a través de la API File System Access y nunca salen de su dispositivo. No hay ningún procesamiento del lado del servidor.",
+		"faq3Q": "¿Por qué es seguro usarlo?",
+		"faq3A": "Rename.Tools es arquitectónicamente incapaz de acceder a sus archivos desde un servidor. Todo el procesamiento ocurre localmente en su navegador a través de la API File System Access. No se transmiten, almacenan ni registran datos. El código es completamente de código abierto para que pueda verificarlo usted mismo. Además, la función de deshacer integrada y la vista previa en vivo aseguran que siempre pueda revisar y revertir cambios antes de que ocurran.",
+		"faq4Q": "¿Qué navegadores son compatibles?",
+		"faq4A": "Rename.Tools funciona mejor en navegadores basados en Chromium (Chrome, Edge, Brave, Arc) que soportan la API File System Access para renombrado directo. En otros navegadores, puede usar el modo de prueba de muestra o exportar scripts de renombrado.",
+		"faq5Q": "¿Cuántos archivos puede manejar?",
+		"faq5A": "Rename.Tools puede manejar miles de archivos en un solo lote. La vista previa en vivo se actualiza en tiempo real incluso con grandes conjuntos de archivos. El rendimiento depende de las capacidades de su navegador y dispositivo.",
+		"useCases": {
+			"badge": "Casos de Uso",
+			"title": "Perfecto para cualquier flujo de trabajo",
+			"desc": "Ya sea que esté organizando fotos, gestionando bibliotecas multimedia o limpiando archivos de proyectos — Rename.Tools se adapta a sus necesidades.",
+			"ruleChainLabel": "Cadena de Reglas",
+			"previewLabel": "Vista Previa",
+			"originalLabel": "Original",
+			"newNameLabel": "Nuevo Nombre",
+			"ruleType": {
+				"findReplace": "Buscar y Reemplazar",
+				"regex": "Regex",
+				"sequence": "Secuencia",
+				"caseStyle": "Mayúsculas/Estilo",
+				"insert": "Insertar",
+				"removeCleanup": "Eliminar"
+			},
+			"photos": {
+				"tab": "Bibliotecas de Fotos",
+				"title": "Organice miles de fotos en segundos",
+				"desc": "Renombre fotos de vacaciones con fechas, agregue prefijos de ubicación o cree nombres consistentes desde archivos de cámara como DSC_0001.jpg a nombres significativos."
+			},
+			"videos": {
+				"tab": "Colecciones de Video",
+				"title": "Gestione archivos de video con facilidad",
+				"desc": "Limpie nombres de videos descargados, agregue números de episodio a series o estandarice las convenciones de nomenclatura de su biblioteca multimedia."
+			},
+			"music": {
+				"tab": "Archivos de Música",
+				"title": "Organice su biblioteca musical",
+				"desc": "Formatee nombres de pistas, agregue prefijos de artista, limpie nombres de archivos descargados o prepare archivos para servidores multimedia."
+			},
+			"code": {
+				"tab": "Proyectos de Código",
+				"title": "Refactorice estructuras de archivos",
+				"desc": "Renombre componentes por lotes, convierta convenciones de nomenclatura (camelCase a kebab-case) o prepare recursos para implementación."
+			},
+			"archives": {
+				"tab": "Archivos de Documentos",
+				"title": "Domine el caos de sus documentos",
+				"desc": "Agregue prefijos de fecha a informes, estandarice la nomenclatura de facturas u organice documentos escaneados con patrones consistentes."
+			}
+		}
+	},
+	"features": {
+		"heroTitle": "Cada característica,\nen detalle completo",
+		"heroDesc": "Desde poderosas cadenas de reglas hasta automatización inteligente, explore cada capacidad que hace de Rename.Tools la herramienta de renombrado por lotes basada en navegador más completa.",
+		"cta": "Comenzar a Renombrar — Gratis",
+		"category": {
+			"rules": "Sistema de Reglas",
+			"preview": "Vista Previa y Flujo de Trabajo",
+			"automation": "Plantillas y Automatización",
+			"privacy": "Privacidad y Seguridad"
+		},
+		"rules": {
+			"title": "7 tipos de reglas.\nCombínelas libremente.",
+			"desc": "Construya operaciones de renombrado complejas encadenando múltiples reglas. Cada regla se procesa en orden — mezcle buscar y reemplazar, regex, secuencias, conversión de mayúsculas/minúsculas, insertar, eliminar y JavaScript personalizado en cualquier combinación."
+		},
+		"findReplace": {
+			"title": "Find & Replace",
+			"desc": "Replace text globally or at exact positions. Supports case sensitivity toggle, replace-first or replace-all modes, and positional replacement by character index.",
+			"capabilities": {
+				"c1": "Global or first-match replacement",
+				"c2": "Case-sensitive and case-insensitive modes",
+				"c3": "Positional replacement by character index",
+				"c4": "Replace from start or end of filename",
+				"c5": "Works on name, extension, or full filename"
+			},
+			"before": "IMG_20240315_vacation (1).jpg",
+			"after": "vacation_20240315.jpg",
+			"bestFor": "Quick text cleanup and standardization"
+		},
+		"insert": {
+			"title": "Add / Insert Text",
+			"desc": "Insert text at the beginning, end, or any character position. Supports dynamic variables like date, time, folder name, and sequence numbers.",
+			"capabilities": {
+				"c1": "Insert at start, end, or specific character index",
+				"c2": "Dynamic variables: '{date}', '{time}', '{folderName}'",
+				"c3": "Combine with sequence numbers for structured naming",
+				"c4": "Metadata variables: EXIF date, camera model, audio tags",
+				"c5": "Stack with other rules for complex prefixes/suffixes"
+			},
+			"before": "report.pdf",
+			"after": "2024-03-15_report.pdf",
+			"bestFor": "Adding date prefixes, version tags, or structured naming"
+		},
+		"sequence": {
+			"title": "Auto Sequence",
+			"desc": "Add sequential numbering with complete control over type, start value, step, padding, scope, and sorting. Supports numeric, alphabetic, and roman numeral sequences.",
+			"capabilities": {
+				"c1": "Numeric, alphabetic (A-Z), and roman numeral sequences",
+				"c2": "Custom start value, step size, and zero-padding",
+				"c3": "Scope: global, per-folder, per-extension, or per-category",
+				"c4": "Sort by name, size, date, or extension before numbering",
+				"c5": "Hierarchical numbering (1.1, 1.2) for nested folders",
+				"c6": "Format templates with variables like '{name}'_'{n}'",
+				"c7": "Preserve original numbers from filenames"
+			},
+			"before": "photo.jpg, sunset.jpg, beach.jpg",
+			"after": "001_photo.jpg, 002_sunset.jpg, 003_beach.jpg",
+			"bestFor": "Organizing large batches with consistent numbering"
+		},
+		"caseStyle": {
+			"title": "Case & Style Conversion",
+			"desc": "Convert filenames between 8 case styles including developer-friendly formats. Combine case changes with separator transforms for complete naming convention overhauls.",
+			"capabilities": {
+				"c1": "UPPERCASE, lowercase, Title Case, Sentence case",
+				"c2": "Developer styles: camelCase, PascalCase, kebab-case, snake_case",
+				"c3": "Separator conversion: spaces ↔ dashes ↔ underscores",
+				"c4": "Combine case + separator in a single operation",
+				"c5": "Apply to name only, extension only, or full filename"
+			},
+			"before": "My Vacation Photos.jpg",
+			"after": "my-vacation-photos.jpg",
+			"bestFor": "Standardizing naming conventions across projects"
+		},
+		"regex": {
+			"title": "Regex Patterns",
+			"desc": "Full regular expression support with capture groups, backreferences, and flag control. The most powerful rule type for complex pattern transformations.",
+			"capabilities": {
+				"c1": "Full JavaScript regex with capture groups ($1, $2...)",
+				"c2": "Configurable flags: global (g), case-insensitive (i), multiline (m)",
+				"c3": "Backreferences for rearranging filename parts",
+				"c4": "Remove patterns: brackets, trailing numbers, special chars",
+				"c5": "Extract and restructure dates, IDs, and metadata"
+			},
+			"before": "2024-03-15 Trip to Paris [DRAFT].docx",
+			"after": "Trip_to_Paris_2024-03-15.docx",
+			"bestFor": "Complex transformations needing pattern matching"
+		},
+		"customJs": {
+			"title": "Custom JavaScript",
+			"desc": "Write your own transformation function with full access to filename, extension, index, file size, and modification time. For when built-in rules aren't enough.",
+			"capabilities": {
+				"c1": "Full JavaScript function with rename(options) API",
+				"c2": "Access: filename, extension, index, size, modifiedTime",
+				"c3": "Built-in code editor with syntax highlighting",
+				"c4": "6 ready-to-use code examples included",
+				"c5": "AI prompt generator — copy to ChatGPT/Claude for code help",
+				"c6": "Sandboxed execution for safety"
+			},
+			"before": "DSC_0042.CR2",
+			"after": "2024-03-15_sunset_042.CR2",
+			"bestFor": "Unlimited flexibility for advanced users"
+		},
+		"removeCleanup": {
+			"title": "Remove & Cleanup",
+			"desc": "Remove characters by count, range, or type. Quick-cleanup mode strips digits, symbols, spaces, Chinese, or English characters in one click.",
+			"capabilities": {
+				"c1": "Remove N characters from start or end",
+				"c2": "Remove characters within a specific index range",
+				"c3": "Quick cleanup: strip digits, symbols, spaces, Chinese, or English",
+				"c4": "Multi-select: combine cleanup types in one pass",
+				"c5": "Scope control: apply to name, extension, or full filename"
+			},
+			"before": "  [2024] report (final v3).pdf",
+			"after": "report.pdf",
+			"bestFor": "Stripping unwanted characters and file clutter"
+		},
+		"preview": {
+			"title": "See every change\nbefore it happens",
+			"desc": "No guessing, no accidents. Every rule you add updates the preview instantly. See original names, new names, and any conflicts — all in real time."
+		},
+		"previewFeatures": {
+			"livePreview": {
+				"title": "Instant Live Preview",
+				"desc": "Changes appear as you type. Every rule modification updates the entire file list immediately — no refresh button, no waiting."
+			},
+			"conflictDetection": {
+				"title": "Conflict Detection",
+				"desc": "Automatically detects when two files would get the same name, preventing data loss. Conflicts are highlighted in red with auto-fix available."
+			},
+			"filterViews": {
+				"title": "Smart Filter Views",
+				"desc": "Toggle between showing all files, only affected files, or only conflicts. Focus on what matters at each stage of your workflow."
+			},
+			"extensionControl": {
+				"title": "Extension Scope Control",
+				"desc": "Apply rules to the filename only, the extension only, or the full filename. Fine-grained control prevents accidentally changing file types."
+			},
+			"undoRedo": {
+				"title": "Undo & Redo",
+				"desc": "Built-in undo and redo support. Made a mistake after executing? Revert the entire batch with one click."
+			},
+			"oneClickExecute": {
+				"title": "One-Click Execute",
+				"desc": "When the preview looks right, execute all renames directly — files are renamed on your device via the File System Access API."
+			},
+			"advancedFilter": {
+				"title": "Advanced File Filtering",
+				"desc": "Filter files by name, extension, size, or modification date using conditions like contains, starts with, regex match, greater than, and more. Combine with AND/OR logic."
+			},
+			"sorting": {
+				"title": "Flexible Sorting",
+				"desc": "Sort files by import order, name (A-Z/Z-A), or extension before renaming. Natural sort ensures proper ordering (1, 2, 10 instead of 1, 10, 2)."
+			}
+		},
+		"automation": {
+			"title": "Save time with\ntemplates & automation",
+			"desc": "From one-click presets to intelligent file detection, Rename.Tools reduces repetitive work with powerful automation features."
+		},
+		"automationFeatures": {
+			"templateLibrary": {
+				"title": "11 Built-in Templates",
+				"desc": "Ready-to-use rule templates for common tasks: remove brackets, add date prefix, format TV shows, clean download names, convert camelCase to kebab-case, and more."
+			},
+			"userPresets": {
+				"title": "Custom User Presets",
+				"desc": "Save your rule chains as reusable presets with names, descriptions, tags, and categories. Pin favorites for quick access."
+			},
+			"presetManagement": {
+				"title": "Import, Export & Share",
+				"desc": "Export presets as JSON files, import from colleagues, and generate shareable URLs. Your workflow is fully portable."
+			},
+			"intelligentSuggestions": {
+				"title": "Intelligent Suggestions",
+				"desc": "Automatically detects file types (photos, music, video series, documents) and suggests optimal rename rules tailored to your files."
+			},
+			"mediaScraper": {
+				"title": "TMDb Media Scraper",
+				"desc": "Match video files with TV show information from The Movie Database. Auto-detect show names, seasons, and episode titles for perfect media library naming."
+			},
+			"metadataExtraction": {
+				"title": "Metadata Extraction",
+				"desc": "Read EXIF data from photos (date, camera, resolution) and audio tags from music files (artist, album, track). Use metadata variables in rename templates."
+			},
+			"scriptExport": {
+				"title": "Script Export",
+				"desc": "Export your entire rename operation as Bash, PowerShell, or CSV. Generate undo scripts to reverse any operation. Perfect for CI/CD pipelines or remote servers."
+			}
+		},
+		"privacy": {
+			"title": "Your files never leave\nyour browser",
+			"desc": "Rename.Tools is architecturally incapable of accessing your files from a server. Everything runs locally via the File System Access API."
+		},
+		"privacyFeatures": {
+			"localProcessing": {
+				"title": "100% Local Processing",
+				"desc": "All file operations run as client-side JavaScript in your browser. No backend, no API calls for file operations, no server-side processing."
+			},
+			"noUpload": {
+				"title": "Zero Upload Architecture",
+				"desc": "Your files are never uploaded anywhere. We use the File System Access API to read and rename files directly on your device."
+			},
+			"noRetention": {
+				"title": "No Data Retention",
+				"desc": "Close the tab and everything is gone. No file data is persisted — only your language, theme, and saved presets stay in localStorage."
+			},
+			"offlineReady": {
+				"title": "Works Offline",
+				"desc": "After the initial page load, Rename.Tools works fully offline. No internet connection required for renaming operations."
+			},
+			"openSource": {
+				"title": "Fully Open Source",
+				"desc": "Every line of code is open on GitHub under AGPL-3.0. Verify our privacy claims yourself — no hidden tracking, no analytics scripts."
+			},
+			"freeForever": {
+				"title": "Free Forever",
+				"desc": "No trials, no premium tiers, no paywalls. Every feature is available to everyone. No sign-up required."
+			}
+		},
+		"ctaTitle": "Ready to rename smarter?",
+		"ctaDesc": "Join thousands of users who save hours with Rename.Tools. Free, private, and runs right in your browser.",
+		"ctaButton": "Start Renaming Now",
+		"ctaSubtext": "Free forever • No sign-up • Works offline",
+		"bestFor": "Best for",
+		"capabilities": "Key capabilities",
+		"example": "Example",
+		"before": "Before",
+		"after": "After"
+	},
+	"rename": {
+		"app": {
+			"title": "Renombrado por Lotes",
+			"privacyBadge": "Privacidad Segura",
+			"privacyDesc": "Todas las operaciones se ejecutan localmente en su navegador. Sin subidas, sin lectura de contenido, se borra al cerrar.",
+			"browserCompat": "Compatibilidad del Navegador",
+			"browserCompatOk": "Su navegador soporta la API File System Access para renombrado local directo.",
+			"browserCompatFail": "Su navegador no soporta la API File System Access. Use el modo de prueba de muestra o exporte scripts.",
+			"language": "Idioma",
+			"theme": "Tema",
+			"light": "Claro",
+			"dark": "Oscuro",
+			"settings": "Configuración",
+			"preferences": "Preferencias",
+			"preferencesDesc": "Configure ajustes y comportamientos globales de la aplicación.",
+			"preferencesPlaceholder": "Más configuraciones próximamente...",
+			"kofiTooltip": "Pequeño café, gran motivación. Gracias por el apoyo ☕",
+			"tmdb": {
+				"title": "Clave API de TMDB",
+				"configured": "✓ Configurada",
+				"description": "Usada para coincidencia automática de metadatos de películas/series de TV. Puede obtener una clave API gratuita en themoviedb.org.",
+				"placeholder": "Ingrese Clave API de TMDB",
+				"clear": "Limpiar",
+				"validating": "Validando...",
+				"save": "Guardar",
+				"errorInvalid": "La clave API es inválida",
+				"errorNetwork": "Error de red, por favor reintente",
+				"errorTimeout": "Tiempo de validación agotado",
+				"errorUnknown": "Error desconocido"
+			}
+		},
+		"files": {
+			"title": "Lista de Archivos",
+			"importFiles": "Importar Archivos",
+			"importFolder": "Importar Carpeta",
+			"clear": "Limpiar",
+			"dropHint": "Suelte archivos o carpetas aquí",
+			"search": "Buscar nombres de archivo…",
+			"selectAll": "Seleccionar Todo",
+			"deselectAll": "Deseleccionar Todo",
+			"total": "Total",
+			"selected": "Seleccionados",
+			"items": "",
+			"filter": "Filtrar",
+			"filtered": "Filtrados",
+			"filterByExt": "Filtrar por extensión",
+			"noFiles": "Aún no hay archivos. Importe archivos o carpetas para comenzar.",
+			"loadMetadata": "Cargar Metadatos de Archivo (EXIF, etiquetas de audio)",
+			"scrapeMedia": "Coincidir series de TV desde TMDb",
+			"loadingMetadata": "Cargando metadatos",
+			"sampleMode": "Modo de Prueba de Muestra",
+			"sampleGenerate": "Generar Muestras Aleatorias",
+			"sampleHint": "Ingrese nombres de archivo (uno por línea) para probar reglas",
+			"samplePlaceholder": "photo_001.jpg\nIMG_20240101.png\nreport (final).docx",
+			"sort": "Ordenar",
+			"sortByImport": "Orden de Importación",
+			"sortByNameAsc": "Nombre A-Z",
+			"sortByNameDesc": "Nombre Z-A",
+			"sortByExtAsc": "Extensión A-Z",
+			"sortByExtDesc": "Extensión Z-A",
+			"loadingFiles": "Cargando {count} archivos...",
+			"scanningFiles": "Escaneando archivos..."
+		},
+		"filter": {
+			"title": "Filtro de Archivos",
+			"fieldName": "Nombre de Archivo",
+			"fieldExtension": "Extensión",
+			"fieldSize": "Tamaño de Archivo",
+			"fieldModified": "Hora de Modificación",
+			"opContains": "Contiene",
+			"opNotContains": "No Contiene",
+			"opEquals": "Igual a",
+			"opNotEquals": "Diferente de",
+			"opStartsWith": "Comienza Con",
+			"opEndsWith": "Termina Con",
+			"opRegex": "Coincidencia Regex",
+			"opGreaterThan": "Mayor Que",
+			"opLessThan": "Menor Que",
+			"logicAnd": "Y",
+			"logicOr": "O",
+			"caseSensitive": "Sensible a Mayúsculas",
+			"valuePlaceholder": "Ingrese valor...",
+			"placeholderName": "Ingrese nombre de archivo...",
+			"placeholderExtension": "ej. jpg, png, pdf",
+			"placeholderSize": "ej. 100KB, 5MB, 1GB",
+			"placeholderModified": "Seleccione fecha",
+			"where": "Donde"
+		},
+		"rules": {
+			"title": "Cadena de Reglas",
+			"addRule": "Agregar Regla",
+			"noRules": "Aún no hay reglas. Haga clic arriba para agregar una.",
+			"enabled": "Habilitada",
+			"disabled": "Deshabilitada",
+			"remove": "Eliminar",
+			"clone": "Clonar",
+			"types": {
+				"findReplace": "Buscar y Reemplazar",
+				"insert": "Agregar / Insertar",
+				"sequence": "Secuencia",
+				"caseStyle": "Mayúsculas / Estilo",
+				"regex": "Reemplazo Regex",
+				"customJs": "JS Personalizado",
+				"removeCleanup": "Eliminar / Limpiar"
+			},
+			"findReplace": {
+				"find": "Buscar",
+				"replace": "Reemplazar con",
+				"caseSensitive": "Sensible a Mayúsculas",
+				"matchAll": "Reemplazar todo",
+				"usePosition": "Por posición",
+				"position": "Posición",
+				"fromStart": "Desde el inicio",
+				"fromEnd": "Desde el final",
+				"count": "Caracteres"
+			},
+			"insert": {
+				"text": "Insertar texto",
+				"position": "Posición",
+				"atStart": "Inicio",
+				"atEnd": "Final",
+				"atIndex": "En índice",
+				"index": "Después del carácter N",
+				"variables": "Variables disponibles"
+			},
+			"sequence": {
+				"seqType": "Tipo de secuencia",
+				"numeric": "Numérica (1, 2, 3...)",
+				"alpha": "Alfabética (A, B, C...)",
+				"roman": "Romana (I, II, III...)",
+				"start": "Valor inicial",
+				"step": "Paso",
+				"padding": "Relleno de ceros",
+				"position": "Posición de inserción",
+				"atStart": "Inicio",
+				"atEnd": "Final",
+				"replaceAll": "Reemplazar nombre completo",
+				"template": "Plantilla de formato (opcional)",
+				"templatePlaceholder": "ej. Photo_'{n}'_'{date}'",
+				"templateHint": "Variables disponibles",
+				"scope": "Ámbito de numeración",
+				"scopeGlobal": "Global (todos los archivos)",
+				"scopePerFolder": "Por carpeta",
+				"scopePerExtension": "Por extensión",
+				"scopePerCategory": "Por categoría de archivo",
+				"sortBeforeNumbering": "Ordenar antes de numerar",
+				"sortBy": "Ordenar por",
+				"sortByName": "Nombre de archivo",
+				"sortBySize": "Tamaño de archivo",
+				"sortByModified": "Hora de modificación",
+				"sortByExtension": "Extensión",
+				"sortOrder": "Orden",
+				"sortAsc": "Ascendente",
+				"sortDesc": "Descendente",
+				"naturalSort": "Orden natural (1, 2, 10 no 1, 10, 2)",
+				"preserveOriginal": "Preservar números originales",
+				"preservePattern": "Extraer patrón (regex)",
+				"preservePatternHint": "Use grupo de captura para extraer número, ej. (\\d+)",
+				"hierarchical": "Numeración jerárquica (ej. 1.1, 1.2)",
+				"hierarchySeparator": "Separador"
+			},
+			"caseStyle": {
+				"mode": "Modo",
+				"general": "General",
+				"developer": "Desarrollador",
+				"uppercase": "MAYÚSCULAS",
+				"lowercase": "minúsculas",
+				"titlecase": "Título",
+				"sentencecase": "Oración",
+				"camelCase": "camelCase",
+				"PascalCase": "PascalCase",
+				"kebab-case": "kebab-case",
+				"snake_case": "snake_case",
+				"style": "Conversión de estilo",
+				"none": "Ninguno",
+				"spaceToDash": "Espacio → Guión",
+				"spaceToUnderscore": "Espacio → Guión bajo",
+				"dashToSpace": "Guión → Espacio",
+				"underscoreToSpace": "Guión bajo → Espacio"
+			},
+			"regex": {
+				"pattern": "Patrón regex",
+				"replacement": "Reemplazar con",
+				"flags": "Banderas",
+				"flagsHint": "ej. g, i, m"
+			},
+			"customJs": {
+				"code": "Código",
+				"hint": "Defina la función rename(options), devuelva el nuevo nombre de archivo",
+				"insertExample": "Insertar Ejemplo",
+				"cancel": "Cancelar",
+				"confirm": "Confirmar",
+				"error": "Error de Sintaxis",
+				"expandedTitle": "Editor de JavaScript Personalizado",
+				"aiPromptTitle": "Prompt de IA",
+				"aiPromptDesc": "Copie esta plantilla para enviar a IA (como ChatGPT, Claude) para generar código de renombrado:",
+				"copyPrompt": "Copiar Prompt",
+				"examples": {
+					"datePrefix": "Prefijo de Fecha",
+					"sequenceNumber": "Número de Secuencia",
+					"extractNumbers": "Extraer Números",
+					"cleanupName": "Limpiar Nombre",
+					"conditionalPrefix": "Prefijo Condicional",
+					"useModifiedTime": "Usar Hora de Modificación"
+				}
+			},
+			"removeCleanup": {
+				"mode": "Modo",
+				"chars": "Por cantidad de caracteres",
+				"range": "Por rango",
+				"cleanup": "Limpieza rápida",
+				"direction": "Dirección",
+				"fromStart": "Desde el inicio",
+				"fromEnd": "Desde el final",
+				"count": "Caracteres",
+				"rangeStart": "Desde posición",
+				"rangeEnd": "Hasta posición",
+				"removeDigits": "Dígitos",
+				"removeSymbols": "Símbolos",
+				"removeSpaces": "Espacios",
+				"removeChinese": "Chino",
+				"removeEnglish": "Inglés"
+			},
+			"extensionScope": "Ámbito",
+			"scopeName": "Nombre",
+			"scopeExtension": "Ext",
+			"scopeFull": "Completo",
+			"templateTitle": "Plantillas de Reglas",
+			"templates": {
+				"removeBrackets": {
+					"name": "Eliminar corchetes y contenido",
+					"desc": "Eliminar (), [], '{}' y su contenido"
+				},
+				"datePrefix": {
+					"name": "Agregar prefijo de fecha",
+					"desc": "Anteponer la fecha de hoy como YYYY-MM-DD_"
+				},
+				"photoCleanup": {
+					"name": "Limpieza de archivos de fotos",
+					"desc": "Reemplazar IMG_ con Photo_ y agregar secuencia"
+				},
+				"lowercaseDash": {
+					"name": "Minúsculas + guiones",
+					"desc": "Convertir a minúsculas y espacios a guiones"
+				},
+				"removeExtraSpaces": {
+					"name": "Eliminar espacios extra",
+					"desc": "Combinar espacios consecutivos en uno"
+				},
+				"tvShowFormat": {
+					"name": "Formato de serie de TV",
+					"desc": "Formatear números de episodio como S01E01 - Título"
+				},
+				"musicFormat": {
+					"name": "Formato de pista musical",
+					"desc": "Formatear números de pista como 01. Título"
+				},
+				"documentVersion": {
+					"name": "Versionado de documentos",
+					"desc": "Agregar sufijo de número de versión como _v1"
+				},
+				"downloadCleanup": {
+					"name": "Limpieza de descargas",
+					"desc": "Eliminar (1), copy y etiquetas de origen"
+				},
+				"camelToKebab": {
+					"name": "camelCase a kebab-case",
+					"desc": "Convertir a formato kebab-case"
+				},
+				"addBackupSuffix": {
+					"name": "Agregar sufijo de respaldo",
+					"desc": "Añadir _backup al nombre de archivo"
+				}
+			},
+			"savePreset": "Guardar Preajuste",
+			"clear": "Limpiar Reglas"
+		},
+		"templateEditor": {
+			"placeholder": "Haga clic en los botones de abajo para agregar variables o texto...",
+			"inputText": "Ingrese texto...",
+			"addText": "Agregar Texto",
+			"commonVars": "Variables",
+			"metadata": "Metadatos",
+			"dragHint": "Arrastre para reordenar",
+			"variables": {
+				"name": "Nombre de archivo original",
+				"n": "Número de secuencia",
+				"date": "Fecha",
+				"time": "Hora",
+				"datetime": "Fecha y Hora",
+				"timestamp": "Marca de tiempo",
+				"folderName": "Nombre de carpeta",
+				"exifDate": "Fecha EXIF",
+				"exifCamera": "Modelo de cámara",
+				"mediaArtist": "Artista",
+				"mediaTitle": "Título",
+				"mediaAlbum": "Álbum",
+				"mediaYear": "Año",
+				"mediaTrack": "Número de pista"
+			}
+		},
+		"presets": {
+			"quickAccess": "Acceso Rápido",
+			"systemTemplates": "Plantillas del Sistema",
+			"myPresets": "Mis Preajustes",
+			"noPinned": "No hay elementos fijados. Fije plantillas o preajustes para acceso rápido.",
+			"noPresets": "Aún no hay preajustes guardados. Guarde sus cadenas de reglas para reutilizarlas.",
+			"noPresetsTitle": "Aún No Hay Preajustes",
+			"noPresetsDesc": "Los preajustes le permiten guardar sus combinaciones de reglas favoritas para reutilizarlas rápidamente en diferentes lotes de archivos.",
+			"howToCreate": "Crear un Preajuste",
+			"howToCreateDesc": "Configure reglas en el panel de Reglas, luego haga clic en el botón \"Guardar como Preajuste\".",
+			"howToImport": "Importar Preajustes",
+			"howToImportDesc": "Haga clic en el botón de abajo para importar archivos de preajustes previamente exportados (formato .json).",
+			"howToCreateSimple": "Configure reglas en el panel de Reglas, luego haga clic en \"Guardar como Preajuste\"",
+			"howToImportSimple": "O importe archivos de preajustes existentes usando el botón de abajo",
+			"importPresets": "Importar Archivo de Preajuste",
+			"searchPlaceholder": "Buscar preajustes...",
+			"sortRecent": "Recientes",
+			"sortFrequent": "Más Usados",
+			"sortName": "Nombre",
+			"sortCreated": "Creados",
+			"categoryAll": "Todas las Categorías",
+			"categoryPhoto": "Foto",
+			"categoryDocument": "Documento",
+			"categoryCode": "Código",
+			"categoryVideo": "Video",
+			"categoryMusic": "Música",
+			"categoryGeneral": "General",
+			"import": "Importar",
+			"export": "Exportar",
+			"apply": "Aplicar",
+			"uses": "usos",
+			"justNow": "Justo ahora",
+			"hoursAgo": "Hace {hours}h",
+			"daysAgo": "Hace {days}d",
+			"importSuccess": "Se importaron {count} preajustes exitosamente",
+			"importError": "Error al importar preajustes",
+			"shareCopied": "¡Enlace para compartir copiado al portapapeles!",
+			"pinned": "Fijado",
+			"unpinned": "Desfijado",
+			"saveSuccess": "Preajuste guardado",
+			"saveSuccessDesc": "Preajuste \"{name}\" guardado exitosamente",
+			"saveAsPreset": "Guardar como Preajuste",
+			"saveDescription": "Guardar las {count} reglas actuales como un preajuste reutilizable",
+			"presetName": "Nombre del preajuste",
+			"presetNamePlaceholder": "ej. Flujo de Trabajo de Limpieza de Fotos",
+			"description": "Descripción",
+			"optional": "Opcional",
+			"descriptionPlaceholder": "¿Qué hace este preajuste?",
+			"category": "Categoría",
+			"selectCategory": "Seleccionar categoría",
+			"tags": "Etiquetas",
+			"tagsPlaceholder": "foto, limpieza, lote",
+			"tagsHint": "Separe las etiquetas con comas",
+			"cancel": "Cancelar",
+			"save": "Guardar"
+		},
+		"preview": {
+			"title": "Vista Previa",
+			"index": "#",
+			"original": "Nombre Original",
+			"arrow": "→",
+			"newName": "Nuevo Nombre",
+			"showAll": "Mostrar Todo",
+			"showAffected": "Solo Afectados",
+			"showConflicts": "Solo Conflictos",
+			"affected": "Afectados",
+			"conflicts": "Conflictos",
+			"noConflict": "Sin conflictos",
+			"total": "Total",
+			"items": "archivos",
+			"autoFix": "Corrección automática",
+			"resetAutoFix": "Restablecer corrección"
+		},
+		"metadata": {
+			"title": "Metadatos de Archivo",
+			"image": {
+				"dateTime": "Fecha",
+				"camera": "Cámara",
+				"resolution": "Resolución",
+				"aperture": "Apertura",
+				"exposure": "Exposición",
+				"focal": "Focal",
+				"noData": "No hay datos EXIF disponibles"
+			},
+			"media": {
+				"title": "Título",
+				"artist": "Artista",
+				"album": "Álbum",
+				"year": "Año",
+				"genre": "Género",
+				"track": "Pista",
+				"duration": "Duración",
+				"bitrate": "Tasa de bits",
+				"codec": "Códec",
+				"noData": "No hay etiquetas de audio disponibles"
+			}
+		},
+		"intelligence": {
+			"apply": "Aplicar",
+			"startMatch": "Iniciar Coincidencia",
+			"metadataEnhanced": "Metadatos",
+			"scenarios": {
+				"photo_collection": "Colección de Fotos Detectada",
+				"music_library": "Biblioteca Musical Detectada",
+				"video_series": "Serie de Videos Detectada",
+				"document_archive": "Archivo de Documentos Detectado",
+				"video_scrape": "Archivos de Series de TV Detectados"
+			},
+			"descriptions": {
+				"photo_collection": "Organice fotos con fecha y numeración secuencial",
+				"music_library": "Formatee pistas con artista, álbum y número de pista",
+				"video_series": "Numere episodios con orden secuencial",
+				"document_archive": "Archive documentos con prefijo de fecha y secuencia",
+				"video_scrape": "Coincida automáticamente nombres de programas, temporadas y títulos de episodios desde TMDb"
+			}
+		},
+		"scraper": {
+			"title": "Media Scraper",
+			"description": "Match video files with TV show information from TMDb",
+			"cancel": "Cancelar",
+			"apply": "Aplicar",
+			"startSearch": "Buscar en TMDb",
+			"searching": "Buscando en TMDb...",
+			"searchingProgress": "Buscando {current}/{total}...",
+			"noGroups": "No se detectaron patrones de series de TV en los archivos de video seleccionados",
+			"groupsHint": "Se detectaron las siguientes series desde los nombres de archivo. Edite los títulos si es necesario antes de buscar.",
+			"files": "archivos",
+			"season": "Temporada",
+			"noMatch": "No se encontró coincidencia",
+			"matchedCount": "{matched}/{total} archivos coincidieron",
+			"selectAll": "Seleccionar Todo",
+			"deselectAll": "Deseleccionar Todo",
+			"outputFormat": "Formato de Salida",
+			"customTemplate": "Plantilla personalizada...",
+			"retry": "Reintentar",
+			"error": "Búsqueda fallida: {message}",
+			"selectShow": "Seleccionar serie",
+			"noResults": "Sin resultados",
+			"confidence": {
+				"high": "Alta",
+				"medium": "Media",
+				"low": "Baja",
+				"none": "Ninguna"
+			},
+			"filter": {
+				"all": "Todos",
+				"matched": "Coincidentes",
+				"unmatched": "Sin coincidencia"
+			},
+			"steps": {
+				"parse": "Detectar",
+				"match": "Buscar",
+				"confirm": "Confirmar"
+			},
+			"apiKey": {
+				"title": "Configurar Clave API de TMDb",
+				"description": "El scraping de medios requiere una clave API gratuita de TMDb. Su clave se almacena localmente solo en el navegador.",
+				"howToGet": "Cómo obtener una clave API gratuita:",
+				"step1": "Visite themoviedb.org y cree una cuenta gratuita",
+				"step2": "Vaya a Configuración → API → Crear Clave API",
+				"step3": "Copie el API Read Access Token (autenticación v4)",
+				"goToTmdb": "Ir a TMDb",
+				"label": "API Read Access Token",
+				"placeholder": "eyJhbGciOiJIUzI1NiJ9...",
+				"required": "Se requiere clave API",
+				"invalid": "Clave API inválida. Por favor verifique e intente de nuevo.",
+				"network": "Error de red. Por favor verifique su conexión.",
+				"timeout": "Tiempo de espera agotado. Por favor intente de nuevo.",
+				"unknown": "Validación fallida. Por favor intente de nuevo.",
+				"localOnly": "Su clave API se almacena localmente en el almacenamiento del navegador y nunca se envía a nuestros servidores.",
+				"cancel": "Cancelar",
+				"save": "Guardar y Continuar"
+			}
+		},
+		"execute": {
+			"execute": "Ejecutar Renombrado",
+			"clear": "Limpiar Reglas",
+			"refresh": "Actualizar Vista Previa",
+			"confirmTitle": "Confirmar Renombrado",
+			"confirmDesc": "A punto de renombrar {count} archivos.",
+			"confirmWarning": "Nota: Renombrar cambiará la hora de modificación del archivo.",
+			"cancel": "Cancelar",
+			"confirm": "Confirmar",
+			"exportPlan": "Exportar Plan",
+			"exportMap": "Exportar Mapeo",
+			"exportScript": "Exportar Script",
+			"exportPowerShell": "Exportar PowerShell",
+			"exportCSV": "Exportar CSV",
+			"exportReverse": "Exportar Script de Deshacer",
+			"progress": "Progreso",
+			"log": "Registro de Ejecución",
+			"success": "Éxito",
+			"failed": "Fallido",
+			"skipped": "Omitido",
+			"timestampWarning": "Entiendo: renombrar cambiará las marcas de tiempo de modificación del archivo",
+			"undo": "Deshacer",
+			"redo": "Rehacer",
+			"undoHint": "Deshacer último lote de renombrado",
+			"redoHint": "Rehacer último lote deshecho",
+			"activationRequired": "Permiso del navegador expirado — haga clic aquí para continuar renombrando"
+		}
+	},
+	"about": {
+		"title": "Acerca de Este Proyecto",
+		"description": "Rename.Tools es una poderosa herramienta de renombrado de archivos por lotes basada en navegador. Todas las operaciones se ejecutan localmente en su navegador para total privacidad.",
+		"techStack": "Stack Tecnológico",
+		"items": {
+			"framework": "Framework: Next.js 16 with App Router",
+			"styling": "Estilos: Tailwind CSS 4",
+			"components": "Componentes: shadcn/ui",
+			"i18n": "Internacionalización: next-intl",
+			"linting": "Linting y Formato: Biome",
+			"theme": "Tema: next-themes con modo oscuro"
+		},
+		"backHome": "Volver al Inicio"
+	},
+	"notFound": {
+		"title": "404",
+		"description": "La página que busca no existe o ha sido movida.",
+		"backHome": "Volver al Inicio"
+	},
+	"error": {
+		"title": "Algo salió mal",
+		"description": "Ocurrió un error inesperado. Por favor, inténtelo de nuevo.",
+		"retry": "Intentar de Nuevo"
+	},
+	"loading": {
+		"text": "Cargando..."
+	},
+	"footer": {
+		"tagline": "Una potente herramienta de renombrado por lotes basada en navegador. Soporta regex, cadenas de reglas, vista previa en vivo — todo el procesamiento se realiza localmente con total privacidad.",
+		"privacyBadge": "100% Procesamiento Local, Cero Subida de Datos",
+		"legalTitle": "Legal",
+		"resourcesTitle": "Recursos",
+		"languagesTitle": "Idiomas",
+		"features": "Todas las Funciones",
+		"terms": "Términos de Servicio",
+		"privacyPolicy": "Política de Privacidad",
+		"disclaimer": "Descargo de Responsabilidad",
+		"reportIssue": "Reportar un Problema",
+		"changelog": "Registro de Cambios",
+		"allRightsReserved": "Todos los derechos reservados.",
+		"madeWith": "Hecho con",
+		"madeIn": "por desarrolladores"
+	},
+	"legal": {
+		"backToHome": "Volver al Inicio",
+		"lastUpdated": "Última Actualización",
+		"termsTitle": "Términos de Servicio",
+		"termsIntro": "Bienvenido a Rename.Tools. Por favor, lea estos términos cuidadosamente antes de usar el servicio. Al usar este servicio, acepta estar sujeto a estos términos.",
+		"termsAcceptance": "1. Aceptación de Términos",
+		"termsAcceptanceDesc": "Al acceder y usar Rename.Tools (en adelante denominado \"el Servicio\"), acepta estar sujeto a estos Términos de Servicio. Si no está de acuerdo con alguno de estos términos, por favor deje de usar el Servicio inmediatamente. El Servicio está disponible para usuarios de todo el mundo, y usted es responsable de asegurar que su uso cumpla con las leyes y regulaciones aplicables en su jurisdicción.",
+		"termsService": "2. Descripción del Servicio",
+		"termsServiceDesc": "Rename.Tools es una herramienta gratuita de renombrado de archivos por lotes basada en navegador. Las características clave de este Servicio incluyen: todo el procesamiento de archivos se realiza localmente en su navegador; no recopilamos, almacenamos ni transmitimos ningún dato de archivo de usuario; soporte para varias reglas de renombrado incluyendo expresiones regulares, generación de secuencias y conversión de mayúsculas/minúsculas; funcionalidad de vista previa en tiempo real para confirmar resultados antes de la ejecución.",
+		"termsUserConduct": "3. Conducta del Usuario",
+		"termsUserConductDesc": "Al usar este Servicio, acepta: no usar el Servicio para ningún propósito ilegal; no intentar dañar, interferir o eludir las medidas de seguridad del Servicio; no abusar del Servicio ni dañar los intereses de otros usuarios de ninguna manera; asumir la responsabilidad total por su uso del Servicio y sus resultados.",
+		"termsIntellectual": "4. Propiedad Intelectual",
+		"termsIntellectualDesc": "El código fuente de Rename.Tools es de código abierto bajo la Licencia AGPL-3.0. Es libre de usar, modificar y distribuir el código fuente, siempre que retenga el aviso de copyright original y cumpla con los requisitos de AGPL-3.0 para uso en red. Las marcas comerciales, logotipos y nombres de marca de este Servicio pertenecen a sus respectivos propietarios.",
+		"termsDisclaimer": "5. Limitación de Responsabilidad",
+		"termsDisclaimerDesc": "El Servicio se proporciona \"tal cual\" y \"según disponibilidad\" sin ninguna garantía expresa o implícita. En la máxima medida permitida por la ley, no somos responsables de: ningún daño directo, indirecto, incidental, especial o consecuente que surja del uso o la incapacidad de usar el Servicio; ninguna pérdida de datos, corrupción de archivos o falla del sistema; ninguna acción o contenido de terceros.",
+		"termsLiability": "6. Asunción de Riesgo",
+		"termsLiabilityDesc": "Las operaciones de renombrado por lotes son típicamente irreversibles. Usted reconoce y acepta expresamente que: usa el Servicio enteramente bajo su propio riesgo; es responsable de verificar cuidadosamente los resultados a través de la función de vista previa antes de ejecutar operaciones de renombrado; recomendamos encarecidamente hacer copias de seguridad de archivos importantes antes de cualquier operación; no somos responsables de ninguna pérdida resultante de errores operacionales.",
+		"termsChanges": "7. Cambios a los Términos",
+		"termsChangesDesc": "Nos reservamos el derecho de modificar estos Términos de Servicio en cualquier momento sin previo aviso. Los términos modificados entran en vigencia inmediatamente después de su publicación en esta página. Usted es responsable de revisar periódicamente esta página para cualquier cambio. El uso continuado del Servicio después de las modificaciones constituye la aceptación de los términos revisados.",
+		"termsTermination": "8. Terminación del Servicio",
+		"termsTerminationDesc": "Nos reservamos el derecho de suspender o terminar el Servicio en cualquier momento por cualquier razón sin previo aviso. Tras la terminación, las disposiciones relativas a la limitación de responsabilidad, propiedad intelectual y descargos de responsabilidad permanecerán en vigor.",
+		"termsGoverning": "9. Ley Aplicable",
+		"termsGoverningDesc": "Estos Términos de Servicio se regirán e interpretarán de acuerdo con las leyes aplicables. Cualquier disputa que surja de estos términos se resolverá primero mediante negociación amistosa; si la negociación falla, cualquiera de las partes puede someter la disputa a un tribunal de jurisdicción competente.",
+		"termsContact": "10. Información de Contacto",
+		"termsContactDesc": "Si tiene alguna pregunta o sugerencia con respecto a estos Términos de Servicio, por favor contáctenos a través de: GitHub Issues (recomendado): https://github.com/chenz24/rename.tools/issues",
+		"privacyTitle": "Política de Privacidad",
+		"privacyIntro": "Entendemos lo importante que es la privacidad para usted. Esta Política de Privacidad explica cómo Rename.Tools maneja su información. En resumen: no recopilamos ninguno de sus datos.",
+		"privacyLocalTitle": "1. Principio de Procesamiento Local",
+		"privacyLocalDesc": "Rename.Tools utiliza una arquitectura puramente del lado del navegador, lo que significa: todas las operaciones de archivos se realizan localmente en su dispositivo; sus archivos nunca se cargan a ningún servidor; el contenido de los archivos, nombres de archivos y metadatos nunca salen de su navegador; el Servicio funciona sin conexión después de la carga inicial.",
+		"privacyNoCollection": "2. Información que No Recopilamos",
+		"privacyNoCollectionDesc": "Explícitamente no recopilamos: el contenido de sus archivos, nombres de archivos o cualquier metadato de archivo; su información personal (nombre, correo electrónico, teléfono, etc.); información de su dispositivo o huella digital del navegador; su dirección IP o ubicación geográfica; su comportamiento de uso o historial de navegación.",
+		"privacyNoStorage": "3. Almacenamiento de Datos",
+		"privacyNoStorageDesc": "Este Servicio no persiste ningún dato de usuario en servidores remotos. En su navegador local, solo almacenamos: preferencias de idioma (localStorage); configuración de tema (localStorage); preajustes de reglas de renombrado que guarde voluntariamente (localStorage). Cuando cierra la pestaña del navegador, todos los datos temporales (incluidas las listas de archivos y configuraciones de reglas actuales) se borran automáticamente. Puede borrar todos los datos almacenados localmente en cualquier momento a través de la configuración de su navegador.",
+		"privacyCookies": "4. Uso de Cookies",
+		"privacyCookiesDesc": "Este Servicio solo usa cookies funcionales esenciales para almacenar sus preferencias de idioma y tema. Estas cookies: no contienen ninguna información de identificación personal; no se usan para fines de seguimiento o análisis; no se comparten con terceros; pueden eliminarse en cualquier momento a través de la configuración de su navegador.",
+		"privacyThirdParty": "5. Servicios de Terceros",
+		"privacyThirdPartyDesc": "Integración de API de TMDb: Si elige usar la función de extracción de metadatos multimedia, necesita configurar una clave API de TMDb. Esta clave se almacena solo en el almacenamiento local de su navegador y no se envía a nuestros servidores. Las llamadas API se realizan directamente desde su navegador a los servidores de TMDb; no participamos ni registramos estas comunicaciones. Alojamiento: Este sitio web está alojado en Vercel. Vercel puede recopilar registros de servidor estándar (como direcciones IP y tiempos de acceso), que son gestionados por Vercel según su política de privacidad. No tenemos acceso a estos datos.",
+		"privacySecurity": "6. Medidas de Seguridad",
+		"privacySecurityDesc": "Aunque no almacenamos sus datos, aún tomamos las siguientes medidas para proteger la seguridad del servicio: usar HTTPS para cifrar todas las comunicaciones de red; actualizar regularmente las dependencias para corregir vulnerabilidades de seguridad conocidas; código de código abierto sujeto a revisión de la comunidad; no usar ningún script de seguimiento o análisis de terceros.",
+		"privacyChildren": "7. Privacidad de los Niños",
+		"privacyChildrenDesc": "Este Servicio no está específicamente dirigido a niños menores de 13 años. Dado que no recopilamos ninguna información personal, no hay problema de recopilación de datos de privacidad de niños.",
+		"privacyChanges": "8. Cambios a la Política",
+		"privacyChangesDesc": "Podemos actualizar esta Política de Privacidad de vez en cuando para reflejar cambios en el servicio o requisitos legales. Cualquier cambio significativo se publicará en esta página. Recomendamos revisar periódicamente esta página para mantenerse informado sobre nuestras prácticas de privacidad.",
+		"privacyRights": "9. Sus Derechos",
+		"privacyRightsDesc": "Dado que no recopilamos ni almacenamos sus datos personales, los derechos tradicionales del sujeto de datos (como acceso, rectificación, eliminación) técnicamente no son aplicables. Sin embargo, siempre puede: borrar el almacenamiento local de su navegador para eliminar todas las preferencias guardadas localmente; elegir no usar funciones que requieran APIs de terceros; revisar nuestro código de código abierto para verificar nuestras afirmaciones de privacidad.",
+		"privacyContact": "10. Contáctenos",
+		"privacyContactDesc": "Si tiene alguna pregunta sobre esta Política de Privacidad, por favor contáctenos a través de GitHub Issues.",
+		"disclaimerTitle": "Descargo de Responsabilidad",
+		"disclaimerIntro": "Por favor, lea este descargo de responsabilidad cuidadosamente antes de usar Rename.Tools. Al usar este Servicio, reconoce que entiende y acepta estos términos.",
+		"disclaimerGeneral": "1. Descargo de Responsabilidad General",
+		"disclaimerGeneralDesc": "Rename.Tools es una herramienta gratuita de código abierto diseñada para ayudar a los usuarios a renombrar archivos por lotes de manera eficiente. Esta herramienta se proporciona \"tal cual\", y no hacemos garantías expresas o implícitas con respecto a su integridad, precisión o idoneidad. El uso de esta herramienta es enteramente bajo su propio riesgo.",
+		"disclaimerRisk": "2. Advertencia de Riesgo Operacional",
+		"disclaimerRiskDesc": "El renombrado de archivos por lotes es una operación con riesgos potenciales. Tenga en cuenta: las operaciones de renombrado son típicamente irreversibles y pueden no deshacerse una vez ejecutadas; reglas de renombrado incorrectas pueden causar confusión en los nombres de archivos o pérdida de la organización original de archivos; renombrar ciertos archivos del sistema o archivos de los que dependen los programas puede causar fallas del sistema o de aplicaciones; en algunos sistemas de archivos, cambiar nombres de archivos puede afectar las marcas de tiempo de modificación de archivos.",
+		"disclaimerBackup": "3. Recomendación de Copia de Seguridad de Datos",
+		"disclaimerBackupDesc": "Recomendamos encarecidamente: realizar una copia de seguridad completa de los archivos objetivo antes de ejecutar cualquier operación de renombrado por lotes; usar la función de vista previa proporcionada por esta herramienta para verificar cuidadosamente los resultados esperados; para archivos importantes, primero verificar la corrección de las reglas en un conjunto de archivos de prueba; considerar usar la función \"Exportar Script de Deshacer\" proporcionada por esta herramienta para restaurar nombres de archivos si es necesario.",
+		"disclaimerNoWarranty": "4. Declaración Sin Garantía",
+		"disclaimerNoWarrantyDesc": "En la máxima medida permitida por la ley: esta herramienta no viene con garantías de ningún tipo, ya sean expresas o implícitas; no garantizamos que esta herramienta cumpla con sus requisitos específicos; no garantizamos que el funcionamiento de esta herramienta será ininterrumpido, oportuno, seguro o libre de errores; no garantizamos que los resultados obtenidos usando esta herramienta serán precisos o confiables; no somos responsables de ninguna pérdida de datos, corrupción de archivos, falla del sistema u otros daños.",
+		"disclaimerLiability": "5. Limitación de Responsabilidad",
+		"disclaimerLiabilityDesc": "Bajo ninguna circunstancia los desarrolladores y contribuyentes de Rename.Tools serán responsables de: ningún daño directo, indirecto, incidental, especial, punitivo o consecuente que surja del uso o la incapacidad de usar esta herramienta; ninguna pérdida de ganancias, pérdida de datos o interrupción del negocio; ninguna reclamación de terceros. Estas limitaciones se aplican incluso si hemos sido informados de la posibilidad de tales daños.",
+		"disclaimerOpenSource": "6. Licencia de Código Abierto",
+		"disclaimerOpenSourceDesc": "Rename.Tools es de código abierto bajo la Licencia Pública General Affero de GNU v3.0 (AGPL-3.0). Esto significa: es libre de usar, copiar, modificar y distribuir este software; puede usarlo para fines comerciales o no comerciales; debe retener el aviso de copyright y el aviso de licencia en todas las copias; si modifica y ejecuta el software en un servidor de red, debe proporcionar el código fuente a los usuarios; este software se proporciona \"tal cual\" sin ninguna garantía.",
+		"disclaimerThirdParty": "7. Contenido de Terceros",
+		"disclaimerThirdPartyDesc": "Esta herramienta puede contener o enlazar a contenido, bibliotecas o servicios de terceros. No somos responsables de la precisión, integridad o disponibilidad de ningún contenido de terceros. Al usar servicios de terceros (como la API de TMDb), también debe cumplir con los términos de servicio de esos servicios.",
+		"disclaimerJurisdiction": "8. Jurisdicción",
+		"disclaimerJurisdictionDesc": "Este descargo de responsabilidad se rige por las leyes aplicables. Si alguna parte de esta declaración se considera inválida o inaplicable, las partes restantes permanecerán en vigor.",
+		"disclaimerAcknowledgment": "9. Reconocimiento",
+		"disclaimerAcknowledgmentDesc": "Al usar Rename.Tools, reconoce que: ha leído y entendido este descargo de responsabilidad; acepta estar sujeto a este descargo de responsabilidad; entiende los riesgos de las operaciones de renombrado por lotes; será responsable de su uso de esta herramienta y sus resultados."
+	}
+}
