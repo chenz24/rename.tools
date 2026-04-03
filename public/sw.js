@@ -76,8 +76,9 @@ function isApiOrInternal(url) {
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
-  // Only handle same-origin requests
+  // Only handle same-origin GET requests (Cache API only supports GET)
   if (url.origin !== self.location.origin) return;
+  if (event.request.method !== 'GET') return;
 
   // Skip API and internal Next.js data requests
   if (isApiOrInternal(url)) return;
