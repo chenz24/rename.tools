@@ -33,9 +33,13 @@ export function RegisterServiceWorker() {
 							!hasShownUpdate.current
 						) {
 							hasShownUpdate.current = true;
-							showUpdateToast();
+							showUpdateToast(newWorker);
 						}
 					});
+				});
+
+				navigator.serviceWorker.addEventListener("controllerchange", () => {
+					window.location.reload();
 				});
 
 				return () => clearInterval(interval);
@@ -48,14 +52,14 @@ export function RegisterServiceWorker() {
 	return null;
 }
 
-function showUpdateToast() {
+function showUpdateToast(waitingWorker: ServiceWorker) {
 	toast.info("A new version is available", {
 		description: "Refresh to get the latest features.",
 		duration: Number.POSITIVE_INFINITY,
 		action: {
 			label: "Refresh",
 			onClick: () => {
-				window.location.reload();
+				waitingWorker.postMessage("SKIP_WAITING");
 			},
 		},
 	});

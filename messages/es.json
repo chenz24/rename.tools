@@ -397,6 +397,7 @@
 			"scrapeMedia": "Coincidir series de TV desde TMDb",
 			"loadingMetadata": "Cargando metadatos",
 			"sampleMode": "Modo de Prueba de Muestra",
+			"trySampleMode": "Probar el Modo de Prueba",
 			"sampleGenerate": "Generar Muestras Aleatorias",
 			"sampleHint": "Ingrese nombres de archivo (uno por línea) para probar reglas",
 			"samplePlaceholder": "photo_001.jpg\nIMG_20240101.png\nreport (final).docx",

@@ -397,6 +397,7 @@
 			"scrapeMedia": "Match TV shows from TMDb",
 			"loadingMetadata": "Loading metadata",
 			"sampleMode": "Sample Test Mode",
+			"trySampleMode": "Try Sample Test Mode",
 			"sampleGenerate": "Generate Random Samples",
 			"sampleHint": "Enter file names (one per line) to test rules",
 			"samplePlaceholder": "photo_001.jpg\nIMG_20240101.png\nreport (final).docx",

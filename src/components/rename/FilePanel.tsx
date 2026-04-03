@@ -6,6 +6,7 @@ import {
 	Database,
 	FileUp,
 	Filter,
+	FlaskConical,
 	FolderOpen,
 	Loader2,
 	Trash2,
@@ -320,7 +321,7 @@ export function FilePanel({
 			<div className="border-b bg-muted/20 px-3 py-3 flex items-center gap-2">
 				<h2 className="text-sm font-medium text-foreground">{t("title")}</h2>
 				<div className="ml-auto flex items-center gap-1">
-					{apiSupported ? (
+					{apiSupported && (
 						<>
 							<Tooltip>
 								<TooltipTrigger asChild>
@@ -348,16 +349,22 @@ export function FilePanel({
 								</TooltipContent>
 							</Tooltip>
 						</>
-					) : (
-						<Button
-							size="sm"
-							variant="outline"
-							className="gap-1 text-xs h-7"
-							onClick={() => setSampleMode(!sampleMode)}
-						>
-							{t("sampleMode")}
-						</Button>
 					)}
+					<Tooltip>
+						<TooltipTrigger asChild>
+							<Button
+								size="sm"
+								variant={sampleMode ? "default" : "outline"}
+								className="h-7 w-7 p-0"
+								onClick={() => setSampleMode(!sampleMode)}
+							>
+								<FlaskConical className="h-3.5 w-3.5" />
+							</Button>
+						</TooltipTrigger>
+						<TooltipContent>
+							<p>{t("sampleMode")}</p>
+						</TooltipContent>
+					</Tooltip>
 					{allFiles.length > 0 && onLoadMetadata && (
 						<Tooltip>
 							<TooltipTrigger asChild>
@@ -615,6 +622,14 @@ export function FilePanel({
 									</Button>
 								</div>
 							)}
+							<Button
+								variant="link"
+								size="sm"
+								className="gap-1.5 text-xs text-muted-foreground mt-1"
+								onClick={() => setSampleMode(true)}
+							>
+								<FlaskConical className="h-3.5 w-3.5" /> {t("trySampleMode")}
+							</Button>
 						</div>
 					</div>
 				) : (
