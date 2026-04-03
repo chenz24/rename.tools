@@ -397,6 +397,7 @@
 			"scrapeMedia": "TMDb에서 TV 쇼 매칭",
 			"loadingMetadata": "메타데이터 로드 중",
 			"sampleMode": "샘플 테스트 모드",
+			"trySampleMode": "샘플 테스트 모드 시도",
 			"sampleGenerate": "랜덤 샘플 생성",
 			"sampleHint": "규칙을 테스트하려면 파일 이름을 입력하세요 (한 줄에 하나씩)",
 			"samplePlaceholder": "photo_001.jpg\nIMG_20240101.png\nreport (final).docx",

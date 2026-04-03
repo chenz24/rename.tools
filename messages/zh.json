@@ -397,6 +397,7 @@
 			"scrapeMedia": "从 TMDb 匹配剧集信息",
 			"loadingMetadata": "正在加载元数据",
 			"sampleMode": "示例测试模式",
+			"trySampleMode": "试用示例测试模式",
 			"sampleGenerate": "随机生成示例",
 			"sampleHint": "输入文件名（每行一个）以测试规则",
 			"samplePlaceholder": "photo_001.jpg\nIMG_20240101.png\nreport (final).docx",

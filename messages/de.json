@@ -397,6 +397,7 @@
 			"scrapeMedia": "TV-Serien von TMDb zuordnen",
 			"loadingMetadata": "Metadaten werden geladen",
 			"sampleMode": "Beispiel-Testmodus",
+			"trySampleMode": "Beispiel-Testmodus ausprobieren",
 			"sampleGenerate": "Zufällige Beispiele generieren",
 			"sampleHint": "Geben Sie Dateinamen ein (einen pro Zeile), um Regeln zu testen",
 			"samplePlaceholder": "photo_001.jpg\nIMG_20240101.png\nreport (final).docx",

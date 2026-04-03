@@ -397,6 +397,7 @@
 			"scrapeMedia": "TMDbからTV番組をマッチ",
 			"loadingMetadata": "メタデータ読み込み中",
 			"sampleMode": "サンプルテストモード",
+			"trySampleMode": "サンプルテストモードを試す",
 			"sampleGenerate": "ランダムサンプルを生成",
 			"sampleHint": "ルールをテストするためにファイル名を入力（1行に1つ）",
 			"samplePlaceholder": "photo_001.jpg\nIMG_20240101.png\nreport (final).docx",

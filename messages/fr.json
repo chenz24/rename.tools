@@ -397,6 +397,7 @@
 			"scrapeMedia": "Correspondre les séries TV depuis TMDb",
 			"loadingMetadata": "Chargement des métadonnées",
 			"sampleMode": "Mode Test d'Échantillon",
+			"trySampleMode": "Essayer le Mode Test",
 			"sampleGenerate": "Générer des Échantillons Aléatoires",
 			"sampleHint": "Entrez les noms de fichiers (un par ligne) pour tester les règles",
 			"samplePlaceholder": "photo_001.jpg\nIMG_20240101.png\nreport (final).docx",
