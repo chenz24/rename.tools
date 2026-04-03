@@ -6,11 +6,6 @@ const OFFLINE_URL = '/offline.html';
 
 // Static assets to pre-cache during install
 const PRECACHE_ASSETS = [
-  '/',
-  '/en',
-  '/en/app',
-  '/zh',
-  '/zh/app',
   '/offline.html',
   '/icon-192.png',
   '/icon-512.png',
@@ -25,8 +20,8 @@ self.addEventListener('install', (event) => {
       return cache.addAll(PRECACHE_ASSETS);
     })
   );
-  // Activate immediately without waiting for existing SW to finish
-  self.skipWaiting();
+  // Don't skipWaiting here — let the user trigger the update via the toast
+  // so we avoid serving new SW logic with a stale page.
 });
 
 // Activate: clean up old caches
@@ -127,8 +122,9 @@ async function networkFirstNavigation(request) {
     }
     return response;
   } catch {
-    // Network failed, try cache
-    const cached = await caches.match(request);
+    // Network failed, try dynamic cache only (avoid stale precached HTML)
+    const dynamicCache = await caches.open(DYNAMIC_CACHE);
+    const cached = await dynamicCache.match(request);
     if (cached) return cached;
 
     // Last resort: show offline page
@@ -145,15 +141,13 @@ async function networkFirstNavigation(request) {
 
 // Stale While Revalidate: return cache immediately, update in background
 async function staleWhileRevalidate(request) {
-  const cached = await caches.match(request);
+  const cache = await caches.open(DYNAMIC_CACHE);
+  const cached = await cache.match(request);
 
   const fetchPromise = fetch(request)
     .then((response) => {
       if (response.ok) {
-        const cloned = response.clone();
-        caches.open(DYNAMIC_CACHE).then((cache) => {
-          cache.put(request, cloned);
-        });
+        cache.put(request, response.clone());
       }
       return response;
     })
