@@ -3,6 +3,7 @@ import { headers } from "next/headers";
 import type { ReactNode } from "react";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { RegisterServiceWorker } from "@/components/ServiceWorkerRegistration";
+import { UmamiAnalytics } from "@/components/UmamiAnalytics";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -40,6 +41,7 @@ export default async function RootLayout({
 				className={`${geistSans.variable} ${geistMono.variable} ${notoSansSC.variable} antialiased`}
 			>
 				<GoogleAnalytics />
+				<UmamiAnalytics />
 				<RegisterServiceWorker />
 				{children}
 			</body>
