@@ -46,6 +46,7 @@ import type { PreviewResult } from "@/lib/rename/types";
 
 interface Props {
 	preview: PreviewResult[];
+	isPreviewComputing?: boolean;
 	applyAutoFix?: () => void;
 	resetAutoFix?: () => void;
 	hasAutoFix?: boolean;
@@ -254,9 +255,18 @@ const PreviewFileItem = React.memo(function PreviewFileItem({
 
 				{/* Conflict Badge */}
 				{item.conflict && (
-					<Badge variant="destructive" className="text-[10px] py-0 shrink-0">
-						{item.error || t("conflicts")}
-					</Badge>
+					<Tooltip>
+						<TooltipTrigger asChild>
+							<Badge variant="destructive" className="text-[10px] py-0 shrink-0">
+								{item.error || t("conflicts")}
+							</Badge>
+						</TooltipTrigger>
+						{item.errorDetail && (
+							<TooltipContent side="left" className="max-w-xs break-words">
+								<p className="text-xs">{item.errorDetail}</p>
+							</TooltipContent>
+						)}
+					</Tooltip>
 				)}
 			</div>
 		</div>
@@ -350,6 +360,7 @@ function downloadBlob(content: string, filename: string, type: string) {
 
 export function PreviewPanel({
 	preview,
+	isPreviewComputing = false,
 	applyAutoFix,
 	resetAutoFix,
 	hasAutoFix,
@@ -569,7 +580,7 @@ export function PreviewPanel({
 								variant="ghost"
 								size="sm"
 								className="gap-1 text-xs"
-								disabled={affectedCount === 0}
+								disabled={affectedCount === 0 || isPreviewComputing}
 							>
 								<Download className="h-3.5 w-3.5" /> {tExecute("exportScript")}
 							</Button>
@@ -593,7 +604,7 @@ export function PreviewPanel({
 								variant="ghost"
 								size="sm"
 								className="gap-1 text-xs"
-								disabled={affectedCount === 0}
+								disabled={affectedCount === 0 || isPreviewComputing}
 							>
 								<FileText className="h-3.5 w-3.5" /> {tExecute("exportPlan")}
 							</Button>
@@ -609,7 +620,7 @@ export function PreviewPanel({
 							<button
 								type="button"
 								className="inline-flex items-center gap-1.5 rounded-md brand-gradient px-4 py-2 text-sm font-medium text-white shadow-sm transition-all hover:shadow-lg disabled:opacity-50 disabled:pointer-events-none"
-								disabled={affectedCount === 0 || hasConflicts || isExecuting}
+								disabled={affectedCount === 0 || hasConflicts || isExecuting || isPreviewComputing}
 							>
 								<Play className="h-3.5 w-3.5" />
 								{tExecute("execute")} ({affectedCount})

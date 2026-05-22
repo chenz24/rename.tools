@@ -1,6 +1,11 @@
 import { create } from "zustand";
 import type { FileMetadata, MetadataLoadState } from "@/lib/file-metadata/types";
-import { autoFixConflicts, computePreview } from "@/lib/rename/rules";
+import {
+	autoFixConflicts,
+	computePreview,
+	computePreviewAsync,
+	hasEnabledCustomJsRule,
+} from "@/lib/rename/rules";
 import type {
 	ExtensionScope,
 	FileEntry,
@@ -261,6 +266,7 @@ interface RenameState {
 	// Derived (cached)
 	filteredFiles: FileEntry[];
 	preview: PreviewResult[];
+	isPreviewComputing: boolean;
 	hasMetadata: boolean;
 
 	// Preview override (auto-fix)
@@ -343,7 +349,9 @@ function recomputeDerived(
 	const basePreview = derivePreview(filteredFiles, state.rules, state.extensionScope);
 	const preview = state._previewOverride || basePreview;
 	const hasMetadata = deriveHasMetadata(state.files);
-	return { filteredFiles, _basePreview: basePreview, preview, hasMetadata };
+	const isPreviewComputing =
+		hasEnabledCustomJsRule(state.rules) && filteredFiles.some((f) => f.selected);
+	return { filteredFiles, _basePreview: basePreview, preview, hasMetadata, isPreviewComputing };
 }
 
 // Batch UI update interval for execute / undo / redo
@@ -354,545 +362,612 @@ let _activationResolver: (() => void) | null = null;
 
 // ── Zustand store ──
 
-export const useRenameStore = create<RenameState>()((set, get) => ({
-	// ── Initial state ──
-	files: [],
-	sortMode: "import",
-	filter: { conditions: [], logic: "AND" },
+export const useRenameStore = create<RenameState>()((set, get) => {
+	let previewGeneration = 0;
+	let previewTimer: ReturnType<typeof setTimeout> | null = null;
 
-	filteredFiles: [],
-	preview: [],
-	hasMetadata: false,
+	const queueSandboxedPreview = () => {
+		const snapshot = get();
+		const needsSandbox =
+			hasEnabledCustomJsRule(snapshot.rules) && snapshot.filteredFiles.some((f) => f.selected);
+		const generation = ++previewGeneration;
 
-	_previewOverride: null,
-	_basePreview: [],
-	hasAutoFix: false,
-
-	rules: [],
-	extensionScope: "name",
-
-	executionLog: [],
-	executionProgress: null,
-	isExecuting: false,
-	_abortExecution: false,
-	needsUserActivation: false,
-
-	undoStack: [],
-	redoStack: [],
-	canUndo: false,
-	canRedo: false,
-
-	// ── File actions ──
-
-	addFiles: async (names, handles?, relativePaths?) => {
-		try {
-			const newEntries = await Promise.all(
-				names.map((n, i) => parseFileEntry(n, handles?.[i], relativePaths?.[i])),
-			);
-			set((state) => {
-				const existingKeys = new Set(state.files.map((f) => f.relativePath || f.name));
-				const uniqueEntries = newEntries.filter((entry) => {
-					const key = entry.relativePath || entry.name;
-					if (existingKeys.has(key)) return false;
-					existingKeys.add(key);
-					return true;
-				});
-				const files = [...state.files, ...uniqueEntries];
-				return { files, ...recomputeDerived({ ...state, files }) };
-			});
-		} catch (error) {
-			console.error("Failed to add files:", error);
+		if (previewTimer) {
+			clearTimeout(previewTimer);
+			previewTimer = null;
 		}
-	},
 
-	clearFiles: () =>
-		set((state) => {
-			const files: FileEntry[] = [];
-			return { files, ...recomputeDerived({ ...state, files }) };
-		}),
+		if (!needsSandbox) {
+			set({ isPreviewComputing: false });
+			return;
+		}
 
-	toggleFileSelection: (id) =>
-		set((state) => {
-			const files = state.files.map((f) => (f.id === id ? { ...f, selected: !f.selected } : f));
-			return { files, ...recomputeDerived({ ...state, files }) };
-		}),
+		set({ isPreviewComputing: true });
 
-	selectAll: (selected, filteredIds?) =>
-		set((state) => {
-			const files = state.files.map((f) => {
-				if (filteredIds && !filteredIds.includes(f.id)) return f;
-				return { ...f, selected };
-			});
-			return { files, ...recomputeDerived({ ...state, files }) };
-		}),
+		previewTimer = setTimeout(() => {
+			previewTimer = null;
+			if (generation !== previewGeneration) return;
 
-	sortFiles: (mode) =>
-		set((state) => {
-			const files = sortFileEntries(state.files, mode);
-			return { files, sortMode: mode, ...recomputeDerived({ ...state, files }) };
-		}),
+			const latest = get();
+			const files = latest.filteredFiles.map((file) => ({ ...file }));
+			const rules = JSON.parse(JSON.stringify(latest.rules)) as RenameRule[];
+			const { extensionScope } = latest;
 
-	// ── Rule actions ──
-
-	addRule: (type) =>
-		set((state) => {
-			const rule: RenameRule = { id: genId(), enabled: true, ruleConfig: getDefaultConfig(type) };
-			const rules = [...state.rules, rule];
-			return {
-				rules,
-				_previewOverride: null,
-				hasAutoFix: false,
-				...recomputeDerived({ ...state, rules, _previewOverride: null }),
-			};
-		}),
-
-	addRulesFromTemplate: (configs) =>
-		set((state) => {
-			const newRules: RenameRule[] = configs.map((rc) => ({
-				id: genId(),
-				enabled: true,
-				ruleConfig: rc,
-			}));
-			const rules = [...state.rules, ...newRules];
-			return {
-				rules,
-				_previewOverride: null,
-				hasAutoFix: false,
-				...recomputeDerived({ ...state, rules, _previewOverride: null }),
-			};
-		}),
-
-	updateRule: (id, updates) =>
-		set((state) => {
-			const rules = state.rules.map((r) => (r.id === id ? { ...r, ...updates } : r));
-			return {
-				rules,
-				_previewOverride: null,
-				hasAutoFix: false,
-				...recomputeDerived({ ...state, rules, _previewOverride: null }),
-			};
-		}),
-
-	removeRule: (id) =>
-		set((state) => {
-			const rules = state.rules.filter((r) => r.id !== id);
-			return {
-				rules,
-				_previewOverride: null,
-				hasAutoFix: false,
-				...recomputeDerived({ ...state, rules, _previewOverride: null }),
-			};
-		}),
-
-	reorderRules: (newOrder) =>
-		set((state) => {
-			const rules = newOrder;
-			return {
-				rules,
-				_previewOverride: null,
-				hasAutoFix: false,
-				...recomputeDerived({ ...state, rules, _previewOverride: null }),
-			};
-		}),
-
-	cloneRule: (id) =>
-		set((state) => {
-			const idx = state.rules.findIndex((r) => r.id === id);
-			if (idx === -1) return state;
-			const source = state.rules[idx];
-			const cloned: RenameRule = {
-				id: genId(),
-				enabled: source.enabled,
-				ruleConfig: JSON.parse(JSON.stringify(source.ruleConfig)),
-			};
-			const rules = [...state.rules];
-			rules.splice(idx + 1, 0, cloned);
-			return {
-				rules,
-				_previewOverride: null,
-				hasAutoFix: false,
-				...recomputeDerived({ ...state, rules, _previewOverride: null }),
-			};
-		}),
-
-	clearRules: () =>
-		set((state) => {
-			const rules: RenameRule[] = [];
-			return {
-				rules,
-				_previewOverride: null,
-				hasAutoFix: false,
-				...recomputeDerived({ ...state, rules, _previewOverride: null }),
-			};
-		}),
-
-	setExtensionScope: (scope) =>
-		set((state) => {
-			return {
-				extensionScope: scope,
-				_previewOverride: null,
-				hasAutoFix: false,
-				...recomputeDerived({ ...state, extensionScope: scope, _previewOverride: null }),
-			};
-		}),
-
-	// ── Metadata ──
-
-	updateFileMetadata: (id, metadata, state_arg, _error?) =>
-		set((state) => {
-			const files = state.files.map((f) =>
-				f.id === id ? { ...f, metadata: metadata ?? f.metadata, metadataState: state_arg } : f,
-			);
-			return { files, ...recomputeDerived({ ...state, files }) };
-		}),
-
-	// ── Filter actions ──
-
-	addFilterCondition: () =>
-		set((state) => {
-			const filter: FileFilter = {
-				...state.filter,
-				conditions: [
-					...state.filter.conditions,
-					{
-						id: genFilterId(),
-						field: "name",
-						operator: "contains",
-						value: "",
-						caseSensitive: false,
-					},
-				],
-			};
-			return { filter, ...recomputeDerived({ ...state, filter }) };
-		}),
-
-	updateFilterCondition: (id, updates) =>
-		set((state) => {
-			const filter: FileFilter = {
-				...state.filter,
-				conditions: state.filter.conditions.map((c) => (c.id === id ? { ...c, ...updates } : c)),
-			};
-			return { filter, ...recomputeDerived({ ...state, filter }) };
-		}),
-
-	removeFilterCondition: (id) =>
-		set((state) => {
-			const filter: FileFilter = {
-				...state.filter,
-				conditions: state.filter.conditions.filter((c) => c.id !== id),
-			};
-			return { filter, ...recomputeDerived({ ...state, filter }) };
-		}),
-
-	setFilterLogic: (logic) =>
-		set((state) => {
-			const filter: FileFilter = { ...state.filter, logic };
-			return { filter, ...recomputeDerived({ ...state, filter }) };
-		}),
-
-	clearFilter: () =>
-		set((state) => {
-			const filter: FileFilter = { conditions: [], logic: "AND" };
-			return { filter, ...recomputeDerived({ ...state, filter }) };
-		}),
-
-	// ── Preview ──
-
-	applyAutoFix: () =>
-		set((state) => {
-			const fixed = autoFixConflicts(state._basePreview, state.extensionScope);
-			return { _previewOverride: fixed, preview: fixed, hasAutoFix: true };
-		}),
-
-	resetAutoFix: () =>
-		set((state) => ({
-			_previewOverride: null,
-			preview: state._basePreview,
-			hasAutoFix: false,
-		})),
-
-	// ── Execution (optimized: Map index + batched UI updates) ──
-
-	execute: async () => {
-		const { preview, filteredFiles } = get();
-		const toRename = preview.filter((r) => r.hasChange);
-		if (toRename.length === 0) return;
-
-		set({
-			isExecuting: true,
-			executionLog: [],
-			executionProgress: { current: 0, total: toRename.length },
-			_abortExecution: false,
-			needsUserActivation: false,
-		});
-
-		const log: LogEntry[] = [];
-		const undoableEntries: UndoableRename[] = [];
-
-		// 预建 Map 索引，避免 O(n²) 查找
-		const fileMap = new Map(filteredFiles.map((f) => [f.id, f]));
-
-		for (let i = 0; i < toRename.length; i++) {
-			if (get()._abortExecution) break;
-			const result = toRename[i];
-			const file = fileMap.get(result.fileId);
-
-			if (!file?.handle) {
-				log.push({
-					fileId: result.fileId,
-					original: result.original,
-					newName: result.newName,
-					status: "skipped",
-					reason: "No file handle",
+			void computePreviewAsync(files, rules, extensionScope)
+				.then((basePreview) => {
+					if (generation !== previewGeneration) return;
+					set((state) => {
+						const previewOverride = state.hasAutoFix
+							? autoFixConflicts(basePreview, state.extensionScope)
+							: null;
+						return {
+							_basePreview: basePreview,
+							_previewOverride: previewOverride,
+							preview: previewOverride ?? basePreview,
+							isPreviewComputing: false,
+						};
+					});
+				})
+				.catch(() => {
+					if (generation === previewGeneration) {
+						set({ isPreviewComputing: false });
+					}
 				});
-			} else {
-				try {
-					await (file.handle as any).move(result.newName);
+		}, 50);
+	};
+
+	type StoreUpdate =
+		| RenameState
+		| Partial<RenameState>
+		| ((state: RenameState) => RenameState | Partial<RenameState>);
+
+	const setAndQueuePreview = (updater: StoreUpdate) => {
+		set(updater);
+		queueSandboxedPreview();
+	};
+
+	return {
+		// ── Initial state ──
+		files: [],
+		sortMode: "import",
+		filter: { conditions: [], logic: "AND" },
+
+		filteredFiles: [],
+		preview: [],
+		isPreviewComputing: false,
+		hasMetadata: false,
+
+		_previewOverride: null,
+		_basePreview: [],
+		hasAutoFix: false,
+
+		rules: [],
+		extensionScope: "name",
+
+		executionLog: [],
+		executionProgress: null,
+		isExecuting: false,
+		_abortExecution: false,
+		needsUserActivation: false,
+
+		undoStack: [],
+		redoStack: [],
+		canUndo: false,
+		canRedo: false,
+
+		// ── File actions ──
+
+		addFiles: async (names, handles?, relativePaths?) => {
+			try {
+				const newEntries = await Promise.all(
+					names.map((n, i) => parseFileEntry(n, handles?.[i], relativePaths?.[i])),
+				);
+				setAndQueuePreview((state) => {
+					const existingKeys = new Set(state.files.map((f) => f.relativePath || f.name));
+					const uniqueEntries = newEntries.filter((entry) => {
+						const key = entry.relativePath || entry.name;
+						if (existingKeys.has(key)) return false;
+						existingKeys.add(key);
+						return true;
+					});
+					const files = [...state.files, ...uniqueEntries];
+					return { files, ...recomputeDerived({ ...state, files }) };
+				});
+			} catch (error) {
+				console.error("Failed to add files:", error);
+			}
+		},
+
+		clearFiles: () =>
+			setAndQueuePreview((state) => {
+				const files: FileEntry[] = [];
+				return { files, ...recomputeDerived({ ...state, files }) };
+			}),
+
+		toggleFileSelection: (id) =>
+			setAndQueuePreview((state) => {
+				const files = state.files.map((f) => (f.id === id ? { ...f, selected: !f.selected } : f));
+				return { files, ...recomputeDerived({ ...state, files }) };
+			}),
+
+		selectAll: (selected, filteredIds?) =>
+			setAndQueuePreview((state) => {
+				const files = state.files.map((f) => {
+					if (filteredIds && !filteredIds.includes(f.id)) return f;
+					return { ...f, selected };
+				});
+				return { files, ...recomputeDerived({ ...state, files }) };
+			}),
+
+		sortFiles: (mode) =>
+			setAndQueuePreview((state) => {
+				const files = sortFileEntries(state.files, mode);
+				return { files, sortMode: mode, ...recomputeDerived({ ...state, files }) };
+			}),
+
+		// ── Rule actions ──
+
+		addRule: (type) =>
+			setAndQueuePreview((state) => {
+				const rule: RenameRule = { id: genId(), enabled: true, ruleConfig: getDefaultConfig(type) };
+				const rules = [...state.rules, rule];
+				return {
+					rules,
+					_previewOverride: null,
+					hasAutoFix: false,
+					...recomputeDerived({ ...state, rules, _previewOverride: null }),
+				};
+			}),
+
+		addRulesFromTemplate: (configs) =>
+			setAndQueuePreview((state) => {
+				const newRules: RenameRule[] = configs.map((rc) => ({
+					id: genId(),
+					enabled: true,
+					ruleConfig: rc,
+				}));
+				const rules = [...state.rules, ...newRules];
+				return {
+					rules,
+					_previewOverride: null,
+					hasAutoFix: false,
+					...recomputeDerived({ ...state, rules, _previewOverride: null }),
+				};
+			}),
+
+		updateRule: (id, updates) =>
+			setAndQueuePreview((state) => {
+				const rules = state.rules.map((r) => (r.id === id ? { ...r, ...updates } : r));
+				return {
+					rules,
+					_previewOverride: null,
+					hasAutoFix: false,
+					...recomputeDerived({ ...state, rules, _previewOverride: null }),
+				};
+			}),
+
+		removeRule: (id) =>
+			setAndQueuePreview((state) => {
+				const rules = state.rules.filter((r) => r.id !== id);
+				return {
+					rules,
+					_previewOverride: null,
+					hasAutoFix: false,
+					...recomputeDerived({ ...state, rules, _previewOverride: null }),
+				};
+			}),
+
+		reorderRules: (newOrder) =>
+			setAndQueuePreview((state) => {
+				const rules = newOrder;
+				return {
+					rules,
+					_previewOverride: null,
+					hasAutoFix: false,
+					...recomputeDerived({ ...state, rules, _previewOverride: null }),
+				};
+			}),
+
+		cloneRule: (id) =>
+			setAndQueuePreview((state) => {
+				const idx = state.rules.findIndex((r) => r.id === id);
+				if (idx === -1) return state;
+				const source = state.rules[idx];
+				const cloned: RenameRule = {
+					id: genId(),
+					enabled: source.enabled,
+					ruleConfig: JSON.parse(JSON.stringify(source.ruleConfig)),
+				};
+				const rules = [...state.rules];
+				rules.splice(idx + 1, 0, cloned);
+				return {
+					rules,
+					_previewOverride: null,
+					hasAutoFix: false,
+					...recomputeDerived({ ...state, rules, _previewOverride: null }),
+				};
+			}),
+
+		clearRules: () =>
+			setAndQueuePreview((state) => {
+				const rules: RenameRule[] = [];
+				return {
+					rules,
+					_previewOverride: null,
+					hasAutoFix: false,
+					...recomputeDerived({ ...state, rules, _previewOverride: null }),
+				};
+			}),
+
+		setExtensionScope: (scope) =>
+			setAndQueuePreview((state) => {
+				return {
+					extensionScope: scope,
+					_previewOverride: null,
+					hasAutoFix: false,
+					...recomputeDerived({ ...state, extensionScope: scope, _previewOverride: null }),
+				};
+			}),
+
+		// ── Metadata ──
+
+		updateFileMetadata: (id, metadata, state_arg, _error?) =>
+			setAndQueuePreview((state) => {
+				const files = state.files.map((f) =>
+					f.id === id ? { ...f, metadata: metadata ?? f.metadata, metadataState: state_arg } : f,
+				);
+				return { files, ...recomputeDerived({ ...state, files }) };
+			}),
+
+		// ── Filter actions ──
+
+		addFilterCondition: () =>
+			setAndQueuePreview((state) => {
+				const filter: FileFilter = {
+					...state.filter,
+					conditions: [
+						...state.filter.conditions,
+						{
+							id: genFilterId(),
+							field: "name",
+							operator: "contains",
+							value: "",
+							caseSensitive: false,
+						},
+					],
+				};
+				return { filter, ...recomputeDerived({ ...state, filter }) };
+			}),
+
+		updateFilterCondition: (id, updates) =>
+			setAndQueuePreview((state) => {
+				const filter: FileFilter = {
+					...state.filter,
+					conditions: state.filter.conditions.map((c) => (c.id === id ? { ...c, ...updates } : c)),
+				};
+				return { filter, ...recomputeDerived({ ...state, filter }) };
+			}),
+
+		removeFilterCondition: (id) =>
+			setAndQueuePreview((state) => {
+				const filter: FileFilter = {
+					...state.filter,
+					conditions: state.filter.conditions.filter((c) => c.id !== id),
+				};
+				return { filter, ...recomputeDerived({ ...state, filter }) };
+			}),
+
+		setFilterLogic: (logic) =>
+			setAndQueuePreview((state) => {
+				const filter: FileFilter = { ...state.filter, logic };
+				return { filter, ...recomputeDerived({ ...state, filter }) };
+			}),
+
+		clearFilter: () =>
+			setAndQueuePreview((state) => {
+				const filter: FileFilter = { conditions: [], logic: "AND" };
+				return { filter, ...recomputeDerived({ ...state, filter }) };
+			}),
+
+		// ── Preview ──
+
+		applyAutoFix: () =>
+			set((state) => {
+				const fixed = autoFixConflicts(state._basePreview, state.extensionScope);
+				return { _previewOverride: fixed, preview: fixed, hasAutoFix: true };
+			}),
+
+		resetAutoFix: () =>
+			set((state) => ({
+				_previewOverride: null,
+				preview: state._basePreview,
+				hasAutoFix: false,
+			})),
+
+		// ── Execution (optimized: Map index + batched UI updates) ──
+
+		execute: async () => {
+			const { preview, filteredFiles, isPreviewComputing } = get();
+			if (isPreviewComputing) return;
+			const toRename = preview.filter((r) => r.hasChange);
+			if (toRename.length === 0) return;
+
+			set({
+				isExecuting: true,
+				executionLog: [],
+				executionProgress: { current: 0, total: toRename.length },
+				_abortExecution: false,
+				needsUserActivation: false,
+			});
+
+			const log: LogEntry[] = [];
+			const undoableEntries: UndoableRename[] = [];
+
+			// 预建 Map 索引，避免 O(n²) 查找
+			const fileMap = new Map(filteredFiles.map((f) => [f.id, f]));
+
+			for (let i = 0; i < toRename.length; i++) {
+				if (get()._abortExecution) break;
+				const result = toRename[i];
+				const file = fileMap.get(result.fileId);
+
+				if (!file?.handle) {
 					log.push({
 						fileId: result.fileId,
 						original: result.original,
 						newName: result.newName,
+						status: "skipped",
+						reason: "No file handle",
+					});
+				} else {
+					try {
+						await (file.handle as any).move(result.newName);
+						log.push({
+							fileId: result.fileId,
+							original: result.original,
+							newName: result.newName,
+							status: "success",
+						});
+						undoableEntries.push({
+							fileId: result.fileId,
+							original: result.original,
+							newName: result.newName,
+							handle: file.handle,
+						});
+					} catch (err: any) {
+						const msg = err?.message || "Unknown error";
+						// 检测浏览器 transient user activation 过期
+						if (msg.includes("not allowed by the user agent")) {
+							set({
+								needsUserActivation: true,
+								executionLog: [...log],
+								executionProgress: { current: i, total: toRename.length },
+							});
+							// 暂停，等待用户点击刷新激活状态
+							await new Promise<void>((resolve) => {
+								_activationResolver = resolve;
+							});
+							// 用户已点击，重试当前文件
+							i--;
+							continue;
+						}
+						log.push({
+							fileId: result.fileId,
+							original: result.original,
+							newName: result.newName,
+							status: "failed",
+							reason: msg,
+						});
+					}
+				}
+
+				// 批量更新 UI：每 N 个文件或最后一个才更新
+				if ((i + 1) % EXEC_UI_UPDATE_INTERVAL === 0 || i === toRename.length - 1) {
+					set({
+						executionLog: [...log],
+						executionProgress: { current: i + 1, total: toRename.length },
+					});
+				}
+			}
+
+			// 保存可撤销批次
+			set((state) => {
+				const newUndoStack =
+					undoableEntries.length > 0
+						? [...state.undoStack, { timestamp: Date.now(), entries: undoableEntries }]
+						: state.undoStack;
+				const newRedoStack = undoableEntries.length > 0 ? [] : state.redoStack;
+				return {
+					isExecuting: false,
+					undoStack: newUndoStack,
+					redoStack: newRedoStack,
+					canUndo: newUndoStack.length > 0,
+					canRedo: newRedoStack.length > 0,
+				};
+			});
+		},
+
+		clearExecutionLog: () =>
+			set({ executionLog: [], executionProgress: null, needsUserActivation: false }),
+
+		confirmUserActivation: () => {
+			set({ needsUserActivation: false });
+			if (_activationResolver) {
+				_activationResolver();
+				_activationResolver = null;
+			}
+		},
+
+		// Undo: 撤销上一次批量重命名
+		undo: async () => {
+			const { undoStack, isExecuting } = get();
+			if (undoStack.length === 0 || isExecuting) return;
+
+			const batch = undoStack[undoStack.length - 1];
+			set({
+				isExecuting: true,
+				executionLog: [],
+				executionProgress: { current: 0, total: batch.entries.length },
+				needsUserActivation: false,
+			});
+
+			const log: LogEntry[] = [];
+			const redoEntries: UndoableRename[] = [];
+			const failedEntries: UndoableRename[] = [];
+
+			// 反向执行：newName -> original
+			for (let i = 0; i < batch.entries.length; i++) {
+				const entry = batch.entries[i];
+				try {
+					await (entry.handle as any).move(entry.original);
+					log.push({
+						fileId: entry.fileId,
+						original: entry.newName,
+						newName: entry.original,
 						status: "success",
 					});
-					undoableEntries.push({
-						fileId: result.fileId,
-						original: result.original,
-						newName: result.newName,
-						handle: file.handle,
-					});
+					redoEntries.push(entry);
 				} catch (err: any) {
 					const msg = err?.message || "Unknown error";
-					// 检测浏览器 transient user activation 过期
 					if (msg.includes("not allowed by the user agent")) {
 						set({
 							needsUserActivation: true,
 							executionLog: [...log],
-							executionProgress: { current: i, total: toRename.length },
+							executionProgress: { current: i, total: batch.entries.length },
 						});
-						// 暂停，等待用户点击刷新激活状态
 						await new Promise<void>((resolve) => {
 							_activationResolver = resolve;
 						});
-						// 用户已点击，重试当前文件
 						i--;
 						continue;
 					}
+					failedEntries.push(entry);
 					log.push({
-						fileId: result.fileId,
-						original: result.original,
-						newName: result.newName,
+						fileId: entry.fileId,
+						original: entry.newName,
+						newName: entry.original,
 						status: "failed",
 						reason: msg,
 					});
 				}
-			}
 
-			// 批量更新 UI：每 N 个文件或最后一个才更新
-			if ((i + 1) % EXEC_UI_UPDATE_INTERVAL === 0 || i === toRename.length - 1) {
-				set({
-					executionLog: [...log],
-					executionProgress: { current: i + 1, total: toRename.length },
-				});
-			}
-		}
-
-		// 保存可撤销批次
-		set((state) => {
-			const newUndoStack =
-				undoableEntries.length > 0
-					? [...state.undoStack, { timestamp: Date.now(), entries: undoableEntries }]
-					: state.undoStack;
-			const newRedoStack = undoableEntries.length > 0 ? [] : state.redoStack;
-			return {
-				isExecuting: false,
-				undoStack: newUndoStack,
-				redoStack: newRedoStack,
-				canUndo: newUndoStack.length > 0,
-				canRedo: newRedoStack.length > 0,
-			};
-		});
-	},
-
-	clearExecutionLog: () =>
-		set({ executionLog: [], executionProgress: null, needsUserActivation: false }),
-
-	confirmUserActivation: () => {
-		set({ needsUserActivation: false });
-		if (_activationResolver) {
-			_activationResolver();
-			_activationResolver = null;
-		}
-	},
-
-	// Undo: 撤销上一次批量重命名
-	undo: async () => {
-		const { undoStack, isExecuting } = get();
-		if (undoStack.length === 0 || isExecuting) return;
-
-		const batch = undoStack[undoStack.length - 1];
-		set({
-			isExecuting: true,
-			executionLog: [],
-			executionProgress: { current: 0, total: batch.entries.length },
-			needsUserActivation: false,
-		});
-
-		const log: LogEntry[] = [];
-		const redoEntries: UndoableRename[] = [];
-		const failedEntries: UndoableRename[] = [];
-
-		// 反向执行：newName -> original
-		for (let i = 0; i < batch.entries.length; i++) {
-			const entry = batch.entries[i];
-			try {
-				await (entry.handle as any).move(entry.original);
-				log.push({
-					fileId: entry.fileId,
-					original: entry.newName,
-					newName: entry.original,
-					status: "success",
-				});
-				redoEntries.push(entry);
-			} catch (err: any) {
-				const msg = err?.message || "Unknown error";
-				if (msg.includes("not allowed by the user agent")) {
+				if ((i + 1) % EXEC_UI_UPDATE_INTERVAL === 0 || i === batch.entries.length - 1) {
 					set({
-						needsUserActivation: true,
 						executionLog: [...log],
-						executionProgress: { current: i, total: batch.entries.length },
+						executionProgress: { current: i + 1, total: batch.entries.length },
 					});
-					await new Promise<void>((resolve) => {
-						_activationResolver = resolve;
-					});
-					i--;
-					continue;
 				}
-				failedEntries.push(entry);
-				log.push({
-					fileId: entry.fileId,
-					original: entry.newName,
-					newName: entry.original,
-					status: "failed",
-					reason: msg,
-				});
 			}
 
-			if ((i + 1) % EXEC_UI_UPDATE_INTERVAL === 0 || i === batch.entries.length - 1) {
-				set({
-					executionLog: [...log],
-					executionProgress: { current: i + 1, total: batch.entries.length },
-				});
-			}
-		}
+			// 拆分批次：成功的移到 redoStack，失败的留在 undoStack 供重试
+			set((state) => {
+				// 移除原批次
+				let newUndoStack = state.undoStack.slice(0, -1);
+				let newRedoStack = state.redoStack;
 
-		// 拆分批次：成功的移到 redoStack，失败的留在 undoStack 供重试
-		set((state) => {
-			// 移除原批次
-			let newUndoStack = state.undoStack.slice(0, -1);
-			let newRedoStack = state.redoStack;
+				// 失败的条目留在 undoStack 供重试
+				if (failedEntries.length > 0) {
+					newUndoStack = [...newUndoStack, { timestamp: batch.timestamp, entries: failedEntries }];
+				}
+				// 成功的条目移到 redoStack
+				if (redoEntries.length > 0) {
+					newRedoStack = [...state.redoStack, { timestamp: Date.now(), entries: redoEntries }];
+				}
 
-			// 失败的条目留在 undoStack 供重试
-			if (failedEntries.length > 0) {
-				newUndoStack = [...newUndoStack, { timestamp: batch.timestamp, entries: failedEntries }];
-			}
-			// 成功的条目移到 redoStack
-			if (redoEntries.length > 0) {
-				newRedoStack = [...state.redoStack, { timestamp: Date.now(), entries: redoEntries }];
-			}
+				return {
+					isExecuting: false,
+					undoStack: newUndoStack,
+					redoStack: newRedoStack,
+					canUndo: newUndoStack.length > 0,
+					canRedo: newRedoStack.length > 0,
+				};
+			});
+		},
 
-			return {
-				isExecuting: false,
-				undoStack: newUndoStack,
-				redoStack: newRedoStack,
-				canUndo: newUndoStack.length > 0,
-				canRedo: newRedoStack.length > 0,
-			};
-		});
-	},
+		// Redo: 重做上一次撤销的操作
+		redo: async () => {
+			const { redoStack, isExecuting } = get();
+			if (redoStack.length === 0 || isExecuting) return;
 
-	// Redo: 重做上一次撤销的操作
-	redo: async () => {
-		const { redoStack, isExecuting } = get();
-		if (redoStack.length === 0 || isExecuting) return;
+			const batch = redoStack[redoStack.length - 1];
+			set({
+				isExecuting: true,
+				executionLog: [],
+				executionProgress: { current: 0, total: batch.entries.length },
+				needsUserActivation: false,
+			});
 
-		const batch = redoStack[redoStack.length - 1];
-		set({
-			isExecuting: true,
-			executionLog: [],
-			executionProgress: { current: 0, total: batch.entries.length },
-			needsUserActivation: false,
-		});
+			const log: LogEntry[] = [];
+			const undoEntries: UndoableRename[] = [];
+			const failedEntries: UndoableRename[] = [];
 
-		const log: LogEntry[] = [];
-		const undoEntries: UndoableRename[] = [];
-		const failedEntries: UndoableRename[] = [];
+			// 正向执行：original -> newName
+			for (let i = 0; i < batch.entries.length; i++) {
+				const entry = batch.entries[i];
+				try {
+					await (entry.handle as any).move(entry.newName);
+					log.push({
+						fileId: entry.fileId,
+						original: entry.original,
+						newName: entry.newName,
+						status: "success",
+					});
+					undoEntries.push(entry);
+				} catch (err: any) {
+					const msg = err?.message || "Unknown error";
+					if (msg.includes("not allowed by the user agent")) {
+						set({
+							needsUserActivation: true,
+							executionLog: [...log],
+							executionProgress: { current: i, total: batch.entries.length },
+						});
+						await new Promise<void>((resolve) => {
+							_activationResolver = resolve;
+						});
+						i--;
+						continue;
+					}
+					failedEntries.push(entry);
+					log.push({
+						fileId: entry.fileId,
+						original: entry.original,
+						newName: entry.newName,
+						status: "failed",
+						reason: msg,
+					});
+				}
 
-		// 正向执行：original -> newName
-		for (let i = 0; i < batch.entries.length; i++) {
-			const entry = batch.entries[i];
-			try {
-				await (entry.handle as any).move(entry.newName);
-				log.push({
-					fileId: entry.fileId,
-					original: entry.original,
-					newName: entry.newName,
-					status: "success",
-				});
-				undoEntries.push(entry);
-			} catch (err: any) {
-				const msg = err?.message || "Unknown error";
-				if (msg.includes("not allowed by the user agent")) {
+				if ((i + 1) % EXEC_UI_UPDATE_INTERVAL === 0 || i === batch.entries.length - 1) {
 					set({
-						needsUserActivation: true,
 						executionLog: [...log],
-						executionProgress: { current: i, total: batch.entries.length },
+						executionProgress: { current: i + 1, total: batch.entries.length },
 					});
-					await new Promise<void>((resolve) => {
-						_activationResolver = resolve;
-					});
-					i--;
-					continue;
 				}
-				failedEntries.push(entry);
-				log.push({
-					fileId: entry.fileId,
-					original: entry.original,
-					newName: entry.newName,
-					status: "failed",
-					reason: msg,
-				});
 			}
 
-			if ((i + 1) % EXEC_UI_UPDATE_INTERVAL === 0 || i === batch.entries.length - 1) {
-				set({
-					executionLog: [...log],
-					executionProgress: { current: i + 1, total: batch.entries.length },
-				});
-			}
-		}
+			// 拆分批次：成功的移到 undoStack，失败的留在 redoStack 供重试
+			set((state) => {
+				// 移除原批次
+				let newRedoStack = state.redoStack.slice(0, -1);
+				let newUndoStack = state.undoStack;
 
-		// 拆分批次：成功的移到 undoStack，失败的留在 redoStack 供重试
-		set((state) => {
-			// 移除原批次
-			let newRedoStack = state.redoStack.slice(0, -1);
-			let newUndoStack = state.undoStack;
+				// 失败的条目留在 redoStack 供重试
+				if (failedEntries.length > 0) {
+					newRedoStack = [...newRedoStack, { timestamp: batch.timestamp, entries: failedEntries }];
+				}
+				// 成功的条目移到 undoStack
+				if (undoEntries.length > 0) {
+					newUndoStack = [...state.undoStack, { timestamp: Date.now(), entries: undoEntries }];
+				}
 
-			// 失败的条目留在 redoStack 供重试
-			if (failedEntries.length > 0) {
-				newRedoStack = [...newRedoStack, { timestamp: batch.timestamp, entries: failedEntries }];
-			}
-			// 成功的条目移到 undoStack
-			if (undoEntries.length > 0) {
-				newUndoStack = [...state.undoStack, { timestamp: Date.now(), entries: undoEntries }];
-			}
-
-			return {
-				isExecuting: false,
-				undoStack: newUndoStack,
-				redoStack: newRedoStack,
-				canUndo: newUndoStack.length > 0,
-				canRedo: newRedoStack.length > 0,
-			};
-		});
-	},
-}));
+				return {
+					isExecuting: false,
+					undoStack: newUndoStack,
+					redoStack: newRedoStack,
+					canUndo: newUndoStack.length > 0,
+					canRedo: newRedoStack.length > 0,
+				};
+			});
+		},
+	};
+});

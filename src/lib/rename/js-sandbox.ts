@@ -1,4 +1,5 @@
-// Sandboxed JavaScript executor with timeout protection using Web Worker
+import { SANDBOX_WORKER_SOURCE } from "@/lib/rename/js-sandbox-worker-source";
+import type { CustomJsOptions } from "@/lib/rename/types";
 
 type SandboxResult = {
 	success: boolean;
@@ -6,30 +7,100 @@ type SandboxResult = {
 	error?: string;
 };
 
-let worker: Worker | null = null;
-let pendingResolve: ((result: SandboxResult) => void) | null = null;
+const activeWorkers = new Set<Worker>();
+const SANDBOX_WORKER_VERSION = "20260522-strict-iife";
+const SANDBOX_WORKER_URL = `/js-sandbox-worker.js?v=${SANDBOX_WORKER_VERSION}`;
 
-function getWorker(): Worker {
-	if (!worker) {
-		worker = new Worker("/js-sandbox-worker.js");
-		worker.onmessage = (e: MessageEvent<SandboxResult>) => {
-			if (pendingResolve) {
-				pendingResolve(e.data);
-				pendingResolve = null;
-			}
-		};
-		worker.onerror = (e) => {
-			if (pendingResolve) {
-				pendingResolve({
-					success: false,
-					result: "",
-					error: e.message || "Worker error",
-				});
-				pendingResolve = null;
-			}
+type WorkerHandle = {
+	worker: Worker;
+	objectUrl?: string;
+};
+
+function createSandboxWorker(): WorkerHandle {
+	if (
+		typeof Blob !== "undefined" &&
+		typeof URL !== "undefined" &&
+		typeof URL.createObjectURL === "function"
+	) {
+		const objectUrl = URL.createObjectURL(
+			new Blob([SANDBOX_WORKER_SOURCE], { type: "text/javascript" }),
+		);
+		try {
+			return { worker: new Worker(objectUrl), objectUrl };
+		} catch (error) {
+			URL.revokeObjectURL(objectUrl);
+			throw error;
+		}
+	}
+
+	return { worker: new Worker(SANDBOX_WORKER_URL) };
+}
+
+export async function executeSandboxedRename(
+	code: string,
+	options: CustomJsOptions,
+	timeout = 1000,
+): Promise<SandboxResult> {
+	if (typeof Worker === "undefined") {
+		return {
+			success: false,
+			result: options.name,
+			error: "Sandbox worker is not available",
 		};
 	}
-	return worker;
+
+	return new Promise((resolve) => {
+		let handle: WorkerHandle;
+		try {
+			handle = createSandboxWorker();
+		} catch (error) {
+			resolve({
+				success: false,
+				result: options.name,
+				error: error instanceof Error ? error.message : String(error),
+			});
+			return;
+		}
+
+		const { worker, objectUrl } = handle;
+		activeWorkers.add(worker);
+
+		let settled = false;
+
+		const settle = (result: SandboxResult) => {
+			if (settled) return;
+			settled = true;
+			clearTimeout(timeoutId);
+			worker.terminate();
+			activeWorkers.delete(worker);
+			if (objectUrl) {
+				URL.revokeObjectURL(objectUrl);
+			}
+			resolve(result);
+		};
+
+		const timeoutId = setTimeout(() => {
+			settle({
+				success: false,
+				result: options.name,
+				error: "Execution timeout",
+			});
+		}, timeout);
+
+		worker.onmessage = (e: MessageEvent<SandboxResult>) => {
+			settle(e.data);
+		};
+
+		worker.onerror = (e) => {
+			settle({
+				success: false,
+				result: options.name,
+				error: e.message || "Worker error",
+			});
+		};
+
+		worker.postMessage({ code, options });
+	});
 }
 
 export async function executeSandboxedJs(
@@ -39,47 +110,16 @@ export async function executeSandboxedJs(
 	index: number,
 	timeout = 1000,
 ): Promise<SandboxResult> {
-	return new Promise((resolve) => {
-		const w = getWorker();
-
-		// Fallback timeout in case worker doesn't respond
-		const fallbackTimeout = setTimeout(() => {
-			if (pendingResolve) {
-				pendingResolve = null;
-				resolve({
-					success: false,
-					result: name,
-					error: "Execution timeout",
-				});
-			}
-		}, timeout + 500);
-
-		pendingResolve = (result) => {
-			clearTimeout(fallbackTimeout);
-			resolve(result);
-		};
-
-		w.postMessage({ code, name, ext, index, timeout });
-	});
-}
-
-// Synchronous execution with timeout (fallback for batch processing)
-export function executeJs(
-	code: string,
-	name: string,
-	ext: string,
-	index: number,
-): { result: string; error?: string } {
-	try {
-		const fn = new Function("name", "ext", "index", code);
-		const result = fn(name, ext, index);
-		if (typeof result === "string") {
-			return { result };
-		}
-		return { result: name, error: `Expected string, got ${typeof result}` };
-	} catch (e) {
-		return { result: name, error: e instanceof Error ? e.message : String(e) };
-	}
+	return executeSandboxedRename(
+		code,
+		{
+			name,
+			ext: ext.startsWith(".") ? ext.slice(1) : ext,
+			fullName: ext ? `${name}${ext}` : name,
+			index,
+		},
+		timeout,
+	);
 }
 
 // Validate code syntax without executing
@@ -94,9 +134,8 @@ export function validateJsCode(code: string): { valid: boolean; error?: string }
 
 // Cleanup worker when no longer needed
 export function terminateSandbox(): void {
-	if (worker) {
+	for (const worker of activeWorkers) {
 		worker.terminate();
-		worker = null;
-		pendingResolve = null;
 	}
+	activeWorkers.clear();
 }

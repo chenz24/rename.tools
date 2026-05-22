@@ -1,5 +1,7 @@
+import vm from "node:vm";
 import { describe, expect, it } from "vitest";
-import { applyRule, computePreview } from "@/lib/rename/rules";
+import { SANDBOX_WORKER_SOURCE } from "@/lib/rename/js-sandbox-worker-source";
+import { applyRule, computePreview, computePreviewAsync } from "@/lib/rename/rules";
 import type {
 	FileEntry,
 	RenameRule,
@@ -44,6 +46,70 @@ function createMockContext(
 		size: options.size,
 		modified: options.modified,
 		metadata: options.metadata,
+	};
+}
+
+function installFakeSandboxWorker(scriptUrls: string[] = []) {
+	const originalWorker = globalThis.Worker;
+
+	class FakeWorker {
+		onmessage: ((event: MessageEvent) => void) | null = null;
+		onerror: ((event: ErrorEvent) => void) | null = null;
+		private terminated = false;
+
+		constructor(scriptUrl: string | URL) {
+			scriptUrls.push(String(scriptUrl));
+		}
+
+		postMessage(message: {
+			code: string;
+			options: { name: string; ext: string; fullName: string; index: number };
+		}) {
+			queueMicrotask(() => {
+				if (this.terminated) return;
+				try {
+					const fn = new Function(
+						"options",
+						`
+							${message.code}
+							if (typeof rename === "function") {
+								return rename(options);
+							}
+							return options.name;
+						`,
+					);
+					const result = fn(message.options);
+					this.onmessage?.({
+						data:
+							typeof result === "string"
+								? { success: true, result }
+								: {
+										success: false,
+										result: message.options.name,
+										error: `Expected string return value, got ${typeof result}`,
+									},
+					} as MessageEvent);
+				} catch (error) {
+					this.onerror?.({ message: error instanceof Error ? error.message : String(error) } as ErrorEvent);
+				}
+			});
+		}
+
+		terminate() {
+			this.terminated = true;
+		}
+	}
+
+	Object.defineProperty(globalThis, "Worker", {
+		value: FakeWorker,
+		configurable: true,
+	});
+
+	return () => {
+		Object.defineProperty(globalThis, "Worker", {
+			value: originalWorker,
+			configurable: true,
+		});
 	};
 }
 
@@ -442,7 +508,53 @@ describe("重命名规则测试", () => {
 	});
 
 	describe("6. CustomJs - 自定义 JS", () => {
-		it("基础自定义函数", () => {
+		it("Worker 沙盒示例代码在严格模式下正常执行", () => {
+			let workerResult: unknown;
+			const workerSelf = {
+				onmessage: null as ((event: { data: unknown }) => void) | null,
+				postMessage(message: unknown) {
+					workerResult = message;
+				},
+			};
+
+			vm.runInNewContext(SANDBOX_WORKER_SOURCE, { self: workerSelf });
+			workerSelf.onmessage?.({
+				data: {
+					code: `function rename(options) {
+  const { name } = options;
+  return name
+    .replace(/[^a-zA-Z0-9\\u4e00-\\u9fa5\\s_-]/g, '')
+    .replace(/\\s+/g, '_')
+    .toLowerCase();
+}`,
+					options: {
+						name: "IMG 20250409_4126!",
+						ext: "png",
+						fullName: "IMG 20250409_4126!.png",
+						index: 0,
+					},
+				},
+			});
+
+			expect(workerResult).toEqual({ success: true, result: "img_20250409_4126" });
+		});
+
+		it("优先使用 Blob Worker，避免 public worker 缓存", async () => {
+			const originalCreateObjectURL = URL.createObjectURL;
+			const originalRevokeObjectURL = URL.revokeObjectURL;
+			const workerUrls: string[] = [];
+			const revokedUrls: string[] = [];
+			const restoreWorker = installFakeSandboxWorker(workerUrls);
+			Object.defineProperty(URL, "createObjectURL", {
+				value: () => "blob:custom-js-worker",
+				configurable: true,
+			});
+			Object.defineProperty(URL, "revokeObjectURL", {
+				value: (url: string) => {
+					revokedUrls.push(url);
+				},
+				configurable: true,
+			});
 			const rule: RenameRule = {
 				id: "1",
 				enabled: true,
@@ -457,12 +569,55 @@ describe("重命名规则测试", () => {
 					},
 				},
 			};
-			const context = createMockContext(0, "file", ".txt");
-			const result = applyRule(rule, "file", ".txt", 0, context);
-			expect(result).toBe("FILE");
+
+			try {
+				const files = [createMockFile("1", "file.txt", "file", ".txt")];
+				const results = await computePreviewAsync(files, [rule], "name");
+				expect(results[0].newName).toBe("FILE.txt");
+				expect(workerUrls[0]).toBe("blob:custom-js-worker");
+				expect(revokedUrls).toEqual(["blob:custom-js-worker"]);
+			} finally {
+				restoreWorker();
+				Object.defineProperty(URL, "createObjectURL", {
+					value: originalCreateObjectURL,
+					configurable: true,
+				});
+				Object.defineProperty(URL, "revokeObjectURL", {
+					value: originalRevokeObjectURL,
+					configurable: true,
+				});
+			}
 		});
 
-		it("使用 index 参数", () => {
+		it("基础自定义函数", async () => {
+			const workerUrls: string[] = [];
+			const restoreWorker = installFakeSandboxWorker(workerUrls);
+			const rule: RenameRule = {
+				id: "1",
+				enabled: true,
+				ruleConfig: {
+					type: "customJs",
+					config: {
+						code: `
+							function rename(options) {
+								return options.name.toUpperCase();
+							}
+						`,
+					},
+				},
+			};
+			try {
+				const files = [createMockFile("1", "file.txt", "file", ".txt")];
+				const results = await computePreviewAsync(files, [rule], "name");
+				expect(results[0].newName).toBe("FILE.txt");
+				expect(workerUrls[0]).toMatch(/^(blob:|\/js-sandbox-worker\.js\?v=.+)/);
+			} finally {
+				restoreWorker();
+			}
+		});
+
+		it("使用 index 参数", async () => {
+			const restoreWorker = installFakeSandboxWorker();
 			const rule: RenameRule = {
 				id: "1",
 				enabled: true,
@@ -477,9 +632,15 @@ describe("重命名规则测试", () => {
 					},
 				},
 			};
-			const context = createMockContext(0, "file", ".txt");
-			const result = applyRule(rule, "file", ".txt", 5, context);
-			expect(result).toBe("006_file");
+			try {
+				const files = Array.from({ length: 6 }, (_, i) =>
+					createMockFile(String(i + 1), "file.txt", "file", ".txt"),
+				);
+				const results = await computePreviewAsync(files, [rule], "name");
+				expect(results[5].newName).toBe("006_file.txt");
+			} finally {
+				restoreWorker();
+			}
 		});
 	});
 

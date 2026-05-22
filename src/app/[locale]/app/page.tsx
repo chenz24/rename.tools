@@ -90,6 +90,7 @@ export default function RenameAppPage() {
 
 	const {
 		preview,
+		isPreviewComputing,
 		applyAutoFix,
 		resetAutoFix,
 		hasAutoFix,
@@ -107,6 +108,7 @@ export default function RenameAppPage() {
 	} = useRenameStore(
 		useShallow((s) => ({
 			preview: s.preview,
+			isPreviewComputing: s.isPreviewComputing,
 			applyAutoFix: s.applyAutoFix,
 			resetAutoFix: s.resetAutoFix,
 			hasAutoFix: s.hasAutoFix,
@@ -226,6 +228,7 @@ export default function RenameAppPage() {
 				<ResizablePanel defaultSize={55} minSize={20}>
 					<PreviewPanel
 						preview={preview}
+						isPreviewComputing={isPreviewComputing}
 						applyAutoFix={applyAutoFix}
 						resetAutoFix={resetAutoFix}
 						hasAutoFix={hasAutoFix}

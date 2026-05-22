@@ -1,7 +1,8 @@
 import { resolveMetadataVariable } from "@/lib/file-metadata";
+import { executeSandboxedRename } from "@/lib/rename/js-sandbox";
 import type {
 	CaseStyleConfig,
-	CustomJsConfig,
+	CustomJsOptions,
 	ExtensionScope,
 	FileEntry,
 	FindReplaceConfig,
@@ -426,45 +427,22 @@ function applyRegex(name: string, c: RegexConfig): string {
 	}
 }
 
-function applyCustomJs(
+export function createCustomJsOptions(
 	name: string,
 	ext: string,
 	index: number,
-	c: CustomJsConfig,
 	context: RuleContext,
-): string {
-	try {
-		// Build options object for the rename function
-		const options = {
-			name,
-			ext: ext.startsWith(".") ? ext.slice(1) : ext,
-			fullName: ext ? `${name}${ext}` : name,
-			index,
-			size: context.size,
-			modifiedTime: context.modified,
-		};
-
-		// Wrap user code to call rename(options) and return result
-		const wrappedCode = `
-			${c.code}
-			if (typeof rename === 'function') {
-				return rename(arguments[0]);
-			}
-			return arguments[0].name;
-		`;
-
-		const fn = new Function(wrappedCode);
-		const result = fn(options);
-
-		if (typeof result === "string") {
-			return result;
-		}
-		console.warn(`Custom JS returned non-string value for "${name}": ${typeof result}`);
-		return name;
-	} catch (error) {
-		console.error(`Custom JS execution error for "${name}":`, error);
-		return name;
-	}
+): CustomJsOptions {
+	const normalizedExt = ext.startsWith(".") ? ext.slice(1) : ext;
+	const suffix = normalizedExt ? `.${normalizedExt}` : "";
+	return {
+		name,
+		ext: normalizedExt,
+		fullName: suffix && !name.endsWith(suffix) ? `${name}${suffix}` : name,
+		index,
+		size: context.size,
+		modifiedTime: context.modified,
+	};
 }
 
 function applyRemoveCleanup(name: string, c: RemoveCleanupConfig): string {
@@ -503,10 +481,22 @@ function hasInvalidFileNameChars(name: string) {
 	return false;
 }
 
+function getFilenameError(fullName: string, editablePart = fullName): string | undefined {
+	const trimmedFullName = fullName.trim();
+	const trimmedEditablePart = editablePart.trim();
+	if (trimmedFullName === "" || trimmedFullName === "." || trimmedEditablePart === "") {
+		return "empty";
+	}
+	if (hasInvalidFileNameChars(fullName)) {
+		return "illegal";
+	}
+	return undefined;
+}
+
 export function applyRule(
 	rule: RenameRule,
 	name: string,
-	ext: string,
+	_ext: string,
 	index: number,
 	context: RuleContext,
 	precomputedSeqValue?: string,
@@ -525,7 +515,7 @@ export function applyRule(
 		case "regex":
 			return applyRegex(name, ruleConfig.config);
 		case "customJs":
-			return applyCustomJs(name, ext, index, ruleConfig.config, context);
+			return name;
 		case "removeCleanup":
 			return applyRemoveCleanup(name, ruleConfig.config);
 	}
@@ -625,16 +615,19 @@ export function computePreview(
 		}
 
 		const fullName = extensionScope === "full" ? name : name + ext;
+		const validationTarget = extensionScope === "name" ? name : fullName;
 		const conflictKey = `${getDirKey(file)}/${fullName}`;
 		nameCount.set(conflictKey, (nameCount.get(conflictKey) || 0) + 1);
 		conflictKeys.push(conflictKey);
 		const dirPath = getDirKey(file);
+		const error = getFilenameError(fullName, validationTarget);
 		results.push({
 			fileId: file.id,
 			original: file.name,
 			newName: fullName,
 			hasChange: fullName !== file.name,
-			conflict: false,
+			conflict: !!error,
+			error,
 			dirPath: dirPath || undefined,
 		});
 	}
@@ -645,12 +638,10 @@ export function computePreview(
 		if ((nameCount.get(conflictKeys[i]) || 0) > 1) {
 			r.conflict = true;
 		}
-		// Check illegal chars and empty filename
-		const trimmedName = r.newName.trim();
-		const isEmptyName = trimmedName === "" || trimmedName === ".";
-		if (hasInvalidFileNameChars(r.newName) || isEmptyName) {
+		const error = getFilenameError(r.newName);
+		if (error) {
 			r.conflict = true;
-			r.error = isEmptyName ? "empty" : "illegal";
+			r.error = error;
 		}
 	}
 
@@ -742,17 +733,173 @@ export function autoFixConflicts(
 		const r = fixedResults[i];
 		if (!r.hasChange) continue;
 
-		const trimmedName = r.newName.trim();
-		const isEmptyName = trimmedName === "" || trimmedName === ".";
 		if ((nameCount.get(conflictKeys[i]) || 0) > 1) {
 			r.conflict = true;
-		} else if (hasInvalidFileNameChars(r.newName) || isEmptyName) {
-			r.conflict = true;
-			r.error = isEmptyName ? "empty" : "illegal";
 		} else {
-			r.conflict = false;
+			const error = getFilenameError(r.newName);
+			if (error) {
+				r.conflict = true;
+				r.error = error;
+			} else {
+				r.conflict = false;
+			}
 		}
 	}
 
 	return fixedResults;
+}
+
+export function hasEnabledCustomJsRule(rules: RenameRule[]): boolean {
+	return rules.some((rule) => rule.enabled && rule.ruleConfig.type === "customJs");
+}
+
+export async function computePreviewAsync(
+	files: FileEntry[],
+	rules: RenameRule[],
+	extensionScope: ExtensionScope,
+): Promise<PreviewResult[]> {
+	const selectedFiles = files.filter((f) => f.selected);
+	const results: PreviewResult[] = [];
+	const nameCount = new Map<string, number>();
+	const conflictKeys: string[] = [];
+	const customJsErrors = new Map<string, string>();
+
+	const getDirKey = (file: FileEntry) => {
+		if (!file.relativePath) return "";
+		const lastSlash = file.relativePath.lastIndexOf("/");
+		return lastSlash > 0 ? file.relativePath.slice(0, lastSlash) : "";
+	};
+
+	const sequenceDataMap = new Map<string, Map<string, SequenceFileData>>();
+	for (const rule of rules) {
+		if (!rule.enabled || rule.ruleConfig.type !== "sequence") continue;
+		const seqConfig = rule.ruleConfig.config as SequenceConfig;
+		sequenceDataMap.set(rule.id, computeSequenceData(selectedFiles, seqConfig, getDirKey));
+	}
+
+	const applyRuleWithSeqData = async (
+		rule: RenameRule,
+		currentName: string,
+		ext: string,
+		globalIndex: number,
+		fileId: string,
+		context: RuleContext,
+	): Promise<string> => {
+		let effectiveIndex = globalIndex;
+		let precomputedSeqValue: string | undefined;
+		if (rule.ruleConfig.type === "sequence" && sequenceDataMap.has(rule.id)) {
+			const fileData = sequenceDataMap.get(rule.id)!.get(fileId);
+			if (fileData) {
+				effectiveIndex = fileData.index;
+				precomputedSeqValue = fileData.seqValue;
+			}
+		}
+
+		if (rule.ruleConfig.type === "customJs") {
+			const options = createCustomJsOptions(currentName, ext, effectiveIndex, context);
+			const result = await executeSandboxedRename(rule.ruleConfig.config.code, options);
+			if (result.success) {
+				return result.result;
+			}
+			customJsErrors.set(fileId, result.error || "Custom JS execution failed");
+			return currentName;
+		}
+
+		return applyRule(rule, currentName, ext, effectiveIndex, context, precomputedSeqValue);
+	};
+
+	for (let i = 0; i < selectedFiles.length; i++) {
+		const file = selectedFiles[i];
+		let name: string;
+		let ext: string;
+
+		const folderName = file.relativePath ? file.relativePath.split("/").slice(-2, -1)[0] || "" : "";
+
+		const context: RuleContext = {
+			index: i,
+			ext: file.extension,
+			originalName: file.baseName,
+			currentName: file.baseName,
+			folderName,
+			relativePath: file.relativePath,
+			size: file.size,
+			modified: file.modified,
+			metadata: file.metadata,
+		};
+
+		switch (extensionScope) {
+			case "name":
+				name = file.baseName;
+				ext = file.extension;
+				for (const rule of rules) {
+					name = await applyRuleWithSeqData(rule, name, ext, i, file.id, context);
+					context.currentName = name;
+				}
+				break;
+			case "extension":
+				name = file.baseName;
+				ext = file.extension.startsWith(".") ? file.extension.slice(1) : file.extension;
+				for (const rule of rules) {
+					ext = await applyRuleWithSeqData(rule, ext, "", i, file.id, context);
+					context.currentName = ext;
+				}
+				ext = ext ? `.${ext}` : "";
+				break;
+			case "full":
+				name = file.name;
+				ext = "";
+				for (const rule of rules) {
+					name = await applyRuleWithSeqData(rule, name, file.extension, i, file.id, context);
+					context.currentName = name;
+				}
+				break;
+		}
+
+		const fullName = extensionScope === "full" ? name : name + ext;
+		const validationTarget = extensionScope === "name" ? name : fullName;
+		const conflictKey = `${getDirKey(file)}/${fullName}`;
+		nameCount.set(conflictKey, (nameCount.get(conflictKey) || 0) + 1);
+		conflictKeys.push(conflictKey);
+		const dirPath = getDirKey(file);
+		const customJsError = customJsErrors.get(file.id);
+		const error = customJsError ? "customJs" : getFilenameError(fullName, validationTarget);
+		results.push({
+			fileId: file.id,
+			original: file.name,
+			newName: fullName,
+			hasChange: fullName !== file.name,
+			conflict: !!error,
+			error,
+			errorDetail: customJsError,
+			dirPath: dirPath || undefined,
+		});
+	}
+
+	for (let i = 0; i < results.length; i++) {
+		const r = results[i];
+		if ((nameCount.get(conflictKeys[i]) || 0) > 1) {
+			r.conflict = true;
+		}
+		const error = r.error ?? getFilenameError(r.newName);
+		if (error) {
+			r.conflict = true;
+			r.error = error;
+		}
+	}
+
+	for (const file of files) {
+		if (!file.selected) {
+			const dirPath = getDirKey(file);
+			results.push({
+				fileId: file.id,
+				original: file.name,
+				newName: file.name,
+				hasChange: false,
+				conflict: false,
+				dirPath: dirPath || undefined,
+			});
+		}
+	}
+
+	return results;
 }

@@ -148,6 +148,7 @@ export interface PreviewResult {
 	hasChange: boolean;
 	conflict: boolean;
 	error?: string;
+	errorDetail?: string;
 	dirPath?: string;
 }
 
