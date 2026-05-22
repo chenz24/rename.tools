@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
-import type { Article, BreadcrumbList, WithContext } from "schema-dts";
+import type { Article, BreadcrumbList, HowTo, WithContext } from "schema-dts";
 import { JsonLd } from "@/components/JsonLd";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
@@ -156,10 +156,28 @@ export default async function GuideDetailPage({ params }: Props) {
 		],
 	};
 
+	const howToSteps = guide.sections.flatMap((section) => section.steps ?? []);
+	const howToSchema: WithContext<HowTo> | null =
+		howToSteps.length > 0
+			? {
+					"@context": "https://schema.org",
+					"@type": "HowTo",
+					name: guide.title,
+					description: guide.description,
+					inLanguage: guide.locale,
+					step: howToSteps.map((step, index) => ({
+						"@type": "HowToStep",
+						position: index + 1,
+						text: step,
+					})),
+				}
+			: null;
+
 	return (
 		<>
 			<JsonLd data={articleSchema} />
 			<JsonLd data={breadcrumbSchema} />
+			{howToSchema && <JsonLd data={howToSchema} />}
 			<article className="min-h-screen bg-background text-foreground">
 				<header className="mx-auto max-w-5xl px-4 pt-12 pb-10 sm:px-6 sm:pt-16 md:pt-20">
 					<Link
