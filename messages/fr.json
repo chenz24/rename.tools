@@ -31,6 +31,7 @@
 		"home": "Accueil",
 		"app": "App",
 		"features": "Fonctionnalités",
+		"guides": "Guides",
 		"about": "À propos",
 		"theme": "Changer de thème",
 		"language": "Langue"
@@ -889,6 +890,7 @@
 		"resourcesTitle": "Ressources",
 		"languagesTitle": "Langues",
 		"features": "Toutes les Fonctionnalités",
+		"guides": "Guides",
 		"terms": "Conditions d'Utilisation",
 		"privacyPolicy": "Politique de Confidentialité",
 		"disclaimer": "Avertissement",

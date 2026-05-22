@@ -31,6 +31,7 @@
 		"home": "Startseite",
 		"app": "App",
 		"features": "Funktionen",
+		"guides": "Guides",
 		"about": "Über uns",
 		"theme": "Design wechseln",
 		"language": "Sprache"
@@ -886,6 +887,7 @@
 		"legalTitle": "Rechtliches",
 		"resourcesTitle": "Ressourcen",
 		"features": "Alle Funktionen",
+		"guides": "Guides",
 		"terms": "Nutzungsbedingungen",
 		"privacyPolicy": "Datenschutzerklärung",
 		"disclaimer": "Haftungsausschluss",

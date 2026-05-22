@@ -14,6 +14,10 @@
 			"title": "Features - Rename.Tools",
 			"description": "Explore all features: regex patterns, sequences, case conversion, custom JavaScript, metadata extraction, and more."
 		},
+		"guides": {
+			"title": "Guides - Rename.Tools",
+			"description": "Practical guides for batch file renaming with Rename.Tools: regex, sequences, photo organization, music libraries, and video filenames."
+		},
 		"privacy": {
 			"title": "Privacy Policy - Rename.Tools",
 			"description": "Our privacy policy: We don't collect any data. All file operations run locally in your browser."
@@ -31,6 +35,7 @@
 		"home": "Home",
 		"app": "App",
 		"features": "Features",
+		"guides": "Guides",
 		"about": "About",
 		"theme": "Toggle theme",
 		"language": "Language"
@@ -887,6 +892,7 @@
 		"resourcesTitle": "Resources",
 		"languagesTitle": "Languages",
 		"features": "All Features",
+		"guides": "Guides",
 		"terms": "Terms of Service",
 		"privacyPolicy": "Privacy Policy",
 		"disclaimer": "Disclaimer",

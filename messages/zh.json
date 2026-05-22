@@ -14,6 +14,10 @@
 			"title": "功能特性 - Rename.Tools",
 			"description": "探索所有功能：正则表达式、序号生成、大小写转换、自定义 JavaScript、元数据提取等。"
 		},
+		"guides": {
+			"title": "使用指南 - Rename.Tools",
+			"description": "Rename.Tools 批量文件重命名实用指南：正则表达式、序号、照片整理、音乐库和剧集文件名整理。"
+		},
 		"privacy": {
 			"title": "隐私政策 - Rename.Tools",
 			"description": "我们的隐私政策：我们不收集任何数据。所有文件操作都在您的浏览器本地运行。"
@@ -31,6 +35,7 @@
 		"home": "首页",
 		"app": "应用",
 		"features": "功能",
+		"guides": "指南",
 		"about": "关于",
 		"theme": "切换主题",
 		"language": "语言"
@@ -887,6 +892,7 @@
 		"resourcesTitle": "资源",
 		"languagesTitle": "语言",
 		"features": "所有功能",
+		"guides": "使用指南",
 		"terms": "服务条款",
 		"privacyPolicy": "隐私政策",
 		"disclaimer": "免责声明",

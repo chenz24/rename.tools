@@ -31,6 +31,7 @@
 		"home": "ホーム",
 		"app": "アプリ",
 		"features": "機能",
+		"guides": "Guides",
 		"about": "概要",
 		"theme": "テーマ切替",
 		"language": "言語"
@@ -890,6 +891,7 @@
 		"resourcesTitle": "リソース",
 		"languagesTitle": "言語",
 		"features": "すべての機能",
+		"guides": "Guides",
 		"terms": "利用規約",
 		"privacyPolicy": "プライバシーポリシー",
 		"disclaimer": "免責事項",

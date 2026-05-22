@@ -33,6 +33,12 @@ export function Header() {
 							{t("features")}
 						</Link>
 						<Link
+							href="/guides"
+							className="rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+						>
+							{t("guides")}
+						</Link>
+						<Link
 							href="/app"
 							className="rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
 						>

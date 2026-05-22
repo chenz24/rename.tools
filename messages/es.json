@@ -31,6 +31,7 @@
 		"home": "Inicio",
 		"app": "App",
 		"features": "Características",
+		"guides": "Guides",
 		"about": "Acerca de",
 		"theme": "Cambiar tema",
 		"language": "Idioma"
@@ -884,6 +885,7 @@
 		"resourcesTitle": "Recursos",
 		"languagesTitle": "Idiomas",
 		"features": "Todas las Funciones",
+		"guides": "Guides",
 		"terms": "Términos de Servicio",
 		"privacyPolicy": "Política de Privacidad",
 		"disclaimer": "Descargo de Responsabilidad",

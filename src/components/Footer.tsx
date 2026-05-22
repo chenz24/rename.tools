@@ -86,6 +86,14 @@ export function Footer() {
 								</Link>
 							</li>
 							<li>
+								<Link
+									href="/guides"
+									className="text-muted-foreground transition-colors hover:text-foreground"
+								>
+									{t("guides")}
+								</Link>
+							</li>
+							<li>
 								<a
 									href="https://github.com/chenz24/rename.tools"
 									target="_blank"

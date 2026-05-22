@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
+import { GUIDE_LOCALES, guides } from "@/lib/guides/content";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://example.com";
 
@@ -27,6 +28,38 @@ export default function sitemap(): MetadataRoute.Sitemap {
 					languages: Object.fromEntries(
 						routing.locales.map((l) => [l, `${BASE_URL}/${l}${route.path}`]),
 					),
+				},
+			});
+		}
+	}
+
+	for (const locale of GUIDE_LOCALES) {
+		entries.push({
+			url: `${BASE_URL}/${locale}/guides`,
+			lastModified: new Date("2026-05-22"),
+			changeFrequency: "monthly",
+			priority: 0.75,
+			alternates: {
+				languages: {
+					en: `${BASE_URL}/en/guides`,
+					zh: `${BASE_URL}/zh/guides`,
+				},
+			},
+		});
+	}
+
+	for (const guide of guides) {
+		for (const locale of GUIDE_LOCALES) {
+			entries.push({
+				url: `${BASE_URL}/${locale}/guides/${guide.slug}`,
+				lastModified: new Date(guide.updatedAt),
+				changeFrequency: "monthly",
+				priority: 0.7,
+				alternates: {
+					languages: {
+						en: `${BASE_URL}/en/guides/${guide.slug}`,
+						zh: `${BASE_URL}/zh/guides/${guide.slug}`,
+					},
 				},
 			});
 		}

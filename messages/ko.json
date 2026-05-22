@@ -31,6 +31,7 @@
 		"home": "홈",
 		"app": "앱",
 		"features": "기능",
+		"guides": "Guides",
 		"about": "소개",
 		"theme": "테마 전환",
 		"language": "언어"
@@ -887,6 +888,7 @@
 		"resourcesTitle": "리소스",
 		"languagesTitle": "언어",
 		"features": "모든 기능",
+		"guides": "Guides",
 		"terms": "서비스 약관",
 		"privacyPolicy": "개인정보 보호정책",
 		"disclaimer": "면책 조항",
