@@ -589,6 +589,97 @@ describe("重命名规则测试", () => {
 			}
 		});
 
+		it("Blob Worker 不可用时回退到带版本号的静态 Worker", async () => {
+			const originalCreateObjectURL = URL.createObjectURL;
+			const originalRevokeObjectURL = URL.revokeObjectURL;
+			const workerUrls: string[] = [];
+			const revokedUrls: string[] = [];
+			const originalWorker = globalThis.Worker;
+
+			class FallbackWorker {
+				onmessage: ((event: MessageEvent) => void) | null = null;
+				onerror: ((event: ErrorEvent) => void) | null = null;
+				private terminated = false;
+
+				constructor(scriptUrl: string | URL) {
+					const url = String(scriptUrl);
+					workerUrls.push(url);
+					if (url.startsWith("blob:")) {
+						throw new Error("Blob workers are blocked");
+					}
+				}
+
+				postMessage(message: {
+					code: string;
+					options: { name: string; ext: string; fullName: string; index: number };
+				}) {
+					queueMicrotask(() => {
+						if (this.terminated) return;
+						this.onmessage?.({
+							data: { success: true, result: message.options.name.toUpperCase() },
+						} as MessageEvent);
+					});
+				}
+
+				terminate() {
+					this.terminated = true;
+				}
+			}
+
+			Object.defineProperty(globalThis, "Worker", {
+				value: FallbackWorker,
+				configurable: true,
+			});
+			Object.defineProperty(URL, "createObjectURL", {
+				value: () => "blob:blocked-custom-js-worker",
+				configurable: true,
+			});
+			Object.defineProperty(URL, "revokeObjectURL", {
+				value: (url: string) => {
+					revokedUrls.push(url);
+				},
+				configurable: true,
+			});
+
+			const rule: RenameRule = {
+				id: "1",
+				enabled: true,
+				ruleConfig: {
+					type: "customJs",
+					config: {
+						code: `
+							function rename(options) {
+								return options.name.toUpperCase();
+							}
+						`,
+					},
+				},
+			};
+
+			try {
+				const files = [createMockFile("1", "file.txt", "file", ".txt")];
+				const results = await computePreviewAsync(files, [rule], "name");
+				expect(results[0].newName).toBe("FILE.txt");
+				expect(workerUrls).toHaveLength(2);
+				expect(workerUrls[0]).toBe("blob:blocked-custom-js-worker");
+				expect(workerUrls[1]).toMatch(/^\/js-sandbox-worker\.js\?v=.+/);
+				expect(revokedUrls).toEqual(["blob:blocked-custom-js-worker"]);
+			} finally {
+				Object.defineProperty(globalThis, "Worker", {
+					value: originalWorker,
+					configurable: true,
+				});
+				Object.defineProperty(URL, "createObjectURL", {
+					value: originalCreateObjectURL,
+					configurable: true,
+				});
+				Object.defineProperty(URL, "revokeObjectURL", {
+					value: originalRevokeObjectURL,
+					configurable: true,
+				});
+			}
+		});
+
 		it("基础自定义函数", async () => {
 			const workerUrls: string[] = [];
 			const restoreWorker = installFakeSandboxWorker(workerUrls);

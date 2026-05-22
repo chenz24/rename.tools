@@ -27,9 +27,8 @@ function createSandboxWorker(): WorkerHandle {
 		);
 		try {
 			return { worker: new Worker(objectUrl), objectUrl };
-		} catch (error) {
+		} catch {
 			URL.revokeObjectURL(objectUrl);
-			throw error;
 		}
 	}
 
