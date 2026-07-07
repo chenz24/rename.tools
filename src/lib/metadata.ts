@@ -28,10 +28,13 @@ export async function generatePageMetadata({
 		description: t("description"),
 		metadataBase: new URL(SITE_URL),
 		keywords: [
-			"batch file rename",
+			"bulk rename files",
+			"bulk file renamer",
+			"bulk file rename",
+			"batch file renamer",
 			"file renaming tool",
 			"regex rename",
-			"bulk rename",
+			"batch file rename",
 			"browser file rename",
 			"local file processing",
 			"privacy-first rename",
@@ -54,9 +57,9 @@ export async function generatePageMetadata({
 			images: [
 				{
 					url: imageUrl,
-					width: 2400,
-					height: 1260,
-					alt: "Rename.Tools - Advanced Batch File Rename",
+					width: 1200,
+					height: 630,
+					alt: "Rename.Tools - Advanced Bulk File Renamer",
 				},
 			],
 		},

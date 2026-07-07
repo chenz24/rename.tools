@@ -1,22 +1,22 @@
 {
 	"metadata": {
-		"title": "Rename.Tools - Free Online Batch File Renaming Tool | No Upload, Privacy-First, Local Processing",
-		"description": "Free browser-based batch file renaming tool with regex, sequences, and rule chains. Rename thousands of files instantly with live preview. 100% local processing - no uploads, no tracking, complete privacy guaranteed.",
+		"title": "Bulk Rename Files Online | Free Batch File Renamer - Rename.Tools",
+		"description": "Bulk rename files in your browser with regex, sequences, rule chains, and live preview. Free batch file renamer with 100% local processing - no uploads, no tracking.",
 		"app": {
-			"title": "Rename.Tools | Online Batch File Rename Tool - Free, Fast & Private",
-			"description": "Rename thousands of files instantly in your browser with regex, sequences, and rule chains. Real-time preview, undo/redo support, metadata extraction. 100% local processing - your files never leave your device. Free forever."
+			"title": "Rename.Tools | Bulk Rename Files Online - Free, Fast & Private",
+			"description": "Bulk rename thousands of files instantly in your browser with regex, sequences, and rule chains. Real-time preview, undo/redo support, metadata extraction. 100% local processing - your files never leave your device. Free forever."
 		},
 		"about": {
 			"title": "About - Rename.Tools",
-			"description": "Learn about Rename.Tools, the browser-based batch file renaming tool built with Next.js, React, and modern web technologies."
+			"description": "Learn about Rename.Tools, the browser-based bulk file renaming tool built with Next.js, React, and modern web technologies."
 		},
 		"features": {
-			"title": "Batch File Renamer Features | Regex, Sequences, Live Preview - Rename.Tools",
-			"description": "Explore Rename.Tools features for bulk file renaming: regex replace, sequence numbering, case conversion, custom JavaScript, metadata extraction, live preview, undo, and script export."
+			"title": "Bulk File Renamer Features | Regex, Sequences, Live Preview - Rename.Tools",
+			"description": "Explore Rename.Tools features for bulk file renaming and batch rename workflows: regex replace, sequence numbering, case conversion, custom JavaScript, metadata extraction, live preview, undo, and script export."
 		},
 		"guides": {
 			"title": "Guides - Rename.Tools",
-			"description": "Practical guides for batch file renaming with Rename.Tools: regex, sequences, photo organization, music libraries, and video filenames."
+			"description": "Practical guides for bulk file renaming with Rename.Tools: regex, sequences, photo organization, music libraries, and batch rename workflows."
 		},
 		"privacy": {
 			"title": "Privacy Policy - Rename.Tools",
@@ -24,7 +24,7 @@
 		},
 		"terms": {
 			"title": "Terms of Service - Rename.Tools",
-			"description": "Terms of service for using Rename.Tools batch file renaming tool."
+			"description": "Terms of service for using Rename.Tools bulk and batch file renaming tool."
 		},
 		"disclaimer": {
 			"title": "Disclaimer - Rename.Tools",
@@ -41,18 +41,18 @@
 		"language": "Language"
 	},
 	"home": {
-		"heroTitle": "Rename thousands of files.\nRight in your browser.",
+		"heroTitle": "Bulk rename files.\nRight in your browser.",
 		"heroFeature1": "7 Rule Types",
 		"heroFeature2": "Live Preview",
 		"heroFeature3": "Zero Uploads",
-		"heroDescription": "Combine regex, sequences, and case conversion into powerful rule chains. Every operation runs locally in your browser — your files never leave your device.",
+		"heroDescription": "Bulk rename files with regex, sequences, and case conversion in powerful rule chains. Every operation runs locally in your browser — your files never leave your device.",
 		"cta": "Start Renaming",
 		"viewOnGithub": "View on GitHub",
 		"githubStars": "Open Source",
 		"onGithub": "on GitHub",
 		"highlightBadge": "Why Rename.Tools",
 		"highlightTitle": "Everything you need,\nnothing you don't",
-		"highlightDesc": "A focused set of capabilities designed to make batch renaming fast, safe, and predictable.",
+		"highlightDesc": "A focused set of capabilities designed to make bulk renaming fast, safe, and predictable.",
 		"hl1Title": "Rule Chains",
 		"hl1Desc": "Combine 7 rule types — find & replace, regex, sequences, case conversion, insert, remove, and custom JS — in any order",
 		"hl2Title": "Live Preview",
@@ -115,7 +115,7 @@
 			"code": {
 				"tab": "Code Projects",
 				"title": "Refactor file structures",
-				"desc": "Batch rename components, convert naming conventions (camelCase to kebab-case), or prepare assets for deployment."
+				"desc": "Bulk rename components, convert naming conventions (camelCase to kebab-case), or prepare assets for deployment."
 			},
 			"archives": {
 				"tab": "Document Archives",
@@ -126,7 +126,7 @@
 	},
 	"features": {
 		"heroTitle": "Every feature,\nin full detail",
-		"heroDesc": "From powerful rule chains to intelligent automation, explore every capability that makes Rename.Tools the most complete browser-based batch renaming tool.",
+		"heroDesc": "From powerful rule chains to intelligent automation, explore every capability that makes Rename.Tools the most complete browser-based bulk file renamer.",
 		"cta": "Start Renaming — Free",
 		"category": {
 			"rules": "Rule System",
@@ -353,7 +353,7 @@
 	},
 	"rename": {
 		"app": {
-			"title": "Batch Rename",
+			"title": "Bulk Rename",
 			"privacyBadge": "Privacy Safe",
 			"privacyDesc": "All operations run locally in your browser. No uploads, no content reading, cleared on close.",
 			"browserCompat": "Browser Compatibility",
@@ -707,7 +707,7 @@
 			"category": "Category",
 			"selectCategory": "Select category",
 			"tags": "Tags",
-			"tagsPlaceholder": "photo, cleanup, batch",
+			"tagsPlaceholder": "photo, cleanup, bulk",
 			"tagsHint": "Separate tags with commas",
 			"cancel": "Cancel",
 			"save": "Save"
@@ -860,7 +860,7 @@
 	},
 	"about": {
 		"title": "About This Project",
-		"description": "Rename.Tools is a powerful browser-based batch file renaming tool. All operations run locally in your browser for total privacy.",
+		"description": "Rename.Tools is a powerful browser-based bulk file renaming tool. All operations run locally in your browser for total privacy.",
 		"techStack": "Tech Stack",
 		"items": {
 			"framework": "Framework: Next.js 16 with App Router",
@@ -886,7 +886,7 @@
 		"text": "Loading..."
 	},
 	"footer": {
-		"tagline": "A powerful browser-based batch renaming tool. Supports regex, rule chains, live preview — all processing done locally with complete privacy.",
+		"tagline": "A powerful browser-based bulk file renaming tool. Supports regex, rule chains, live preview — all processing done locally with complete privacy.",
 		"privacyBadge": "100% Local Processing, Zero Data Upload",
 		"legalTitle": "Legal",
 		"resourcesTitle": "Resources",
@@ -910,7 +910,7 @@
 		"termsAcceptance": "1. Acceptance of Terms",
 		"termsAcceptanceDesc": "By accessing and using Rename.Tools (hereinafter referred to as \"the Service\"), you agree to be bound by these Terms of Service. If you do not agree to any of these terms, please stop using the Service immediately. The Service is available to users worldwide, and you are responsible for ensuring that your use complies with applicable laws and regulations in your jurisdiction.",
 		"termsService": "2. Service Description",
-		"termsServiceDesc": "Rename.Tools is a free browser-based batch file renaming tool. Key features of this Service include: all file processing is performed locally in your browser; we do not collect, store, or transmit any user file data; support for various renaming rules including regular expressions, sequence generation, and case conversion; real-time preview functionality to confirm results before execution.",
+		"termsServiceDesc": "Rename.Tools is a free browser-based bulk file renaming tool. Key features of this Service include: all file processing is performed locally in your browser; we do not collect, store, or transmit any user file data; support for various renaming rules including regular expressions, sequence generation, and case conversion; real-time preview functionality to confirm results before execution.",
 		"termsUserConduct": "3. User Conduct",
 		"termsUserConductDesc": "When using this Service, you agree to: not use the Service for any illegal purposes; not attempt to damage, interfere with, or bypass the security measures of the Service; not abuse the Service or harm other users' interests in any way; take full responsibility for your use of the Service and its outcomes.",
 		"termsIntellectual": "4. Intellectual Property",
@@ -918,7 +918,7 @@
 		"termsDisclaimer": "5. Limitation of Liability",
 		"termsDisclaimerDesc": "The Service is provided on an \"as is\" and \"as available\" basis without any express or implied warranties. To the maximum extent permitted by law, we are not liable for: any direct, indirect, incidental, special, or consequential damages arising from the use or inability to use the Service; any data loss, file corruption, or system failure; any actions or content of third parties.",
 		"termsLiability": "6. Assumption of Risk",
-		"termsLiabilityDesc": "Batch renaming operations are typically irreversible. You expressly acknowledge and agree that: you use the Service entirely at your own risk; you are responsible for carefully verifying results through the preview feature before executing rename operations; we strongly recommend backing up important files before any operation; we are not liable for any losses resulting from operational errors.",
+		"termsLiabilityDesc": "Bulk renaming operations are typically irreversible. You expressly acknowledge and agree that: you use the Service entirely at your own risk; you are responsible for carefully verifying results through the preview feature before executing rename operations; we strongly recommend backing up important files before any operation; we are not liable for any losses resulting from operational errors.",
 		"termsChanges": "7. Changes to Terms",
 		"termsChangesDesc": "We reserve the right to modify these Terms of Service at any time without prior notice. Modified terms become effective immediately upon posting on this page. You are responsible for periodically reviewing this page for any changes. Continued use of the Service after modifications constitutes acceptance of the revised terms.",
 		"termsTermination": "8. Service Termination",
@@ -952,11 +952,11 @@
 		"disclaimerTitle": "Disclaimer",
 		"disclaimerIntro": "Please read this disclaimer carefully before using Rename.Tools. By using this Service, you acknowledge that you understand and accept these terms.",
 		"disclaimerGeneral": "1. General Disclaimer",
-		"disclaimerGeneralDesc": "Rename.Tools is a free open-source tool designed to help users efficiently batch rename files. This tool is provided \"as is,\" and we make no express or implied warranties regarding its completeness, accuracy, or suitability. Use of this tool is entirely at your own risk.",
+		"disclaimerGeneralDesc": "Rename.Tools is a free open-source tool designed to help users efficiently bulk rename files. This tool is provided \"as is,\" and we make no express or implied warranties regarding its completeness, accuracy, or suitability. Use of this tool is entirely at your own risk.",
 		"disclaimerRisk": "2. Operational Risk Warning",
-		"disclaimerRiskDesc": "Batch file renaming is an operation with potential risks. Please note: rename operations are typically irreversible and may not be undone once executed; incorrect renaming rules may cause file name confusion or loss of original file organization; renaming certain system files or files that programs depend on may cause system or application failures; on some file systems, changing file names may affect file modification timestamps.",
+		"disclaimerRiskDesc": "Bulk file renaming is an operation with potential risks. Please note: rename operations are typically irreversible and may not be undone once executed; incorrect renaming rules may cause file name confusion or loss of original file organization; renaming certain system files or files that programs depend on may cause system or application failures; on some file systems, changing file names may affect file modification timestamps.",
 		"disclaimerBackup": "3. Data Backup Recommendation",
-		"disclaimerBackupDesc": "We strongly recommend: performing a complete backup of target files before executing any batch renaming operation; using the preview feature provided by this tool to carefully check expected results; for important files, first verify rule correctness on a test file set; consider using the \"Export Undo Script\" feature provided by this tool to restore file names if needed.",
+		"disclaimerBackupDesc": "We strongly recommend: performing a complete backup of target files before executing any bulk renaming operation; using the preview feature provided by this tool to carefully check expected results; for important files, first verify rule correctness on a test file set; consider using the \"Export Undo Script\" feature provided by this tool to restore file names if needed.",
 		"disclaimerNoWarranty": "4. No Warranty Statement",
 		"disclaimerNoWarrantyDesc": "To the maximum extent permitted by law: this tool comes with no warranties of any kind, whether express or implied; we do not guarantee that this tool will meet your specific requirements; we do not guarantee that the operation of this tool will be uninterrupted, timely, secure, or error-free; we do not guarantee that results obtained using this tool will be accurate or reliable; we are not liable for any data loss, file corruption, system failure, or other damages.",
 		"disclaimerLiability": "5. Limitation of Liability",
@@ -968,6 +968,6 @@
 		"disclaimerJurisdiction": "8. Jurisdiction",
 		"disclaimerJurisdictionDesc": "This disclaimer is governed by applicable laws. If any part of this statement is found to be invalid or unenforceable, the remaining parts shall remain in effect.",
 		"disclaimerAcknowledgment": "9. Acknowledgment",
-		"disclaimerAcknowledgmentDesc": "By using Rename.Tools, you acknowledge that: you have read and understood this disclaimer; you agree to be bound by this disclaimer; you understand the risks of batch renaming operations; you will be responsible for your use of this tool and its outcomes."
+		"disclaimerAcknowledgmentDesc": "By using Rename.Tools, you acknowledge that: you have read and understood this disclaimer; you agree to be bound by this disclaimer; you understand the risks of bulk renaming operations; you will be responsible for your use of this tool and its outcomes."
 	}
 }

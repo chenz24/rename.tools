@@ -1,31 +1,23 @@
 import { ImageResponse } from "next/og";
+import { routing } from "@/i18n/routing";
 
-export const alt = "Rename.Tools - Advanced Batch File Rename";
+export const alt = "Rename.Tools - Advanced Bulk File Renamer";
 
-// Use 2400x1260 "Retina" size to fix embedded image blurriness (Satori downsamples strictly).
 export const size = {
-	width: 2400,
-	height: 1260,
+	width: 1200,
+	height: 630,
 };
 export const contentType = "image/png";
+export const dynamic = "force-static";
+export const dynamicParams = false;
 
-type Props = {
-	params: Promise<{ locale: string }>;
-};
+const featureLabels = ["Regex", "Sequences", "Case styles", "Local files"];
 
-export default async function Image({ params }: Props) {
-	const { locale } = await params;
+export function generateStaticParams() {
+	return routing.locales.map((locale) => ({ locale }));
+}
 
-	const headline =
-		locale === "zh"
-			? "Rename.Tools - 强大、安全的在线批量文件重命名工具。"
-			: "Rename.Tools - Advanced Online Batch File Rename Tool.";
-
-	// Load the local screenshot image as an ArrayBuffer, supported by Next.js Edge OG
-	const imageData = await fetch(
-		new URL("../../../public/screenshots/product_screenshot.png", import.meta.url),
-	).then((res) => res.arrayBuffer());
-
+export default function Image() {
 	return new ImageResponse(
 		<div
 			style={{
@@ -33,123 +25,207 @@ export default async function Image({ params }: Props) {
 				width: "100%",
 				display: "flex",
 				flexDirection: "column",
-				alignItems: "center",
-				backgroundColor: "#080808", // Very dark black-gray matching reference
-				fontFamily: "Inter, sans-serif",
+				justifyContent: "space-between",
+				backgroundColor: "#07090d",
+				color: "#ffffff",
+				fontFamily: "Arial, sans-serif",
 				position: "relative",
 				overflow: "hidden",
+				padding: "62px 80px 54px",
 			}}
 		>
-			{/* Fine grid background layer */}
 			<div
 				style={{
 					position: "absolute",
 					inset: 0,
 					backgroundImage:
-						"linear-gradient(to right, rgba(255, 255, 255, 0.06) 2px, transparent 2px), linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 2px, transparent 2px)",
-					backgroundSize: "56px 56px", // Doubled density for retina
+						"linear-gradient(to right, rgba(255,255,255,0.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.055) 1px, transparent 1px)",
+					backgroundSize: "42px 42px",
 					backgroundPosition: "center center",
 				}}
 			/>
-
-			{/* Subtle central glow to make text pop gently */}
 			<div
 				style={{
 					position: "absolute",
-					top: 0,
-					left: "50%",
-					transform: "translateX(-50%)",
-					width: 2000,
-					height: 1000,
-					background: "radial-gradient(ellipse, rgba(255,255,255,0.06) 0%, rgba(0,0,0,0) 60%)",
+					right: -220,
+					top: -220,
+					width: 620,
+					height: 620,
 					borderRadius: "50%",
-					pointerEvents: "none",
+					background:
+						"radial-gradient(circle, rgba(30, 144, 255, 0.34) 0%, rgba(30, 144, 255, 0) 68%)",
 				}}
 			/>
-
-			{/* Top-aligned content container */}
 			<div
 				style={{
 					display: "flex",
-					flexDirection: "column",
+					justifyContent: "space-between",
 					alignItems: "center",
 					width: "100%",
-					marginTop: "140px",
-					zIndex: 10,
+					position: "relative",
+					zIndex: 1,
 				}}
 			>
-				{/* The Pill: strictly mimicking myogimage.com's bordered rounded rect */}
 				<div
 					style={{
 						display: "flex",
 						alignItems: "center",
-						justifyContent: "center",
-						padding: "12px 48px",
-						border: "2px solid #ffffff", // pure white border
-						borderRadius: "200px",
-						marginBottom: "56px",
-						backgroundColor: "rgba(0,0,0,0.4)", // Slight transparency over grid
+						gap: 14,
 					}}
 				>
-					<span
+					<div
 						style={{
-							fontSize: 44,
-							fontWeight: 500,
-							color: "#ffffff",
-							letterSpacing: "0.01em",
-							fontFamily: "monospace, sans-serif", // Clean system font look
+							width: 44,
+							height: 44,
+							display: "flex",
+							alignItems: "center",
+							justifyContent: "center",
+							borderRadius: 12,
+							backgroundColor: "#ffffff",
+							color: "#07090d",
+							fontSize: 28,
+							fontWeight: 900,
 						}}
 					>
-						rename.tools
-					</span>
+						R
+					</div>
+					<div style={{ display: "flex", flexDirection: "column" }}>
+						<div style={{ fontSize: 30, fontWeight: 800 }}>Rename.Tools</div>
+						<div style={{ marginTop: 2, fontSize: 18, color: "#aeb7c8" }}>
+							Privacy-first file renaming
+						</div>
+					</div>
 				</div>
-
-				{/* The Headline: large, bold, pure white, with tight letter spacing */}
-				<h1
+				<div
 					style={{
-						fontSize: 136,
-						fontWeight: 900,
-						color: "#ffffff",
-						letterSpacing: "-0.04em",
-						lineHeight: 1.1,
-						margin: 0,
-						marginBottom: "100px",
-						textAlign: "center",
-						maxWidth: "1920px",
+						display: "flex",
+						alignItems: "center",
+						padding: "12px 20px",
+						border: "1px solid rgba(255,255,255,0.2)",
+						borderRadius: 999,
+						backgroundColor: "rgba(255,255,255,0.08)",
+						color: "#d6deec",
+						fontSize: 18,
+						fontWeight: 700,
 					}}
 				>
-					{headline}
-				</h1>
+					Web app. No upload required.
+				</div>
+			</div>
 
-				{/* Product Screenshot embedded container */}
+			<div
+				style={{
+					display: "flex",
+					flexDirection: "column",
+					width: 760,
+					position: "relative",
+					zIndex: 1,
+				}}
+			>
+				<div style={{ fontSize: 76, fontWeight: 900, lineHeight: 1 }}>Bulk Rename Files Online</div>
+				<div style={{ marginTop: 24, fontSize: 28, lineHeight: 1.35, color: "#b8c2d6" }}>
+					Rename hundreds of files with regex, sequences, case transforms, and instant previews in
+					your browser.
+				</div>
+			</div>
+
+			<div
+				style={{
+					display: "flex",
+					alignItems: "flex-end",
+					justifyContent: "space-between",
+					width: "100%",
+					position: "relative",
+					zIndex: 1,
+				}}
+			>
+				<div style={{ display: "flex", gap: 12 }}>
+					{featureLabels.map((label) => (
+						<div
+							key={label}
+							style={{
+								display: "flex",
+								padding: "10px 14px",
+								border: "1px solid rgba(255,255,255,0.16)",
+								borderRadius: 999,
+								backgroundColor: "rgba(255,255,255,0.08)",
+								color: "#eef3ff",
+								fontSize: 16,
+								fontWeight: 700,
+							}}
+						>
+							{label}
+						</div>
+					))}
+				</div>
+
 				<div
 					style={{
 						display: "flex",
 						flexDirection: "column",
-						width: "1800px",
-						height: "800px", // Deliberately cutting off the bottom like in the reference
-						border: "2px solid rgba(255, 255, 255, 0.15)",
-						borderTopLeftRadius: "32px",
-						borderTopRightRadius: "32px",
-						borderBottom: "none",
-						boxShadow: "0 60px 200px rgba(0,0,0,0.9)", // Deep shadow to lift it off the grid
+						width: 340,
+						height: 166,
+						border: "1px solid rgba(255,255,255,0.18)",
+						borderRadius: 18,
 						overflow: "hidden",
-						backgroundColor: "#000",
+						backgroundColor: "rgba(10,14,22,0.92)",
+						boxShadow: "0 28px 90px rgba(0,0,0,0.52)",
 					}}
 				>
-					<img
-						src={imageData as any}
-						alt="Product screenshot"
+					<div
 						style={{
-							width: "1800px",
-							// Omitting objectFit/height allows it to naturally proportion and crop with overflow:hidden.
+							display: "flex",
+							alignItems: "center",
+							height: 40,
+							padding: "0 14px",
+							borderBottom: "1px solid rgba(255,255,255,0.12)",
 						}}
-					/>
+					>
+						<div style={{ display: "flex", gap: 7 }}>
+							<div
+								style={{ width: 10, height: 10, borderRadius: 999, backgroundColor: "#ff5f57" }}
+							/>
+							<div
+								style={{ width: 10, height: 10, borderRadius: 999, backgroundColor: "#ffbd2e" }}
+							/>
+							<div
+								style={{ width: 10, height: 10, borderRadius: 999, backgroundColor: "#28c840" }}
+							/>
+						</div>
+					</div>
+					<div style={{ display: "flex", flexDirection: "column", gap: 10, padding: 16 }}>
+						<div style={{ display: "flex", gap: 10 }}>
+							<div style={{ width: 96, height: 16, borderRadius: 6, backgroundColor: "#1e90ff" }} />
+							<div
+								style={{ width: 174, height: 16, borderRadius: 6, backgroundColor: "#263244" }}
+							/>
+						</div>
+						<div style={{ display: "flex", gap: 10 }}>
+							<div
+								style={{ width: 132, height: 16, borderRadius: 6, backgroundColor: "#263244" }}
+							/>
+							<div
+								style={{ width: 154, height: 16, borderRadius: 6, backgroundColor: "#33d69f" }}
+							/>
+						</div>
+						<div style={{ display: "flex", gap: 10 }}>
+							<div
+								style={{ width: 112, height: 16, borderRadius: 6, backgroundColor: "#263244" }}
+							/>
+							<div
+								style={{ width: 184, height: 16, borderRadius: 6, backgroundColor: "#ffd166" }}
+							/>
+						</div>
+						<div style={{ display: "flex", gap: 10 }}>
+							<div style={{ width: 82, height: 16, borderRadius: 6, backgroundColor: "#263244" }} />
+							<div
+								style={{ width: 210, height: 16, borderRadius: 6, backgroundColor: "#fb7185" }}
+							/>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>,
-		{
-			...size,
-		},
+		size,
 	);
 }
