@@ -73,7 +73,7 @@ export const guideIndexCopy: Record<
 	en: {
 		title: "Guides - Rename.Tools",
 		description:
-			"Practical guides for batch file renaming with Rename.Tools: regex, sequences, photo organization, music libraries, and video filenames.",
+			"Practical guides for bulk file renaming with Rename.Tools: regex, sequences, photo organization, music libraries, and batch rename workflows.",
 		eyebrow: "Guides",
 		heading: "Practical file renaming guides",
 		intro:
@@ -119,11 +119,11 @@ export const guides: Guide[] = [
 		relatedSlugs: ["sequence-file-numbering", "regex-batch-rename"],
 		content: {
 			en: {
-				title: "Batch file renaming basics: import, preview, execute",
+				title: "Bulk file renaming basics: import, preview, execute",
 				description:
-					"Learn the safest Rename.Tools workflow: add files, build a rule chain, inspect the preview, resolve conflicts, and execute locally.",
+					"Learn the safest bulk rename workflow: add files, build a rule chain, inspect the preview, resolve conflicts, and execute locally.",
 				intro:
-					"Batch renaming works best when you treat it like a reviewable change: import a small set, add one rule at a time, and only execute after the preview is clean.",
+					"Bulk renaming works best when you treat it like a reviewable change: import a small set, add one rule at a time, and only execute after the preview is clean.",
 				categoryLabel: "Getting started",
 				sections: [
 					{
@@ -149,7 +149,7 @@ export const guides: Guide[] = [
 					{
 						title: "Build one rule at a time",
 						body: [
-							"A reliable batch rename workflow is a sequence of small, reviewable edits. Add the cleanup rule first, check the preview, then add numbering. If the preview changes something unexpected, the last rule you added is the easiest place to look.",
+							"A reliable bulk rename workflow is a sequence of small, reviewable edits. Add the cleanup rule first, check the preview, then add numbering. If the preview changes something unexpected, the last rule you added is the easiest place to look.",
 							"This example removes a camera prefix and adds a padded sequence number. It is intentionally simple: the goal is to learn how the rule chain changes the preview before you use more advanced variables or regex.",
 						],
 						image: {
@@ -546,9 +546,9 @@ export const guides: Guide[] = [
 		relatedSlugs: ["batch-file-rename-basics", "sequence-file-numbering"],
 		content: {
 			en: {
-				title: "Use regular expressions for batch file renaming",
+				title: "Use regular expressions for bulk file renaming",
 				description:
-					"Learn practical regex rename patterns for removing clutter, rearranging dates, and extracting useful filename parts.",
+					"Learn practical regex bulk rename patterns for removing clutter, rearranging dates, and extracting useful filename parts.",
 				intro:
 					"Regex is the most powerful rename rule when filenames share a pattern. Use it when simple find and replace cannot describe the change precisely.",
 				categoryLabel: "Patterns",

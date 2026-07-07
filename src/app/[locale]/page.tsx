@@ -74,7 +74,8 @@ function LandingContent({ locale }: { locale: string }) {
 			priceCurrency: "USD",
 		},
 		featureList: [
-			"Batch file renaming",
+			"Bulk file renaming",
+			"Batch rename workflows",
 			"Regular expression support",
 			"Sequential numbering",
 			"Case conversion",

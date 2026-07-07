@@ -2,10 +2,10 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
 	return {
-		name: "Rename.Tools - Batch File Renaming Tool",
+		name: "Rename.Tools - Bulk File Renamer",
 		short_name: "Rename.Tools",
 		description:
-			"Free browser-based batch file renaming tool with regex, sequences, and rule chains. 100% local processing.",
+			"Free browser-based bulk file renaming tool with regex, sequences, and rule chains. 100% local processing.",
 		start_url: "/",
 		display: "standalone",
 		orientation: "any",
@@ -36,7 +36,7 @@ export default function manifest(): MetadataRoute.Manifest {
 				sizes: "3348x1844",
 				type: "image/png",
 				form_factor: "wide",
-				label: "Rename.Tools - Batch File Renaming",
+				label: "Rename.Tools - Bulk File Renaming",
 			},
 			{
 				src: "/screenshots/product_screenshot_dark.png",
