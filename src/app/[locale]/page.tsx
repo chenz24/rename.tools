@@ -23,6 +23,7 @@ import {
 	AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Link } from "@/i18n/navigation";
+import { SITE_URL } from "@/lib/site";
 
 type Props = {
 	params: Promise<{ locale: string }>;
@@ -59,14 +60,12 @@ function IconItem({
 function LandingContent({ locale }: { locale: string }) {
 	const t = useTranslations("home");
 
-	const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://example.com";
-
 	const webAppSchema: WithContext<WebApplication> = {
 		"@context": "https://schema.org",
 		"@type": "WebApplication",
 		name: "Rename.Tools",
 		description: t("heroDescription"),
-		url: `${BASE_URL}/${locale}`,
+		url: `${SITE_URL}/${locale}`,
 		applicationCategory: "UtilitiesApplication",
 		operatingSystem: "Web Browser",
 		offers: {

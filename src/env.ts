@@ -6,7 +6,7 @@ export const env = createEnv({
 		NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
 	},
 	client: {
-		NEXT_PUBLIC_BASE_URL: z.url().default("https://example.com"),
+		NEXT_PUBLIC_BASE_URL: z.url().default("https://rename.tools"),
 		NEXT_PUBLIC_GA_MEASUREMENT_ID: z.string().optional(),
 		NEXT_PUBLIC_UMAMI_WEBSITE_ID: z.string().optional(),
 		NEXT_PUBLIC_UMAMI_SRC: z.url().optional(),

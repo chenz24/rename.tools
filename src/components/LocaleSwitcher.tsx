@@ -15,6 +15,11 @@ import { routing } from "@/i18n/routing";
 const localeNames: Record<string, string> = {
 	en: "English",
 	zh: "中文",
+	ja: "日本語",
+	ko: "한국어",
+	es: "Español",
+	fr: "Français",
+	de: "Deutsch",
 };
 
 export function LocaleSwitcher() {
