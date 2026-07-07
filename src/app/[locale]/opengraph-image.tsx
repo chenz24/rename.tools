@@ -1,6 +1,5 @@
 import { ImageResponse } from "next/og";
 
-export const runtime = "edge";
 export const alt = "Rename.Tools - Advanced Batch File Rename";
 
 // Use 2400x1260 "Retina" size to fix embedded image blurriness (Satori downsamples strictly).

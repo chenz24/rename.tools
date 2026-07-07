@@ -5,7 +5,7 @@ import { routing } from "./i18n/routing";
 const intlMiddleware = createMiddleware(routing);
 const GUIDE_LOCALES = new Set<string>(["en", "zh"]);
 
-export function proxy(request: NextRequest) {
+export default function middleware(request: NextRequest) {
 	const { pathname } = request.nextUrl;
 	const locale = getPathLocale(pathname);
 
