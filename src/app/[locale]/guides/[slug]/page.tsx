@@ -6,8 +6,8 @@ import { setRequestLocale } from "next-intl/server";
 import type { Article, BreadcrumbList, HowTo, WithContext } from "schema-dts";
 import { JsonLd } from "@/components/JsonLd";
 import { Link } from "@/i18n/navigation";
-import { routing } from "@/i18n/routing";
 import {
+	GUIDE_LOCALES,
 	getGuideBySlug,
 	getGuideIndexCopy,
 	getGuidePrimaryImage,
@@ -15,15 +15,14 @@ import {
 	getRelatedGuides,
 	isIndexableGuideLocale,
 } from "@/lib/guides/content";
-
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://example.com";
+import { SITE_URL } from "@/lib/site";
 
 type Props = {
 	params: Promise<{ locale: string; slug: string }>;
 };
 
 export function generateStaticParams() {
-	return routing.locales.flatMap((locale) =>
+	return GUIDE_LOCALES.flatMap((locale) =>
 		getGuideSlugs().map((slug) => ({
 			locale,
 			slug,
@@ -41,20 +40,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 	const isIndexable = isIndexableGuideLocale(locale);
 	const canonicalLocale = isIndexable ? locale : "en";
-	const canonical = `${BASE_URL}/${canonicalLocale}/guides/${guide.slug}`;
+	const canonical = `${SITE_URL}/${canonicalLocale}/guides/${guide.slug}`;
 	const primaryImage = getGuidePrimaryImage(guide);
-	const openGraphImages = primaryImage ? [{ url: `${BASE_URL}${primaryImage.src}` }] : undefined;
+	const openGraphImages = primaryImage ? [{ url: `${SITE_URL}${primaryImage.src}` }] : undefined;
 
 	return {
 		title: `${guide.title} - Rename.Tools`,
 		description: guide.description,
-		metadataBase: new URL(BASE_URL),
+		metadataBase: new URL(SITE_URL),
 		alternates: {
 			canonical,
 			languages: {
-				en: `${BASE_URL}/en/guides/${guide.slug}`,
-				zh: `${BASE_URL}/zh/guides/${guide.slug}`,
-				"x-default": `${BASE_URL}/en/guides/${guide.slug}`,
+				en: `${SITE_URL}/en/guides/${guide.slug}`,
+				zh: `${SITE_URL}/zh/guides/${guide.slug}`,
+				"x-default": `${SITE_URL}/en/guides/${guide.slug}`,
 			},
 		},
 		openGraph: {
@@ -72,7 +71,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 			card: "summary_large_image",
 			title: guide.title,
 			description: guide.description,
-			images: primaryImage ? [`${BASE_URL}${primaryImage.src}`] : undefined,
+			images: primaryImage ? [`${SITE_URL}${primaryImage.src}`] : undefined,
 		},
 		robots: isIndexable ? undefined : { index: false, follow: true },
 	};
@@ -90,7 +89,7 @@ export default async function GuideDetailPage({ params }: Props) {
 	const copy = getGuideIndexCopy(locale);
 	const relatedGuides = getRelatedGuides(guide, locale);
 	const canonicalLocale = isIndexableGuideLocale(locale) ? locale : "en";
-	const url = `${BASE_URL}/${canonicalLocale}/guides/${guide.slug}`;
+	const url = `${SITE_URL}/${canonicalLocale}/guides/${guide.slug}`;
 	const primaryImage = getGuidePrimaryImage(guide);
 
 	const articleSchema: WithContext<Article> = {
@@ -102,7 +101,7 @@ export default async function GuideDetailPage({ params }: Props) {
 		dateModified: guide.updatedAt,
 		inLanguage: guide.locale,
 		mainEntityOfPage: url,
-		image: primaryImage ? `${BASE_URL}${primaryImage.src}` : undefined,
+		image: primaryImage ? `${SITE_URL}${primaryImage.src}` : undefined,
 		author: {
 			"@type": "Organization",
 			name: "Rename.Tools",
@@ -112,7 +111,7 @@ export default async function GuideDetailPage({ params }: Props) {
 			name: "Rename.Tools",
 			logo: {
 				"@type": "ImageObject",
-				url: `${BASE_URL}/logo.svg`,
+				url: `${SITE_URL}/logo.svg`,
 			},
 		},
 		articleBody: [
@@ -139,13 +138,13 @@ export default async function GuideDetailPage({ params }: Props) {
 				"@type": "ListItem",
 				position: 1,
 				name: "Rename.Tools",
-				item: `${BASE_URL}/${canonicalLocale}`,
+				item: `${SITE_URL}/${canonicalLocale}`,
 			},
 			{
 				"@type": "ListItem",
 				position: 2,
 				name: copy.eyebrow,
-				item: `${BASE_URL}/${canonicalLocale}/guides`,
+				item: `${SITE_URL}/${canonicalLocale}/guides`,
 			},
 			{
 				"@type": "ListItem",

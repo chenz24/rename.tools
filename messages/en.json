@@ -11,8 +11,8 @@
 			"description": "Learn about Rename.Tools, the browser-based batch file renaming tool built with Next.js, React, and modern web technologies."
 		},
 		"features": {
-			"title": "Features - Rename.Tools",
-			"description": "Explore all features: regex patterns, sequences, case conversion, custom JavaScript, metadata extraction, and more."
+			"title": "Batch File Renamer Features | Regex, Sequences, Live Preview - Rename.Tools",
+			"description": "Explore Rename.Tools features for bulk file renaming: regex replace, sequence numbering, case conversion, custom JavaScript, metadata extraction, live preview, undo, and script export."
 		},
 		"guides": {
 			"title": "Guides - Rename.Tools",

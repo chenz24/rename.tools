@@ -11,8 +11,8 @@
 			"description": "了解 Rename.Tools，这是一个基于 Next.js、React 和现代 Web 技术构建的浏览器端批量文件重命名工具。"
 		},
 		"features": {
-			"title": "功能特性 - Rename.Tools",
-			"description": "探索所有功能：正则表达式、序号生成、大小写转换、自定义 JavaScript、元数据提取等。"
+			"title": "批量文件重命名功能 | 正则、序号、实时预览 - Rename.Tools",
+			"description": "了解 Rename.Tools 的批量文件重命名功能：正则替换、序号编号、大小写转换、自定义 JavaScript、元数据提取、实时预览、撤销和脚本导出。"
 		},
 		"guides": {
 			"title": "使用指南 - Rename.Tools",

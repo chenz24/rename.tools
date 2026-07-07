@@ -1,12 +1,14 @@
 import { Github } from "lucide-react";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { ThemeToggle } from "./ThemeToggle";
 
 export function Header() {
 	const t = useTranslations("header");
+	const locale = useLocale();
+	const guidesLocale = locale === "zh" ? "zh" : "en";
 
 	return (
 		<header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -34,6 +36,7 @@ export function Header() {
 						</Link>
 						<Link
 							href="/guides"
+							locale={guidesLocale}
 							className="rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
 						>
 							{t("guides")}

@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
-
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://example.com";
+import { SITE_URL } from "@/lib/site";
 
 type GeneratePageMetadataParams = {
 	locale: string;
@@ -17,16 +16,17 @@ export async function generatePageMetadata({
 }: GeneratePageMetadataParams): Promise<Metadata> {
 	const t = await getTranslations({ locale, namespace });
 
-	const url = `${BASE_URL}/${locale}${path}`;
+	const url = `${SITE_URL}/${locale}${path}`;
+	const imageUrl = `${SITE_URL}/${locale}/opengraph-image`;
 
 	const alternateLanguages = Object.fromEntries(
-		routing.locales.map((l) => [l, `${BASE_URL}/${l}${path}`]),
+		routing.locales.map((l) => [l, `${SITE_URL}/${l}${path}`]),
 	);
 
 	return {
 		title: t("title"),
 		description: t("description"),
-		metadataBase: new URL(BASE_URL),
+		metadataBase: new URL(SITE_URL),
 		keywords: [
 			"batch file rename",
 			"file renaming tool",
@@ -41,7 +41,7 @@ export async function generatePageMetadata({
 			canonical: url,
 			languages: {
 				...alternateLanguages,
-				"x-default": `${BASE_URL}/en${path}`,
+				"x-default": `${SITE_URL}/en${path}`,
 			},
 		},
 		openGraph: {
@@ -51,11 +51,20 @@ export async function generatePageMetadata({
 			siteName: "Rename.Tools",
 			locale,
 			type: "website",
+			images: [
+				{
+					url: imageUrl,
+					width: 2400,
+					height: 1260,
+					alt: "Rename.Tools - Advanced Batch File Rename",
+				},
+			],
 		},
 		twitter: {
 			card: "summary_large_image",
 			title: t("title"),
 			description: t("description"),
+			images: [imageUrl],
 		},
 	};
 }

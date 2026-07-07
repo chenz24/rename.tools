@@ -4,7 +4,8 @@ import { Link } from "@/i18n/navigation";
 
 export function Footer() {
 	const t = useTranslations("footer");
-	const _locale = useLocale();
+	const locale = useLocale();
+	const guidesLocale = locale === "zh" ? "zh" : "en";
 	const year = new Date().getFullYear();
 
 	const _languages = [
@@ -14,6 +15,7 @@ export function Footer() {
 		{ code: "es", name: "Spanish", nativeName: "Español" },
 		{ code: "fr", name: "French", nativeName: "Français" },
 		{ code: "ko", name: "Korean", nativeName: "한국어" },
+		{ code: "de", name: "German", nativeName: "Deutsch" },
 	];
 
 	return (
@@ -88,6 +90,7 @@ export function Footer() {
 							<li>
 								<Link
 									href="/guides"
+									locale={guidesLocale}
 									className="text-muted-foreground transition-colors hover:text-foreground"
 								>
 									{t("guides")}
@@ -140,9 +143,7 @@ export function Footer() {
 										href="/"
 										locale={lang.code}
 										className={`transition-colors hover:text-foreground ${
-											_locale === lang.code
-												? "font-medium text-foreground"
-												: "text-muted-foreground"
+											locale === lang.code ? "font-medium text-foreground" : "text-muted-foreground"
 										}`}
 										hrefLang={lang.code}
 									>

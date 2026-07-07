@@ -1,8 +1,7 @@
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
 import { GUIDE_LOCALES, guides } from "@/lib/guides/content";
-
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://example.com";
+import { SITE_URL } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
 	const routes = [
@@ -20,14 +19,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
 	for (const route of routes) {
 		for (const locale of routing.locales) {
 			entries.push({
-				url: `${BASE_URL}/${locale}${route.path}`,
-				lastModified: new Date(),
+				url: `${SITE_URL}/${locale}${route.path}`,
 				changeFrequency: route.changeFrequency,
 				priority: route.priority,
 				alternates: {
-					languages: Object.fromEntries(
-						routing.locales.map((l) => [l, `${BASE_URL}/${l}${route.path}`]),
-					),
+					languages: Object.fromEntries([
+						...routing.locales.map((l) => [l, `${SITE_URL}/${l}${route.path}`] as const),
+						["x-default", `${SITE_URL}/en${route.path}`] as const,
+					]),
 				},
 			});
 		}
@@ -35,14 +34,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
 	for (const locale of GUIDE_LOCALES) {
 		entries.push({
-			url: `${BASE_URL}/${locale}/guides`,
+			url: `${SITE_URL}/${locale}/guides`,
 			lastModified: new Date("2026-05-22"),
 			changeFrequency: "monthly",
 			priority: 0.75,
 			alternates: {
 				languages: {
-					en: `${BASE_URL}/en/guides`,
-					zh: `${BASE_URL}/zh/guides`,
+					en: `${SITE_URL}/en/guides`,
+					zh: `${SITE_URL}/zh/guides`,
+					"x-default": `${SITE_URL}/en/guides`,
 				},
 			},
 		});
@@ -51,14 +51,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
 	for (const guide of guides) {
 		for (const locale of GUIDE_LOCALES) {
 			entries.push({
-				url: `${BASE_URL}/${locale}/guides/${guide.slug}`,
+				url: `${SITE_URL}/${locale}/guides/${guide.slug}`,
 				lastModified: new Date(guide.updatedAt),
 				changeFrequency: "monthly",
 				priority: 0.7,
 				alternates: {
 					languages: {
-						en: `${BASE_URL}/en/guides/${guide.slug}`,
-						zh: `${BASE_URL}/zh/guides/${guide.slug}`,
+						en: `${SITE_URL}/en/guides/${guide.slug}`,
+						zh: `${SITE_URL}/zh/guides/${guide.slug}`,
+						"x-default": `${SITE_URL}/en/guides/${guide.slug}`,
 					},
 				},
 			});
