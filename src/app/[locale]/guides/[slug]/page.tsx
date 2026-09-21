@@ -63,7 +63,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 			siteName: "Rename.Tools",
 			locale: canonicalLocale,
 			type: "article",
-			publishedTime: guide.updatedAt,
+			publishedTime: guide.publishedAt,
 			modifiedTime: guide.updatedAt,
 			images: openGraphImages,
 		},
@@ -97,7 +97,7 @@ export default async function GuideDetailPage({ params }: Props) {
 		"@type": "Article",
 		headline: guide.title,
 		description: guide.description,
-		datePublished: guide.updatedAt,
+		datePublished: guide.publishedAt,
 		dateModified: guide.updatedAt,
 		inLanguage: guide.locale,
 		mainEntityOfPage: url,
@@ -105,6 +105,7 @@ export default async function GuideDetailPage({ params }: Props) {
 		author: {
 			"@type": "Organization",
 			name: "Rename.Tools",
+			url: `${SITE_URL}/${canonicalLocale}/about`,
 		},
 		publisher: {
 			"@type": "Organization",
@@ -198,6 +199,9 @@ export default async function GuideDetailPage({ params }: Props) {
 							{guide.intro}
 						</p>
 						<div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+							<Link href="/about" className="underline underline-offset-4">
+								Rename.Tools
+							</Link>
 							<span className="inline-flex items-center gap-1.5">
 								<Clock3 className="h-4 w-4" />
 								{guide.readingTime} {copy.minRead}

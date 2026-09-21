@@ -54,7 +54,7 @@ function PrivacyContent() {
 						<h1 className="text-3xl font-bold tracking-tight text-foreground">
 							{t("privacyTitle")}
 						</h1>
-						<p className="mt-1 text-sm text-muted-foreground">{t("lastUpdated")}: 2024-01-01</p>
+						<p className="mt-1 text-sm text-muted-foreground">{t("lastUpdated")}: 2026-09-21</p>
 					</div>
 				</div>
 

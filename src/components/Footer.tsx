@@ -5,6 +5,7 @@ import { Link } from "@/i18n/navigation";
 export function Footer() {
 	const t = useTranslations("footer");
 	const locale = useLocale();
+	const tHeader = useTranslations("header");
 	const guidesLocale = locale === "zh" ? "zh" : "en";
 	const year = new Date().getFullYear();
 
@@ -79,6 +80,14 @@ export function Footer() {
 					<div>
 						<h4 className="mb-4 text-sm font-semibold text-foreground">{t("resourcesTitle")}</h4>
 						<ul className="space-y-2.5 text-sm">
+							<li>
+								<Link
+									href="/about"
+									className="text-muted-foreground transition-colors hover:text-foreground"
+								>
+									{tHeader("about")}
+								</Link>
+							</li>
 							<li>
 								<Link
 									href="/features"

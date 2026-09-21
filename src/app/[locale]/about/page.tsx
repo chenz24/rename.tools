@@ -1,7 +1,6 @@
-import { ArrowLeft, Info } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import { Alert, AlertDescription } from "@/components/reui/alert";
 import { Badge } from "@/components/reui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -48,10 +47,24 @@ function AboutContent() {
 			<h1 className="mb-4 text-4xl font-bold tracking-tight">{t("title")}</h1>
 			<p className="mb-8 text-lg text-muted-foreground">{t("description")}</p>
 
-			<Alert variant="info" className="mb-8">
-				<Info className="h-4 w-4" />
-				<AlertDescription>{t("description")}</AlertDescription>
-			</Alert>
+			<section className="mb-8 space-y-4">
+				<h2 className="text-xl font-semibold">{t("maintenanceTitle")}</h2>
+				<p className="leading-relaxed text-muted-foreground">{t("maintenanceDesc")}</p>
+				<ul className="flex flex-wrap gap-x-6 gap-y-3 text-sm underline underline-offset-4">
+					<li>
+						<a href="https://github.com/chenz24/rename.tools">{t("sourceLink")}</a>
+					</li>
+					<li>
+						<a href="https://github.com/chenz24/rename.tools/issues">{t("issuesLink")}</a>
+					</li>
+					<li>
+						<a href="https://github.com/chenz24/rename.tools/releases">{t("releasesLink")}</a>
+					</li>
+					<li>
+						<Link href="/privacy">{t("privacyLink")}</Link>
+					</li>
+				</ul>
+			</section>
 
 			<Card>
 				<CardHeader>

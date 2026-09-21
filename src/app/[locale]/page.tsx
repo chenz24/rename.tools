@@ -1,5 +1,6 @@
 import {
 	ArrowRight,
+	ChevronDown,
 	ChevronRight,
 	Eye,
 	Github,
@@ -16,12 +17,6 @@ import { setRequestLocale } from "next-intl/server";
 import type { FAQPage, WebApplication, WithContext } from "schema-dts";
 import { UseCaseDemo } from "@/components/home/UseCaseDemo";
 import { JsonLd } from "@/components/JsonLd";
-import {
-	Accordion,
-	AccordionContent,
-	AccordionItem,
-	AccordionTrigger,
-} from "@/components/ui/accordion";
 import { Link } from "@/i18n/navigation";
 import { SITE_URL } from "@/lib/site";
 
@@ -300,18 +295,22 @@ function LandingContent({ locale }: { locale: string }) {
 					</p>
 
 					<div className="mt-12">
-						<Accordion type="single" collapsible className="w-full">
+						<div className="w-full">
 							{[1, 2, 3, 4, 5].map((i) => (
-								<AccordionItem key={i} value={`faq-${i}`}>
-									<AccordionTrigger className="text-base font-medium text-foreground">
+								<details key={i} name="home-faq" className="group border-b last:border-b-0">
+									<summary className="flex cursor-pointer list-none items-center justify-between gap-4 rounded-md py-4 text-base font-medium text-foreground focus-visible:outline-2 focus-visible:outline-ring [&::-webkit-details-marker]:hidden">
 										{t(`faq${i}Q`)}
-									</AccordionTrigger>
-									<AccordionContent className="text-sm leading-relaxed text-muted-foreground">
+										<ChevronDown
+											aria-hidden="true"
+											className="h-4 w-4 shrink-0 transition-transform group-open:rotate-180"
+										/>
+									</summary>
+									<p className="pb-4 text-sm leading-relaxed text-muted-foreground">
 										{t(`faq${i}A`)}
-									</AccordionContent>
-								</AccordionItem>
+									</p>
+								</details>
 							))}
-						</Accordion>
+						</div>
 					</div>
 				</section>
 

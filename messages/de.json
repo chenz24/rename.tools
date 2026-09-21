@@ -1,14 +1,14 @@
 {
 	"metadata": {
 		"title": "Rename.Tools - Kostenloses Online-Tool zum Batch-Umbenennen von Dateien | Kein Upload, Datenschutz-First, Lokale Verarbeitung",
-		"description": "Kostenloses browserbasiertes Tool zum Batch-Umbenennen von Dateien mit Regex, Sequenzen und Regelketten. Benennen Sie Tausende von Dateien sofort mit Live-Vorschau um. 100% lokale Verarbeitung - keine Uploads, kein Tracking, vollständiger Datenschutz garantiert.",
+		"description": "Dateien mit regulären Ausdrücken, Nummerierung und Vorschau stapelweise umbenennen. Kostenlos und lokal im Browser, ohne Datei-Upload.",
 		"app": {
 			"title": "Rename.Tools | Online Batch-Datei-Umbenennungs-Tool - Kostenlos, Schnell & Privat",
 			"description": "Benennen Sie Tausende von Dateien sofort in Ihrem Browser um mit Regex, Sequenzen und Regelketten. Echtzeit-Vorschau, Rückgängig/Wiederholen-Unterstützung, Metadaten-Extraktion. 100% lokale Verarbeitung - Ihre Dateien verlassen niemals Ihr Gerät. Für immer kostenlos."
 		},
 		"about": {
 			"title": "Über uns - Rename.Tools",
-			"description": "Erfahren Sie mehr über Rename.Tools, das browserbasierte Batch-Datei-Umbenennungs-Tool, das mit Next.js, React und modernen Web-Technologien entwickelt wurde."
+			"description": "Ein quelloffenes Werkzeug zum Prüfen und Ausführen von Stapelumbenennungen lokal im Browser."
 		},
 		"features": {
 			"title": "Funktionen - Rename.Tools",
@@ -16,7 +16,7 @@
 		},
 		"privacy": {
 			"title": "Datenschutzerklärung - Rename.Tools",
-			"description": "Unsere Datenschutzerklärung: Wir sammeln keine Daten. Alle Dateioperationen laufen lokal in Ihrem Browser."
+			"description": "Umbenennung und Metadaten werden lokal im Browser verarbeitet, ohne Dateien hochzuladen. Optionale TMDb-Abfragen senden Suchbegriffe an TMDb. Besuchsstatistiken sind von der Dateiverarbeitung getrennt."
 		},
 		"terms": {
 			"title": "Nutzungsbedingungen - Rename.Tools",
@@ -41,7 +41,7 @@
 		"heroFeature1": "7 Regeltypen",
 		"heroFeature2": "Live-Vorschau",
 		"heroFeature3": "Keine Uploads",
-		"heroDescription": "Kombinieren Sie Regex, Sequenzen und Groß-/Kleinschreibung zu leistungsstarken Regelketten. Jede Operation läuft lokal in Ihrem Browser — Ihre Dateien verlassen niemals Ihr Gerät.",
+		"heroDescription": "Dateien mit regulären Ausdrücken, Nummerierung und Vorschau stapelweise umbenennen. Kostenlos und lokal im Browser, ohne Datei-Upload.",
 		"cta": "Jetzt umbenennen",
 		"viewOnGithub": "Auf GitHub ansehen",
 		"githubStars": "Open Source",
@@ -56,7 +56,7 @@
 		"hl3Title": "Konflikterkennung",
 		"hl3Desc": "Erkennt automatisch doppelte Dateinamen vor dem Umbenennen und verhindert versehentliches Überschreiben",
 		"hl4Title": "100% Lokal & Privat",
-		"hl4Desc": "Dateien verlassen niemals Ihr Gerät. Keine Uploads, keine Serververarbeitung, keine Datenspeicherung — schließen Sie den Tab und alles ist weg",
+		"hl4Desc": "Umbenennung und Metadaten werden lokal im Browser verarbeitet, ohne Dateien hochzuladen. Optionale TMDb-Abfragen senden Suchbegriffe an TMDb. Besuchsstatistiken sind von der Dateiverarbeitung getrennt.",
 		"hl5Title": "Rückgängig & Script-Export",
 		"hl5Desc": "Integrierte Rückgängig/Wiederholen-Unterstützung, plus Export als Bash- oder PowerShell-Skripte für Offline-Ausführung oder Rollback",
 		"hl6Title": "Kostenlos & Open Source",
@@ -70,9 +70,9 @@
 		"faq1Q": "Ist Rename.Tools wirklich kostenlos?",
 		"faq1A": "Ja, vollständig kostenlos und Open Source. Es gibt keine Premium-Stufen, keine Testversionen und keine versteckten Gebühren. Der vollständige Quellcode ist auf GitHub unter der AGPL-3.0-Lizenz verfügbar.",
 		"faq2Q": "Werden meine Dateien auf einen Server hochgeladen?",
-		"faq2A": "Nein. Rename.Tools läuft vollständig in Ihrem Browser. Ihre Dateien werden über die File System Access API aufgerufen und verlassen niemals Ihr Gerät. Es gibt keinerlei serverseitige Verarbeitung.",
+		"faq2A": "Umbenennung und Metadaten werden lokal im Browser verarbeitet, ohne Dateien hochzuladen. Optionale TMDb-Abfragen senden Suchbegriffe an TMDb. Besuchsstatistiken sind von der Dateiverarbeitung getrennt.",
 		"faq3Q": "Warum ist es sicher zu verwenden?",
-		"faq3A": "Rename.Tools ist architektonisch nicht in der Lage, von einem Server aus auf Ihre Dateien zuzugreifen. Die gesamte Verarbeitung erfolgt lokal in Ihrem Browser über die File System Access API. Es werden keine Daten übertragen, gespeichert oder protokolliert. Der Code ist vollständig Open Source, sodass Sie dies selbst überprüfen können. Außerdem stellen die integrierte Rückgängig-Funktion und Live-Vorschau sicher, dass Sie Änderungen immer überprüfen und rückgängig machen können, bevor sie erfolgen.",
+		"faq3A": "Sie wählen die Dateien aus, auf die der Browser zugreifen darf. Prüfen Sie die neuen Namen und lösen Sie Konflikte vor der Ausführung; nutzen Sie bei Bedarf Rückgängig. Die Dateiverarbeitung bleibt lokal. Website-Analysen werden in der Datenschutzerklärung erläutert.",
 		"faq4Q": "Welche Browser werden unterstützt?",
 		"faq4A": "Rename.Tools funktioniert am besten in Chromium-basierten Browsern (Chrome, Edge, Brave, Arc), die die File System Access API für direktes Umbenennen unterstützen. In anderen Browsern können Sie den Beispiel-Testmodus verwenden oder Umbenennungsskripte exportieren.",
 		"faq5Q": "Wie viele Dateien kann es verarbeiten?",
@@ -309,7 +309,7 @@
 		},
 		"privacy": {
 			"title": "Ihre Dateien verlassen niemals\nIhren Browser",
-			"desc": "Rename.Tools ist architektonisch nicht in der Lage, von einem Server aus auf Ihre Dateien zuzugreifen. Alles läuft lokal über die File System Access API."
+			"desc": "Umbenennung und Metadaten werden lokal im Browser verarbeitet, ohne Dateien hochzuladen. Optionale TMDb-Abfragen senden Suchbegriffe an TMDb. Besuchsstatistiken sind von der Dateiverarbeitung getrennt."
 		},
 		"privacyFeatures": {
 			"localProcessing": {
@@ -321,8 +321,8 @@
 				"desc": "Ihre Dateien werden niemals irgendwohin hochgeladen. Wir verwenden die File System Access API, um Dateien direkt auf Ihrem Gerät zu lesen und umzubenennen."
 			},
 			"noRetention": {
-				"title": "Keine Datenspeicherung",
-				"desc": "Schließen Sie den Tab und alles ist weg. Keine Dateidaten werden gespeichert — nur Ihre Sprache, Ihr Design und gespeicherte Voreinstellungen bleiben im localStorage."
+				"title": "Lokaler Dateistatus",
+				"desc": "Dateilisten und Vorschauen bleiben im Browserspeicher. Einstellungen, gespeicherte Vorlagen und optionale TMDb-Zugangsdaten können lokal gespeichert werden. Das Löschen lokaler Daten entfernt keine bereits von Analysediensten verarbeiteten Daten."
 			},
 			"offlineReady": {
 				"title": "Funktioniert offline",
@@ -330,7 +330,7 @@
 			},
 			"openSource": {
 				"title": "Vollständig Open Source",
-				"desc": "Jede Zeile Code ist auf GitHub unter AGPL-3.0 offen. Überprüfen Sie unsere Datenschutzaussagen selbst — kein verstecktes Tracking, keine Analyse-Skripte."
+				"desc": "Der Quellcode steht auf GitHub unter AGPL-3.0 bereit. Lokale Dateiverarbeitung und separate Website-Analysen sind dort einsehbar."
 			},
 			"freeForever": {
 				"title": "Für immer kostenlos",
@@ -338,7 +338,7 @@
 			}
 		},
 		"ctaTitle": "Bereit, intelligenter umzubenennen?",
-		"ctaDesc": "Schließen Sie sich Tausenden von Benutzern an, die mit Rename.Tools Stunden sparen. Kostenlos, privat und läuft direkt in Ihrem Browser.",
+		"ctaDesc": "Prüfen Sie die nächsten Dateinamen in der Vorschau. Kostenlos, quelloffen und lokal im Browser.",
 		"ctaButton": "Jetzt umbenennen",
 		"ctaSubtext": "Für immer kostenlos • Keine Anmeldung • Funktioniert offline",
 		"bestFor": "Ideal für",
@@ -351,7 +351,7 @@
 		"app": {
 			"title": "Batch-Umbenennung",
 			"privacyBadge": "Datenschutzsicher",
-			"privacyDesc": "Alle Operationen laufen lokal in Ihrem Browser. Keine Uploads, kein Lesen von Inhalten, beim Schließen gelöscht.",
+			"privacyDesc": "Umbenennung und Metadaten werden lokal im Browser verarbeitet, ohne Dateien hochzuladen. Optionale TMDb-Abfragen senden Suchbegriffe an TMDb. Besuchsstatistiken sind von der Dateiverarbeitung getrennt.",
 			"browserCompat": "Browser-Kompatibilität",
 			"browserCompatOk": "Ihr Browser unterstützt die File System Access API für direktes lokales Umbenennen.",
 			"browserCompatFail": "Ihr Browser unterstützt die File System Access API nicht. Verwenden Sie den Beispiel-Testmodus oder exportieren Sie Skripte.",
@@ -856,7 +856,7 @@
 	},
 	"about": {
 		"title": "Über dieses Projekt",
-		"description": "Rename.Tools ist ein leistungsstarkes browserbasiertes Batch-Datei-Umbenennungs-Tool. Alle Operationen laufen lokal in Ihrem Browser für vollständigen Datenschutz.",
+		"description": "Ein quelloffenes Werkzeug zum Prüfen und Ausführen von Stapelumbenennungen lokal im Browser.",
 		"techStack": "Tech-Stack",
 		"items": {
 			"framework": "Framework: Next.js 16 mit App Router",
@@ -866,7 +866,13 @@
 			"linting": "Linting & Formatierung: Biome",
 			"theme": "Theme: next-themes mit Dark Mode"
 		},
-		"backHome": "Zurück zur Startseite"
+		"backHome": "Zurück zur Startseite",
+		"maintenanceDesc": "Das Projekt wird im GitHub-Repository chenz24/rename.tools gepflegt. Dort können Sie den AGPL-3.0-Code und neue Versionen einsehen, reproduzierbare Probleme melden und Verbesserungen beitragen.",
+		"maintenanceTitle": "Projekt und Wartung",
+		"sourceLink": "Quellcode",
+		"issuesLink": "Problem melden",
+		"releasesLink": "Versionen",
+		"privacyLink": "Datenschutz und Analysen"
 	},
 	"notFound": {
 		"title": "404",
@@ -883,7 +889,7 @@
 	},
 	"footer": {
 		"tagline": "Ein leistungsstarkes browserbasiertes Batch-Umbenennungs-Tool. Unterstützt Regex, Regelketten, Live-Vorschau — alle Verarbeitung erfolgt lokal mit vollständigem Datenschutz.",
-		"privacyBadge": "100% lokale Verarbeitung, kein Daten-Upload",
+		"privacyBadge": "Lokale Dateiverarbeitung · Kein Datei-Upload",
 		"legalTitle": "Rechtliches",
 		"resourcesTitle": "Ressourcen",
 		"languagesTitle": "Sprachen",
@@ -906,7 +912,7 @@
 		"termsAcceptance": "1. Annahme der Bedingungen",
 		"termsAcceptanceDesc": "Durch den Zugriff auf und die Nutzung von Rename.Tools (im Folgenden als \"der Dienst\" bezeichnet) erklären Sie sich mit diesen Nutzungsbedingungen einverstanden. Wenn Sie mit einem dieser Bedingungen nicht einverstanden sind, beenden Sie bitte sofort die Nutzung des Dienstes. Der Dienst ist weltweit für Benutzer verfügbar, und Sie sind dafür verantwortlich sicherzustellen, dass Ihre Nutzung den geltenden Gesetzen und Vorschriften in Ihrer Gerichtsbarkeit entspricht.",
 		"termsService": "2. Dienstbeschreibung",
-		"termsServiceDesc": "Rename.Tools ist ein kostenloses browserbasiertes Batch-Datei-Umbenennungs-Tool. Zu den Hauptmerkmalen dieses Dienstes gehören: Alle Dateiverarbeitungen werden lokal in Ihrem Browser durchgeführt; wir sammeln, speichern oder übertragen keine Benutzerdateidaten; Unterstützung für verschiedene Umbenennungsregeln einschließlich regulärer Ausdrücke, Sequenzgenerierung und Groß-/Kleinschreibungskonvertierung; Echtzeit-Vorschaufunktion zur Bestätigung der Ergebnisse vor der Ausführung.",
+		"termsServiceDesc": "Umbenennung und Metadaten werden lokal im Browser verarbeitet, ohne Dateien hochzuladen. Optionale TMDb-Abfragen senden Suchbegriffe an TMDb. Besuchsstatistiken sind von der Dateiverarbeitung getrennt.",
 		"termsUserConduct": "3. Benutzerverhalten",
 		"termsUserConductDesc": "Bei der Nutzung dieses Dienstes erklären Sie sich damit einverstanden: den Dienst nicht für illegale Zwecke zu verwenden; nicht zu versuchen, die Sicherheitsmaßnahmen des Dienstes zu beschädigen, zu stören oder zu umgehen; den Dienst nicht zu missbrauchen oder die Interessen anderer Benutzer in irgendeiner Weise zu schädigen; die volle Verantwortung für Ihre Nutzung des Dienstes und dessen Ergebnisse zu übernehmen.",
 		"termsIntellectual": "4. Geistiges Eigentum",
@@ -924,25 +930,25 @@
 		"termsContact": "10. Kontaktinformationen",
 		"termsContactDesc": "Wenn Sie Fragen oder Vorschläge zu diesen Nutzungsbedingungen haben, kontaktieren Sie uns bitte über: GitHub Issues (empfohlen): https://github.com/chenz24/rename.tools/issues",
 		"privacyTitle": "Datenschutzerklärung",
-		"privacyIntro": "Wir verstehen, wie wichtig Datenschutz für Sie ist. Diese Datenschutzerklärung erklärt, wie Rename.Tools mit Ihren Informationen umgeht. Kurz gesagt: Wir sammeln keine Ihrer Daten.",
+		"privacyIntro": "Umbenennung und Metadaten werden lokal im Browser verarbeitet, ohne Dateien hochzuladen. Optionale TMDb-Abfragen senden Suchbegriffe an TMDb. Besuchsstatistiken sind von der Dateiverarbeitung getrennt.",
 		"privacyLocalTitle": "1. Prinzip der lokalen Verarbeitung",
-		"privacyLocalDesc": "Rename.Tools verwendet eine rein browserseitige Architektur, was bedeutet: Alle Dateioperationen werden lokal auf Ihrem Gerät durchgeführt; Ihre Dateien werden niemals auf einen Server hochgeladen; Dateiinhalte, Dateinamen und Metadaten verlassen niemals Ihren Browser; der Dienst funktioniert nach dem ersten Laden offline.",
-		"privacyNoCollection": "2. Informationen, die wir nicht sammeln",
-		"privacyNoCollectionDesc": "Wir sammeln ausdrücklich nicht: Ihre Dateiinhalte, Dateinamen oder Dateimetadaten; Ihre persönlichen Informationen (Name, E-Mail, Telefon usw.); Ihre Geräteinformationen oder Browser-Fingerabdruck; Ihre IP-Adresse oder geografische Position; Ihr Nutzungsverhalten oder Browserverlauf.",
+		"privacyLocalDesc": "Umbenennung und Metadaten werden lokal im Browser verarbeitet, ohne Dateien hochzuladen. Optionale TMDb-Abfragen senden Suchbegriffe an TMDb. Besuchsstatistiken sind von der Dateiverarbeitung getrennt.",
+		"privacyNoCollection": "2. Website-Analysen",
+		"privacyNoCollectionDesc": "Wir verwenden Google Analytics, Umami und Cloudflare Insights für Besuchs- und Leistungsmessungen. Diese Dienste verarbeiten Besuchs- und technische Daten getrennt von lokalen Dateioperationen. Unsere Analyseintegration sendet weder die importierte Dateiliste noch Dateiinhalte.",
 		"privacyNoStorage": "3. Datenspeicherung",
-		"privacyNoStorageDesc": "Dieser Dienst speichert keine Benutzerdaten auf Remote-Servern. In Ihrem lokalen Browser speichern wir nur: Spracheinstellungen (localStorage); Theme-Einstellungen (localStorage); Umbenennungsregel-Voreinstellungen, die Sie freiwillig speichern (localStorage). Wenn Sie den Browser-Tab schließen, werden alle temporären Daten (einschließlich Dateilisten und aktueller Regelkonfigurationen) automatisch gelöscht. Sie können alle lokal gespeicherten Daten jederzeit über Ihre Browsereinstellungen löschen.",
+		"privacyNoStorageDesc": "Dateilisten und Vorschauen bleiben im Browserspeicher. Einstellungen, gespeicherte Vorlagen und optionale TMDb-Zugangsdaten können lokal gespeichert werden. Das Löschen lokaler Daten entfernt keine bereits von Analysediensten verarbeiteten Daten.",
 		"privacyCookies": "4. Verwendung von Cookies",
-		"privacyCookiesDesc": "Dieser Dienst verwendet nur wesentliche funktionale Cookies, um Ihre Sprach- und Theme-Einstellungen zu speichern. Diese Cookies: enthalten keine persönlich identifizierbaren Informationen; werden nicht für Tracking- oder Analysezwecke verwendet; werden nicht mit Dritten geteilt; können jederzeit über Ihre Browsereinstellungen gelöscht werden.",
+		"privacyCookiesDesc": "Die Spracheinstellung verwendet ein funktionales Cookie. Google Analytics kann Cookies zur Besuchsmessung verwenden. Sie können diese in den Datenschutz- und Cookie-Einstellungen Ihres Browsers einschränken.",
 		"privacyThirdParty": "5. Dienste Dritter",
-		"privacyThirdPartyDesc": "TMDb API-Integration: Wenn Sie die Media-Metadaten-Scraping-Funktion verwenden möchten, müssen Sie einen TMDb API-Schlüssel konfigurieren. Dieser Schlüssel wird nur im lokalen Speicher Ihres Browsers gespeichert und nicht an unsere Server gesendet. API-Aufrufe werden direkt von Ihrem Browser an TMDb-Server gesendet; wir nehmen nicht an diesen Kommunikationen teil und protokollieren sie nicht. Hosting: Diese Website wird auf Vercel gehostet. Vercel kann Standard-Serverprotokolle (wie IP-Adressen und Zugriffszeiten) sammeln, die von Vercel gemäß ihrer Datenschutzrichtlinie verwaltet werden. Wir haben keinen Zugriff auf diese Daten.",
+		"privacyThirdPartyDesc": "Die Website wird bei Cloudflare gehostet, das Anfragen und technische Protokolle verarbeitet. Google Analytics, Umami und Cloudflare Insights messen Besuche oder Leistung. Bei Nutzung von TMDb werden aus Mediendateinamen abgeleitete Suchbegriffe und Ihre Zugangsdaten direkt an TMDb gesendet. Dateiinhalte werden nicht hochgeladen.",
 		"privacySecurity": "6. Sicherheitsmaßnahmen",
-		"privacySecurityDesc": "Obwohl wir Ihre Daten nicht speichern, ergreifen wir dennoch die folgenden Maßnahmen zum Schutz der Dienstsicherheit: Verwendung von HTTPS zur Verschlüsselung aller Netzwerkkommunikationen; regelmäßige Aktualisierung von Abhängigkeiten zur Behebung bekannter Sicherheitslücken; Open-Source-Code unterliegt der Community-Überprüfung; keine Verwendung von Tracking- oder Analyse-Skripten Dritter.",
+		"privacySecurityDesc": "Die Website verwendet HTTPS und veröffentlicht ihren Quellcode. Umbenennungen erfolgen lokal; Besuchsstatistiken und optionale TMDb-Anfragen nutzen externe Dienste.",
 		"privacyChildren": "7. Datenschutz für Kinder",
-		"privacyChildrenDesc": "Dieser Dienst richtet sich nicht speziell an Kinder unter 13 Jahren. Da wir keine persönlichen Informationen sammeln, gibt es kein Problem mit der Sammlung von Datenschutzdaten von Kindern.",
+		"privacyChildrenDesc": "Dieses Werkzeug dient der allgemeinen Dateiverwaltung und wurde nicht speziell für Kinder entwickelt.",
 		"privacyChanges": "8. Änderungen der Richtlinie",
 		"privacyChangesDesc": "Wir können diese Datenschutzrichtlinie von Zeit zu Zeit aktualisieren, um Dienständerungen oder gesetzliche Anforderungen widerzuspiegeln. Wesentliche Änderungen werden auf dieser Seite veröffentlicht. Wir empfehlen, diese Seite regelmäßig zu überprüfen, um über unsere Datenschutzpraktiken informiert zu bleiben.",
 		"privacyRights": "9. Ihre Rechte",
-		"privacyRightsDesc": "Da wir Ihre persönlichen Daten nicht sammeln oder speichern, sind traditionelle Betroffenenrechte (wie Zugriff, Berichtigung, Löschung) technisch nicht anwendbar. Sie können jedoch immer: den lokalen Speicher Ihres Browsers löschen, um alle lokal gespeicherten Einstellungen zu entfernen; sich entscheiden, Funktionen nicht zu verwenden, die Drittanbieter-APIs erfordern; unseren Open-Source-Code überprüfen, um unsere Datenschutzaussagen zu verifizieren.",
+		"privacyRightsDesc": "Sie können lokale Browserdaten löschen, Analysen über Browsereinstellungen einschränken und auf TMDb verzichten. Fragen zur Datenverarbeitung können Sie über GitHub Issues stellen. Veröffentlichen Sie dort keine privaten Dateinamen oder Zugangsdaten.",
 		"privacyContact": "10. Kontaktieren Sie uns",
 		"privacyContactDesc": "Wenn Sie Fragen zu dieser Datenschutzrichtlinie haben, kontaktieren Sie uns bitte über GitHub Issues.",
 		"disclaimerTitle": "Haftungsausschluss",
@@ -965,5 +971,13 @@
 		"disclaimerJurisdictionDesc": "Dieser Haftungsausschluss unterliegt den geltenden Gesetzen. Sollte ein Teil dieser Erklärung als ungültig oder nicht durchsetzbar befunden werden, bleiben die übrigen Teile in Kraft.",
 		"disclaimerAcknowledgment": "9. Bestätigung",
 		"disclaimerAcknowledgmentDesc": "Durch die Verwendung von Rename.Tools bestätigen Sie, dass: Sie diesen Haftungsausschluss gelesen und verstanden haben; Sie sich an diesen Haftungsausschluss gebunden fühlen; Sie die Risiken von Batch-Umbenennungsoperationen verstehen; Sie für Ihre Nutzung dieses Tools und dessen Ergebnisse verantwortlich sind."
+	},
+	"guideLinks": {
+		"basics": "Anleitung zur Stapelumbenennung",
+		"photos": "Anleitung für Fotodaten und Nummern",
+		"media": "Anleitung für Musik- und Videonamen",
+		"regex": "Anleitung für reguläre Ausdrücke",
+		"sequence": "Anleitung zur Nummerierung",
+		"english": "Englisch"
 	}
 }

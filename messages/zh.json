@@ -1,14 +1,14 @@
 {
 	"metadata": {
 		"title": "Rename.Tools - 免费在线批量重命名工具 | 无需上传，本地处理，隐私安全",
-		"description": "免费在线批量文件重命名工具，支持正则表达式、序号生成、规则链组合。实时预览，一键重命名数千文件。100%本地处理，无需上传，零追踪，隐私安全有保障。",
+		"description": "免费在线批量重命名文件，支持正则、序号和实时预览。文件在浏览器本地处理，无需上传。",
 		"app": {
 			"title": "Rename.Tools | 在线批量文件重命名工具 - 免费、快速、隐私安全",
 			"description": "在浏览器中瞬间重命名数千文件，支持正则表达式、序号生成、规则链组合。实时预览、撤销/重做、元数据提取。100%本地处理，文件不离开您的设备。永久免费。"
 		},
 		"about": {
 			"title": "关于 - Rename.Tools",
-			"description": "了解 Rename.Tools，这是一个基于 Next.js、React 和现代 Web 技术构建的浏览器端批量文件重命名工具。"
+			"description": "一款开源工具，用于在浏览器本地预览并执行批量文件重命名。"
 		},
 		"features": {
 			"title": "批量文件重命名功能 | 正则、序号、实时预览 - Rename.Tools",
@@ -20,7 +20,7 @@
 		},
 		"privacy": {
 			"title": "隐私政策 - Rename.Tools",
-			"description": "我们的隐私政策：我们不收集任何数据。所有文件操作都在您的浏览器本地运行。"
+			"description": "文件重命名和元数据提取在浏览器本地完成，无需上传文件。可选的 TMDb 查询会向 TMDb 发送搜索词。网站访问统计与文件处理相互独立。"
 		},
 		"terms": {
 			"title": "服务条款 - Rename.Tools",
@@ -45,7 +45,7 @@
 		"heroFeature1": "7 种规则类型",
 		"heroFeature2": "实时预览",
 		"heroFeature3": "零上传",
-		"heroDescription": "组合正则、序号、大小写转换为强大的规则链。所有操作均在浏览器本地运行——文件永远不会离开你的设备。",
+		"heroDescription": "免费在线批量重命名文件，支持正则、序号和实时预览。文件在浏览器本地处理，无需上传。",
 		"cta": "开始重命名",
 		"viewOnGithub": "在 GitHub 查看",
 		"githubStars": "开源项目",
@@ -60,7 +60,7 @@
 		"hl3Title": "冲突检测",
 		"hl3Desc": "重命名前自动发现重复文件名，防止意外覆盖",
 		"hl4Title": "100% 本地 & 隐私",
-		"hl4Desc": "文件永远不离开你的设备。无上传、无服务端处理、无数据留存——关闭标签页即清除一切",
+		"hl4Desc": "文件重命名和元数据提取在浏览器本地完成，无需上传文件。可选的 TMDb 查询会向 TMDb 发送搜索词。网站访问统计与文件处理相互独立。",
 		"hl5Title": "撤销与脚本导出",
 		"hl5Desc": "内置撤销/重做，还可导出为 Bash 或 PowerShell 脚本，支持离线执行与回滚",
 		"hl6Title": "免费且开源",
@@ -74,9 +74,9 @@
 		"faq1Q": "Rename.Tools 真的免费吗？",
 		"faq1A": "是的，完全免费且开源。没有高级版、没有试用期、没有隐藏费用。完整源代码在 GitHub 上以 AGPL-3.0 许可协议公开。",
 		"faq2Q": "我的文件会被上传到服务器吗？",
-		"faq2A": "不会。Rename.Tools 完全在浏览器中运行。文件通过 File System Access API 访问，从不离开你的设备。不存在任何服务端处理。",
+		"faq2A": "文件重命名和元数据提取在浏览器本地完成，无需上传文件。可选的 TMDb 查询会向 TMDb 发送搜索词。网站访问统计与文件处理相互独立。",
 		"faq3Q": "为什么说它是安全的？",
-		"faq3A": "Rename.Tools 从架构上就不可能从服务器访问你的文件。所有处理都通过 File System Access API 在浏览器本地完成，没有任何数据被传输、存储或记录。代码完全开源，你可以自行验证。此外，内置的撤销功能和实时预览确保你可以在执行前检查并随时回退更改。",
+		"faq3A": "由你选择允许浏览器访问的文件。执行前先检查新名称并解决冲突，必要时使用撤销。文件处理在本地完成，网站访问统计另见隐私政策。",
 		"faq4Q": "支持哪些浏览器？",
 		"faq4A": "Rename.Tools 在基于 Chromium 的浏览器（Chrome、Edge、Brave、Arc）中效果最佳，这些浏览器支持 File System Access API 进行直接重命名。在其他浏览器中，你可以使用示例测试模式或导出重命名脚本。",
 		"faq5Q": "可以处理多少文件？",
@@ -313,7 +313,7 @@
 		},
 		"privacy": {
 			"title": "你的文件，\n从不离开浏览器",
-			"desc": "Rename.Tools 从架构上就不可能从服务器访问你的文件。一切通过 File System Access API 在本地运行。"
+			"desc": "文件重命名和元数据提取在浏览器本地完成，无需上传文件。可选的 TMDb 查询会向 TMDb 发送搜索词。网站访问统计与文件处理相互独立。"
 		},
 		"privacyFeatures": {
 			"localProcessing": {
@@ -325,8 +325,8 @@
 				"desc": "你的文件永远不会被上传到任何地方。我们使用 File System Access API 直接在你的设备上读取和重命名文件。"
 			},
 			"noRetention": {
-				"title": "无数据留存",
-				"desc": "关闭标签页即清除一切。没有文件数据被持久化——只有语言、主题和保存的预设留在 localStorage。"
+				"title": "本地文件状态",
+				"desc": "文件列表与预览保存在浏览器内存中。语言、主题、已保存预设和可选的 TMDb 凭据可能保存在本地。你可以在浏览器中清除本地设置，但这不会删除统计服务已处理的数据。"
 			},
 			"offlineReady": {
 				"title": "离线可用",
@@ -334,7 +334,7 @@
 			},
 			"openSource": {
 				"title": "完全开源",
-				"desc": "每一行代码都在 GitHub 上以 AGPL-3.0 许可证开放。亲自验证我们的隐私声明——无隐藏追踪，无分析脚本。"
+				"desc": "源代码以 AGPL-3.0 许可证公开在 GitHub，可检查本地文件处理与独立的网站统计集成。"
 			},
 			"freeForever": {
 				"title": "永久免费",
@@ -342,7 +342,7 @@
 			}
 		},
 		"ctaTitle": "准备好更智能地重命名了吗？",
-		"ctaDesc": "加入数千用户的行列，用 Rename.Tools 节省数小时时间。免费、隐私、直接在浏览器中运行。",
+		"ctaDesc": "先预览下一批文件的新名称。免费、开源，在浏览器本地处理。",
 		"ctaButton": "立即开始重命名",
 		"ctaSubtext": "永久免费 • 无需注册 • 离线可用",
 		"bestFor": "适用场景",
@@ -355,7 +355,7 @@
 		"app": {
 			"title": "批量重命名",
 			"privacyBadge": "隐私安全",
-			"privacyDesc": "所有操作均在浏览器本地运行。无上传，无内容读取，关闭即清除。",
+			"privacyDesc": "文件重命名和元数据提取在浏览器本地完成，无需上传文件。可选的 TMDb 查询会向 TMDb 发送搜索词。网站访问统计与文件处理相互独立。",
 			"browserCompat": "浏览器兼容性",
 			"browserCompatOk": "你的浏览器支持 File System Access API，可直接在本地重命名。",
 			"browserCompatFail": "你的浏览器不支持 File System Access API，请使用示例测试模式或导出脚本。",
@@ -860,7 +860,7 @@
 	},
 	"about": {
 		"title": "关于此项目",
-		"description": "Rename.Tools 是一款强大的浏览器端文件批量重命名工具。所有操作在本地浏览器中运行，全面保护你的隐私。",
+		"description": "一款开源工具，用于在浏览器本地预览并执行批量文件重命名。",
 		"techStack": "技术栈",
 		"items": {
 			"framework": "框架：Next.js 16 + App Router",
@@ -870,7 +870,13 @@
 			"linting": "代码检查与格式化：Biome",
 			"theme": "主题：next-themes 暗黑模式"
 		},
-		"backHome": "返回首页"
+		"backHome": "返回首页",
+		"maintenanceDesc": "项目通过 chenz24/rename.tools GitHub 仓库维护。你可以查看 AGPL-3.0 源码、关注版本发布、反馈可复现的问题并参与改进。",
+		"maintenanceTitle": "项目与维护",
+		"sourceLink": "查看源码",
+		"issuesLink": "反馈问题",
+		"releasesLink": "版本发布",
+		"privacyLink": "隐私与统计"
 	},
 	"notFound": {
 		"title": "404",
@@ -887,7 +893,7 @@
 	},
 	"footer": {
 		"tagline": "强大的浏览器端批量重命名工具。支持正则表达式、规则链、实时预览 — 所有处理均在本地完成，完全保护隐私。",
-		"privacyBadge": "100% 本地处理，零数据上传",
+		"privacyBadge": "本地文件处理 · 无需上传文件",
 		"legalTitle": "法律",
 		"resourcesTitle": "资源",
 		"languagesTitle": "语言",
@@ -910,7 +916,7 @@
 		"termsAcceptance": "1. 接受条款",
 		"termsAcceptanceDesc": "访问和使用 Rename.Tools（以下简称「本服务」）即表示你同意受这些服务条款的约束。如果你不同意任何条款，请立即停止使用本服务。本服务面向全球用户提供，你需确保使用本服务符合你所在地区的法律法规。",
 		"termsService": "2. 服务描述",
-		"termsServiceDesc": "Rename.Tools 是一款免费的浏览器端文件批量重命名工具。本服务的核心特点包括：所有文件处理均在用户本地浏览器中完成；我们不收集、存储或传输任何用户文件数据；支持多种重命名规则，包括正则表达式、序号生成、大小写转换等；提供实时预览功能，让用户在执行前确认结果。",
+		"termsServiceDesc": "文件重命名和元数据提取在浏览器本地完成，无需上传文件。可选的 TMDb 查询会向 TMDb 发送搜索词。网站访问统计与文件处理相互独立。",
 		"termsUserConduct": "3. 用户行为准则",
 		"termsUserConductDesc": "使用本服务时，你同意：不将本服务用于任何非法目的；不尝试破坏、干扰或绕过本服务的安全措施；不滥用本服务或以任何方式损害其他用户的利益；对自己使用本服务的行为和结果承担全部责任。",
 		"termsIntellectual": "4. 知识产权",
@@ -928,25 +934,25 @@
 		"termsContact": "10. 联系方式",
 		"termsContactDesc": "如对这些服务条款有任何疑问或建议，请通过以下方式联系我们：GitHub Issues（推荐）：https://github.com/chenz24/rename.tools/issues",
 		"privacyTitle": "隐私政策",
-		"privacyIntro": "我们深知隐私对你的重要性。本隐私政策说明 Rename.Tools 如何处理你的信息。简而言之：我们不收集你的任何数据。",
+		"privacyIntro": "文件重命名和元数据提取在浏览器本地完成，无需上传文件。可选的 TMDb 查询会向 TMDb 发送搜索词。网站访问统计与文件处理相互独立。",
 		"privacyLocalTitle": "1. 本地处理原则",
-		"privacyLocalDesc": "Rename.Tools 采用纯浏览器端架构，这意味着：所有文件操作都在你的设备本地完成；你的文件永远不会被上传到任何服务器；文件内容、文件名和元数据都不会离开你的浏览器；即使在离线状态下，本服务也能正常工作（首次加载后）。",
-		"privacyNoCollection": "2. 我们不收集的信息",
-		"privacyNoCollectionDesc": "我们明确声明不收集以下信息：你的文件内容、文件名或任何文件元数据；你的个人身份信息（姓名、邮箱、电话等）；你的设备信息或浏览器指纹；你的 IP 地址或地理位置；你的使用行为或浏览历史。",
+		"privacyLocalDesc": "文件重命名和元数据提取在浏览器本地完成，无需上传文件。可选的 TMDb 查询会向 TMDb 发送搜索词。网站访问统计与文件处理相互独立。",
+		"privacyNoCollection": "2. 网站访问统计",
+		"privacyNoCollectionDesc": "我们使用 Google Analytics、Umami 和 Cloudflare Insights 统计网站访问与性能。这些服务处理访问和技术数据，与本地文件操作分开。我们的统计集成不会发送你导入的文件列表或文件内容。",
 		"privacyNoStorage": "3. 数据存储",
-		"privacyNoStorageDesc": "本服务不会将任何用户数据持久化存储到远程服务器。在本地浏览器中，我们仅存储：语言偏好设置（localStorage）；主题设置（localStorage）；你自愿保存的重命名规则预设（localStorage）。关闭浏览器标签页后，所有临时数据（包括文件列表和当前规则配置）都会被自动清除。你可以随时通过浏览器设置清除所有本地存储的数据。",
+		"privacyNoStorageDesc": "文件列表与预览保存在浏览器内存中。语言、主题、已保存预设和可选的 TMDb 凭据可能保存在本地。你可以在浏览器中清除本地设置，但这不会删除统计服务已处理的数据。",
 		"privacyCookies": "4. Cookie 使用",
-		"privacyCookiesDesc": "本服务仅使用必要的功能性 Cookie 来存储你的语言和主题偏好。这些 Cookie：不包含任何个人身份信息；不用于跟踪或分析目的；不会与任何第三方共享；你可以通过浏览器设置随时删除。",
+		"privacyCookiesDesc": "语言偏好使用功能性 Cookie。Google Analytics 可能使用 Cookie 统计访问。你可以通过浏览器的 Cookie 和隐私设置限制这些 Cookie。",
 		"privacyThirdParty": "5. 第三方服务",
-		"privacyThirdPartyDesc": "TMDb API 集成：如果你选择使用影视元数据刮削功能，需要配置 TMDb API 密钥。该密钥仅存储在你的浏览器本地存储中，不会发送到我们的服务器。API 调用直接从你的浏览器发起到 TMDb 服务器，我们不参与或记录这些通信。托管服务：本网站托管在 Vercel 上。Vercel 可能会收集标准的服务器日志（如 IP 地址、访问时间），这些日志由 Vercel 根据其隐私政策管理，我们无法访问这些数据。",
+		"privacyThirdPartyDesc": "网站托管于 Cloudflare，由其处理网站请求与技术日志。Google Analytics、Umami 和 Cloudflare Insights 提供访问或性能统计。使用 TMDb 时，从媒体文件名提取的搜索词及你配置的凭据会直接发送给 TMDb，不会上传文件内容。",
 		"privacySecurity": "6. 安全措施",
-		"privacySecurityDesc": "虽然我们不存储你的数据，但我们仍采取以下措施保护服务安全：使用 HTTPS 加密所有网络通信；定期更新依赖项以修复已知安全漏洞；开源代码接受社区审查；不使用任何第三方跟踪或分析脚本。",
+		"privacySecurityDesc": "网站使用 HTTPS 并公开源代码供检查。重命名在本地运行；网站统计和可选的 TMDb 请求会涉及外部服务。",
 		"privacyChildren": "7. 儿童隐私",
-		"privacyChildrenDesc": "本服务不专门针对 13 岁以下儿童。由于我们不收集任何个人信息，因此不存在儿童隐私数据的收集问题。",
+		"privacyChildrenDesc": "本工具用于一般文件管理，并非专为儿童设计。",
 		"privacyChanges": "8. 政策变更",
 		"privacyChangesDesc": "我们可能会不时更新本隐私政策以反映服务变化或法律要求。任何重大变更将在本页面公布。我们建议你定期查看本页面以了解最新的隐私实践。",
 		"privacyRights": "9. 你的权利",
-		"privacyRightsDesc": "由于我们不收集或存储你的个人数据，传统的数据主体权利（如访问、更正、删除）在技术上不适用。但是，你始终可以：清除浏览器本地存储来删除所有本地保存的偏好设置；选择不使用需要第三方 API 的功能；查看我们的开源代码以验证我们的隐私声明。",
+		"privacyRightsDesc": "你可以清除浏览器本地数据，通过浏览器隐私控制限制统计，并选择不使用 TMDb。有关网站信息处理的问题，请通过 GitHub Issues 联系维护者。请勿在公开问题中包含私密文件名或凭据。",
 		"privacyContact": "10. 联系我们",
 		"privacyContactDesc": "如对本隐私政策有任何疑问，请通过 GitHub Issues 联系我们。",
 		"disclaimerTitle": "免责声明",
@@ -969,5 +975,13 @@
 		"disclaimerJurisdictionDesc": "本免责声明受中华人民共和国法律管辖。如果本声明的任何部分被认定为无效或不可执行，其余部分仍然有效。",
 		"disclaimerAcknowledgment": "9. 确认声明",
 		"disclaimerAcknowledgmentDesc": "使用 Rename.Tools 即表示你确认：你已阅读并理解本免责声明；你同意受本免责声明的约束；你理解批量重命名操作的风险；你将对自己使用本工具的行为和结果负责。"
+	},
+	"guideLinks": {
+		"basics": "批量重命名入门",
+		"photos": "照片日期与编号指南",
+		"media": "音乐与视频命名指南",
+		"regex": "正则重命名指南",
+		"sequence": "序号命名指南",
+		"english": "英文"
 	}
 }
