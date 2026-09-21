@@ -9,7 +9,7 @@
 		"dev": "next dev --turbopack",
 		"build": "next build --webpack",
 		"generate:og": "node --import tsx scripts/generate-opengraph-image.tsx",
-		"build:cf": "opennextjs-cloudflare build",
+		"build:cf": "opennextjs-cloudflare build && opennextjs-cloudflare populateCache local",
 		"start": "next start",
 		"lint": "biome lint .",
 		"format": "biome format --write .",
