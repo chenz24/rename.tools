@@ -132,13 +132,12 @@ export const guides: Guide[] = [
 						title: "Start in Sample Test Mode",
 						body: [
 							"Sample Test Mode is the safest way to learn the interface because it does not ask for file permissions and cannot change anything on disk. You paste or generate filenames, then test the same rules you would use on real files.",
-							"For a first run, use a mixed set of names: a few camera files, one document, and one video filename. Mixed examples make it obvious which rules are too broad and which ones only affect the intended files.",
+							"Start with IMG_0421.jpg and IMG_0422.jpg, one per line, to reproduce the screenshots and the next rule chain. Later, add documents and video filenames to check how your rules affect different names.",
 						],
 						image: {
-							src: "/guides/screenshots/app-sample-files.png",
-							alt: "Rename.Tools sample test mode with six imported filenames and an unchanged preview",
-							caption:
-								"Interface reference. Use the exact settings and expected filenames in the text for this example.",
+							src: "/guides/screenshots/samples-en.png",
+							alt: "Two imported camera filenames, before adding rules.",
+							caption: "Two imported camera filenames, before adding rules.",
 						},
 						steps: [
 							"Open the app and click Try Sample Test Mode in the file panel.",
@@ -151,14 +150,15 @@ export const guides: Guide[] = [
 					{
 						title: "Build one rule at a time",
 						body: [
+							"To enter a template below, click Add Text, paste the complete template including braces, then press Enter or Tab to apply it. It becomes draggable text and variable blocks; check the updated preview before continuing.",
 							"A reliable bulk rename workflow is a sequence of small, reviewable edits. Add the cleanup rule first, check the preview, then add numbering. If the preview changes something unexpected, the last rule you added is the easiest place to look.",
 							"The first rule demonstrates removing a prefix. The Sequence template then replaces the whole name with a fixed date and a padded number; the prefix cleanup is optional when you use this whole-name template.",
 						],
 						image: {
-							src: "/guides/screenshots/app-sequence-preview.png",
-							alt: "Rename.Tools rule chain with Find and Replace plus Sequence rules updating the preview",
+							src: "/guides/screenshots/basics-en.png",
+							alt: "Fixed-date template produces 2026-05-22_001.jpg and 2026-05-22_002.jpg. Scroll the rule panel to inspect each rule.",
 							caption:
-								"Interface reference. Use the exact settings and expected filenames in the text for this example.",
+								"Fixed-date template produces 2026-05-22_001.jpg and 2026-05-22_002.jpg. Scroll the rule panel to inspect each rule.",
 						},
 						steps: [
 							"Keep Scope set to Name. Add Find & Replace: Find IMG_, Replace with empty. The first preview becomes 0421.jpg.",
@@ -241,12 +241,12 @@ export const guides: Guide[] = [
 						title: "先用示例测试模式练习",
 						body: [
 							"示例测试模式是学习界面最安全的方式：它不需要文件权限，也不会修改磁盘上的真实文件。你只需要粘贴或生成一些文件名，就能测试和真实文件完全一样的规则链。",
-							"第一次练习建议放入混合文件名：几张相机照片、一个文档和一个视频文件名。混合示例能帮你发现规则是否过宽，是否误伤了不该处理的文件。",
+							"先每行输入一个文件名：IMG_0421.jpg、IMG_0422.jpg，以复现截图和下一节规则链。之后可加入文档和视频文件名，检查规则对不同名称的影响。",
 						],
 						image: {
-							src: "/guides/screenshots/app-sample-files.png",
-							alt: "Rename.Tools 示例测试模式，已导入 6 个示例文件并显示未变化的预览",
-							caption: "界面参考图。复现本例时，以正文中的完整设置和预期文件名为准。",
+							src: "/guides/screenshots/samples-zh.png",
+							alt: "导入两个相机文件名，尚未添加规则。",
+							caption: "导入两个相机文件名，尚未添加规则。",
 						},
 						steps: [
 							"打开应用，在文件面板点击“试用示例测试模式”。",
@@ -259,13 +259,15 @@ export const guides: Guide[] = [
 					{
 						title: "一次只添加一条规则",
 						body: [
+							"输入下文模板时，点击“添加文本”，粘贴含花括号的完整模板，再按 Enter 或 Tab 确认。模板会拆成可拖动的文本与变量块；确认预览已更新后再继续。",
 							"可靠的批量重命名应该由一组小而可检查的步骤组成。先添加清理规则，检查预览，再添加编号规则。如果预览出现异常，最近添加的规则通常就是排查入口。",
 							"第一条规则用于演示移除前缀。随后序号模板将整个名称替换为固定日期与补零编号；使用这种整名模板时，前缀清理步骤实际上可以省略。",
 						],
 						image: {
-							src: "/guides/screenshots/app-sequence-preview.png",
-							alt: "Rename.Tools 规则链中包含查找替换和序号规则，预览面板实时显示结果",
-							caption: "界面参考图。复现本例时，以正文中的完整设置和预期文件名为准。",
+							src: "/guides/screenshots/basics-zh.png",
+							alt: "固定日期模板生成 2026-05-22_001.jpg 和 2026-05-22_002.jpg。滚动规则面板可查看每条规则。",
+							caption:
+								"固定日期模板生成 2026-05-22_001.jpg 和 2026-05-22_002.jpg。滚动规则面板可查看每条规则。",
 						},
 						steps: [
 							"保持作用域为“名称”。添加查找替换：查找 IMG_，替换为空。第一步预览应为 0421.jpg。",
@@ -375,14 +377,15 @@ export const guides: Guide[] = [
 					{
 						title: "Build the rule chain",
 						body: [
+							"To enter a template below, click Add Text, paste the complete template including braces, then press Enter or Tab to apply it. It becomes draggable text and variable blocks; check the updated preview before continuing.",
 							"Use Find & Replace or Remove to strip camera prefixes when they do not carry useful meaning. Then use Sequence with padding so every file receives a predictable number.",
 							"For the fixed-date example, keep import order. The Sequence rule can also sort by filename or modified time before numbering. EXIF date is available in a naming template, but there is currently no EXIF-date sort option.",
 						],
 						image: {
-							src: "/guides/screenshots/app-sequence-preview.png",
-							alt: "Rename.Tools photo cleanup workflow showing camera filenames converted with a sequence rule",
+							src: "/guides/screenshots/photos-en.png",
+							alt: "The fixed-date Tokyo template replaces the name and preserves .JPG and .HEIC.",
 							caption:
-								"Interface reference. Use the exact settings and expected filenames in the text for this example.",
+								"The fixed-date Tokyo template replaces the name and preserves .JPG and .HEIC.",
 						},
 						steps: [
 							"Import DSC_0007.JPG and IMG_1842.HEIC in that order, and keep Scope on Name.",
@@ -471,13 +474,14 @@ export const guides: Guide[] = [
 					{
 						title: "构建规则链",
 						body: [
+							"输入下文模板时，点击“添加文本”，粘贴含花括号的完整模板，再按 Enter 或 Tab 确认。模板会拆成可拖动的文本与变量块；确认预览已更新后再继续。",
 							"如果相机前缀没有实际意义，可以用查找替换或删除规则清理掉。然后用带补零的序号规则，让每张照片获得稳定编号。",
 							"固定日期示例使用导入顺序。序号规则也可以先按文件名或修改时间排序再编号。EXIF 日期可用于命名模板，但目前没有按 EXIF 日期排序的选项。",
 						],
 						image: {
-							src: "/guides/screenshots/app-sequence-preview.png",
-							alt: "Rename.Tools 照片清理工作流，通过序号规则转换相机文件名",
-							caption: "界面参考图。复现本例时，以正文中的完整设置和预期文件名为准。",
+							src: "/guides/screenshots/photos-zh.png",
+							alt: "固定日期与 tokyo 模板替换名称，并保留 .JPG、.HEIC 扩展名。",
+							caption: "固定日期与 tokyo 模板替换名称，并保留 .JPG、.HEIC 扩展名。",
 						},
 						steps: [
 							"按顺序导入 DSC_0007.JPG、IMG_1842.HEIC，保持作用域为“名称”。",
@@ -583,10 +587,10 @@ export const guides: Guide[] = [
 							"Keep the Flags field intentional. Use i for case-insensitive matching, g when you want every occurrence replaced, and avoid m unless you are working with multi-line text pasted into filenames.",
 						],
 						image: {
-							src: "/guides/screenshots/app-regex-preview.png",
-							alt: "Rename.Tools regex rule extracting a video episode code and updating the preview",
+							src: "/guides/screenshots/regex-en.png",
+							alt: "Date capture groups and space cleanup produce invoice_client-a_2026-05-22.pdf.",
 							caption:
-								"Interface reference. Use the exact settings and expected filenames in the text for this example.",
+								"Date capture groups and space cleanup produce invoice_client-a_2026-05-22.pdf.",
 						},
 						steps: [
 							"Keep Scope on Name. Add Regex Replace; enter a pattern without surrounding / delimiters. Each recipe below is independent.",
@@ -683,9 +687,9 @@ export const guides: Guide[] = [
 							"Flags 字段也要有意识地设置。大小写不统一时用 i，需要替换所有出现位置时用 g；除非处理多行文本，否则通常不需要 m。",
 						],
 						image: {
-							src: "/guides/screenshots/app-regex-preview.png",
-							alt: "Rename.Tools 正则规则提取视频剧集编号，并在预览中显示更新结果",
-							caption: "界面参考图。复现本例时，以正文中的完整设置和预期文件名为准。",
+							src: "/guides/screenshots/regex-zh.png",
+							alt: "日期捕获组加空格清理，生成 invoice_client-a_2026-05-22.pdf。",
+							caption: "日期捕获组加空格清理，生成 invoice_client-a_2026-05-22.pdf。",
 						},
 						steps: [
 							"保持作用域为“名称”。添加正则替换，模式两侧不加 /。以下配方分别使用，不是依次叠加的规则链。",
@@ -768,15 +772,15 @@ export const guides: Guide[] = [
 					{
 						title: "Use padding for reliable sorting",
 						body: [
+							"To enter a template below, click Add Text, paste the complete template including braces, then press Enter or Tab to apply it. It becomes draggable text and variable blocks; check the updated preview before continuing.",
 							"Without padding, file managers may sort 10 before 2. Padding fixes that by making every number the same width, so alphabetical sorting matches numeric order.",
 							"Use 2 digits for small albums, 3 digits for hundreds of files, and 4 digits when the folder may grow over time. Choosing one extra digit is usually harmless; choosing too few can create a messy rename later.",
 							"Padding is especially important when files will be uploaded to cloud drives, shared with clients, imported into editing software, or archived in systems that use simple alphabetical ordering.",
 						],
 						image: {
-							src: "/guides/screenshots/app-sequence-preview.png",
-							alt: "Rename.Tools sequence rule preview with zero-padded numbers applied to sample files",
-							caption:
-								"Interface reference. Use the exact settings and expected filenames in the text for this example.",
+							src: "/guides/screenshots/sequence-en.png",
+							alt: "Preserve original numbers keeps 1, 2 and 10 as 001, 002 and 010.",
+							caption: "Preserve original numbers keeps 1, 2 and 10 as 001, 002 and 010.",
 						},
 						examples: [
 							{
@@ -867,14 +871,15 @@ export const guides: Guide[] = [
 					{
 						title: "用补零保证可靠排序",
 						body: [
+							"输入下文模板时，点击“添加文本”，粘贴含花括号的完整模板，再按 Enter 或 Tab 确认。模板会拆成可拖动的文本与变量块；确认预览已更新后再继续。",
 							"如果不补零，某些文件管理器可能把 10 排在 2 前面。补零能让所有数字长度一致，让字母排序和数字顺序保持一致。",
 							"小相册可用 2 位，数百个文件建议 3 位，如果文件夹未来还会增长，可以用 4 位。多留一位通常没什么坏处；位数太少，后续反而可能需要再次整理。",
 							"当文件要上传网盘、交付客户、导入剪辑软件或放入只按字母排序的归档系统时，补零尤其重要。",
 						],
 						image: {
-							src: "/guides/screenshots/app-sequence-preview.png",
-							alt: "Rename.Tools 序号规则预览，示例文件被添加补零编号",
-							caption: "界面参考图。复现本例时，以正文中的完整设置和预期文件名为准。",
+							src: "/guides/screenshots/sequence-zh.png",
+							alt: "保留原有序号将 1、2、10 补零为 001、002、010。",
+							caption: "保留原有序号将 1、2、10 补零为 001、002、010。",
 						},
 						examples: [
 							{
@@ -982,6 +987,7 @@ export const guides: Guide[] = [
 						],
 						steps: [
 							"Import one album at a time when track order matters.",
+							"To enter a template below, click Add Text, paste the complete template including braces, then press Enter or Tab to apply it. It becomes draggable text and variable blocks; check the updated preview before continuing.",
 							"Load metadata if the files have reliable audio tags.",
 							"Add a Sequence rule and set its template to {media.track}. {media.artist} - {media.title}. A non-empty template replaces the whole name; this template uses tag track numbers, not generated {n} numbers.",
 							"Keep Scope set to Name so audio extensions remain unchanged.",
@@ -1008,10 +1014,10 @@ export const guides: Guide[] = [
 							"For media servers, consistency matters more than clever wording. Choose one pattern for a library and reuse it across seasons.",
 						],
 						image: {
-							src: "/guides/screenshots/app-regex-preview.png",
-							alt: "Rename.Tools regex preview converting a noisy episode filename into a cleaner S01E03 name",
+							src: "/guides/screenshots/media-en.png",
+							alt: "Regex, separator cleanup and Title Case produce Show Name S01E03.mkv. Scroll the rule panel to see all three rules.",
 							caption:
-								"Interface reference. Use the exact settings and expected filenames in the text for this example.",
+								"Regex, separator cleanup and Title Case produce Show Name S01E03.mkv. Scroll the rule panel to see all three rules.",
 						},
 						steps: [
 							"Keep Scope on Name. Add Regex Replace: ^(.+)\\.s(\\d+)e(\\d+).*$, replacement $1 S$2E$3, flags i.",
@@ -1074,6 +1080,7 @@ export const guides: Guide[] = [
 						],
 						steps: [
 							"曲目顺序重要时，一次只导入一个专辑。",
+							"输入下文模板时，点击“添加文本”，粘贴含花括号的完整模板，再按 Enter 或 Tab 确认。模板会拆成可拖动的文本与变量块；确认预览已更新后再继续。",
 							"如果音频标签可靠，先加载元数据。",
 							"添加序号规则，将模板设为 {media.track}. {media.artist} - {media.title}。非空模板替换整个名称；这里使用标签中的曲目编号，不是新生成的 {n}。",
 							"保持作用域为“名称”，避免音频扩展名被修改。",
@@ -1100,9 +1107,10 @@ export const guides: Guide[] = [
 							"对媒体服务器来说，一致性比聪明的命名更重要。给一个媒体库选择一种格式，并跨季复用。",
 						],
 						image: {
-							src: "/guides/screenshots/app-regex-preview.png",
-							alt: "Rename.Tools 正则预览，把杂乱的剧集文件名转换成更清晰的 S01E03 名称",
-							caption: "界面参考图。复现本例时，以正文中的完整设置和预期文件名为准。",
+							src: "/guides/screenshots/media-zh.png",
+							alt: "正则、分隔符清理和标题式大小写生成 Show Name S01E03.mkv。滚动规则面板可查看全部三条规则。",
+							caption:
+								"正则、分隔符清理和标题式大小写生成 Show Name S01E03.mkv。滚动规则面板可查看全部三条规则。",
 						},
 						steps: [
 							"保持作用域为“名称”。添加正则替换：模式 ^(.+)\\.s(\\d+)e(\\d+).*$，替换为 $1 S$2E$3，标志 i。",

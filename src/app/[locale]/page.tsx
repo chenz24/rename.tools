@@ -138,6 +138,7 @@ function LandingContent({ locale }: { locale: string }) {
 						<div className="mt-8 flex flex-wrap items-center gap-4 sm:mt-10">
 							<Link
 								href="/app"
+								prefetch={false}
 								className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-foreground px-6 py-3 text-sm font-medium text-background transition-opacity hover:opacity-90 sm:w-auto"
 							>
 								{t("cta")}
@@ -229,18 +230,18 @@ function LandingContent({ locale }: { locale: string }) {
 							<Image
 								src="/screenshots/product_screenshot.png"
 								alt="Rename.Tools Rule Chain Interface"
-								width={1200}
-								height={750}
-								className="w-full block dark:hidden"
-								priority
+								width={3348}
+								height={1844}
+								sizes="(max-width: 639px) calc(100vw - 44px), (max-width: 1023px) calc(100vw - 64px), 960px"
+								className="block h-auto w-full dark:hidden"
 							/>
 							<Image
 								src="/screenshots/product_screenshot_dark.png"
 								alt="Rename.Tools Rule Chain Interface"
-								width={1200}
-								height={750}
-								className="w-full hidden dark:block"
-								priority
+								width={3354}
+								height={1852}
+								sizes="(max-width: 639px) calc(100vw - 44px), (max-width: 1023px) calc(100vw - 64px), 960px"
+								className="hidden h-auto w-full dark:block"
 							/>
 						</div>
 					</div>
@@ -267,6 +268,7 @@ function LandingContent({ locale }: { locale: string }) {
 					<div className="mt-6 sm:mt-8">
 						<Link
 							href="/app"
+							prefetch={false}
 							className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-foreground px-6 py-3 text-sm font-medium text-background transition-opacity hover:opacity-90 sm:w-auto"
 						>
 							{t("ctaButton")}

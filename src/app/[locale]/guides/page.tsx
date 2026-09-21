@@ -110,6 +110,7 @@ export default async function GuidesPage({ params }: Props) {
 										alt={primaryImage.alt}
 										width={1280}
 										height={720}
+										sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1023px) 33vw, 314px"
 										className="aspect-video w-full object-cover"
 									/>
 								)}
@@ -181,6 +182,7 @@ export default async function GuidesPage({ params }: Props) {
 					<div className="mt-6">
 						<Link
 							href="/app"
+							prefetch={false}
 							className="inline-flex items-center gap-2 rounded-lg bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-90"
 						>
 							{copy.startRenaming}

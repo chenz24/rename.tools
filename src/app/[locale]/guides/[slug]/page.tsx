@@ -233,7 +233,8 @@ export default async function GuideDetailPage({ params }: Props) {
 												alt={section.image.alt}
 												width={1280}
 												height={720}
-												className="block w-full"
+												sizes="(max-width: 639px) calc(100vw - 32px), (max-width: 1023px) calc(100vw - 48px), 676px"
+												className="block h-auto w-full"
 											/>
 											{section.image.caption && (
 												<figcaption className="border-t bg-muted/30 px-4 py-3 text-sm leading-relaxed text-muted-foreground">
@@ -313,6 +314,7 @@ export default async function GuideDetailPage({ params }: Props) {
 						<div className="mt-6">
 							<Link
 								href="/app"
+								prefetch={false}
 								className="inline-flex items-center gap-2 rounded-lg bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-90"
 							>
 								{copy.startRenaming}

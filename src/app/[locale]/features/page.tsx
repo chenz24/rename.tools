@@ -158,6 +158,7 @@ export default function FeaturesPage() {
 					<div className="mt-8">
 						<Link
 							href="/app"
+							prefetch={false}
 							className="inline-flex items-center gap-2 rounded-2xl bg-foreground px-6 py-3 text-sm font-medium text-background transition-opacity hover:opacity-90"
 						>
 							{t("cta")}
@@ -443,6 +444,7 @@ export default function FeaturesPage() {
 					<div className="mt-8 flex flex-wrap items-center gap-4">
 						<Link
 							href="/app"
+							prefetch={false}
 							className="inline-flex items-center gap-2 rounded-2xl bg-foreground px-6 py-3 text-sm font-medium text-background transition-opacity hover:opacity-90"
 						>
 							{t("ctaButton")}
