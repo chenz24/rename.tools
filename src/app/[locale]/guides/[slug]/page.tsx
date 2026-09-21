@@ -23,6 +23,9 @@ type Props = {
 	params: Promise<{ locale: string; slug: string }>;
 };
 
+// All guides ship with the build; unknown slugs must not trigger runtime rendering.
+export const dynamicParams = false;
+
 export function generateStaticParams() {
 	return GUIDE_LOCALES.flatMap((locale) =>
 		getGuideSlugs().map((slug) => ({
