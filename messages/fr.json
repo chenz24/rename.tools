@@ -936,7 +936,7 @@
 		"privacyLocalTitle": "1. Local Processing Principle",
 		"privacyLocalDesc": "Le renommage et l’extraction des métadonnées se font dans votre navigateur sans envoyer les fichiers. Les recherches TMDb facultatives transmettent des termes de recherche à TMDb. Les statistiques du site sont distinctes du traitement des fichiers.",
 		"privacyNoCollection": "2. Statistiques du site",
-		"privacyNoCollectionDesc": "Nous utilisons Google Analytics, Umami et Cloudflare Insights pour mesurer les visites et les performances. Ces services traitent des données de visite et des données techniques, séparément des opérations locales. Notre intégration ne transmet ni la liste des fichiers importés ni leur contenu.",
+		"privacyNoCollectionDesc": "Nous utilisons Google Analytics, Umami et Cloudflare Insights pour mesurer les visites et les performances. Ces services traitent des données de visite et des données techniques, séparément des opérations locales. Notre intégration ne transmet ni la liste des fichiers importés ni leur contenu. Google Analytics mesure aussi les pages vues, le défilement et les clics sur les liens externes ; ces événements peuvent inclure les URL des pages, les pages référentes et les liens de destination.",
 		"privacyNoStorage": "3. Data Storage",
 		"privacyNoStorageDesc": "Les listes et aperçus restent dans la mémoire du navigateur. Les préférences, les préréglages et l’identifiant TMDb facultatif peuvent être conservés localement. Leur suppression n’efface pas les données déjà traitées par les services de mesure.",
 		"privacyCookies": "4. Use of Cookies",

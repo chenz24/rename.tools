@@ -931,7 +931,7 @@
 		"privacyLocalTitle": "1. Principio de Procesamiento Local",
 		"privacyLocalDesc": "El cambio de nombres y la extracción de metadatos se realizan en tu navegador sin subir archivos. Las consultas opcionales a TMDb envían términos de búsqueda a TMDb. Las estadísticas del sitio son independientes del procesamiento de archivos.",
 		"privacyNoCollection": "2. Analítica del sitio",
-		"privacyNoCollectionDesc": "Usamos Google Analytics, Umami y Cloudflare Insights para medir visitas y rendimiento. Estos servicios procesan datos de visitas y datos técnicos, por separado de las operaciones locales. Nuestra integración de analítica no envía la lista de archivos importados ni su contenido.",
+		"privacyNoCollectionDesc": "Usamos Google Analytics, Umami y Cloudflare Insights para medir visitas y rendimiento. Estos servicios procesan datos de visitas y datos técnicos, por separado de las operaciones locales. Nuestra integración de analítica no envía la lista de archivos importados ni su contenido. Google Analytics también mide las páginas vistas, el desplazamiento y los clics en enlaces externos; estos eventos pueden incluir las URL de las páginas, las páginas de referencia y los enlaces de destino.",
 		"privacyNoStorage": "3. Almacenamiento de Datos",
 		"privacyNoStorageDesc": "Las listas y vistas previas se mantienen en la memoria del navegador. Las preferencias, los ajustes guardados y la credencial opcional de TMDb pueden almacenarse localmente. Borrar estos datos no elimina los ya procesados por los proveedores de analítica.",
 		"privacyCookies": "4. Uso de Cookies",

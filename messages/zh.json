@@ -938,7 +938,7 @@
 		"privacyLocalTitle": "1. 本地处理原则",
 		"privacyLocalDesc": "文件重命名和元数据提取在浏览器本地完成，无需上传文件。可选的 TMDb 查询会向 TMDb 发送搜索词。网站访问统计与文件处理相互独立。",
 		"privacyNoCollection": "2. 网站访问统计",
-		"privacyNoCollectionDesc": "我们使用 Google Analytics、Umami 和 Cloudflare Insights 统计网站访问与性能。这些服务处理访问和技术数据，与本地文件操作分开。我们的统计集成不会发送你导入的文件列表或文件内容。",
+		"privacyNoCollectionDesc": "我们使用 Google Analytics、Umami 和 Cloudflare Insights 统计网站访问与性能。这些服务处理访问和技术数据，与本地文件操作分开。我们的统计集成不会发送你导入的文件列表或文件内容。 Google Analytics 还会统计页面浏览、滚动和出站链接点击；这些事件可能包含页面网址、来源网址和目标链接。",
 		"privacyNoStorage": "3. 数据存储",
 		"privacyNoStorageDesc": "文件列表与预览保存在浏览器内存中。语言、主题、已保存预设和可选的 TMDb 凭据可能保存在本地。你可以在浏览器中清除本地设置，但这不会删除统计服务已处理的数据。",
 		"privacyCookies": "4. Cookie 使用",

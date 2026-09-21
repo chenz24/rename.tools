@@ -49,6 +49,6 @@
 		}
 	},
 	"files": {
-		"includes": ["src/**", "messages/**", "*.ts", "*.json", "*.md"]
+		"includes": ["src/**", "messages/**", "scripts/**/*.tsx", "*.ts", "*.json", "*.md"]
 	}
 }

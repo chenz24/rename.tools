@@ -13,6 +13,14 @@ export default function middleware(request: NextRequest) {
 		return redirectToDefaultLocale(request);
 	}
 
+	// Keep previously crawled metadata image URLs working without runtime image rendering.
+	if (pathname === `/${locale}/opengraph-image`) {
+		const url = request.nextUrl.clone();
+		url.pathname = "/opengraph-image.png";
+		url.search = "";
+		return NextResponse.redirect(url, 308);
+	}
+
 	if (!GUIDE_LOCALES.has(locale) && isGuidePath(pathname, locale)) {
 		const url = request.nextUrl.clone();
 		url.pathname = `/${routing.defaultLocale}${pathname.slice(locale.length + 1)}`;

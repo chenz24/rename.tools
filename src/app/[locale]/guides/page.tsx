@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const isIndexable = isIndexableGuideLocale(locale);
 	const canonicalLocale = isIndexable ? locale : "en";
 	const canonical = `${SITE_URL}/${canonicalLocale}/guides`;
-	const imageUrl = `${SITE_URL}/${canonicalLocale}/opengraph-image`;
+	const imageUrl = `${SITE_URL}/opengraph-image.png`;
 
 	return {
 		title: copy.title,

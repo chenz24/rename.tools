@@ -938,7 +938,7 @@
 		"privacyLocalTitle": "1. Local Processing Principle",
 		"privacyLocalDesc": "File renaming and metadata extraction run locally in your browser without uploading your files. Optional TMDb lookups send search terms to TMDb. Website visit statistics are separate from file processing.",
 		"privacyNoCollection": "2. Website Analytics",
-		"privacyNoCollectionDesc": "We use Google Analytics, Umami and Cloudflare Insights to measure website visits and performance. These services process visit and technical data separately from local file operations. Our analytics integration does not send your imported file list or file contents.",
+		"privacyNoCollectionDesc": "We use Google Analytics, Umami and Cloudflare Insights to measure website visits and performance. These services process visit and technical data separately from local file operations. Our analytics integration does not send your imported file list or file contents. Google Analytics also measures page views, scrolling and outbound link clicks; these events can include page URLs, referrers and destination links.",
 		"privacyNoStorage": "3. Data Storage",
 		"privacyNoStorageDesc": "File lists and previews are held in browser memory. Language and theme preferences, saved presets and an optional TMDb credential may be stored locally. You can clear local settings in your browser; this does not delete data already processed by analytics providers.",
 		"privacyCookies": "4. Use of Cookies",

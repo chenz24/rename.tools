@@ -934,7 +934,7 @@
 		"privacyLocalTitle": "1. Prinzip der lokalen Verarbeitung",
 		"privacyLocalDesc": "Umbenennung und Metadaten werden lokal im Browser verarbeitet, ohne Dateien hochzuladen. Optionale TMDb-Abfragen senden Suchbegriffe an TMDb. Besuchsstatistiken sind von der Dateiverarbeitung getrennt.",
 		"privacyNoCollection": "2. Website-Analysen",
-		"privacyNoCollectionDesc": "Wir verwenden Google Analytics, Umami und Cloudflare Insights für Besuchs- und Leistungsmessungen. Diese Dienste verarbeiten Besuchs- und technische Daten getrennt von lokalen Dateioperationen. Unsere Analyseintegration sendet weder die importierte Dateiliste noch Dateiinhalte.",
+		"privacyNoCollectionDesc": "Wir verwenden Google Analytics, Umami und Cloudflare Insights für Besuchs- und Leistungsmessungen. Diese Dienste verarbeiten Besuchs- und technische Daten getrennt von lokalen Dateioperationen. Unsere Analyseintegration sendet weder die importierte Dateiliste noch Dateiinhalte. Google Analytics erfasst auch Seitenaufrufe, Scrollvorgänge und Klicks auf externe Links; diese Ereignisse können Seiten-URLs, verweisende URLs und Ziellinks enthalten.",
 		"privacyNoStorage": "3. Datenspeicherung",
 		"privacyNoStorageDesc": "Dateilisten und Vorschauen bleiben im Browserspeicher. Einstellungen, gespeicherte Vorlagen und optionale TMDb-Zugangsdaten können lokal gespeichert werden. Das Löschen lokaler Daten entfernt keine bereits von Analysediensten verarbeiteten Daten.",
 		"privacyCookies": "4. Verwendung von Cookies",

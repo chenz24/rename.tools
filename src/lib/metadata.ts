@@ -17,7 +17,7 @@ export async function generatePageMetadata({
 	const t = await getTranslations({ locale, namespace });
 
 	const url = `${SITE_URL}/${locale}${path}`;
-	const imageUrl = `${SITE_URL}/${locale}/opengraph-image`;
+	const imageUrl = `${SITE_URL}/opengraph-image.png`;
 
 	const alternateLanguages = Object.fromEntries(
 		routing.locales.map((l) => [l, `${SITE_URL}/${l}${path}`]),

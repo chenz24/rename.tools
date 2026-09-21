@@ -934,7 +934,7 @@
 		"privacyLocalTitle": "1. 로컬 처리 원칙",
 		"privacyLocalDesc": "파일 이름 변경과 메타데이터 추출은 파일 업로드 없이 브라우저에서 처리합니다. 선택 기능인 TMDb 조회는 검색어를 TMDb로 전송합니다. 웹사이트 방문 통계는 파일 처리와 별개입니다.",
 		"privacyNoCollection": "2. 웹사이트 방문 통계",
-		"privacyNoCollectionDesc": "Google Analytics, Umami, Cloudflare Insights로 사이트 방문과 성능을 측정합니다. 이 서비스는 방문 및 기술 데이터를 처리하며 로컬 파일 작업과 별도로 작동합니다. 통계 연동은 가져온 파일 목록이나 파일 내용을 전송하지 않습니다.",
+		"privacyNoCollectionDesc": "Google Analytics, Umami, Cloudflare Insights로 사이트 방문과 성능을 측정합니다. 이 서비스는 방문 및 기술 데이터를 처리하며 로컬 파일 작업과 별도로 작동합니다. 통계 연동은 가져온 파일 목록이나 파일 내용을 전송하지 않습니다. Google Analytics는 페이지 조회, 스크롤, 외부 링크 클릭도 측정하며, 이러한 이벤트에는 페이지 URL, 유입 URL, 링크 대상이 포함될 수 있습니다.",
 		"privacyNoStorage": "3. 데이터 저장",
 		"privacyNoStorageDesc": "파일 목록과 미리보기는 브라우저 메모리에 보관합니다. 언어, 테마, 저장한 프리셋과 선택한 TMDb 인증 정보는 로컬에 저장될 수 있습니다. 브라우저에서 삭제할 수 있지만 통계 서비스가 이미 처리한 데이터는 삭제되지 않습니다.",
 		"privacyCookies": "4. 쿠키 사용",

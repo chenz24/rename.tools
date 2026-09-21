@@ -937,7 +937,7 @@
 		"privacyLocalTitle": "1. ローカル処理の原則",
 		"privacyLocalDesc": "ファイル名の変更とメタデータ抽出は、ファイルをアップロードせずブラウザ内で実行します。任意の TMDb 検索では検索語を TMDb に送信します。サイトのアクセス解析はファイル処理とは別です。",
 		"privacyNoCollection": "2. サイトのアクセス解析",
-		"privacyNoCollectionDesc": "Google Analytics、Umami、Cloudflare Insights でサイトの利用状況と性能を測定します。これらはアクセス情報や技術情報を処理し、ローカルのファイル操作とは別に動作します。当サイトの解析連携は、読み込んだファイル一覧や内容を送信しません。",
+		"privacyNoCollectionDesc": "Google Analytics、Umami、Cloudflare Insights でサイトの利用状況と性能を測定します。これらはアクセス情報や技術情報を処理し、ローカルのファイル操作とは別に動作します。当サイトの解析連携は、読み込んだファイル一覧や内容を送信しません。 Google Analytics はページ閲覧、スクロール、外部リンクのクリックも測定します。これらのイベントには、ページ URL、参照元 URL、リンク先が含まれる場合があります。",
 		"privacyNoStorage": "3. データストレージ",
 		"privacyNoStorageDesc": "ファイル一覧とプレビューはブラウザのメモリに保持します。言語、テーマ、保存したプリセット、任意の TMDb 認証情報はローカルに保存される場合があります。ブラウザで削除できますが、解析サービスが処理済みのデータは削除されません。",
 		"privacyCookies": "4. Cookieの使用",
