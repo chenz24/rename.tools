@@ -1,3 +1,5 @@
+import { taskGuides } from "./task-guides";
+
 export const GUIDE_LOCALES = ["en", "zh"] as const;
 
 export type GuideLocale = (typeof GUIDE_LOCALES)[number];
@@ -72,7 +74,7 @@ export const guideIndexCopy: Record<
 	}
 > = {
 	en: {
-		title: "Guides - Rename.Tools",
+		title: "File Renaming Guides & Tutorials | Rename.Tools",
 		description:
 			"Practical guides for bulk file renaming with Rename.Tools: regex, sequences, photo organization, music libraries, and batch rename workflows.",
 		eyebrow: "Guides",
@@ -92,7 +94,7 @@ export const guideIndexCopy: Record<
 			"Open Rename.Tools, add a few sample files, and preview every rule before touching the real filenames.",
 	},
 	zh: {
-		title: "使用指南 - Rename.Tools",
+		title: "批量文件重命名指南与教程 | Rename.Tools",
 		description:
 			"Rename.Tools 批量文件重命名实用指南：正则表达式、序号、照片整理、音乐库和剧集文件名整理。",
 		eyebrow: "使用指南",
@@ -118,7 +120,11 @@ export const guides: Guide[] = [
 		publishedAt: "2026-05-22",
 		updatedAt: "2026-09-21",
 		readingTime: 9,
-		relatedSlugs: ["sequence-file-numbering", "regex-batch-rename"],
+		relatedSlugs: [
+			"sequence-file-numbering",
+			"add-prefix-suffix-to-filenames",
+			"replace-spaces-in-filenames",
+		],
 		content: {
 			en: {
 				title: "Bulk file renaming basics: import, preview, execute",
@@ -349,11 +355,11 @@ export const guides: Guide[] = [
 		relatedSlugs: ["batch-file-rename-basics", "sequence-file-numbering"],
 		content: {
 			en: {
-				title: "Organize photos by date and sequence number",
+				title: "Batch Rename Photos by Date & Sequence",
 				description:
 					"Rename camera photos with date prefixes and padded sequence numbers so albums stay sortable and easy to scan.",
 				intro:
-					"Camera filenames are unique but rarely meaningful. A date plus sequence pattern keeps photos chronological, portable, and easy to search later.",
+					"Camera filenames are rarely meaningful. Choose a fixed event date or read each photo’s EXIF capture date, then add sequence numbers. The runnable example below uses a fixed date, not EXIF.",
 				categoryLabel: "Photos",
 				sections: [
 					{
@@ -399,8 +405,11 @@ export const guides: Guide[] = [
 					{
 						title: "When EXIF metadata helps",
 						body: [
+							"Choose the date source deliberately: 2026-05-22 is text you enter; {exif.date} reads DateTimeOriginal, falling back to CreateDate; {date} is the current UTC date. File modified time is a separate property and may change when files are copied.",
+							"If EXIF is missing, the preview keeps {exif.date} literally. Separate those files and enter a known date or keep their existing names. Never silently replace an unknown capture date with today’s date.",
+							"Renaming a RAW filename does not imply RAW metadata support. GPS variables produce coordinates, not city names; tokyo in this guide is a label you enter yourself.",
 							"If the photos include EXIF dates, load metadata and prefer EXIF date variables over today's date. This is useful when files were copied, downloaded, exported from a phone, or edited after they were taken.",
-							"EXIF is not guaranteed. Screenshots, social media exports, edited images, and some HEIC conversions may have missing or changed metadata. Keep a fallback workflow that uses folder names, today's date, or manual event labels.",
+							"EXIF is not guaranteed. Screenshots, social media exports, edited images, and some HEIC conversions may have missing or changed metadata. A known event label is a useful alternative when the capture date cannot be verified.",
 							"When EXIF dates differ from file modified times, trust the value that matches your organizing goal. For a vacation album, capture date is usually better. For a delivery folder, export date may be more useful.",
 						],
 					},
@@ -450,7 +459,7 @@ export const guides: Guide[] = [
 				title: "按日期和序号整理照片",
 				description: "用日期前缀和补零序号重命名相机照片，让相册保持可排序、易浏览、易查找。",
 				intro:
-					"相机文件名通常唯一，但不够直观。日期加序号的格式能保持时间顺序，也方便跨设备搜索和归档。",
+					"相机文件名往往不够直观。先选择固定活动日期或每张照片的 EXIF 拍摄日期，再添加序号。下方可运行示例使用固定日期，不读取 EXIF。",
 				categoryLabel: "照片整理",
 				sections: [
 					{
@@ -495,8 +504,11 @@ export const guides: Guide[] = [
 					{
 						title: "什么时候使用 EXIF 元数据",
 						body: [
+							"先选清楚日期来源：2026-05-22 是手动输入的文字；{exif.date} 优先读取 DateTimeOriginal，缺少时使用 CreateDate；{date} 是当前 UTC 日期。文件修改时间是另一项属性，复制文件后可能改变。",
+							"缺少 EXIF 时，预览会保留字面量 {exif.date}。请把这些文件分开，填写已知日期或保留原名，不要把未知拍摄日期默认为今天。",
+							"能修改 RAW 文件名不代表支持读取 RAW 元数据。GPS 变量输出坐标而非城市名；本文的 tokyo 是你手动填写的标签。",
 							"如果照片带有 EXIF 拍摄时间，建议先加载元数据，再使用 EXIF 日期变量，而不是今天的日期。文件被复制、下载、从手机导出或后期编辑过时，这一点尤其有用。",
-							"EXIF 并不总是存在。截图、社交平台导出的图片、后期处理后的图片，以及部分 HEIC 转换文件都可能缺少或改变元数据。因此最好准备一个不依赖 EXIF 的备用规则链，比如使用文件夹名、今天日期或手动活动标签。",
+							"EXIF 并不总是存在。截图、社交平台导出的图片、后期处理后的图片，以及部分 HEIC 转换文件都可能缺少或改变元数据。无法确认拍摄日期时，可以改用已知的活动标签。",
 							"当 EXIF 日期和文件修改时间不一致时，选择更符合整理目标的那个。旅行相册通常更适合拍摄日期；交付目录则可能更适合导出日期。",
 						],
 					},
@@ -553,7 +565,7 @@ export const guides: Guide[] = [
 		relatedSlugs: ["batch-file-rename-basics", "sequence-file-numbering"],
 		content: {
 			en: {
-				title: "Use regular expressions for bulk file renaming",
+				title: "Bulk Rename Files with Regex: Examples & Patterns",
 				description:
 					"Learn practical regex bulk rename patterns for removing clutter, rearranging dates, and extracting useful filename parts.",
 				intro:
@@ -1158,6 +1170,7 @@ export const guides: Guide[] = [
 			},
 		},
 	},
+	...taskGuides,
 ];
 
 export function isIndexableGuideLocale(locale: string): locale is GuideLocale {

@@ -41,7 +41,7 @@
 		"heroFeature1": "7 Types de Règles",
 		"heroFeature2": "Aperçu en Direct",
 		"heroFeature3": "Zéro Téléchargement",
-		"heroDescription": "Renommez vos fichiers par lots avec expressions régulières, numérotation et aperçu. Gratuit, dans votre navigateur, sans téléverser vos fichiers.",
+		"heroDescription": "Renommez directement vos fichiers locaux avec regex, séquences et aperçu en direct. Aucun envoi de fichiers ni archive ZIP à retélécharger.",
 		"cta": "Commencer à Renommer",
 		"viewOnGithub": "Voir sur GitHub",
 		"githubStars": "Open Source",
@@ -118,7 +118,10 @@
 				"title": "Maîtrisez le chaos de vos documents",
 				"desc": "Ajoutez des préfixes de date, supprimez les suffixes de version, standardisez le nommage entre les départements ou préparez les fichiers pour l'archivage."
 			}
-		}
+		},
+		"browserNote": "Renommage direct sur les versions de bureau compatibles de Chrome et Edge. Les autres navigateurs peuvent exporter des scripts.",
+		"examplesTitle": "Découvrez le résultat avec des exemples",
+		"examplesDescription": "Choisissez une tâche, vérifiez les règles et prévisualisez les changements. Sans fichiers ni inscription. Exemples et guides en anglais."
 	},
 	"features": {
 		"heroTitle": "Chaque fonctionnalité,\nen détail complet",
@@ -703,7 +706,13 @@
 			"tagsPlaceholder": "photo, nettoyage, lot",
 			"tagsHint": "Séparez les balises par des virgules",
 			"cancel": "Annuler",
-			"save": "Enregistrer"
+			"save": "Enregistrer",
+			"shareError": "Impossible de partager ce modèle. Vérifiez les règles et l’accès au presse-papiers.",
+			"share": "Partager le modèle",
+			"delete": "Supprimer le modèle",
+			"pin": "Épingler le modèle",
+			"unpin": "Désépingler le modèle",
+			"shareHint": "Copiez ce lien pour partager les règles. Il contient le texte du modèle, mais pas les fichiers sélectionnés."
 		},
 		"preview": {
 			"title": "Aperçu",
@@ -854,6 +863,24 @@
 			"undoHint": "Annuler le dernier lot de renommage",
 			"redoHint": "Refaire le dernier lot annulé",
 			"activationRequired": "Autorisation du navigateur expirée — cliquez ici pour continuer le renommage"
+		},
+		"presetLink": {
+			"intro": "Vérifiez les règles avant de les appliquer. Les fichiers ne seront renommés que lorsque vous lancerez le renommage.",
+			"invalidTitle": "Ce lien de modèle est invalide",
+			"invalidDescription": "Le lien est incomplet, trop volumineux ou contient des règles non prises en charge. Demandez un nouveau lien.",
+			"example": "Aperçu de l’exemple",
+			"existing": "Vous avez déjà {count} règles. Les nouvelles seront ajoutées à la fin, en conservant vos fichiers et la portée actuelle ({scope}). Le résultat combiné peut différer de cet exemple.",
+			"trustCode": "J’ai vérifié ce code JavaScript et je fais confiance à sa source. Son application exécutera le code pour générer les aperçus.",
+			"busy": "Attendez la fin du renommage en cours.",
+			"cancel": "Annuler",
+			"save": "Enregistrer le modèle",
+			"saved": "Modèle enregistré",
+			"apply": "Utiliser les règles",
+			"append": "Ajouter aux règles actuelles",
+			"trySample": "Tester avec des noms fictifs",
+			"yes": "Oui",
+			"no": "Non",
+			"empty": "(vide)"
 		}
 	},
 	"about": {

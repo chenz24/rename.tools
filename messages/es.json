@@ -41,7 +41,7 @@
 		"heroFeature1": "7 Tipos de Reglas",
 		"heroFeature2": "Vista Previa en Vivo",
 		"heroFeature3": "Cero Subidas",
-		"heroDescription": "Renombra archivos por lotes con expresiones regulares, secuencias y vista previa. Gratis, en tu navegador y sin subir archivos.",
+		"heroDescription": "Renombra archivos locales directamente con regex, secuencias y vista previa. Sin subir archivos ni volver a descargar un ZIP.",
 		"cta": "Comenzar a Renombrar",
 		"viewOnGithub": "Ver en GitHub",
 		"githubStars": "Código Abierto",
@@ -118,7 +118,10 @@
 				"title": "Domine el caos de sus documentos",
 				"desc": "Agregue prefijos de fecha a informes, estandarice la nomenclatura de facturas u organice documentos escaneados con patrones consistentes."
 			}
-		}
+		},
+		"browserNote": "Renombrado directo en versiones de escritorio compatibles de Chrome y Edge. Otros navegadores permiten exportar scripts.",
+		"examplesTitle": "Mira el resultado y prueba un ejemplo",
+		"examplesDescription": "Elige una tarea, revisa las reglas y previsualiza los cambios. Sin archivos ni registro. Los ejemplos y las guías están en inglés."
 	},
 	"features": {
 		"heroTitle": "Cada característica,\nen detalle completo",
@@ -703,7 +706,13 @@
 			"tagsPlaceholder": "foto, limpieza, lote",
 			"tagsHint": "Separe las etiquetas con comas",
 			"cancel": "Cancelar",
-			"save": "Guardar"
+			"save": "Guardar",
+			"shareError": "No se pudo compartir la plantilla. Revisa las reglas y el acceso al portapapeles.",
+			"share": "Compartir plantilla",
+			"delete": "Eliminar plantilla",
+			"pin": "Fijar plantilla",
+			"unpin": "Desfijar plantilla",
+			"shareHint": "Copia este enlace para compartir las reglas. Incluye el texto de la plantilla, pero no los archivos seleccionados."
 		},
 		"preview": {
 			"title": "Vista Previa",
@@ -849,6 +858,24 @@
 			"undoHint": "Deshacer último lote de renombrado",
 			"redoHint": "Rehacer último lote deshecho",
 			"activationRequired": "Permiso del navegador expirado — haga clic aquí para continuar renombrando"
+		},
+		"presetLink": {
+			"intro": "Revisa las reglas antes de aplicarlas. Los archivos solo se renombran cuando ejecutas el cambio de nombre.",
+			"invalidTitle": "El enlace de la plantilla no es válido",
+			"invalidDescription": "El enlace está incompleto, es demasiado grande o contiene reglas no compatibles. Pide un nuevo enlace.",
+			"example": "Vista previa del ejemplo",
+			"existing": "Ya tienes {count} reglas. Las nuevas se añadirán al final, conservando tus archivos y el ámbito actual ({scope}). El resultado combinado puede diferir del ejemplo.",
+			"trustCode": "He revisado este JavaScript y confío en su origen. Al aplicarlo, el código se ejecutará para generar vistas previas.",
+			"busy": "Espera a que termine la operación actual.",
+			"cancel": "Cancelar",
+			"save": "Guardar plantilla",
+			"saved": "Plantilla guardada",
+			"apply": "Usar reglas",
+			"append": "Añadir a las reglas actuales",
+			"trySample": "Probar con nombres de ejemplo",
+			"yes": "Sí",
+			"no": "No",
+			"empty": "(vacío)"
 		}
 	},
 	"about": {

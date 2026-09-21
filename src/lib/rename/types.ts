@@ -240,6 +240,7 @@ export type PresetCategory = "photo" | "document" | "code" | "video" | "music" |
 export type PresetSortMode = "recent" | "frequent" | "name" | "created";
 
 export interface UserPreset {
+	extensionScope?: ExtensionScope;
 	id: string;
 	name: string;
 	description?: string;

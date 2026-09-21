@@ -15,7 +15,7 @@
 			"description": "了解 Rename.Tools 的批量文件重命名功能：正则替换、序号编号、大小写转换、自定义 JavaScript、元数据提取、实时预览、撤销和脚本导出。"
 		},
 		"guides": {
-			"title": "使用指南 - Rename.Tools",
+			"title": "批量文件重命名指南与教程 | Rename.Tools",
 			"description": "Rename.Tools 批量文件重命名实用指南：正则表达式、序号、照片整理、音乐库和剧集文件名整理。"
 		},
 		"privacy": {
@@ -45,7 +45,7 @@
 		"heroFeature1": "7 种规则类型",
 		"heroFeature2": "实时预览",
 		"heroFeature3": "零上传",
-		"heroDescription": "免费在线批量重命名文件，支持正则、序号和实时预览。文件在浏览器本地处理，无需上传。",
+		"heroDescription": "用正则、序号和实时预览直接重命名本地文件，无需上传，也不用重新下载 ZIP 压缩包。",
 		"cta": "开始重命名",
 		"viewOnGithub": "在 GitHub 查看",
 		"githubStars": "开源项目",
@@ -122,7 +122,10 @@
 				"title": "驯服混乱的文档",
 				"desc": "添加日期前缀、移除版本后缀、跨部门统一命名，或为存档准备文件。"
 			}
-		}
+		},
+		"browserNote": "支持的桌面版 Chrome、Edge 可直接重命名；其他浏览器可导出重命名脚本。",
+		"examplesTitle": "先看效果，再用示例试一试",
+		"examplesDescription": "选择任务、确认规则并预览结果，无需导入文件或注册。"
 	},
 	"features": {
 		"heroTitle": "每一个功能，\n完整呈现",
@@ -710,7 +713,13 @@
 			"tagsPlaceholder": "照片, 清理, 批量",
 			"tagsHint": "用逗号分隔标签",
 			"cancel": "取消",
-			"save": "保存"
+			"save": "保存",
+			"shareError": "无法分享此预设。请确认规则有效并允许访问剪贴板。",
+			"share": "分享预设",
+			"delete": "删除预设",
+			"pin": "固定预设",
+			"unpin": "取消固定预设",
+			"shareHint": "复制此链接即可分享规则。链接包含预设文本，不包含已选择的文件。"
 		},
 		"preview": {
 			"title": "预览",
@@ -856,6 +865,24 @@
 			"undoHint": "撤销上次批量重命名",
 			"redoHint": "重做上次撤销的操作",
 			"activationRequired": "浏览器权限已过期 — 点击此处继续重命名"
+		},
+		"presetLink": {
+			"intro": "请先查看规则，再确认应用。只有点击“执行重命名”才会修改真实文件名。",
+			"invalidTitle": "预设链接无效",
+			"invalidDescription": "链接不完整、过大，或包含不支持的规则。请让分享者重新生成链接。",
+			"example": "示例预览",
+			"existing": "你已有 {count} 条规则。新规则将追加到末尾，保留已有文件和当前作用域（{scope}）。组合后的结果可能与此示例不同。",
+			"trustCode": "我已查看这段 JavaScript 并信任其来源。应用后会运行代码以生成预览。",
+			"busy": "请等待当前重命名操作完成。",
+			"cancel": "取消",
+			"save": "保存到预设",
+			"saved": "预设已保存",
+			"apply": "使用规则",
+			"append": "追加到已有规则",
+			"trySample": "用示例文件名试用",
+			"yes": "是",
+			"no": "否",
+			"empty": "（空）"
 		}
 	},
 	"about": {

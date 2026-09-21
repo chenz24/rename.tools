@@ -39,7 +39,7 @@ interface Props {
 	rules: RenameRule[];
 	extensionScope: ExtensionScope;
 	onAddRule: (type: RuleType) => void;
-	onAddRulesFromTemplate: (configs: RuleConfig[]) => void;
+	onAddRulesFromTemplate: (configs: RuleConfig[], scope?: ExtensionScope) => void;
 	onUpdateRule: (id: string, updates: Partial<RenameRule>) => void;
 	onRemoveRule: (id: string) => void;
 	onReorderRules: (newOrder: RenameRule[]) => void;
@@ -183,7 +183,7 @@ export function RulePanel({
 							size="sm"
 							variant="outline"
 							className="gap-1 text-xs"
-							disabled={rules.length === 0}
+							disabled={!rules.some((rule) => rule.enabled)}
 						>
 							<Save className="h-3.5 w-3.5" /> {t("savePreset")}
 						</Button>

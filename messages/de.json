@@ -41,7 +41,7 @@
 		"heroFeature1": "7 Regeltypen",
 		"heroFeature2": "Live-Vorschau",
 		"heroFeature3": "Keine Uploads",
-		"heroDescription": "Dateien mit regulären Ausdrücken, Nummerierung und Vorschau stapelweise umbenennen. Kostenlos und lokal im Browser, ohne Datei-Upload.",
+		"heroDescription": "Benenne lokale Dateien direkt mit Regex, Nummerierung und Live-Vorschau um. Kein Hochladen und kein erneuter ZIP-Download.",
 		"cta": "Jetzt umbenennen",
 		"viewOnGithub": "Auf GitHub ansehen",
 		"githubStars": "Open Source",
@@ -118,7 +118,10 @@
 				"title": "Bändigen Sie Ihr Dokumentenchaos",
 				"desc": "Fügen Sie Datumspräfixe hinzu, entfernen Sie Versionssuffixe, standardisieren Sie die Benennung über Abteilungen hinweg oder bereiten Sie Dateien für die Archivierung vor."
 			}
-		}
+		},
+		"browserNote": "Direktes Umbenennen in unterstützten Desktop-Versionen von Chrome und Edge. Andere Browser können Umbenennungsskripte exportieren.",
+		"examplesTitle": "Ergebnis ansehen und mit Beispielen testen",
+		"examplesDescription": "Aufgabe auswählen, Regeln prüfen und Änderungen als Vorschau ansehen. Ohne Dateien oder Registrierung. Beispiele und Anleitungen sind auf Englisch."
 	},
 	"features": {
 		"heroTitle": "Jede Funktion,\nim Detail",
@@ -706,7 +709,13 @@
 			"tagsPlaceholder": "foto, bereinigung, batch",
 			"tagsHint": "Tags durch Kommas trennen",
 			"cancel": "Abbrechen",
-			"save": "Speichern"
+			"save": "Speichern",
+			"shareError": "Vorlage konnte nicht geteilt werden. Prüfe die Regeln und den Zugriff auf die Zwischenablage.",
+			"share": "Vorlage teilen",
+			"delete": "Vorlage löschen",
+			"pin": "Vorlage anheften",
+			"unpin": "Vorlage lösen",
+			"shareHint": "Kopiere diesen Link, um die Regeln zu teilen. Er enthält den Vorlagentext, aber keine ausgewählten Dateien."
 		},
 		"preview": {
 			"title": "Vorschau",
@@ -852,6 +861,24 @@
 			"undoHint": "Letzten Umbenennungs-Batch rückgängig machen",
 			"redoHint": "Letzten rückgängig gemachten Batch wiederholen",
 			"activationRequired": "Browser-Berechtigung abgelaufen — hier klicken, um mit dem Umbenennen fortzufahren"
+		},
+		"presetLink": {
+			"intro": "Prüfe die Regeln vor dem Anwenden. Dateien werden erst umbenannt, wenn du die Umbenennung ausführst.",
+			"invalidTitle": "Dieser Vorlagenlink ist ungültig",
+			"invalidDescription": "Der Link ist unvollständig, zu groß oder enthält nicht unterstützte Regeln. Bitte den Absender um einen neuen Link.",
+			"example": "Beispielvorschau",
+			"existing": "Du hast bereits {count} Regeln. Die neuen Regeln werden angehängt; Dateien und aktueller Bereich ({scope}) bleiben erhalten. Das kombinierte Ergebnis kann vom Beispiel abweichen.",
+			"trustCode": "Ich habe diesen JavaScript-Code geprüft und vertraue der Quelle. Beim Anwenden wird der Code für die Vorschau ausgeführt.",
+			"busy": "Warte, bis die laufende Umbenennung abgeschlossen ist.",
+			"cancel": "Abbrechen",
+			"save": "Als Vorlage speichern",
+			"saved": "Vorlage gespeichert",
+			"apply": "Regeln verwenden",
+			"append": "Regeln anhängen",
+			"trySample": "Mit Beispieldateinamen testen",
+			"yes": "Ja",
+			"no": "Nein",
+			"empty": "(leer)"
 		}
 	},
 	"about": {

@@ -17,7 +17,9 @@ import { setRequestLocale } from "next-intl/server";
 import type { FAQPage, WebApplication, WithContext } from "schema-dts";
 import { UseCaseDemo } from "@/components/home/UseCaseDemo";
 import { JsonLd } from "@/components/JsonLd";
+import { RecipeExample } from "@/components/RecipeExample";
 import { Link } from "@/i18n/navigation";
+import { getGuideRecipe } from "@/lib/guides/recipes";
 import { SITE_URL } from "@/lib/site";
 
 type Props = {
@@ -133,6 +135,9 @@ function LandingContent({ locale }: { locale: string }) {
 						<p className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
 							{t("heroDescription")}
 						</p>
+						<p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+							{t("browserNote")}
+						</p>
 
 						{/* CTA row */}
 						<div className="mt-8 flex flex-wrap items-center gap-4 sm:mt-10">
@@ -167,6 +172,23 @@ function LandingContent({ locale }: { locale: string }) {
 							<span className="text-muted-foreground">•</span>
 							<p className="text-sm text-muted-foreground">{t("ctaSubtext")}</p>
 						</div>
+					</div>
+				</section>
+
+				<section aria-labelledby="try-examples" className="mx-auto max-w-5xl px-4 pb-12 sm:px-6">
+					<h2 id="try-examples" className="text-2xl font-semibold tracking-tight">
+						{t("examplesTitle")}
+					</h2>
+					<p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+						{t("examplesDescription")}
+					</p>
+					<div className="mt-6 grid gap-4 md:grid-cols-3">
+						{["photo-date-sequence", "prefix-suffix", "spaces-to-underscores"].map((id) => {
+							const recipe = getGuideRecipe(id);
+							return recipe ? (
+								<RecipeExample key={id} recipe={recipe} locale={locale} entry="home" />
+							) : null;
+						})}
 					</div>
 				</section>
 

@@ -17,6 +17,7 @@ import type {
 	RuleType,
 } from "@/lib/rename/types";
 import { getDefaultConfig } from "@/lib/rename/types";
+import { taskMode, trackTaskEvent } from "@/lib/task-analytics";
 
 export interface LogEntry {
 	fileId: string;
@@ -305,7 +306,7 @@ interface RenameState {
 
 	// Rules
 	addRule: (type: RuleType) => void;
-	addRulesFromTemplate: (configs: RuleConfig[]) => void;
+	addRulesFromTemplate: (configs: RuleConfig[], scope?: ExtensionScope) => void;
 	updateRule: (id: string, updates: Partial<RenameRule>) => void;
 	removeRule: (id: string) => void;
 	reorderRules: (newOrder: RenameRule[]) => void;
@@ -519,7 +520,7 @@ export const useRenameStore = create<RenameState>()((set, get) => {
 				};
 			}),
 
-		addRulesFromTemplate: (configs) =>
+		addRulesFromTemplate: (configs, scope) =>
 			setAndQueuePreview((state) => {
 				const newRules: RenameRule[] = configs.map((rc) => ({
 					id: genId(),
@@ -527,11 +528,15 @@ export const useRenameStore = create<RenameState>()((set, get) => {
 					ruleConfig: rc,
 				}));
 				const rules = [...state.rules, ...newRules];
+				// A preset sets scope only on an empty chain; existing work keeps its scope.
+				const extensionScope =
+					state.rules.length === 0 ? (scope ?? state.extensionScope) : state.extensionScope;
 				return {
 					rules,
+					extensionScope,
 					_previewOverride: null,
 					hasAutoFix: false,
-					...recomputeDerived({ ...state, rules, _previewOverride: null }),
+					...recomputeDerived({ ...state, rules, extensionScope, _previewOverride: null }),
 				};
 			}),
 
@@ -768,6 +773,22 @@ export const useRenameStore = create<RenameState>()((set, get) => {
 						executionProgress: { current: i + 1, total: toRename.length },
 					});
 				}
+			}
+
+			const affectedIds = new Set(toRename.map((row) => row.fileId));
+			const executionMode = taskMode(filteredFiles.filter((file) => affectedIds.has(file.id)));
+			if (executionMode === "real" || executionMode === "mixed") {
+				const successes = log.filter((entry) => entry.status === "success").length;
+				trackTaskEvent("rename_complete", {
+					mode: executionMode,
+					result: get()._abortExecution
+						? "cancelled"
+						: successes === toRename.length
+							? "success"
+							: successes > 0
+								? "partial"
+								: "failure",
+				});
 			}
 
 			// 保存可撤销批次

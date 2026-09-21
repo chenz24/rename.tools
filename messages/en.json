@@ -1,7 +1,7 @@
 {
 	"metadata": {
 		"title": "Bulk Rename Files Online | Free Batch File Renamer - Rename.Tools",
-		"description": "Bulk rename files in your browser with regex, sequences and live preview. Free, local file processing without uploading your files.",
+		"description": "Bulk rename local files with regex, sequences and live preview. No uploads. Rename directly in supported browsers or export a script.",
 		"app": {
 			"title": "Rename.Tools | Bulk Rename Files Online - Free, Fast & Private",
 			"description": "Bulk rename thousands of files instantly in your browser with regex, sequences, and rule chains. Real-time preview, undo/redo support, metadata extraction. 100% local processing - your files never leave your device. Free forever."
@@ -15,7 +15,7 @@
 			"description": "Explore Rename.Tools features for bulk file renaming and batch rename workflows: regex replace, sequence numbering, case conversion, custom JavaScript, metadata extraction, live preview, undo, and script export."
 		},
 		"guides": {
-			"title": "Guides - Rename.Tools",
+			"title": "File Renaming Guides & Tutorials | Rename.Tools",
 			"description": "Practical guides for bulk file renaming with Rename.Tools: regex, sequences, photo organization, music libraries, and batch rename workflows."
 		},
 		"privacy": {
@@ -41,11 +41,11 @@
 		"language": "Language"
 	},
 	"home": {
-		"heroTitle": "Bulk rename files.\nRight in your browser.",
+		"heroTitle": "Bulk rename files online.\nRight in your browser.",
 		"heroFeature1": "7 Rule Types",
 		"heroFeature2": "Live Preview",
 		"heroFeature3": "Zero Uploads",
-		"heroDescription": "Bulk rename files in your browser with regex, sequences and live preview. Free, local file processing without uploading your files.",
+		"heroDescription": "Rename local files directly with regex, sequences and live preview. No uploads or ZIP files to download again.",
 		"cta": "Start Renaming",
 		"viewOnGithub": "View on GitHub",
 		"githubStars": "Open Source",
@@ -122,7 +122,10 @@
 				"title": "Tame your document chaos",
 				"desc": "Add date prefixes, remove version suffixes, standardize naming across departments, or prepare files for archival."
 			}
-		}
+		},
+		"browserNote": "Direct renaming in supported desktop Chrome and Edge browsers. Other browsers can export rename scripts.",
+		"examplesTitle": "See the result. Try it with sample names.",
+		"examplesDescription": "Choose a task, review its rules and preview the changes. No files or sign-up needed."
 	},
 	"features": {
 		"heroTitle": "Every feature,\nin full detail",
@@ -710,7 +713,13 @@
 			"tagsPlaceholder": "photo, cleanup, bulk",
 			"tagsHint": "Separate tags with commas",
 			"cancel": "Cancel",
-			"save": "Save"
+			"save": "Save",
+			"shareError": "Could not share this preset. Check that it has supported rules and allow clipboard access.",
+			"share": "Share preset",
+			"delete": "Delete preset",
+			"pin": "Pin preset",
+			"unpin": "Unpin preset",
+			"shareHint": "Copy this link to share the rules. It contains the preset text, but not your selected files."
 		},
 		"preview": {
 			"title": "Preview",
@@ -856,6 +865,24 @@
 			"undoHint": "Undo last rename batch",
 			"redoHint": "Redo last undone batch",
 			"activationRequired": "Browser permission expired — click here to continue renaming"
+		},
+		"presetLink": {
+			"intro": "Review the rules before applying them. Files are renamed only when you choose Execute Rename.",
+			"invalidTitle": "This preset link is invalid",
+			"invalidDescription": "The link is incomplete, too large, or contains unsupported rules. Ask the sender for a new link.",
+			"example": "Example preview",
+			"existing": "You have {count} existing rules. These rules will be added at the end, keeping your files and current scope ({scope}). The combined result may differ from this example.",
+			"trustCode": "I have reviewed this JavaScript and trust its source. Applying it runs the code to generate previews.",
+			"busy": "Wait for the current rename operation to finish.",
+			"cancel": "Cancel",
+			"save": "Save to presets",
+			"saved": "Preset saved",
+			"apply": "Use rules",
+			"append": "Add to current rules",
+			"trySample": "Try with sample filenames",
+			"yes": "Yes",
+			"no": "No",
+			"empty": "(empty)"
 		}
 	},
 	"about": {
