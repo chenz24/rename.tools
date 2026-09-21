@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const isIndexable = isIndexableGuideLocale(locale);
 	const canonicalLocale = isIndexable ? locale : "en";
 	const canonical = `${SITE_URL}/${canonicalLocale}/guides`;
-	const imageUrl = `${SITE_URL}/${canonicalLocale}/opengraph-image`;
+	const imageUrl = `${SITE_URL}/opengraph-image.png`;
 
 	return {
 		title: copy.title,
@@ -88,6 +88,48 @@ export default async function GuidesPage({ params }: Props) {
 				</div>
 			</section>
 
+			<nav
+				aria-label={locale === "zh" ? "按任务与素材查找指南" : "Find guides by task and material"}
+				className="mx-auto grid max-w-5xl gap-4 px-4 sm:grid-cols-2 sm:px-6"
+			>
+				{[
+					{
+						title: locale === "zh" ? "按任务" : "By task",
+						slugs: [
+							"batch-file-rename-basics",
+							"regex-batch-rename",
+							"sequence-file-numbering",
+							"add-prefix-suffix-to-filenames",
+							"replace-spaces-in-filenames",
+						],
+					},
+					{
+						title: locale === "zh" ? "按素材" : "By material",
+						slugs: ["organize-photos-by-date-sequence", "organize-music-video-files"],
+					},
+				].map((group) => (
+					<div key={group.title} className="rounded-xl border p-5">
+						<h2 className="text-lg font-semibold">{group.title}</h2>
+						<ul className="mt-4 space-y-3 text-sm">
+							{group.slugs.map((slug) => {
+								const guide = guides.find((item) => item.slug === slug);
+								return guide ? (
+									<li key={slug}>
+										<Link
+											href={`/guides/${slug}`}
+											locale={guideLinkLocale}
+											className="underline underline-offset-4"
+										>
+											{guide.title}
+										</Link>
+									</li>
+								) : null;
+							})}
+						</ul>
+					</div>
+				))}
+			</nav>
+
 			<section className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-12">
 				<div className="mb-6 flex items-center gap-2">
 					<Sparkles className="h-5 w-5 text-amber-500" />
@@ -110,6 +152,7 @@ export default async function GuidesPage({ params }: Props) {
 										alt={primaryImage.alt}
 										width={1280}
 										height={720}
+										sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1023px) 33vw, 314px"
 										className="aspect-video w-full object-cover"
 									/>
 								)}
@@ -181,6 +224,7 @@ export default async function GuidesPage({ params }: Props) {
 					<div className="mt-6">
 						<Link
 							href="/app"
+							prefetch={false}
 							className="inline-flex items-center gap-2 rounded-lg bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-90"
 						>
 							{copy.startRenaming}

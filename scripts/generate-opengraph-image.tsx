@@ -1,23 +1,15 @@
+import { writeFile } from "node:fs/promises";
+import { resolve } from "node:path";
 import { ImageResponse } from "next/og";
-import { routing } from "@/i18n/routing";
 
-export const alt = "Rename.Tools - Advanced Bulk File Renamer";
-
-export const size = {
+const size = {
 	width: 1200,
 	height: 630,
 };
-export const contentType = "image/png";
-export const dynamic = "force-static";
-export const dynamicParams = false;
 
 const featureLabels = ["Regex", "Sequences", "Case styles", "Local files"];
 
-export function generateStaticParams() {
-	return routing.locales.map((locale) => ({ locale }));
-}
-
-export default function Image() {
+function Image() {
 	return new ImageResponse(
 		<div
 			style={{
@@ -229,3 +221,14 @@ export default function Image() {
 		size,
 	);
 }
+
+// Generate once when the artwork changes; production serves the checked-in PNG.
+async function main() {
+	const image = await Image().arrayBuffer();
+	await writeFile(resolve("public/opengraph-image.png"), Buffer.from(image));
+}
+
+main().catch((error: unknown) => {
+	console.error(error);
+	process.exitCode = 1;
+});

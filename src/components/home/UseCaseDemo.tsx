@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { type ElementType, useState } from "react";
+import { GuideLink } from "@/components/GuideLink";
 
 /* ─── Types ────────────────────────────────────────────────────── */
 
@@ -72,11 +73,7 @@ const SCENARIOS: UseCaseScenario[] = [
 		color: "text-rose-500",
 		bgColor: "bg-rose-500/10",
 		borderColor: "border-rose-500",
-		rules: [
-			{ type: "findReplace", config: '"IMG_" → ""' },
-			{ type: "insert", config: '"{date}_" at start' },
-			{ type: "sequence", config: "001, 002, 003…" },
-		],
+		rules: [{ type: "sequence", config: "2024-03-15_{n} · 001, 002, 003…" }],
 		files: [
 			{ before: "IMG_0421.jpg", after: "2024-03-15_001.jpg" },
 			{ before: "IMG_0422.jpg", after: "2024-03-15_002.jpg" },
@@ -110,8 +107,8 @@ const SCENARIOS: UseCaseScenario[] = [
 		borderColor: "border-violet-500",
 		rules: [
 			{ type: "caseStyle", config: "Title Case" },
-			{ type: "insert", config: '"{artist} - " at start' },
-			{ type: "sequence", config: "01. 02. 03.…" },
+			{ type: "insert", config: '"{media.artist} - " at start' },
+			{ type: "sequence", config: "{n}. {name} · 01, 02, 03…" },
 		],
 		files: [
 			{ before: "love story.mp3", after: "01. Taylor Swift - Love Story.mp3" },
@@ -141,9 +138,9 @@ const SCENARIOS: UseCaseScenario[] = [
 		bgColor: "bg-orange-500/10",
 		borderColor: "border-orange-500",
 		rules: [
-			{ type: "removeCleanup", config: "(...) [...]" },
-			{ type: "findReplace", config: '"final" → ""' },
-			{ type: "insert", config: '"{date}_" at start' },
+			{ type: "regex", config: "\\s*[\\(\\[].*?[\\)\\]] → ∅" },
+			{ type: "caseStyle", config: "kebab-case" },
+			{ type: "insert", config: '"2024-03-15_"' },
 		],
 		files: [
 			{ before: "report (final v3).pdf", after: "2024-03-15_report.pdf" },
@@ -158,10 +155,10 @@ const SCENARIOS: UseCaseScenario[] = [
 
 export function UseCaseDemo() {
 	const t = useTranslations("home.useCases");
-	const [active, setActive] = useState(SCENARIOS[0]);
+	const [activeId, setActiveId] = useState(SCENARIOS[0].id);
 
 	return (
-		<section className="relative mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20 md:py-24">
+		<section className="relative mx-auto max-w-5xl overflow-x-clip px-4 py-16 sm:px-6 sm:py-20 md:py-24">
 			{/* decorative blobs */}
 			<div className="pointer-events-none absolute -right-24 top-12 h-56 w-56 rounded-full bg-violet-500/6 blur-3xl" />
 			<div className="pointer-events-none absolute -left-20 bottom-8 h-48 w-48 rounded-full bg-rose-500/6 blur-3xl" />
@@ -187,13 +184,15 @@ export function UseCaseDemo() {
 				<div className="flex flex-col gap-2 rounded-xl bg-muted/30 p-3 ring-1 ring-border/40 sm:rounded-2xl sm:p-4 lg:col-span-4">
 					{SCENARIOS.map((scenario) => {
 						const Icon = scenario.icon;
-						const isActive = active.id === scenario.id;
+						const isActive = activeId === scenario.id;
 
 						return (
 							<button
 								type="button"
 								key={scenario.id}
-								onClick={() => setActive(scenario)}
+								onClick={() => setActiveId(scenario.id)}
+								aria-pressed={isActive}
+								aria-controls={`scenario-${scenario.id}`}
 								className={`group flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-left transition-all duration-200 sm:gap-3 sm:rounded-xl sm:px-4 sm:py-3 ${
 									isActive
 										? `${scenario.bgColor} border-l-2 ${scenario.borderColor} ring-1 ring-border shadow-xs`
@@ -227,83 +226,91 @@ export function UseCaseDemo() {
 					})}
 				</div>
 
-				{/* right panel: rules + preview */}
-				<div className="flex flex-col gap-4 sm:gap-5 lg:col-span-8">
-					{/* scenario title & desc */}
-					<div>
-						<h3 className="text-lg font-semibold text-foreground sm:text-xl">
-							{t(`${active.id}.title`)}
-						</h3>
-						<p className="mt-1.5 text-sm leading-relaxed text-muted-foreground sm:mt-2">
-							{t(`${active.id}.desc`)}
-						</p>
-					</div>
+				{/* Keep every scenario in the server-rendered HTML. */}
+				{SCENARIOS.map((active) => (
+					<div
+						key={active.id}
+						id={`scenario-${active.id}`}
+						hidden={active.id !== activeId}
+						className="flex min-w-0 flex-col gap-4 sm:gap-5 lg:col-span-8 hidden:hidden"
+					>
+						{/* scenario title & desc */}
+						<div>
+							<h3 className="text-lg font-semibold text-foreground sm:text-xl">
+								{t(`${active.id}.title`)}
+							</h3>
+							<p className="mt-1.5 text-sm leading-relaxed text-muted-foreground sm:mt-2">
+								{t(`${active.id}.desc`)}
+							</p>
+						</div>
 
-					{/* rule chain */}
-					<div className="rounded-xl border border-border/60 bg-muted/20 p-3 sm:rounded-2xl sm:p-4">
-						<div className="mb-3 flex items-center gap-2 text-xs font-medium text-muted-foreground sm:text-sm">
-							<span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500" />
-							{t("ruleChainLabel")}
-						</div>
-						<div className="flex flex-col gap-2">
-							{active.rules.map((rule, i) => {
-								const meta = RULE_META[rule.type];
-								const RuleIcon = meta.icon;
-								return (
-									<div
-										key={`${active.id}-rule-${i}`}
-										className="flex items-center gap-2.5 rounded-lg bg-background/60 px-3 py-2 ring-1 ring-border/40 sm:gap-3 sm:px-4 sm:py-2.5"
-									>
-										<span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-muted text-[10px] font-bold text-muted-foreground sm:h-6 sm:w-6 sm:text-xs">
-											{i + 1}
-										</span>
-										<span
-											className={`inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[10px] font-medium sm:text-xs ${meta.bg} ${meta.color}`}
-										>
-											<RuleIcon className="h-3 w-3" strokeWidth={2} />
-											{t(`ruleType.${rule.type}`)}
-										</span>
-										<span className="truncate text-xs text-muted-foreground sm:text-sm">
-											{rule.config}
-										</span>
-									</div>
-								);
-							})}
-						</div>
-					</div>
-
-					{/* file preview table */}
-					<div className="overflow-hidden rounded-xl border border-border/60 sm:rounded-2xl">
-						{/* table header */}
-						<div className="flex items-center gap-3 border-b border-border/60 bg-muted/30 px-4 py-2.5 text-xs font-medium text-muted-foreground sm:text-sm">
-							<span className="inline-block h-1.5 w-1.5 rounded-full bg-blue-500" />
-							{t("previewLabel")}
-						</div>
-						{/* header row */}
-						<div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2 border-b border-border/40 bg-muted/10 px-4 py-2 text-[10px] font-medium uppercase tracking-wider text-muted-foreground sm:text-xs">
-							<span>{t("originalLabel")}</span>
-							<span className="w-6" />
-							<span>{t("newNameLabel")}</span>
-						</div>
-						{/* file rows */}
-						{active.files.map((file, i) => (
-							<div
-								key={`${active.id}-file-${i}`}
-								className={`grid grid-cols-[1fr_auto_1fr] items-center gap-2 px-4 py-2 sm:py-2.5 ${
-									i < active.files.length - 1 ? "border-b border-border/30" : ""
-								}`}
-							>
-								<span className="truncate font-mono text-xs text-muted-foreground sm:text-sm">
-									{file.before}
-								</span>
-								<ArrowRight className="h-3 w-3 shrink-0 text-muted-foreground/50 sm:h-3.5 sm:w-3.5" />
-								<span className="truncate font-mono text-xs font-medium text-foreground sm:text-sm">
-									{file.after}
-								</span>
+						{/* rule chain */}
+						<div className="rounded-xl border border-border/60 bg-muted/20 p-3 sm:rounded-2xl sm:p-4">
+							<div className="mb-3 flex items-center gap-2 text-xs font-medium text-muted-foreground sm:text-sm">
+								<span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500" />
+								{t("ruleChainLabel")}
 							</div>
-						))}
+							<div className="flex flex-col gap-2">
+								{active.rules.map((rule, i) => {
+									const meta = RULE_META[rule.type];
+									const RuleIcon = meta.icon;
+									return (
+										<div
+											key={`${active.id}-rule-${i}`}
+											className="flex items-center gap-2.5 rounded-lg bg-background/60 px-3 py-2 ring-1 ring-border/40 sm:gap-3 sm:px-4 sm:py-2.5"
+										>
+											<span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-muted text-[10px] font-bold text-muted-foreground sm:h-6 sm:w-6 sm:text-xs">
+												{i + 1}
+											</span>
+											<span
+												className={`inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[10px] font-medium sm:text-xs ${meta.bg} ${meta.color}`}
+											>
+												<RuleIcon className="h-3 w-3" strokeWidth={2} />
+												{t(`ruleType.${rule.type}`)}
+											</span>
+											<span className="truncate text-xs text-muted-foreground sm:text-sm">
+												{rule.config}
+											</span>
+										</div>
+									);
+								})}
+							</div>
+						</div>
+
+						{/* file preview table */}
+						<div className="overflow-hidden rounded-xl border border-border/60 sm:rounded-2xl">
+							{/* table header */}
+							<div className="flex items-center gap-3 border-b border-border/60 bg-muted/30 px-4 py-2.5 text-xs font-medium text-muted-foreground sm:text-sm">
+								<span className="inline-block h-1.5 w-1.5 rounded-full bg-blue-500" />
+								{t("previewLabel")}
+							</div>
+							{/* header row */}
+							<div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2 border-b border-border/40 bg-muted/10 px-4 py-2 text-[10px] font-medium uppercase tracking-wider text-muted-foreground sm:text-xs">
+								<span>{t("originalLabel")}</span>
+								<span className="w-6" />
+								<span>{t("newNameLabel")}</span>
+							</div>
+							{/* file rows */}
+							{active.files.map((file, i) => (
+								<div
+									key={`${active.id}-file-${i}`}
+									className={`grid grid-cols-[1fr_auto_1fr] items-center gap-2 px-4 py-2 sm:py-2.5 ${
+										i < active.files.length - 1 ? "border-b border-border/30" : ""
+									}`}
+								>
+									<span className="truncate font-mono text-xs text-muted-foreground sm:text-sm">
+										{file.before}
+									</span>
+									<ArrowRight className="h-3 w-3 shrink-0 text-muted-foreground/50 sm:h-3.5 sm:w-3.5" />
+									<span className="truncate font-mono text-xs font-medium text-foreground sm:text-sm">
+										{file.after}
+									</span>
+								</div>
+							))}
+						</div>
+						<GuideLink topic={active.id} />
 					</div>
-				</div>
+				))}
 			</div>
 		</section>
 	);

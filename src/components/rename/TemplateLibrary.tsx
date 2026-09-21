@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRef, useState } from "react";
+import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -42,7 +43,12 @@ import {
 } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useFilteredPresets, usePresetsStore } from "@/hooks/usePresetsStore";
-import type { PresetCategory, PresetSortMode, RuleConfig } from "@/lib/rename/types";
+import type {
+	ExtensionScope,
+	PresetCategory,
+	PresetSortMode,
+	RuleConfig,
+} from "@/lib/rename/types";
 
 interface Template {
 	id: string;
@@ -247,7 +253,7 @@ function useTemplates() {
 }
 
 interface Props {
-	onApply: (rules: RuleConfig[]) => void;
+	onApply: (rules: RuleConfig[], scope?: ExtensionScope) => void;
 	trigger: React.ReactNode;
 }
 
@@ -256,6 +262,7 @@ export function TemplateLibrary({ onApply, trigger }: Props) {
 	const tPresets = useTranslations("rename.presets");
 	const templates = useTemplates();
 	const [open, setOpen] = useState(false);
+	const [shareUrl, setShareUrl] = useState("");
 	const fileInputRef = useRef<HTMLInputElement>(null);
 
 	const presets = useFilteredPresets();
@@ -276,7 +283,8 @@ export function TemplateLibrary({ onApply, trigger }: Props) {
 	const _allPresets = usePresetsStore((state) => state.presets);
 
 	const handleApply = (rules: RuleConfig[], presetId?: string) => {
-		onApply(rules);
+		const preset = presetId ? _allPresets.find((item) => item.id === presetId) : undefined;
+		onApply(rules, preset?.extensionScope);
 		if (presetId) {
 			incrementUsage(presetId);
 		}
@@ -300,12 +308,20 @@ export function TemplateLibrary({ onApply, trigger }: Props) {
 	};
 
 	const handleShare = async (presetId: string) => {
-		const url = generateShareUrl(presetId);
+		let url: string;
+		try {
+			url = generateShareUrl(presetId);
+			setShareUrl(url);
+		} catch {
+			setShareUrl("");
+			toast.error(tPresets("shareError"));
+			return;
+		}
 		try {
 			await navigator.clipboard.writeText(url);
-			alert(tPresets("shareCopied"));
+			toast.success(tPresets("shareCopied"));
 		} catch {
-			alert(url);
+			// The visible, selectable link still works when clipboard access is unavailable.
 		}
 	};
 
@@ -339,7 +355,13 @@ export function TemplateLibrary({ onApply, trigger }: Props) {
 		.filter(Boolean);
 
 	return (
-		<Dialog open={open} onOpenChange={setOpen}>
+		<Dialog
+			open={open}
+			onOpenChange={(value) => {
+				setOpen(value);
+				if (!value) setShareUrl("");
+			}}
+		>
 			<DialogTrigger asChild>{trigger}</DialogTrigger>
 			<DialogContent className="sm:max-w-2xl max-h-[85vh] flex flex-col">
 				<DialogHeader>
@@ -348,6 +370,21 @@ export function TemplateLibrary({ onApply, trigger }: Props) {
 						{t("templateTitle")}
 					</DialogTitle>
 				</DialogHeader>
+
+				{shareUrl && (
+					<div className="space-y-2 rounded-lg border p-3">
+						<label htmlFor="preset-share-url" className="text-sm font-medium">
+							{tPresets("share")}
+						</label>
+						<Input
+							id="preset-share-url"
+							readOnly
+							value={shareUrl}
+							onFocus={(event) => event.target.select()}
+						/>
+						<p className="text-xs text-muted-foreground">{tPresets("shareHint")}</p>
+					</div>
+				)}
 
 				<Tabs defaultValue="pinned" className="flex-1 flex flex-col min-h-0">
 					<TabsList className="grid w-full grid-cols-3">
@@ -640,17 +677,24 @@ function PresetCard({
 							</div>
 						)}
 					</div>
-					<div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+					<div className="flex items-center gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 focus-within:opacity-100 transition-opacity">
 						<Button
 							variant="ghost"
 							size="sm"
 							className={`h-7 w-7 p-0 ${isPinned ? "text-primary" : ""}`}
 							onClick={onPin}
+							aria-label={tPresets(isPinned ? "unpin" : "pin")}
 						>
 							<Pin className="h-3.5 w-3.5" fill={isPinned ? "currentColor" : "none"} />
 						</Button>
 						{onShare && (
-							<Button variant="ghost" size="sm" className="h-7 w-7 p-0" onClick={onShare}>
+							<Button
+								variant="ghost"
+								size="sm"
+								className="h-7 w-7 p-0"
+								onClick={onShare}
+								aria-label={tPresets("share")}
+							>
 								<Share2 className="h-3.5 w-3.5" />
 							</Button>
 						)}
@@ -660,6 +704,7 @@ function PresetCard({
 								size="sm"
 								className="h-7 w-7 p-0 text-destructive"
 								onClick={onDelete}
+								aria-label={tPresets("delete")}
 							>
 								<Trash2 className="h-3.5 w-3.5" />
 							</Button>

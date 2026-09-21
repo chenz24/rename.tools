@@ -7,7 +7,8 @@ export function RegisterServiceWorker() {
 	const hasShownUpdate = useRef(false);
 
 	useEffect(() => {
-		if (!("serviceWorker" in navigator)) return;
+		// Development chunk URLs are not immutable; cache-first would serve stale code after edits.
+		if (process.env.NODE_ENV !== "production" || !("serviceWorker" in navigator)) return;
 
 		navigator.serviceWorker
 			.register("/sw.js", { scope: "/" })

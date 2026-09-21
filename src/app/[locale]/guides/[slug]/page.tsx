@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import type { Article, BreadcrumbList, HowTo, WithContext } from "schema-dts";
 import { JsonLd } from "@/components/JsonLd";
+import { RecipeExample } from "@/components/RecipeExample";
 import { Link } from "@/i18n/navigation";
 import {
 	GUIDE_LOCALES,
@@ -15,6 +16,7 @@ import {
 	getRelatedGuides,
 	isIndexableGuideLocale,
 } from "@/lib/guides/content";
+import { getRecipeForGuide } from "@/lib/guides/recipes";
 import { SITE_URL } from "@/lib/site";
 
 type Props = {
@@ -42,7 +44,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const canonicalLocale = isIndexable ? locale : "en";
 	const canonical = `${SITE_URL}/${canonicalLocale}/guides/${guide.slug}`;
 	const primaryImage = getGuidePrimaryImage(guide);
-	const openGraphImages = primaryImage ? [{ url: `${SITE_URL}${primaryImage.src}` }] : undefined;
+	const imageUrl = `${SITE_URL}${primaryImage?.src ?? "/opengraph-image.png"}`;
+	const openGraphImages = [{ url: imageUrl }];
 
 	return {
 		title: `${guide.title} - Rename.Tools`,
@@ -63,7 +66,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 			siteName: "Rename.Tools",
 			locale: canonicalLocale,
 			type: "article",
-			publishedTime: guide.updatedAt,
+			publishedTime: guide.publishedAt,
 			modifiedTime: guide.updatedAt,
 			images: openGraphImages,
 		},
@@ -71,7 +74,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 			card: "summary_large_image",
 			title: guide.title,
 			description: guide.description,
-			images: primaryImage ? [`${SITE_URL}${primaryImage.src}`] : undefined,
+			images: [imageUrl],
 		},
 		robots: isIndexable ? undefined : { index: false, follow: true },
 	};
@@ -87,6 +90,8 @@ export default async function GuideDetailPage({ params }: Props) {
 	}
 
 	const copy = getGuideIndexCopy(locale);
+	const recipe = getRecipeForGuide(slug);
+	const recipeLabel = locale === "zh" ? "试用这个示例" : "Try this example";
 	const relatedGuides = getRelatedGuides(guide, locale);
 	const canonicalLocale = isIndexableGuideLocale(locale) ? locale : "en";
 	const url = `${SITE_URL}/${canonicalLocale}/guides/${guide.slug}`;
@@ -97,7 +102,7 @@ export default async function GuideDetailPage({ params }: Props) {
 		"@type": "Article",
 		headline: guide.title,
 		description: guide.description,
-		datePublished: guide.updatedAt,
+		datePublished: guide.publishedAt,
 		dateModified: guide.updatedAt,
 		inLanguage: guide.locale,
 		mainEntityOfPage: url,
@@ -105,6 +110,7 @@ export default async function GuideDetailPage({ params }: Props) {
 		author: {
 			"@type": "Organization",
 			name: "Rename.Tools",
+			url: `${SITE_URL}/${canonicalLocale}/about`,
 		},
 		publisher: {
 			"@type": "Organization",
@@ -197,7 +203,15 @@ export default async function GuideDetailPage({ params }: Props) {
 						<p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
 							{guide.intro}
 						</p>
+						{recipe && (
+							<div className="mt-6">
+								<RecipeExample recipe={recipe} locale={locale} entry="guide" />
+							</div>
+						)}
 						<div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+							<Link href="/about" className="underline underline-offset-4">
+								Rename.Tools
+							</Link>
 							<span className="inline-flex items-center gap-1.5">
 								<Clock3 className="h-4 w-4" />
 								{guide.readingTime} {copy.minRead}
@@ -229,7 +243,8 @@ export default async function GuideDetailPage({ params }: Props) {
 												alt={section.image.alt}
 												width={1280}
 												height={720}
-												className="block w-full"
+												sizes="(max-width: 639px) calc(100vw - 32px), (max-width: 1023px) calc(100vw - 48px), 676px"
+												className="block h-auto w-full"
 											/>
 											{section.image.caption && (
 												<figcaption className="border-t bg-muted/30 px-4 py-3 text-sm leading-relaxed text-muted-foreground">
@@ -260,11 +275,11 @@ export default async function GuideDetailPage({ params }: Props) {
 													className="rounded-lg border bg-card p-5"
 												>
 													<div className="grid gap-3 text-sm sm:grid-cols-[1fr_auto_1fr] sm:items-center">
-														<code className="rounded-md bg-muted px-3 py-2 text-muted-foreground">
+														<code className="whitespace-pre-wrap break-all rounded-md bg-muted px-3 py-2 text-muted-foreground">
 															{example.before}
 														</code>
 														<ArrowRight className="hidden h-4 w-4 text-muted-foreground sm:block" />
-														<code className="rounded-md bg-emerald-500/10 px-3 py-2 text-emerald-700 dark:text-emerald-300">
+														<code className="whitespace-pre-wrap break-all rounded-md bg-emerald-500/10 px-3 py-2 text-emerald-700 dark:text-emerald-300">
 															{example.after}
 														</code>
 													</div>
@@ -308,10 +323,11 @@ export default async function GuideDetailPage({ params }: Props) {
 						</p>
 						<div className="mt-6">
 							<Link
-								href="/app"
+								href={recipe ? `/app?recipe=${recipe.id}&entry=guide` : "/app"}
+								prefetch={false}
 								className="inline-flex items-center gap-2 rounded-lg bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-90"
 							>
-								{copy.startRenaming}
+								{recipe ? recipeLabel : copy.startRenaming}
 								<ArrowRight className="h-4 w-4" />
 							</Link>
 						</div>

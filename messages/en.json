@@ -1,26 +1,26 @@
 {
 	"metadata": {
 		"title": "Bulk Rename Files Online | Free Batch File Renamer - Rename.Tools",
-		"description": "Bulk rename files in your browser with regex, sequences, rule chains, and live preview. Free batch file renamer with 100% local processing - no uploads, no tracking.",
+		"description": "Bulk rename local files with regex, sequences and live preview. No uploads. Rename directly in supported browsers or export a script.",
 		"app": {
 			"title": "Rename.Tools | Bulk Rename Files Online - Free, Fast & Private",
 			"description": "Bulk rename thousands of files instantly in your browser with regex, sequences, and rule chains. Real-time preview, undo/redo support, metadata extraction. 100% local processing - your files never leave your device. Free forever."
 		},
 		"about": {
 			"title": "About - Rename.Tools",
-			"description": "Learn about Rename.Tools, the browser-based bulk file renaming tool built with Next.js, React, and modern web technologies."
+			"description": "An open-source tool for previewing and applying bulk filename changes locally in your browser."
 		},
 		"features": {
 			"title": "Bulk File Renamer Features | Regex, Sequences, Live Preview - Rename.Tools",
 			"description": "Explore Rename.Tools features for bulk file renaming and batch rename workflows: regex replace, sequence numbering, case conversion, custom JavaScript, metadata extraction, live preview, undo, and script export."
 		},
 		"guides": {
-			"title": "Guides - Rename.Tools",
+			"title": "File Renaming Guides & Tutorials | Rename.Tools",
 			"description": "Practical guides for bulk file renaming with Rename.Tools: regex, sequences, photo organization, music libraries, and batch rename workflows."
 		},
 		"privacy": {
 			"title": "Privacy Policy - Rename.Tools",
-			"description": "Our privacy policy: We don't collect any data. All file operations run locally in your browser."
+			"description": "File renaming and metadata extraction run locally in your browser without uploading your files. Optional TMDb lookups send search terms to TMDb. Website visit statistics are separate from file processing."
 		},
 		"terms": {
 			"title": "Terms of Service - Rename.Tools",
@@ -41,11 +41,11 @@
 		"language": "Language"
 	},
 	"home": {
-		"heroTitle": "Bulk rename files.\nRight in your browser.",
+		"heroTitle": "Bulk rename files online.\nRight in your browser.",
 		"heroFeature1": "7 Rule Types",
 		"heroFeature2": "Live Preview",
 		"heroFeature3": "Zero Uploads",
-		"heroDescription": "Bulk rename files with regex, sequences, and case conversion in powerful rule chains. Every operation runs locally in your browser — your files never leave your device.",
+		"heroDescription": "Rename local files directly with regex, sequences and live preview. No uploads or ZIP files to download again.",
 		"cta": "Start Renaming",
 		"viewOnGithub": "View on GitHub",
 		"githubStars": "Open Source",
@@ -60,7 +60,7 @@
 		"hl3Title": "Conflict Detection",
 		"hl3Desc": "Automatically spots duplicate filenames before you rename, preventing accidental overwrites",
 		"hl4Title": "100% Local & Private",
-		"hl4Desc": "Files never leave your device. No uploads, no server processing, no data retention — close the tab and everything is gone",
+		"hl4Desc": "File renaming and metadata extraction run locally in your browser without uploading your files. Optional TMDb lookups send search terms to TMDb. Website visit statistics are separate from file processing.",
 		"hl5Title": "Undo & Script Export",
 		"hl5Desc": "Built-in undo/redo support, plus export as Bash or PowerShell scripts for offline execution or rollback",
 		"hl6Title": "Free & Open Source",
@@ -74,9 +74,9 @@
 		"faq1Q": "Is Rename.Tools really free?",
 		"faq1A": "Yes, completely free and open source. There are no premium tiers, no trials, and no hidden fees. The full source code is available on GitHub under the AGPL-3.0 license.",
 		"faq2Q": "Do my files get uploaded to a server?",
-		"faq2A": "No. Rename.Tools runs entirely in your browser. Your files are accessed through the File System Access API and never leave your device. There is no server-side processing whatsoever.",
+		"faq2A": "File renaming and metadata extraction run locally in your browser without uploading your files. Optional TMDb lookups send search terms to TMDb. Website visit statistics are separate from file processing.",
 		"faq3Q": "Why is it safe to use?",
-		"faq3A": "Rename.Tools is architecturally incapable of accessing your files from a server. All processing happens locally in your browser via the File System Access API. No data is transmitted, stored, or logged. The code is fully open source so you can verify this yourself. Plus, built-in undo and live preview ensure you can always review and revert changes before they happen.",
+		"faq3A": "You choose which files the browser can access. Preview the proposed names and resolve conflicts before executing; use Undo if needed. File processing stays local. Website analytics are described separately in our privacy policy.",
 		"faq4Q": "What browsers are supported?",
 		"faq4A": "Rename.Tools works best in Chromium-based browsers (Chrome, Edge, Brave, Arc) which support the File System Access API for direct renaming. In other browsers, you can use sample test mode or export rename scripts.",
 		"faq5Q": "How many files can it handle?",
@@ -122,7 +122,10 @@
 				"title": "Tame your document chaos",
 				"desc": "Add date prefixes, remove version suffixes, standardize naming across departments, or prepare files for archival."
 			}
-		}
+		},
+		"browserNote": "Direct renaming in supported desktop Chrome and Edge browsers. Other browsers can export rename scripts.",
+		"examplesTitle": "See the result. Try it with sample names.",
+		"examplesDescription": "Choose a task, review its rules and preview the changes. No files or sign-up needed."
 	},
 	"features": {
 		"heroTitle": "Every feature,\nin full detail",
@@ -313,7 +316,7 @@
 		},
 		"privacy": {
 			"title": "Your files never leave\nyour browser",
-			"desc": "Rename.Tools is architecturally incapable of accessing your files from a server. Everything runs locally via the File System Access API."
+			"desc": "File renaming and metadata extraction run locally in your browser without uploading your files. Optional TMDb lookups send search terms to TMDb. Website visit statistics are separate from file processing."
 		},
 		"privacyFeatures": {
 			"localProcessing": {
@@ -325,8 +328,8 @@
 				"desc": "Your files are never uploaded anywhere. We use the File System Access API to read and rename files directly on your device."
 			},
 			"noRetention": {
-				"title": "No Data Retention",
-				"desc": "Close the tab and everything is gone. No file data is persisted — only your language, theme, and saved presets stay in localStorage."
+				"title": "Local file state",
+				"desc": "File lists and previews are held in browser memory. Language and theme preferences, saved presets and an optional TMDb credential may be stored locally. You can clear local settings in your browser; this does not delete data already processed by analytics providers."
 			},
 			"offlineReady": {
 				"title": "Works Offline",
@@ -334,7 +337,7 @@
 			},
 			"openSource": {
 				"title": "Fully Open Source",
-				"desc": "Every line of code is open on GitHub under AGPL-3.0. Verify our privacy claims yourself — no hidden tracking, no analytics scripts."
+				"desc": "The source is available on GitHub under AGPL-3.0. You can inspect local file processing and the separate website analytics integrations."
 			},
 			"freeForever": {
 				"title": "Free Forever",
@@ -342,7 +345,7 @@
 			}
 		},
 		"ctaTitle": "Ready to rename smarter?",
-		"ctaDesc": "Join thousands of users who save hours with Rename.Tools. Free, private, and runs right in your browser.",
+		"ctaDesc": "Preview your next batch of filename changes. Free, open source and local to your browser.",
 		"ctaButton": "Start Renaming Now",
 		"ctaSubtext": "Free forever • No sign-up • Works offline",
 		"bestFor": "Best for",
@@ -355,7 +358,7 @@
 		"app": {
 			"title": "Bulk Rename",
 			"privacyBadge": "Privacy Safe",
-			"privacyDesc": "All operations run locally in your browser. No uploads, no content reading, cleared on close.",
+			"privacyDesc": "File renaming and metadata extraction run locally in your browser without uploading your files. Optional TMDb lookups send search terms to TMDb. Website visit statistics are separate from file processing.",
 			"browserCompat": "Browser Compatibility",
 			"browserCompatOk": "Your browser supports File System Access API for direct local renaming.",
 			"browserCompatFail": "Your browser doesn't support File System Access API. Use sample test mode or export scripts.",
@@ -710,7 +713,13 @@
 			"tagsPlaceholder": "photo, cleanup, bulk",
 			"tagsHint": "Separate tags with commas",
 			"cancel": "Cancel",
-			"save": "Save"
+			"save": "Save",
+			"shareError": "Could not share this preset. Check that it has supported rules and allow clipboard access.",
+			"share": "Share preset",
+			"delete": "Delete preset",
+			"pin": "Pin preset",
+			"unpin": "Unpin preset",
+			"shareHint": "Copy this link to share the rules. It contains the preset text, but not your selected files."
 		},
 		"preview": {
 			"title": "Preview",
@@ -856,11 +865,29 @@
 			"undoHint": "Undo last rename batch",
 			"redoHint": "Redo last undone batch",
 			"activationRequired": "Browser permission expired — click here to continue renaming"
+		},
+		"presetLink": {
+			"intro": "Review the rules before applying them. Files are renamed only when you choose Execute Rename.",
+			"invalidTitle": "This preset link is invalid",
+			"invalidDescription": "The link is incomplete, too large, or contains unsupported rules. Ask the sender for a new link.",
+			"example": "Example preview",
+			"existing": "You have {count} existing rules. These rules will be added at the end, keeping your files and current scope ({scope}). The combined result may differ from this example.",
+			"trustCode": "I have reviewed this JavaScript and trust its source. Applying it runs the code to generate previews.",
+			"busy": "Wait for the current rename operation to finish.",
+			"cancel": "Cancel",
+			"save": "Save to presets",
+			"saved": "Preset saved",
+			"apply": "Use rules",
+			"append": "Add to current rules",
+			"trySample": "Try with sample filenames",
+			"yes": "Yes",
+			"no": "No",
+			"empty": "(empty)"
 		}
 	},
 	"about": {
 		"title": "About This Project",
-		"description": "Rename.Tools is a powerful browser-based bulk file renaming tool. All operations run locally in your browser for total privacy.",
+		"description": "An open-source tool for previewing and applying bulk filename changes locally in your browser.",
 		"techStack": "Tech Stack",
 		"items": {
 			"framework": "Framework: Next.js 16 with App Router",
@@ -870,7 +897,13 @@
 			"linting": "Linting & Formatting: Biome",
 			"theme": "Theme: next-themes with dark mode"
 		},
-		"backHome": "Back to Home"
+		"backHome": "Back to Home",
+		"maintenanceDesc": "The project is maintained through the chenz24/rename.tools GitHub repository. You can inspect the AGPL-3.0 source, follow releases, report reproducible problems and contribute improvements there.",
+		"maintenanceTitle": "Project and maintenance",
+		"sourceLink": "Source code",
+		"issuesLink": "Report an issue",
+		"releasesLink": "Releases",
+		"privacyLink": "Privacy and analytics"
 	},
 	"notFound": {
 		"title": "404",
@@ -887,7 +920,7 @@
 	},
 	"footer": {
 		"tagline": "A powerful browser-based bulk file renaming tool. Supports regex, rule chains, live preview — all processing done locally with complete privacy.",
-		"privacyBadge": "100% Local Processing, Zero Data Upload",
+		"privacyBadge": "Local file processing · No file uploads",
 		"legalTitle": "Legal",
 		"resourcesTitle": "Resources",
 		"languagesTitle": "Languages",
@@ -910,7 +943,7 @@
 		"termsAcceptance": "1. Acceptance of Terms",
 		"termsAcceptanceDesc": "By accessing and using Rename.Tools (hereinafter referred to as \"the Service\"), you agree to be bound by these Terms of Service. If you do not agree to any of these terms, please stop using the Service immediately. The Service is available to users worldwide, and you are responsible for ensuring that your use complies with applicable laws and regulations in your jurisdiction.",
 		"termsService": "2. Service Description",
-		"termsServiceDesc": "Rename.Tools is a free browser-based bulk file renaming tool. Key features of this Service include: all file processing is performed locally in your browser; we do not collect, store, or transmit any user file data; support for various renaming rules including regular expressions, sequence generation, and case conversion; real-time preview functionality to confirm results before execution.",
+		"termsServiceDesc": "File renaming and metadata extraction run locally in your browser without uploading your files. Optional TMDb lookups send search terms to TMDb. Website visit statistics are separate from file processing.",
 		"termsUserConduct": "3. User Conduct",
 		"termsUserConductDesc": "When using this Service, you agree to: not use the Service for any illegal purposes; not attempt to damage, interfere with, or bypass the security measures of the Service; not abuse the Service or harm other users' interests in any way; take full responsibility for your use of the Service and its outcomes.",
 		"termsIntellectual": "4. Intellectual Property",
@@ -928,25 +961,25 @@
 		"termsContact": "10. Contact Information",
 		"termsContactDesc": "If you have any questions or suggestions regarding these Terms of Service, please contact us via: GitHub Issues (recommended): https://github.com/chenz24/rename.tools/issues",
 		"privacyTitle": "Privacy Policy",
-		"privacyIntro": "We understand how important privacy is to you. This Privacy Policy explains how Rename.Tools handles your information. In short: we don't collect any of your data.",
+		"privacyIntro": "File renaming and metadata extraction run locally in your browser without uploading your files. Optional TMDb lookups send search terms to TMDb. Website visit statistics are separate from file processing.",
 		"privacyLocalTitle": "1. Local Processing Principle",
-		"privacyLocalDesc": "Rename.Tools uses a purely browser-side architecture, which means: all file operations are performed locally on your device; your files are never uploaded to any server; file contents, file names, and metadata never leave your browser; the Service works offline after initial load.",
-		"privacyNoCollection": "2. Information We Don't Collect",
-		"privacyNoCollectionDesc": "We explicitly do not collect: your file contents, file names, or any file metadata; your personal information (name, email, phone, etc.); your device information or browser fingerprint; your IP address or geographic location; your usage behavior or browsing history.",
+		"privacyLocalDesc": "File renaming and metadata extraction run locally in your browser without uploading your files. Optional TMDb lookups send search terms to TMDb. Website visit statistics are separate from file processing.",
+		"privacyNoCollection": "2. Website Analytics",
+		"privacyNoCollectionDesc": "We use Google Analytics, Umami and Cloudflare Insights to measure website visits and performance. These services process visit and technical data separately from local file operations. Our analytics integration does not send your imported file list or file contents. Google Analytics also measures page views, scrolling and outbound link clicks; these events can include page URLs, referrers and destination links.",
 		"privacyNoStorage": "3. Data Storage",
-		"privacyNoStorageDesc": "This Service does not persist any user data to remote servers. In your local browser, we only store: language preferences (localStorage); theme settings (localStorage); renaming rule presets you voluntarily save (localStorage). When you close the browser tab, all temporary data (including file lists and current rule configurations) is automatically cleared. You can clear all locally stored data at any time through your browser settings.",
+		"privacyNoStorageDesc": "File lists and previews are held in browser memory. Language and theme preferences, saved presets and an optional TMDb credential may be stored locally. You can clear local settings in your browser; this does not delete data already processed by analytics providers.",
 		"privacyCookies": "4. Use of Cookies",
-		"privacyCookiesDesc": "This Service only uses essential functional cookies to store your language and theme preferences. These cookies: do not contain any personally identifiable information; are not used for tracking or analytics purposes; are not shared with any third parties; can be deleted at any time through your browser settings.",
+		"privacyCookiesDesc": "Language preferences use a functional cookie. Google Analytics may use cookies for visit measurement. Browser cookie and privacy settings let you restrict these cookies.",
 		"privacyThirdParty": "5. Third-Party Services",
-		"privacyThirdPartyDesc": "TMDb API Integration: If you choose to use the media metadata scraping feature, you need to configure a TMDb API key. This key is stored only in your browser's local storage and is not sent to our servers. API calls are made directly from your browser to TMDb servers; we do not participate in or log these communications. Hosting: This website is hosted on Vercel. Vercel may collect standard server logs (such as IP addresses and access times), which are managed by Vercel according to their privacy policy. We do not have access to this data.",
+		"privacyThirdPartyDesc": "The site is hosted on Cloudflare, which handles website requests and technical logs. Google Analytics, Umami and Cloudflare Insights provide visit or performance measurement. If you use TMDb, search terms derived from media filenames and your configured credential are sent directly to TMDb; file contents are not uploaded.",
 		"privacySecurity": "6. Security Measures",
-		"privacySecurityDesc": "Although we don't store your data, we still take the following measures to protect service security: use HTTPS to encrypt all network communications; regularly update dependencies to fix known security vulnerabilities; open source code subject to community review; no use of any third-party tracking or analytics scripts.",
+		"privacySecurityDesc": "The site uses HTTPS and publishes its source code for inspection. Renaming runs locally; website analytics and optional TMDb requests involve external services.",
 		"privacyChildren": "7. Children's Privacy",
-		"privacyChildrenDesc": "This Service is not specifically targeted at children under 13 years of age. Since we do not collect any personal information, there is no issue of collecting children's privacy data.",
+		"privacyChildrenDesc": "This tool is intended for general file management and is not specifically designed for children.",
 		"privacyChanges": "8. Changes to Policy",
 		"privacyChangesDesc": "We may update this Privacy Policy from time to time to reflect service changes or legal requirements. Any significant changes will be posted on this page. We recommend periodically reviewing this page to stay informed about our privacy practices.",
 		"privacyRights": "9. Your Rights",
-		"privacyRightsDesc": "Since we do not collect or store your personal data, traditional data subject rights (such as access, rectification, deletion) are technically not applicable. However, you can always: clear your browser's local storage to delete all locally saved preferences; choose not to use features that require third-party APIs; review our open source code to verify our privacy claims.",
+		"privacyRightsDesc": "You can clear local browser data, restrict analytics through browser privacy controls and choose not to use TMDb. For questions about information processed by this site, contact the maintainers through GitHub Issues. Do not include private filenames or credentials in a public issue.",
 		"privacyContact": "10. Contact Us",
 		"privacyContactDesc": "If you have any questions about this Privacy Policy, please contact us via GitHub Issues.",
 		"disclaimerTitle": "Disclaimer",
@@ -969,5 +1002,13 @@
 		"disclaimerJurisdictionDesc": "This disclaimer is governed by applicable laws. If any part of this statement is found to be invalid or unenforceable, the remaining parts shall remain in effect.",
 		"disclaimerAcknowledgment": "9. Acknowledgment",
 		"disclaimerAcknowledgmentDesc": "By using Rename.Tools, you acknowledge that: you have read and understood this disclaimer; you agree to be bound by this disclaimer; you understand the risks of bulk renaming operations; you will be responsible for your use of this tool and its outcomes."
+	},
+	"guideLinks": {
+		"basics": "Bulk renaming guide",
+		"photos": "Photo date and numbering guide",
+		"media": "Music and video naming guide",
+		"regex": "Regex renaming guide",
+		"sequence": "Sequence numbering guide",
+		"english": "English"
 	}
 }

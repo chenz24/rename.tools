@@ -1,15 +1,17 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useCallback, useMemo, useState } from "react";
+import { Suspense, useCallback, useMemo, useState } from "react";
 import { toast } from "sonner";
 import { useShallow } from "zustand/react/shallow";
 import { FilePanel } from "@/components/rename/FilePanel";
 import { IntelligentSuggestions } from "@/components/rename/IntelligentSuggestions";
 import { MediaScraperDialog } from "@/components/rename/MediaScraperDialog";
+import { PresetLinkDialog } from "@/components/rename/PresetLinkDialog";
 import { PreviewPanel } from "@/components/rename/PreviewPanel";
 import { RenameHeader } from "@/components/rename/RenameHeader";
 import { RulePanel } from "@/components/rename/RulePanel";
+import { TaskMeasurement } from "@/components/rename/TaskMeasurement";
 import { TmdbApiKeyDialog } from "@/components/rename/TmdbApiKeyDialog";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
 import { useMediaScraper } from "@/hooks/useMediaScraper";
@@ -162,6 +164,10 @@ export default function RenameAppPage() {
 	return (
 		<div className="flex h-screen flex-col bg-background">
 			<RenameHeader />
+			<Suspense fallback={null}>
+				<PresetLinkDialog />
+				<TaskMeasurement />
+			</Suspense>
 			<ResizablePanelGroup orientation="horizontal" className="flex-1 min-h-0">
 				<ResizablePanel defaultSize={20} minSize={12}>
 					<FilePanel
@@ -212,8 +218,8 @@ export default function RenameAppPage() {
 								onSavePreset={(name, options) => {
 									const _presetId = savePreset(
 										name,
-										rules.map((r) => r.ruleConfig),
-										options,
+										rules.filter((r) => r.enabled).map((r) => r.ruleConfig),
+										{ ...options, extensionScope },
 									);
 									toast.success(tPresets("saveSuccess"), {
 										description: tPresets("saveSuccessDesc", { name }),

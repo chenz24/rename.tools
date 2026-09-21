@@ -1,5 +1,6 @@
 import {
 	ArrowRight,
+	ChevronDown,
 	ChevronRight,
 	Eye,
 	Github,
@@ -16,13 +17,9 @@ import { setRequestLocale } from "next-intl/server";
 import type { FAQPage, WebApplication, WithContext } from "schema-dts";
 import { UseCaseDemo } from "@/components/home/UseCaseDemo";
 import { JsonLd } from "@/components/JsonLd";
-import {
-	Accordion,
-	AccordionContent,
-	AccordionItem,
-	AccordionTrigger,
-} from "@/components/ui/accordion";
+import { RecipeExample } from "@/components/RecipeExample";
 import { Link } from "@/i18n/navigation";
+import { getGuideRecipe } from "@/lib/guides/recipes";
 import { SITE_URL } from "@/lib/site";
 
 type Props = {
@@ -138,11 +135,15 @@ function LandingContent({ locale }: { locale: string }) {
 						<p className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
 							{t("heroDescription")}
 						</p>
+						<p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+							{t("browserNote")}
+						</p>
 
 						{/* CTA row */}
 						<div className="mt-8 flex flex-wrap items-center gap-4 sm:mt-10">
 							<Link
 								href="/app"
+								prefetch={false}
 								className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-foreground px-6 py-3 text-sm font-medium text-background transition-opacity hover:opacity-90 sm:w-auto"
 							>
 								{t("cta")}
@@ -171,6 +172,23 @@ function LandingContent({ locale }: { locale: string }) {
 							<span className="text-muted-foreground">•</span>
 							<p className="text-sm text-muted-foreground">{t("ctaSubtext")}</p>
 						</div>
+					</div>
+				</section>
+
+				<section aria-labelledby="try-examples" className="mx-auto max-w-5xl px-4 pb-12 sm:px-6">
+					<h2 id="try-examples" className="text-2xl font-semibold tracking-tight">
+						{t("examplesTitle")}
+					</h2>
+					<p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+						{t("examplesDescription")}
+					</p>
+					<div className="mt-6 grid gap-4 md:grid-cols-3">
+						{["photo-date-sequence", "prefix-suffix", "spaces-to-underscores"].map((id) => {
+							const recipe = getGuideRecipe(id);
+							return recipe ? (
+								<RecipeExample key={id} recipe={recipe} locale={locale} entry="home" />
+							) : null;
+						})}
 					</div>
 				</section>
 
@@ -234,18 +252,18 @@ function LandingContent({ locale }: { locale: string }) {
 							<Image
 								src="/screenshots/product_screenshot.png"
 								alt="Rename.Tools Rule Chain Interface"
-								width={1200}
-								height={750}
-								className="w-full block dark:hidden"
-								priority
+								width={3348}
+								height={1844}
+								sizes="(max-width: 639px) calc(100vw - 44px), (max-width: 1023px) calc(100vw - 64px), 960px"
+								className="block h-auto w-full dark:hidden"
 							/>
 							<Image
 								src="/screenshots/product_screenshot_dark.png"
 								alt="Rename.Tools Rule Chain Interface"
-								width={1200}
-								height={750}
-								className="w-full hidden dark:block"
-								priority
+								width={3354}
+								height={1852}
+								sizes="(max-width: 639px) calc(100vw - 44px), (max-width: 1023px) calc(100vw - 64px), 960px"
+								className="hidden h-auto w-full dark:block"
 							/>
 						</div>
 					</div>
@@ -272,6 +290,7 @@ function LandingContent({ locale }: { locale: string }) {
 					<div className="mt-6 sm:mt-8">
 						<Link
 							href="/app"
+							prefetch={false}
 							className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-foreground px-6 py-3 text-sm font-medium text-background transition-opacity hover:opacity-90 sm:w-auto"
 						>
 							{t("ctaButton")}
@@ -300,18 +319,22 @@ function LandingContent({ locale }: { locale: string }) {
 					</p>
 
 					<div className="mt-12">
-						<Accordion type="single" collapsible className="w-full">
+						<div className="w-full">
 							{[1, 2, 3, 4, 5].map((i) => (
-								<AccordionItem key={i} value={`faq-${i}`}>
-									<AccordionTrigger className="text-base font-medium text-foreground">
+								<details key={i} name="home-faq" className="group border-b last:border-b-0">
+									<summary className="flex cursor-pointer list-none items-center justify-between gap-4 rounded-md py-4 text-base font-medium text-foreground focus-visible:outline-2 focus-visible:outline-ring [&::-webkit-details-marker]:hidden">
 										{t(`faq${i}Q`)}
-									</AccordionTrigger>
-									<AccordionContent className="text-sm leading-relaxed text-muted-foreground">
+										<ChevronDown
+											aria-hidden="true"
+											className="h-4 w-4 shrink-0 transition-transform group-open:rotate-180"
+										/>
+									</summary>
+									<p className="pb-4 text-sm leading-relaxed text-muted-foreground">
 										{t(`faq${i}A`)}
-									</AccordionContent>
-								</AccordionItem>
+									</p>
+								</details>
 							))}
-						</Accordion>
+						</div>
 					</div>
 				</section>
 

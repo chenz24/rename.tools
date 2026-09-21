@@ -35,6 +35,7 @@ import {
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRef, useState } from "react";
+import { GuideLink } from "@/components/GuideLink";
 import { Link } from "@/i18n/navigation";
 
 /* ─── Category nav ─────────────────────────────────────────────── */
@@ -157,6 +158,7 @@ export default function FeaturesPage() {
 					<div className="mt-8">
 						<Link
 							href="/app"
+							prefetch={false}
 							className="inline-flex items-center gap-2 rounded-2xl bg-foreground px-6 py-3 text-sm font-medium text-background transition-opacity hover:opacity-90"
 						>
 							{t("cta")}
@@ -289,6 +291,7 @@ export default function FeaturesPage() {
 												{t("bestFor")}
 											</span>
 											<p className="mt-1 text-sm text-foreground">{t(`${rule.id}.bestFor`)}</p>
+											<GuideLink topic={rule.id} />
 										</div>
 									</div>
 								</div>
@@ -376,6 +379,9 @@ export default function FeaturesPage() {
 								<p className="mt-2 text-sm leading-relaxed text-muted-foreground">
 									{t(`automationFeatures.${feat.id}.desc`)}
 								</p>
+								{(feat.id === "metadataExtraction" || feat.id === "mediaScraper") && (
+									<GuideLink topic={feat.id} />
+								)}
 							</div>
 						);
 					})}
@@ -438,6 +444,7 @@ export default function FeaturesPage() {
 					<div className="mt-8 flex flex-wrap items-center gap-4">
 						<Link
 							href="/app"
+							prefetch={false}
 							className="inline-flex items-center gap-2 rounded-2xl bg-foreground px-6 py-3 text-sm font-medium text-background transition-opacity hover:opacity-90"
 						>
 							{t("ctaButton")}

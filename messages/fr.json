@@ -1,14 +1,14 @@
 {
 	"metadata": {
 		"title": "Rename.Tools - Outil Gratuit de Renommage de Fichiers par Lots en Ligne | Sans Téléchargement, Confidentialité d'Abord, Traitement Local",
-		"description": "Outil gratuit de renommage de fichiers par lots basé sur navigateur avec regex, séquences et chaînes de règles. Renommez des milliers de fichiers instantanément avec aperçu en direct. Traitement 100% local - pas de téléchargement, pas de suivi, confidentialité complète garantie.",
+		"description": "Renommez vos fichiers par lots avec expressions régulières, numérotation et aperçu. Gratuit, dans votre navigateur, sans téléverser vos fichiers.",
 		"app": {
 			"title": "Rename.Tools | Outil de Renommage de Fichiers par Lots en Ligne - Gratuit, Rapide et Privé",
 			"description": "Renommez des milliers de fichiers instantanément dans votre navigateur avec regex, séquences et chaînes de règles. Aperçu en temps réel, support annuler/refaire, extraction de métadonnées. Traitement 100% local - vos fichiers ne quittent jamais votre appareil. Gratuit pour toujours."
 		},
 		"about": {
 			"title": "À propos - Rename.Tools",
-			"description": "Découvrez Rename.Tools, l'outil de renommage de fichiers par lots basé sur navigateur construit avec Next.js, React et les technologies web modernes."
+			"description": "Un outil libre pour prévisualiser et appliquer des renommages par lots dans votre navigateur."
 		},
 		"features": {
 			"title": "Fonctionnalités - Rename.Tools",
@@ -16,7 +16,7 @@
 		},
 		"privacy": {
 			"title": "Politique de Confidentialité - Rename.Tools",
-			"description": "Notre politique de confidentialité : Nous ne collectons aucune donnée. Toutes les opérations sur les fichiers s'exécutent localement dans votre navigateur."
+			"description": "Le renommage et l’extraction des métadonnées se font dans votre navigateur sans envoyer les fichiers. Les recherches TMDb facultatives transmettent des termes de recherche à TMDb. Les statistiques du site sont distinctes du traitement des fichiers."
 		},
 		"terms": {
 			"title": "Conditions d'Utilisation - Rename.Tools",
@@ -41,7 +41,7 @@
 		"heroFeature1": "7 Types de Règles",
 		"heroFeature2": "Aperçu en Direct",
 		"heroFeature3": "Zéro Téléchargement",
-		"heroDescription": "Combinez regex, séquences et conversion de casse en chaînes de règles puissantes. Chaque opération s'exécute localement dans votre navigateur — vos fichiers ne quittent jamais votre appareil.",
+		"heroDescription": "Renommez directement vos fichiers locaux avec regex, séquences et aperçu en direct. Aucun envoi de fichiers ni archive ZIP à retélécharger.",
 		"cta": "Commencer à Renommer",
 		"viewOnGithub": "Voir sur GitHub",
 		"githubStars": "Open Source",
@@ -56,7 +56,7 @@
 		"hl3Title": "Détection de Conflits",
 		"hl3Desc": "Repère automatiquement les noms de fichiers en double avant le renommage, évitant les écrasements accidentels",
 		"hl4Title": "100% Local et Privé",
-		"hl4Desc": "Les fichiers ne quittent jamais votre appareil. Pas de téléchargement, pas de traitement serveur, pas de rétention de données — fermez l'onglet et tout disparaît",
+		"hl4Desc": "Le renommage et l’extraction des métadonnées se font dans votre navigateur sans envoyer les fichiers. Les recherches TMDb facultatives transmettent des termes de recherche à TMDb. Les statistiques du site sont distinctes du traitement des fichiers.",
 		"hl5Title": "Annuler et Exporter des Scripts",
 		"hl5Desc": "Support intégré annuler/refaire, plus exportation sous forme de scripts Bash ou PowerShell pour exécution hors ligne ou restauration",
 		"hl6Title": "Gratuit et Open Source",
@@ -70,9 +70,9 @@
 		"faq1Q": "Rename.Tools est-il vraiment gratuit ?",
 		"faq1A": "Oui, complètement gratuit et open source. Il n'y a pas de niveaux premium, pas d'essais et pas de frais cachés. Le code source complet est disponible sur GitHub sous licence AGPL-3.0.",
 		"faq2Q": "Mes fichiers sont-ils téléchargés sur un serveur ?",
-		"faq2A": "Non. Rename.Tools fonctionne entièrement dans votre navigateur. Vos fichiers sont accédés via l'API File System Access et ne quittent jamais votre appareil. Il n'y a absolument aucun traitement côté serveur.",
+		"faq2A": "Le renommage et l’extraction des métadonnées se font dans votre navigateur sans envoyer les fichiers. Les recherches TMDb facultatives transmettent des termes de recherche à TMDb. Les statistiques du site sont distinctes du traitement des fichiers.",
 		"faq3Q": "Pourquoi est-ce sûr à utiliser ?",
-		"faq3A": "Rename.Tools est architecturalement incapable d'accéder à vos fichiers depuis un serveur. Tout le traitement se fait localement dans votre navigateur via l'API File System Access. Aucune donnée n'est transmise, stockée ou enregistrée. Le code est entièrement open source pour que vous puissiez le vérifier vous-même. De plus, l'annulation intégrée et l'aperçu en direct garantissent que vous pouvez toujours examiner et annuler les modifications avant qu'elles ne se produisent.",
+		"faq3A": "Vous choisissez les fichiers accessibles au navigateur. Vérifiez les noms et résolvez les conflits avant l’exécution ; utilisez Annuler si nécessaire. Le traitement reste local. Les statistiques du site sont expliquées dans la politique de confidentialité.",
 		"faq4Q": "Quels navigateurs sont supportés ?",
 		"faq4A": "Rename.Tools fonctionne mieux dans les navigateurs basés sur Chromium (Chrome, Edge, Brave, Arc) qui supportent l'API File System Access pour le renommage direct. Dans les autres navigateurs, vous pouvez utiliser le mode test d'échantillon ou exporter des scripts de renommage.",
 		"faq5Q": "Combien de fichiers peut-il gérer ?",
@@ -118,7 +118,10 @@
 				"title": "Maîtrisez le chaos de vos documents",
 				"desc": "Ajoutez des préfixes de date, supprimez les suffixes de version, standardisez le nommage entre les départements ou préparez les fichiers pour l'archivage."
 			}
-		}
+		},
+		"browserNote": "Renommage direct sur les versions de bureau compatibles de Chrome et Edge. Les autres navigateurs peuvent exporter des scripts.",
+		"examplesTitle": "Découvrez le résultat avec des exemples",
+		"examplesDescription": "Choisissez une tâche, vérifiez les règles et prévisualisez les changements. Sans fichiers ni inscription. Exemples et guides en anglais."
 	},
 	"features": {
 		"heroTitle": "Chaque fonctionnalité,\nen détail complet",
@@ -309,7 +312,7 @@
 		},
 		"privacy": {
 			"title": "Vos fichiers ne quittent jamais\nvotre navigateur",
-			"desc": "Rename.Tools est architecturalement incapable d'accéder à vos fichiers depuis un serveur. Tout s'exécute localement via l'API File System Access."
+			"desc": "Le renommage et l’extraction des métadonnées se font dans votre navigateur sans envoyer les fichiers. Les recherches TMDb facultatives transmettent des termes de recherche à TMDb. Les statistiques du site sont distinctes du traitement des fichiers."
 		},
 		"privacyFeatures": {
 			"localProcessing": {
@@ -321,8 +324,8 @@
 				"desc": "Vos fichiers ne sont jamais téléchargés nulle part. Nous utilisons l'API File System Access pour lire et renommer les fichiers directement sur votre appareil."
 			},
 			"noRetention": {
-				"title": "Aucune Rétention de Données",
-				"desc": "Fermez l'onglet et tout disparaît. Aucune donnée de fichier n'est persistée — seuls votre langue, thème et préréglages enregistrés restent dans localStorage."
+				"title": "État local des fichiers",
+				"desc": "Les listes et aperçus restent dans la mémoire du navigateur. Les préférences, les préréglages et l’identifiant TMDb facultatif peuvent être conservés localement. Leur suppression n’efface pas les données déjà traitées par les services de mesure."
 			},
 			"offlineReady": {
 				"title": "Fonctionne Hors Ligne",
@@ -330,7 +333,7 @@
 			},
 			"openSource": {
 				"title": "Entièrement Open Source",
-				"desc": "Chaque ligne de code est ouverte sur GitHub sous AGPL-3.0. Vérifiez nos affirmations de confidentialité vous-même — pas de suivi caché, pas de scripts d'analyse."
+				"desc": "Le code est disponible sur GitHub sous AGPL-3.0. Vous pouvez examiner le traitement local et les intégrations distinctes de statistiques du site."
 			},
 			"freeForever": {
 				"title": "Gratuit Pour Toujours",
@@ -338,7 +341,7 @@
 			}
 		},
 		"ctaTitle": "Prêt à renommer plus intelligemment ?",
-		"ctaDesc": "Rejoignez des milliers d'utilisateurs qui économisent des heures avec Rename.Tools. Gratuit, privé et s'exécute directement dans votre navigateur.",
+		"ctaDesc": "Prévisualisez votre prochain lot de changements. Gratuit, libre et traité dans votre navigateur.",
 		"ctaButton": "Commencer à Renommer Maintenant",
 		"ctaSubtext": "Gratuit pour toujours • Pas d'inscription • Fonctionne hors ligne",
 		"bestFor": "Idéal pour",
@@ -351,7 +354,7 @@
 		"app": {
 			"title": "Renommage par Lots",
 			"privacyBadge": "Confidentialité Garantie",
-			"privacyDesc": "Toutes les opérations s'exécutent localement dans votre navigateur. Pas de téléchargement, pas de lecture de contenu, effacé à la fermeture.",
+			"privacyDesc": "Le renommage et l’extraction des métadonnées se font dans votre navigateur sans envoyer les fichiers. Les recherches TMDb facultatives transmettent des termes de recherche à TMDb. Les statistiques du site sont distinctes du traitement des fichiers.",
 			"browserCompat": "Compatibilité du Navigateur",
 			"browserCompatOk": "Votre navigateur supporte l'API File System Access pour le renommage local direct.",
 			"browserCompatFail": "Votre navigateur ne supporte pas l'API File System Access. Utilisez le mode test d'échantillon ou exportez des scripts.",
@@ -703,7 +706,13 @@
 			"tagsPlaceholder": "photo, nettoyage, lot",
 			"tagsHint": "Séparez les balises par des virgules",
 			"cancel": "Annuler",
-			"save": "Enregistrer"
+			"save": "Enregistrer",
+			"shareError": "Impossible de partager ce modèle. Vérifiez les règles et l’accès au presse-papiers.",
+			"share": "Partager le modèle",
+			"delete": "Supprimer le modèle",
+			"pin": "Épingler le modèle",
+			"unpin": "Désépingler le modèle",
+			"shareHint": "Copiez ce lien pour partager les règles. Il contient le texte du modèle, mais pas les fichiers sélectionnés."
 		},
 		"preview": {
 			"title": "Aperçu",
@@ -854,11 +863,29 @@
 			"undoHint": "Annuler le dernier lot de renommage",
 			"redoHint": "Refaire le dernier lot annulé",
 			"activationRequired": "Autorisation du navigateur expirée — cliquez ici pour continuer le renommage"
+		},
+		"presetLink": {
+			"intro": "Vérifiez les règles avant de les appliquer. Les fichiers ne seront renommés que lorsque vous lancerez le renommage.",
+			"invalidTitle": "Ce lien de modèle est invalide",
+			"invalidDescription": "Le lien est incomplet, trop volumineux ou contient des règles non prises en charge. Demandez un nouveau lien.",
+			"example": "Aperçu de l’exemple",
+			"existing": "Vous avez déjà {count} règles. Les nouvelles seront ajoutées à la fin, en conservant vos fichiers et la portée actuelle ({scope}). Le résultat combiné peut différer de cet exemple.",
+			"trustCode": "J’ai vérifié ce code JavaScript et je fais confiance à sa source. Son application exécutera le code pour générer les aperçus.",
+			"busy": "Attendez la fin du renommage en cours.",
+			"cancel": "Annuler",
+			"save": "Enregistrer le modèle",
+			"saved": "Modèle enregistré",
+			"apply": "Utiliser les règles",
+			"append": "Ajouter aux règles actuelles",
+			"trySample": "Tester avec des noms fictifs",
+			"yes": "Oui",
+			"no": "Non",
+			"empty": "(vide)"
 		}
 	},
 	"about": {
 		"title": "À propos de ce Projet",
-		"description": "Rename.Tools est un puissant outil de renommage de fichiers par lots basé sur navigateur. Toutes les opérations s'exécutent localement dans votre navigateur pour une confidentialité totale.",
+		"description": "Un outil libre pour prévisualiser et appliquer des renommages par lots dans votre navigateur.",
 		"techStack": "Stack Technologique",
 		"items": {
 			"framework": "Framework: Next.js 16 with App Router",
@@ -868,7 +895,13 @@
 			"linting": "Linting et Formatage: Biome",
 			"theme": "Thème: next-themes avec mode sombre"
 		},
-		"backHome": "Retour à l'Accueil"
+		"backHome": "Retour à l'Accueil",
+		"maintenanceDesc": "Le projet est maintenu dans le dépôt GitHub chenz24/rename.tools. Vous pouvez consulter le code AGPL-3.0, suivre les versions, signaler des problèmes reproductibles et contribuer aux améliorations.",
+		"maintenanceTitle": "Projet et maintenance",
+		"sourceLink": "Code source",
+		"issuesLink": "Signaler un problème",
+		"releasesLink": "Versions",
+		"privacyLink": "Confidentialité et statistiques"
 	},
 	"notFound": {
 		"title": "404",
@@ -885,7 +918,7 @@
 	},
 	"footer": {
 		"tagline": "Un puissant outil de renommage par lots basé sur navigateur. Prend en charge regex, chaînes de règles, aperçu en direct — tout le traitement est effectué localement avec une confidentialité totale.",
-		"privacyBadge": "100% Traitement Local, Zéro Téléchargement de Données",
+		"privacyBadge": "Traitement local · Aucun téléversement de fichiers",
 		"legalTitle": "Légal",
 		"resourcesTitle": "Ressources",
 		"languagesTitle": "Langues",
@@ -908,7 +941,7 @@
 		"termsAcceptance": "1. Acceptance of Terms",
 		"termsAcceptanceDesc": "By accessing and using Rename.Tools (hereinafter referred to as \"the Service\"), you agree to be bound by these Terms of Service. If you do not agree to any of these terms, please stop using the Service immediately. The Service is available to users worldwide, and you are responsible for ensuring that your use complies with applicable laws and regulations in your jurisdiction.",
 		"termsService": "2. Service Description",
-		"termsServiceDesc": "Rename.Tools is a free browser-based batch file renaming tool. Key features of this Service include: all file processing is performed locally in your browser; we do not collect, store, or transmit any user file data; support for various renaming rules including regular expressions, sequence generation, and case conversion; real-time preview functionality to confirm results before execution.",
+		"termsServiceDesc": "Le renommage et l’extraction des métadonnées se font dans votre navigateur sans envoyer les fichiers. Les recherches TMDb facultatives transmettent des termes de recherche à TMDb. Les statistiques du site sont distinctes du traitement des fichiers.",
 		"termsUserConduct": "3. User Conduct",
 		"termsUserConductDesc": "When using this Service, you agree to: not use the Service for any illegal purposes; not attempt to damage, interfere with, or bypass the security measures of the Service; not abuse the Service or harm other users' interests in any way; take full responsibility for your use of the Service and its outcomes.",
 		"termsIntellectual": "4. Intellectual Property",
@@ -926,25 +959,25 @@
 		"termsContact": "10. Contact Information",
 		"termsContactDesc": "If you have any questions or suggestions regarding these Terms of Service, please contact us via: GitHub Issues (recommended): https://github.com/chenz24/rename.tools/issues",
 		"privacyTitle": "Privacy Policy",
-		"privacyIntro": "We understand how important privacy is to you. This Privacy Policy explains how Rename.Tools handles your information. In short: we don't collect any of your data.",
+		"privacyIntro": "Le renommage et l’extraction des métadonnées se font dans votre navigateur sans envoyer les fichiers. Les recherches TMDb facultatives transmettent des termes de recherche à TMDb. Les statistiques du site sont distinctes du traitement des fichiers.",
 		"privacyLocalTitle": "1. Local Processing Principle",
-		"privacyLocalDesc": "Rename.Tools uses a purely browser-side architecture, which means: all file operations are performed locally on your device; your files are never uploaded to any server; file contents, file names, and metadata never leave your browser; the Service works offline after initial load.",
-		"privacyNoCollection": "2. Information We Don't Collect",
-		"privacyNoCollectionDesc": "We explicitly do not collect: your file contents, file names, or any file metadata; your personal information (name, email, phone, etc.); your device information or browser fingerprint; your IP address or geographic location; your usage behavior or browsing history.",
+		"privacyLocalDesc": "Le renommage et l’extraction des métadonnées se font dans votre navigateur sans envoyer les fichiers. Les recherches TMDb facultatives transmettent des termes de recherche à TMDb. Les statistiques du site sont distinctes du traitement des fichiers.",
+		"privacyNoCollection": "2. Statistiques du site",
+		"privacyNoCollectionDesc": "Nous utilisons Google Analytics, Umami et Cloudflare Insights pour mesurer les visites et les performances. Ces services traitent des données de visite et des données techniques, séparément des opérations locales. Notre intégration ne transmet ni la liste des fichiers importés ni leur contenu. Google Analytics mesure aussi les pages vues, le défilement et les clics sur les liens externes ; ces événements peuvent inclure les URL des pages, les pages référentes et les liens de destination.",
 		"privacyNoStorage": "3. Data Storage",
-		"privacyNoStorageDesc": "This Service does not persist any user data to remote servers. In your local browser, we only store: language preferences (localStorage); theme settings (localStorage); renaming rule presets you voluntarily save (localStorage). When you close the browser tab, all temporary data (including file lists and current rule configurations) is automatically cleared. You can clear all locally stored data at any time through your browser settings.",
+		"privacyNoStorageDesc": "Les listes et aperçus restent dans la mémoire du navigateur. Les préférences, les préréglages et l’identifiant TMDb facultatif peuvent être conservés localement. Leur suppression n’efface pas les données déjà traitées par les services de mesure.",
 		"privacyCookies": "4. Use of Cookies",
-		"privacyCookiesDesc": "This Service only uses essential functional cookies to store your language and theme preferences. These cookies: do not contain any personally identifiable information; are not used for tracking or analytics purposes; are not shared with any third parties; can be deleted at any time through your browser settings.",
+		"privacyCookiesDesc": "La préférence de langue utilise un cookie fonctionnel. Google Analytics peut utiliser des cookies pour mesurer les visites. Vous pouvez les limiter dans les réglages de confidentialité du navigateur.",
 		"privacyThirdParty": "5. Third-Party Services",
-		"privacyThirdPartyDesc": "TMDb API Integration: If you choose to use the media metadata scraping feature, you need to configure a TMDb API key. This key is stored only in your browser's local storage and is not sent to our servers. API calls are made directly from your browser to TMDb servers; we do not participate in or log these communications. Hosting: This website is hosted on Vercel. Vercel may collect standard server logs (such as IP addresses and access times), which are managed by Vercel according to their privacy policy. We do not have access to this data.",
+		"privacyThirdPartyDesc": "Le site est hébergé par Cloudflare, qui traite les requêtes et journaux techniques. Google Analytics, Umami et Cloudflare Insights mesurent les visites ou les performances. Avec TMDb, les termes issus des noms de fichiers multimédias et votre identifiant sont envoyés directement à TMDb, sans le contenu des fichiers.",
 		"privacySecurity": "6. Security Measures",
-		"privacySecurityDesc": "Although we don't store your data, we still take the following measures to protect service security: use HTTPS to encrypt all network communications; regularly update dependencies to fix known security vulnerabilities; open source code subject to community review; no use of any third-party tracking or analytics scripts.",
+		"privacySecurityDesc": "Le site utilise HTTPS et publie son code pour inspection. Le renommage reste local ; les statistiques et les requêtes TMDb facultatives font appel à des services externes.",
 		"privacyChildren": "7. Children's Privacy",
-		"privacyChildrenDesc": "This Service is not specifically targeted at children under 13 years of age. Since we do not collect any personal information, there is no issue of collecting children's privacy data.",
+		"privacyChildrenDesc": "Cet outil de gestion de fichiers n’est pas spécialement conçu pour les enfants.",
 		"privacyChanges": "8. Changes to Policy",
 		"privacyChangesDesc": "We may update this Privacy Policy from time to time to reflect service changes or legal requirements. Any significant changes will be posted on this page. We recommend periodically reviewing this page to stay informed about our privacy practices.",
 		"privacyRights": "9. Your Rights",
-		"privacyRightsDesc": "Since we do not collect or store your personal data, traditional data subject rights (such as access, rectification, deletion) are technically not applicable. However, you can always: clear your browser's local storage to delete all locally saved preferences; choose not to use features that require third-party APIs; review our open source code to verify our privacy claims.",
+		"privacyRightsDesc": "Vous pouvez effacer les données locales, limiter les statistiques via votre navigateur et ne pas utiliser TMDb. Pour toute question sur les informations traitées, contactez les responsables via GitHub Issues. Ne publiez pas de noms de fichiers privés ni d’identifiants secrets.",
 		"privacyContact": "10. Contact Us",
 		"privacyContactDesc": "If you have any questions about this Privacy Policy, please contact us via GitHub Issues.",
 		"disclaimerTitle": "Disclaimer",
@@ -967,5 +1000,13 @@
 		"disclaimerJurisdictionDesc": "This disclaimer is governed by applicable laws. If any part of this statement is found to be invalid or unenforceable, the remaining parts shall remain in effect.",
 		"disclaimerAcknowledgment": "9. Acknowledgment",
 		"disclaimerAcknowledgmentDesc": "By using Rename.Tools, you acknowledge that: you have read and understood this disclaimer; you agree to be bound by this disclaimer; you understand the risks of batch renaming operations; you will be responsible for your use of this tool and its outcomes."
+	},
+	"guideLinks": {
+		"basics": "Guide du renommage par lots",
+		"photos": "Guide des dates et numéros des photos",
+		"media": "Guide des noms de musique et vidéos",
+		"regex": "Guide des expressions régulières",
+		"sequence": "Guide de numérotation",
+		"english": "en anglais"
 	}
 }

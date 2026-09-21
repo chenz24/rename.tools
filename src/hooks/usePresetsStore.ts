@@ -2,7 +2,13 @@
 
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import {
+	decodeSharedPreset,
+	encodeSharedPreset,
+	sharedPresetSchema,
+} from "@/lib/rename/shared-presets";
 import type {
+	ExtensionScope,
 	PresetCategory,
 	PresetPinned,
 	PresetSortMode,
@@ -31,6 +37,7 @@ interface PresetsState {
 			description?: string;
 			tags?: string[];
 			category?: PresetCategory;
+			extensionScope?: ExtensionScope;
 		},
 	) => string;
 	updatePreset: (id: string, updates: Partial<Omit<UserPreset, "id" | "createdAt">>) => void;
@@ -64,6 +71,7 @@ export const usePresetsStore = create<PresetsState>()(
 					description: options?.description,
 					tags: options?.tags,
 					category: options?.category,
+					extensionScope: options?.extensionScope ?? "name",
 					rules,
 					createdAt: Date.now(),
 					lastUsedAt: Date.now(),
@@ -142,7 +150,7 @@ export const usePresetsStore = create<PresetsState>()(
 							}
 
 							const newPresets = imported.map((p) => ({
-								...p,
+								...sharedPresetSchema.parse(p),
 								id: generatePresetId(),
 								createdAt: Date.now(),
 								lastUsedAt: Date.now(),
@@ -167,27 +175,22 @@ export const usePresetsStore = create<PresetsState>()(
 				const preset = get().presets.find((p) => p.id === id);
 				if (!preset) return "";
 
-				const exportData = {
-					name: preset.name,
-					description: preset.description,
-					tags: preset.tags,
-					category: preset.category,
-					rules: preset.rules,
-				};
-
-				const encoded = btoa(encodeURIComponent(JSON.stringify(exportData)));
-				return `${window.location.origin}${window.location.pathname}?preset=${encoded}`;
+				const encoded = encodeSharedPreset(preset);
+				const params = new URLSearchParams({ preset: encoded });
+				return `${window.location.origin}${window.location.pathname}?${params}`;
 			},
 
 			importFromUrl: (encoded) => {
 				try {
-					const decoded = JSON.parse(decodeURIComponent(atob(encoded)));
+					const decoded = decodeSharedPreset(encoded);
+					if (!decoded) return null;
 					const preset: UserPreset = {
 						id: generatePresetId(),
 						name: decoded.name || "Imported Preset",
 						description: decoded.description,
 						tags: decoded.tags,
 						category: decoded.category,
+						extensionScope: decoded.extensionScope,
 						rules: decoded.rules,
 						createdAt: Date.now(),
 						lastUsedAt: Date.now(),

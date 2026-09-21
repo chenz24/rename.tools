@@ -22,7 +22,9 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useRenameStore } from "@/hooks/useRenameStore";
 import type { PreviewResult } from "@/lib/rename/types";
+import { taskMode, trackTaskEvent } from "@/lib/task-analytics";
 
 interface Props {
 	preview: PreviewResult[];
@@ -65,6 +67,10 @@ export function ExecuteBar({ preview, isExecuting, onExecute, onClearRules }: Pr
 	const exportBash = useCallback(() => {
 		const lines = affected.map((r) => `mv "${esc(r.original)}" "${esc(r.newName)}"`);
 		downloadBlob(lines.join("\n"), "rename.sh", "text/plain");
+		trackTaskEvent("script_export", {
+			mode: taskMode(useRenameStore.getState().filteredFiles),
+			platform: "bash",
+		});
 	}, [affected]);
 
 	const exportPowerShell = useCallback(() => {
@@ -72,6 +78,10 @@ export function ExecuteBar({ preview, isExecuting, onExecute, onClearRules }: Pr
 			(r) => `Rename-Item -LiteralPath "${esc(r.original)}" -NewName "${esc(r.newName)}"`,
 		);
 		downloadBlob(lines.join("\n"), "rename.ps1", "text/plain");
+		trackTaskEvent("script_export", {
+			mode: taskMode(useRenameStore.getState().filteredFiles),
+			platform: "powershell",
+		});
 	}, [affected]);
 
 	const exportCSV = useCallback(() => {
@@ -83,6 +93,10 @@ export function ExecuteBar({ preview, isExecuting, onExecute, onClearRules }: Pr
 	const exportReverse = useCallback(() => {
 		const lines = affected.map((r) => `mv "${esc(r.newName)}" "${esc(r.original)}"`);
 		downloadBlob(lines.join("\n"), "rename-undo.sh", "text/plain");
+		trackTaskEvent("script_export", {
+			mode: taskMode(useRenameStore.getState().filteredFiles),
+			platform: "undo",
+		});
 	}, [affected]);
 
 	return (

@@ -1,3 +1,5 @@
+import { taskGuides } from "./task-guides";
+
 export const GUIDE_LOCALES = ["en", "zh"] as const;
 
 export type GuideLocale = (typeof GUIDE_LOCALES)[number];
@@ -35,6 +37,7 @@ export interface LocalizedGuideContent {
 export interface Guide {
 	slug: string;
 	category: GuideCategory;
+	publishedAt: string;
 	updatedAt: string;
 	readingTime: number;
 	relatedSlugs: string[];
@@ -71,7 +74,7 @@ export const guideIndexCopy: Record<
 	}
 > = {
 	en: {
-		title: "Guides - Rename.Tools",
+		title: "File Renaming Guides & Tutorials | Rename.Tools",
 		description:
 			"Practical guides for bulk file renaming with Rename.Tools: regex, sequences, photo organization, music libraries, and batch rename workflows.",
 		eyebrow: "Guides",
@@ -91,7 +94,7 @@ export const guideIndexCopy: Record<
 			"Open Rename.Tools, add a few sample files, and preview every rule before touching the real filenames.",
 	},
 	zh: {
-		title: "使用指南 - Rename.Tools",
+		title: "批量文件重命名指南与教程 | Rename.Tools",
 		description:
 			"Rename.Tools 批量文件重命名实用指南：正则表达式、序号、照片整理、音乐库和剧集文件名整理。",
 		eyebrow: "使用指南",
@@ -114,9 +117,14 @@ export const guides: Guide[] = [
 	{
 		slug: "batch-file-rename-basics",
 		category: "getting-started",
-		updatedAt: "2026-05-22",
+		publishedAt: "2026-05-22",
+		updatedAt: "2026-09-21",
 		readingTime: 9,
-		relatedSlugs: ["sequence-file-numbering", "regex-batch-rename"],
+		relatedSlugs: [
+			"sequence-file-numbering",
+			"add-prefix-suffix-to-filenames",
+			"replace-spaces-in-filenames",
+		],
 		content: {
 			en: {
 				title: "Bulk file renaming basics: import, preview, execute",
@@ -130,13 +138,12 @@ export const guides: Guide[] = [
 						title: "Start in Sample Test Mode",
 						body: [
 							"Sample Test Mode is the safest way to learn the interface because it does not ask for file permissions and cannot change anything on disk. You paste or generate filenames, then test the same rules you would use on real files.",
-							"For a first run, use a mixed set of names: a few camera files, one document, and one video filename. Mixed examples make it obvious which rules are too broad and which ones only affect the intended files.",
+							"Start with IMG_0421.jpg and IMG_0422.jpg, one per line, to reproduce the screenshots and the next rule chain. Later, add documents and video filenames to check how your rules affect different names.",
 						],
 						image: {
-							src: "/guides/screenshots/app-sample-files.png",
-							alt: "Rename.Tools sample test mode with six imported filenames and an unchanged preview",
-							caption:
-								"Use Sample Test Mode to rehearse a workflow before selecting real files from your device.",
+							src: "/guides/screenshots/samples-en.png",
+							alt: "Two imported camera filenames, before adding rules.",
+							caption: "Two imported camera filenames, before adding rules.",
 						},
 						steps: [
 							"Open the app and click Try Sample Test Mode in the file panel.",
@@ -149,27 +156,28 @@ export const guides: Guide[] = [
 					{
 						title: "Build one rule at a time",
 						body: [
+							"To enter a template below, click Add Text, paste the complete template including braces, then press Enter or Tab to apply it. It becomes draggable text and variable blocks; check the updated preview before continuing.",
 							"A reliable bulk rename workflow is a sequence of small, reviewable edits. Add the cleanup rule first, check the preview, then add numbering. If the preview changes something unexpected, the last rule you added is the easiest place to look.",
-							"This example removes a camera prefix and adds a padded sequence number. It is intentionally simple: the goal is to learn how the rule chain changes the preview before you use more advanced variables or regex.",
+							"The first rule demonstrates removing a prefix. The Sequence template then replaces the whole name with a fixed date and a padded number; the prefix cleanup is optional when you use this whole-name template.",
 						],
 						image: {
-							src: "/guides/screenshots/app-sequence-preview.png",
-							alt: "Rename.Tools rule chain with Find and Replace plus Sequence rules updating the preview",
+							src: "/guides/screenshots/basics-en.png",
+							alt: "Fixed-date template produces 2026-05-22_001.jpg and 2026-05-22_002.jpg. Scroll the rule panel to inspect each rule.",
 							caption:
-								"Add rules one by one and check the preview after each change. Here the sequence rule updates all six sample files.",
+								"Fixed-date template produces 2026-05-22_001.jpg and 2026-05-22_002.jpg. Scroll the rule panel to inspect each rule.",
 						},
 						steps: [
-							"Click Add Rule and choose Find & Replace.",
-							"Set Find to IMG_ and leave Replace with empty to remove the prefix.",
-							"Click Add Rule again and choose Sequence.",
-							"Keep Sequence type as Numeric, Start value as 1, Step as 1, and Zero padding as 3.",
-							"Review the Preview panel and make sure the numbered results match your intended order.",
+							"Keep Scope set to Name. Add Find & Replace: Find IMG_, Replace with empty. The first preview becomes 0421.jpg.",
+							"Add Sequence after Find & Replace: Numeric, Start value 1, Step 1, Zero padding 3, global scope. Leave Preserve original numbers and Sort before numbering off for this example.",
+							"Set the Sequence template to 2026-05-22_{n}. A non-empty template replaces the entire name, so 0421 is discarded while .jpg is preserved by Name scope.",
+							"The date is literal so you can reproduce the example on any day. Use {date}_{n} for the current UTC date instead, or {exif.date}_{n} after loading photo metadata for the capture date.",
+							"Import IMG_0421.jpg and IMG_0422.jpg in that order. Confirm 2026-05-22_001.jpg and 2026-05-22_002.jpg in the preview.",
 						],
 						examples: [
 							{
 								before: "IMG_0421.jpg",
 								after: "2026-05-22_001.jpg",
-								note: "Remove IMG_, insert a date prefix, then add a padded sequence.",
+								note: "Name scope; Sequence template 2026-05-22_{n}, start 1, step 1, padding 3.",
 							},
 							{
 								before: "IMG_0422.jpg",
@@ -193,7 +201,7 @@ export const guides: Guide[] = [
 							{
 								before: "report (final).docx",
 								after: "005report (final).docx",
-								note: "This may be technically correct but not desirable; it tells you the sequence rule is affecting documents too.",
+								note: "Separate cautionary example: with a blank Sequence template, Position Start, start 1 and padding 3, the fifth selected file keeps its old name after 005.",
 							},
 						],
 					},
@@ -221,7 +229,7 @@ export const guides: Guide[] = [
 							{
 								before: "movie.name.s01e03.1080p.mkv",
 								after: "006movie.name.s01e03.1080p.mkv",
-								note: "A global sequence rule can affect every selected file. Filter or split batches when file types need different naming rules.",
+								note: "Separate cautionary example: a blank Sequence template, Position Start, start 1 and padding 3 prefixes the sixth selected file with 006.",
 							},
 						],
 					},
@@ -239,12 +247,12 @@ export const guides: Guide[] = [
 						title: "先用示例测试模式练习",
 						body: [
 							"示例测试模式是学习界面最安全的方式：它不需要文件权限，也不会修改磁盘上的真实文件。你只需要粘贴或生成一些文件名，就能测试和真实文件完全一样的规则链。",
-							"第一次练习建议放入混合文件名：几张相机照片、一个文档和一个视频文件名。混合示例能帮你发现规则是否过宽，是否误伤了不该处理的文件。",
+							"先每行输入一个文件名：IMG_0421.jpg、IMG_0422.jpg，以复现截图和下一节规则链。之后可加入文档和视频文件名，检查规则对不同名称的影响。",
 						],
 						image: {
-							src: "/guides/screenshots/app-sample-files.png",
-							alt: "Rename.Tools 示例测试模式，已导入 6 个示例文件并显示未变化的预览",
-							caption: "用示例测试模式先演练工作流，再选择设备中的真实文件。",
+							src: "/guides/screenshots/samples-zh.png",
+							alt: "导入两个相机文件名，尚未添加规则。",
+							caption: "导入两个相机文件名，尚未添加规则。",
 						},
 						steps: [
 							"打开应用，在文件面板点击“试用示例测试模式”。",
@@ -257,27 +265,28 @@ export const guides: Guide[] = [
 					{
 						title: "一次只添加一条规则",
 						body: [
+							"输入下文模板时，点击“添加文本”，粘贴含花括号的完整模板，再按 Enter 或 Tab 确认。模板会拆成可拖动的文本与变量块；确认预览已更新后再继续。",
 							"可靠的批量重命名应该由一组小而可检查的步骤组成。先添加清理规则，检查预览，再添加编号规则。如果预览出现异常，最近添加的规则通常就是排查入口。",
-							"这个例子会移除相机前缀，并添加补零序号。它刻意保持简单，重点是让你理解规则链如何逐步改变预览结果。",
+							"第一条规则用于演示移除前缀。随后序号模板将整个名称替换为固定日期与补零编号；使用这种整名模板时，前缀清理步骤实际上可以省略。",
 						],
 						image: {
-							src: "/guides/screenshots/app-sequence-preview.png",
-							alt: "Rename.Tools 规则链中包含查找替换和序号规则，预览面板实时显示结果",
+							src: "/guides/screenshots/basics-zh.png",
+							alt: "固定日期模板生成 2026-05-22_001.jpg 和 2026-05-22_002.jpg。滚动规则面板可查看每条规则。",
 							caption:
-								"逐条添加规则，并在每一步后检查预览。这里的序号规则更新了全部 6 个示例文件。",
+								"固定日期模板生成 2026-05-22_001.jpg 和 2026-05-22_002.jpg。滚动规则面板可查看每条规则。",
 						},
 						steps: [
-							"点击“添加规则”，选择“查找替换”。",
-							"将“查找”设为 IMG_，“替换为”留空，用于移除前缀。",
-							"再次点击“添加规则”，选择“序号”。",
-							"保持数字序号，起始值为 1，步长为 1，补零位数为 3。",
-							"查看预览面板，确认编号后的结果符合你想要的顺序。",
+							"保持作用域为“名称”。添加查找替换：查找 IMG_，替换为空。第一步预览应为 0421.jpg。",
+							"在查找替换后添加序号：数字，起始值 1，步长 1，补零 3 位，全局作用域。本例关闭“保留原始编号”和“编号前排序”。",
+							"将序号模板设为 2026-05-22_{n}。非空模板会替换整个名称，因此移除原编号 0421；“名称”作用域会保留 .jpg。",
+							"示例日期是固定文字，方便在任何日期复现。使用 {date}_{n} 可取当前 UTC 日期；加载照片元数据后，使用 {exif.date}_{n} 可取拍摄日期。",
+							"依次导入 IMG_0421.jpg、IMG_0422.jpg，确认预览结果分别为 2026-05-22_001.jpg、2026-05-22_002.jpg。",
 						],
 						examples: [
 							{
 								before: "IMG_0421.jpg",
 								after: "2026-05-22_001.jpg",
-								note: "移除 IMG_，插入日期前缀，再添加补零序号。",
+								note: "名称作用域；序号模板 2026-05-22_{n}，起始 1，步长 1，补零 3 位。",
 							},
 							{
 								before: "IMG_0422.jpg",
@@ -301,7 +310,7 @@ export const guides: Guide[] = [
 							{
 								before: "report (final).docx",
 								after: "005report (final).docx",
-								note: "这可能在技术上正确，但不一定符合目标；它提醒你序号规则影响了文档文件。",
+								note: "独立的错误示例：序号模板留空、位置选开头、起始 1、补零 3 位时，第五个选中文件的旧名称会保留在 005 后面。",
 							},
 						],
 					},
@@ -329,7 +338,7 @@ export const guides: Guide[] = [
 							{
 								before: "movie.name.s01e03.1080p.mkv",
 								after: "006movie.name.s01e03.1080p.mkv",
-								note: "全局序号会影响所有选中文件。不同文件类型需要不同命名规则时，建议筛选或分批处理。",
+								note: "独立的错误示例：序号模板留空、位置选开头、起始 1、补零 3 位时，第六个选中文件会被加上 006 前缀。",
 							},
 						],
 					},
@@ -340,16 +349,17 @@ export const guides: Guide[] = [
 	{
 		slug: "organize-photos-by-date-sequence",
 		category: "photos",
-		updatedAt: "2026-05-22",
+		publishedAt: "2026-05-22",
+		updatedAt: "2026-09-21",
 		readingTime: 10,
 		relatedSlugs: ["batch-file-rename-basics", "sequence-file-numbering"],
 		content: {
 			en: {
-				title: "Organize photos by date and sequence number",
+				title: "Batch Rename Photos by Date & Sequence",
 				description:
 					"Rename camera photos with date prefixes and padded sequence numbers so albums stay sortable and easy to scan.",
 				intro:
-					"Camera filenames are unique but rarely meaningful. A date plus sequence pattern keeps photos chronological, portable, and easy to search later.",
+					"Camera filenames are rarely meaningful. Choose a fixed event date or read each photo’s EXIF capture date, then add sequence numbers. The runnable example below uses a fixed date, not EXIF.",
 				categoryLabel: "Photos",
 				sections: [
 					{
@@ -373,29 +383,33 @@ export const guides: Guide[] = [
 					{
 						title: "Build the rule chain",
 						body: [
+							"To enter a template below, click Add Text, paste the complete template including braces, then press Enter or Tab to apply it. It becomes draggable text and variable blocks; check the updated preview before continuing.",
 							"Use Find & Replace or Remove to strip camera prefixes when they do not carry useful meaning. Then use Sequence with padding so every file receives a predictable number.",
-							"For albums that should keep the original camera order, sort by name before numbering. For mixed phone and camera photos, sort by modified time or EXIF date when metadata is available.",
+							"For the fixed-date example, keep import order. The Sequence rule can also sort by filename or modified time before numbering. EXIF date is available in a naming template, but there is currently no EXIF-date sort option.",
 						],
 						image: {
-							src: "/guides/screenshots/app-sequence-preview.png",
-							alt: "Rename.Tools photo cleanup workflow showing camera filenames converted with a sequence rule",
+							src: "/guides/screenshots/photos-en.png",
+							alt: "The fixed-date Tokyo template replaces the name and preserves .JPG and .HEIC.",
 							caption:
-								"The sequence preview makes it easy to confirm ordering before you rename an entire photo folder.",
+								"The fixed-date Tokyo template replaces the name and preserves .JPG and .HEIC.",
 						},
 						steps: [
-							"Import only the photo folder or filter the file list to image extensions.",
-							"Set Scope to Name so extensions such as .jpg and .heic remain unchanged.",
-							"Add a cleanup rule for camera prefixes such as IMG_, DSC_, or PXL_.",
-							"Add a Sequence rule with padding set to 3 or 4.",
-							"Use a template like {date}_{n}_trip or {exif.date}_{n}_trip when EXIF metadata is loaded.",
-							"Keep extension scope on filename only unless you intentionally want to change extensions.",
+							"Import DSC_0007.JPG and IMG_1842.HEIC in that order, and keep Scope on Name.",
+							"Add Sequence: Numeric, start 1, step 1, padding 3, global scope; keep sorting and Preserve original numbers off.",
+							"Set the template to 2026-05-22_{n}_tokyo. It replaces the whole name, so you do not need a separate camera-prefix removal rule.",
+							"This produces 2026-05-22_001_tokyo.JPG and 2026-05-22_002_tokyo.HEIC. The date and tokyo are fixed example text.",
+							"For real capture dates, load image metadata and change the template to {exif.date}_{n}_tokyo. {date} instead uses the current UTC date, not the capture date.",
+							"Missing EXIF leaves the literal {exif.date} in the preview. Filter those files into a separate batch and use a known date; do not execute unresolved placeholders.",
 						],
 					},
 					{
 						title: "When EXIF metadata helps",
 						body: [
+							"Choose the date source deliberately: 2026-05-22 is text you enter; {exif.date} reads DateTimeOriginal, falling back to CreateDate; {date} is the current UTC date. File modified time is a separate property and may change when files are copied.",
+							"If EXIF is missing, the preview keeps {exif.date} literally. Separate those files and enter a known date or keep their existing names. Never silently replace an unknown capture date with today’s date.",
+							"Renaming a RAW filename does not imply RAW metadata support. GPS variables produce coordinates, not city names; tokyo in this guide is a label you enter yourself.",
 							"If the photos include EXIF dates, load metadata and prefer EXIF date variables over today's date. This is useful when files were copied, downloaded, exported from a phone, or edited after they were taken.",
-							"EXIF is not guaranteed. Screenshots, social media exports, edited images, and some HEIC conversions may have missing or changed metadata. Keep a fallback workflow that uses folder names, today's date, or manual event labels.",
+							"EXIF is not guaranteed. Screenshots, social media exports, edited images, and some HEIC conversions may have missing or changed metadata. A known event label is a useful alternative when the capture date cannot be verified.",
 							"When EXIF dates differ from file modified times, trust the value that matches your organizing goal. For a vacation album, capture date is usually better. For a delivery folder, export date may be more useful.",
 						],
 					},
@@ -415,7 +429,7 @@ export const guides: Guide[] = [
 							{
 								before: "Vacation/IMG_0421.jpg",
 								after: "Vacation/2026-05-22_001_tokyo.jpg",
-								note: "Keeping the event folder and adding a sortable filename gives you two useful organization layers.",
+								note: "Use the same fixed-date template on a fresh one-file batch. The folder path is unchanged; only the filename is renamed.",
 							},
 						],
 					},
@@ -434,8 +448,8 @@ export const guides: Guide[] = [
 						examples: [
 							{
 								before: "Edits/final_export_3.jpg",
-								after: "client-a_2026-05-22_v03.jpg",
-								note: "Edited exports often benefit from version labels more than capture-time names.",
+								after: "Edits/client-a_2026-05-22_v03.jpg",
+								note: "A separate preset: Name scope; Sequence padding 2, Preserve original numbers on, extract pattern (\\d+), template client-a_2026-05-22_v{n}. The Edits folder is unchanged.",
 							},
 						],
 					},
@@ -445,7 +459,7 @@ export const guides: Guide[] = [
 				title: "按日期和序号整理照片",
 				description: "用日期前缀和补零序号重命名相机照片，让相册保持可排序、易浏览、易查找。",
 				intro:
-					"相机文件名通常唯一，但不够直观。日期加序号的格式能保持时间顺序，也方便跨设备搜索和归档。",
+					"相机文件名往往不够直观。先选择固定活动日期或每张照片的 EXIF 拍摄日期，再添加序号。下方可运行示例使用固定日期，不读取 EXIF。",
 				categoryLabel: "照片整理",
 				sections: [
 					{
@@ -469,28 +483,32 @@ export const guides: Guide[] = [
 					{
 						title: "构建规则链",
 						body: [
+							"输入下文模板时，点击“添加文本”，粘贴含花括号的完整模板，再按 Enter 或 Tab 确认。模板会拆成可拖动的文本与变量块；确认预览已更新后再继续。",
 							"如果相机前缀没有实际意义，可以用查找替换或删除规则清理掉。然后用带补零的序号规则，让每张照片获得稳定编号。",
-							"如果相册需要保留原始相机顺序，编号前按名称排序。若照片来自手机和相机混合来源，可以按修改时间排序；加载元数据后，也可以优先使用 EXIF 拍摄时间。",
+							"固定日期示例使用导入顺序。序号规则也可以先按文件名或修改时间排序再编号。EXIF 日期可用于命名模板，但目前没有按 EXIF 日期排序的选项。",
 						],
 						image: {
-							src: "/guides/screenshots/app-sequence-preview.png",
-							alt: "Rename.Tools 照片清理工作流，通过序号规则转换相机文件名",
-							caption: "序号预览能帮你在处理整个照片文件夹前确认排序是否正确。",
+							src: "/guides/screenshots/photos-zh.png",
+							alt: "固定日期与 tokyo 模板替换名称，并保留 .JPG、.HEIC 扩展名。",
+							caption: "固定日期与 tokyo 模板替换名称，并保留 .JPG、.HEIC 扩展名。",
 						},
 						steps: [
-							"只导入照片文件夹，或先按图片扩展名筛选文件列表。",
-							"将作用域保持为“名称”，避免 .jpg、.heic 等扩展名被修改。",
-							"添加清理规则，移除 IMG_、DSC_、PXL_ 等相机前缀。",
-							"添加序号规则，把补零位数设置为 3 或 4。",
-							"模板使用 {date}_{n}_trip；如果已加载 EXIF，可使用 {exif.date}_{n}_trip。",
-							"除非明确要修改扩展名，否则规则作用域保持为仅文件名。",
+							"按顺序导入 DSC_0007.JPG、IMG_1842.HEIC，保持作用域为“名称”。",
+							"添加序号：数字，起始 1，步长 1，补零 3 位，全局作用域；关闭排序和“保留原始编号”。",
+							"模板设为 2026-05-22_{n}_tokyo。模板会替换整个名称，不需要再单独删除相机前缀。",
+							"预览应为 2026-05-22_001_tokyo.JPG、2026-05-22_002_tokyo.HEIC。日期和 tokyo 是固定的示例文字。",
+							"实际按拍摄日期命名时，先加载图像元数据，再将模板改为 {exif.date}_{n}_tokyo。{date} 代表当前 UTC 日期，不是拍摄日期。",
+							"缺少 EXIF 时，预览会保留字面量 {exif.date}。请将这些文件分批处理并填写已知日期，不要执行含未解析占位符的结果。",
 						],
 					},
 					{
 						title: "什么时候使用 EXIF 元数据",
 						body: [
+							"先选清楚日期来源：2026-05-22 是手动输入的文字；{exif.date} 优先读取 DateTimeOriginal，缺少时使用 CreateDate；{date} 是当前 UTC 日期。文件修改时间是另一项属性，复制文件后可能改变。",
+							"缺少 EXIF 时，预览会保留字面量 {exif.date}。请把这些文件分开，填写已知日期或保留原名，不要把未知拍摄日期默认为今天。",
+							"能修改 RAW 文件名不代表支持读取 RAW 元数据。GPS 变量输出坐标而非城市名；本文的 tokyo 是你手动填写的标签。",
 							"如果照片带有 EXIF 拍摄时间，建议先加载元数据，再使用 EXIF 日期变量，而不是今天的日期。文件被复制、下载、从手机导出或后期编辑过时，这一点尤其有用。",
-							"EXIF 并不总是存在。截图、社交平台导出的图片、后期处理后的图片，以及部分 HEIC 转换文件都可能缺少或改变元数据。因此最好准备一个不依赖 EXIF 的备用规则链，比如使用文件夹名、今天日期或手动活动标签。",
+							"EXIF 并不总是存在。截图、社交平台导出的图片、后期处理后的图片，以及部分 HEIC 转换文件都可能缺少或改变元数据。无法确认拍摄日期时，可以改用已知的活动标签。",
 							"当 EXIF 日期和文件修改时间不一致时，选择更符合整理目标的那个。旅行相册通常更适合拍摄日期；交付目录则可能更适合导出日期。",
 						],
 					},
@@ -510,7 +528,7 @@ export const guides: Guide[] = [
 							{
 								before: "Vacation/IMG_0421.jpg",
 								after: "Vacation/2026-05-22_001_tokyo.jpg",
-								note: "保留活动文件夹，再添加可排序文件名，可以同时拥有两层清晰组织结构。",
+								note: "在新的单文件批次中使用同一固定日期模板。文件夹路径不变，只修改文件名。",
 							},
 						],
 					},
@@ -529,8 +547,8 @@ export const guides: Guide[] = [
 						examples: [
 							{
 								before: "Edits/final_export_3.jpg",
-								after: "client-a_2026-05-22_v03.jpg",
-								note: "修图导出通常比拍摄时间更需要版本标签。",
+								after: "Edits/client-a_2026-05-22_v03.jpg",
+								note: "使用独立预设：名称作用域；序号补零 2 位，开启保留原始编号，提取模式 (\\d+)，模板 client-a_2026-05-22_v{n}。Edits 文件夹不变。",
 							},
 						],
 					},
@@ -541,12 +559,13 @@ export const guides: Guide[] = [
 	{
 		slug: "regex-batch-rename",
 		category: "patterns",
-		updatedAt: "2026-05-22",
+		publishedAt: "2026-05-22",
+		updatedAt: "2026-09-21",
 		readingTime: 11,
 		relatedSlugs: ["batch-file-rename-basics", "sequence-file-numbering"],
 		content: {
 			en: {
-				title: "Use regular expressions for bulk file renaming",
+				title: "Bulk Rename Files with Regex: Examples & Patterns",
 				description:
 					"Learn practical regex bulk rename patterns for removing clutter, rearranging dates, and extracting useful filename parts.",
 				intro:
@@ -564,11 +583,12 @@ export const guides: Guide[] = [
 							{
 								before: "2026-05-22 invoice client-a.pdf",
 								after: "invoice_client-a_2026-05-22.pdf",
-								note: "Capture the date and title, then swap their order.",
+								note: "Name scope. Regex ^(\\d{4}-\\d{2}-\\d{2})\\s+(.+)$, replacement $2_$1, no flags; then Find & Replace every space with _.",
 							},
 							{
 								before: "movie.name.s01e03.1080p.mkv",
 								after: "movie name S01E03.mkv",
+								note: "Name scope. Regex ^(.+)\\.s(\\d+)e(\\d+).*$, replacement $1 S$2E$3, flag i; then Find & Replace every dot with a space.",
 							},
 						],
 					},
@@ -579,19 +599,18 @@ export const guides: Guide[] = [
 							"Keep the Flags field intentional. Use i for case-insensitive matching, g when you want every occurrence replaced, and avoid m unless you are working with multi-line text pasted into filenames.",
 						],
 						image: {
-							src: "/guides/screenshots/app-regex-preview.png",
-							alt: "Rename.Tools regex rule extracting a video episode code and updating the preview",
+							src: "/guides/screenshots/regex-en.png",
+							alt: "Date capture groups and space cleanup produce invoice_client-a_2026-05-22.pdf.",
 							caption:
-								"Regex rules are easiest to audit when the preview shows the exact captured parts and replacement result.",
+								"Date capture groups and space cleanup produce invoice_client-a_2026-05-22.pdf.",
 						},
 						steps: [
-							"Open Add Rule and choose Regex Replace.",
-							"Enter the pattern in Regex pattern and the target shape in Replace with.",
-							"Use the preview to verify which filenames changed and which stayed untouched.",
-							"Remove bracketed notes: \\s*\\[[^\\]]+\\]",
-							"Move leading date to the end: ^(\\d{4}-\\d{2}-\\d{2})\\s+(.+)$ -> $2_$1",
-							"Normalize episode casing: s(\\d+)e(\\d+) -> S$1E$2",
-							"Collapse repeated spaces: \\s+ -> single space",
+							"Keep Scope on Name. Add Regex Replace; enter a pattern without surrounding / delimiters. Each recipe below is independent.",
+							"Remove bracketed notes: pattern \\s*\\[[^\\]]+\\], replacement empty, flags g.",
+							"Move a leading date to the end: pattern ^(\\d{4}-\\d{2}-\\d{2})\\s+(.+)$, replacement $2_$1, flags empty. Add Find & Replace for spaces if you want underscores throughout.",
+							"Normalize episode casing: pattern s(\\d+)e(\\d+), replacement S$1E$2, flags gi.",
+							"Collapse repeated whitespace: pattern \\s+, replacement one literal space, flags g.",
+							"Preview matching and nonmatching filenames before applying a pattern to a real folder.",
 						],
 					},
 					{
@@ -619,7 +638,7 @@ export const guides: Guide[] = [
 							{
 								before: "client-a_invoice_2026-05-22_final.pdf",
 								after: "invoice_client-a_2026-05-22.pdf",
-								note: "A targeted pattern can preserve the client, document type, and date while removing the temporary final tag.",
+								note: "Name scope. Pattern ^([^_]+)_([^_]+)_(\\d{4}-\\d{2}-\\d{2})_final$, replacement $2_$1_$3, flags empty.",
 							},
 						],
 					},
@@ -664,11 +683,12 @@ export const guides: Guide[] = [
 							{
 								before: "2026-05-22 invoice client-a.pdf",
 								after: "invoice_client-a_2026-05-22.pdf",
-								note: "捕获日期和标题，再交换顺序。",
+								note: "名称作用域。正则 ^(\\d{4}-\\d{2}-\\d{2})\\s+(.+)$，替换为 $2_$1，标志留空；再用查找替换将所有空格替换为 _。",
 							},
 							{
 								before: "movie.name.s01e03.1080p.mkv",
 								after: "movie name S01E03.mkv",
+								note: "名称作用域。正则 ^(.+)\\.s(\\d+)e(\\d+).*$，替换为 $1 S$2E$3，标志 i；再用查找替换将所有点号替换为空格。",
 							},
 						],
 					},
@@ -679,18 +699,17 @@ export const guides: Guide[] = [
 							"Flags 字段也要有意识地设置。大小写不统一时用 i，需要替换所有出现位置时用 g；除非处理多行文本，否则通常不需要 m。",
 						],
 						image: {
-							src: "/guides/screenshots/app-regex-preview.png",
-							alt: "Rename.Tools 正则规则提取视频剧集编号，并在预览中显示更新结果",
-							caption: "正则规则最适合配合预览检查：能直接看到捕获内容和替换结果是否符合预期。",
+							src: "/guides/screenshots/regex-zh.png",
+							alt: "日期捕获组加空格清理，生成 invoice_client-a_2026-05-22.pdf。",
+							caption: "日期捕获组加空格清理，生成 invoice_client-a_2026-05-22.pdf。",
 						},
 						steps: [
-							"点击“添加规则”，选择“正则替换”。",
-							"在“正则模式”里输入匹配规则，在“替换为”里输入目标格式。",
-							"用预览确认哪些文件发生变化，哪些文件保持不变。",
-							"移除方括号备注：\\s*\\[[^\\]]+\\]",
-							"把开头日期移到末尾：^(\\d{4}-\\d{2}-\\d{2})\\s+(.+)$ -> $2_$1",
-							"统一剧集大小写：s(\\d+)e(\\d+) -> S$1E$2",
-							"压缩重复空格：\\s+ -> 单个空格",
+							"保持作用域为“名称”。添加正则替换，模式两侧不加 /。以下配方分别使用，不是依次叠加的规则链。",
+							"移除方括号备注：模式 \\s*\\[[^\\]]+\\]，替换为空，标志 g。",
+							"把开头日期移到末尾：模式 ^(\\d{4}-\\d{2}-\\d{2})\\s+(.+)$，替换为 $2_$1，标志留空。如需全部使用下划线，再用查找替换处理空格。",
+							"统一剧集大小写：模式 s(\\d+)e(\\d+)，替换为 S$1E$2，标志 gi。",
+							"压缩重复空白：模式 \\s+，替换为一个真实空格，标志 g。",
+							"预览匹配及不匹配的文件名，再将规则用于真实文件夹。",
 						],
 					},
 					{
@@ -718,7 +737,7 @@ export const guides: Guide[] = [
 							{
 								before: "client-a_invoice_2026-05-22_final.pdf",
 								after: "invoice_client-a_2026-05-22.pdf",
-								note: "有针对性的正则能保留客户、文档类型和日期，同时移除临时 final 标记。",
+								note: "名称作用域。模式 ^([^_]+)_([^_]+)_(\\d{4}-\\d{2}-\\d{2})_final$，替换为 $2_$1_$3，标志留空。",
 							},
 						],
 					},
@@ -749,7 +768,8 @@ export const guides: Guide[] = [
 	{
 		slug: "sequence-file-numbering",
 		category: "numbering",
-		updatedAt: "2026-05-22",
+		publishedAt: "2026-05-22",
+		updatedAt: "2026-09-21",
 		readingTime: 9,
 		relatedSlugs: ["organize-photos-by-date-sequence", "batch-file-rename-basics"],
 		content: {
@@ -764,20 +784,21 @@ export const guides: Guide[] = [
 					{
 						title: "Use padding for reliable sorting",
 						body: [
+							"To enter a template below, click Add Text, paste the complete template including braces, then press Enter or Tab to apply it. It becomes draggable text and variable blocks; check the updated preview before continuing.",
 							"Without padding, file managers may sort 10 before 2. Padding fixes that by making every number the same width, so alphabetical sorting matches numeric order.",
 							"Use 2 digits for small albums, 3 digits for hundreds of files, and 4 digits when the folder may grow over time. Choosing one extra digit is usually harmless; choosing too few can create a messy rename later.",
 							"Padding is especially important when files will be uploaded to cloud drives, shared with clients, imported into editing software, or archived in systems that use simple alphabetical ordering.",
 						],
 						image: {
-							src: "/guides/screenshots/app-sequence-preview.png",
-							alt: "Rename.Tools sequence rule preview with zero-padded numbers applied to sample files",
-							caption:
-								"Zero padding is visible immediately in the preview, so sorting problems are easy to catch before execution.",
+							src: "/guides/screenshots/sequence-en.png",
+							alt: "Preserve original numbers keeps 1, 2 and 10 as 001, 002 and 010.",
+							caption: "Preserve original numbers keeps 1, 2 and 10 as 001, 002 and 010.",
 						},
 						examples: [
 							{
 								before: "photo 1.jpg, photo 2.jpg, photo 10.jpg",
 								after: "001_photo.jpg, 002_photo.jpg, 010_photo.jpg",
+								note: "Name scope; Sequence padding 3, Preserve original numbers on, pattern (\\d+), template {n}_photo. This preserves 10 rather than assigning a new third number.",
 							},
 						],
 					},
@@ -805,6 +826,7 @@ export const guides: Guide[] = [
 							{
 								before: "scan.jpg",
 								after: "archive_2026_001_scan.jpg",
+								note: "Name scope; Numeric Sequence, start 1, step 1, padding 3, template archive_2026_{n}_{name}, Preserve original numbers off.",
 							},
 						],
 					},
@@ -818,6 +840,7 @@ export const guides: Guide[] = [
 							"Enable Preserve original numbers in the Sequence rule.",
 							"Keep the extract pattern as (\\d+) for simple filenames with one number.",
 							"Use a more specific pattern when filenames contain several numbers, such as page-(\\d+).",
+							"Set padding to 3 and template to page_{n}_scan for the example below. Keep Scope on Name.",
 							"Preview files where extraction fails; they will fall back to normal sequencing.",
 						],
 						examples: [
@@ -843,8 +866,8 @@ export const guides: Guide[] = [
 						examples: [
 							{
 								before: "scan10.jpg, scan2.jpg, scan1.jpg",
-								after: "001_scan1.jpg, 002_scan2.jpg, 010_scan10.jpg",
-								note: "Natural sort prevents scan10 from being numbered before scan2.",
+								after: "003_scan10.jpg, 002_scan2.jpg, 001_scan1.jpg",
+								note: "Name scope; start 1, step 1, padding 3, template {n}_{name}, Preserve original numbers off; enable Sort before numbering, File name, Ascending, Natural sort. Results are shown in original input order; scan10 receives 003, not 010.",
 							},
 						],
 					},
@@ -860,19 +883,21 @@ export const guides: Guide[] = [
 					{
 						title: "用补零保证可靠排序",
 						body: [
+							"输入下文模板时，点击“添加文本”，粘贴含花括号的完整模板，再按 Enter 或 Tab 确认。模板会拆成可拖动的文本与变量块；确认预览已更新后再继续。",
 							"如果不补零，某些文件管理器可能把 10 排在 2 前面。补零能让所有数字长度一致，让字母排序和数字顺序保持一致。",
 							"小相册可用 2 位，数百个文件建议 3 位，如果文件夹未来还会增长，可以用 4 位。多留一位通常没什么坏处；位数太少，后续反而可能需要再次整理。",
 							"当文件要上传网盘、交付客户、导入剪辑软件或放入只按字母排序的归档系统时，补零尤其重要。",
 						],
 						image: {
-							src: "/guides/screenshots/app-sequence-preview.png",
-							alt: "Rename.Tools 序号规则预览，示例文件被添加补零编号",
-							caption: "补零效果会立刻显示在预览里，因此可以在执行前发现排序问题。",
+							src: "/guides/screenshots/sequence-zh.png",
+							alt: "保留原有序号将 1、2、10 补零为 001、002、010。",
+							caption: "保留原有序号将 1、2、10 补零为 001、002、010。",
 						},
 						examples: [
 							{
 								before: "photo 1.jpg, photo 2.jpg, photo 10.jpg",
 								after: "001_photo.jpg, 002_photo.jpg, 010_photo.jpg",
+								note: "名称作用域；序号补零 3 位，开启保留原始编号，模式 (\\d+)，模板 {n}_photo。这里保留原编号 10，而不是给第三个文件重新编号。",
 							},
 						],
 					},
@@ -900,6 +925,7 @@ export const guides: Guide[] = [
 							{
 								before: "scan.jpg",
 								after: "archive_2026_001_scan.jpg",
+								note: "名称作用域；数字序号，起始 1，步长 1，补零 3 位，模板 archive_2026_{n}_{name}，关闭保留原始编号。",
 							},
 						],
 					},
@@ -913,6 +939,7 @@ export const guides: Guide[] = [
 							"在序号规则中开启“保留原始编号”。",
 							"简单文件名可以保留提取模式 (\\d+)。",
 							"如果文件名里有多个数字，使用更具体的模式，例如 page-(\\d+)。",
+							"下例补零设为 3 位，模板设为 page_{n}_scan，作用域保持为“名称”。",
 							"预览提取失败的文件；它们会回退到普通序号逻辑。",
 						],
 						examples: [
@@ -938,8 +965,8 @@ export const guides: Guide[] = [
 						examples: [
 							{
 								before: "scan10.jpg, scan2.jpg, scan1.jpg",
-								after: "001_scan1.jpg, 002_scan2.jpg, 010_scan10.jpg",
-								note: "自然排序可以避免 scan10 被排在 scan2 前面。",
+								after: "003_scan10.jpg, 002_scan2.jpg, 001_scan1.jpg",
+								note: "名称作用域；起始 1，步长 1，补零 3 位，模板 {n}_{name}，关闭保留原始编号；开启编号前排序，选择文件名、升序、自然排序。结果按原输入顺序列出，scan10 得到 003，而不是 010。",
 							},
 						],
 					},
@@ -950,7 +977,8 @@ export const guides: Guide[] = [
 	{
 		slug: "organize-music-video-files",
 		category: "media",
-		updatedAt: "2026-05-22",
+		publishedAt: "2026-05-22",
+		updatedAt: "2026-09-21",
 		readingTime: 10,
 		relatedSlugs: ["regex-batch-rename", "sequence-file-numbering"],
 		content: {
@@ -971,19 +999,22 @@ export const guides: Guide[] = [
 						],
 						steps: [
 							"Import one album at a time when track order matters.",
+							"To enter a template below, click Add Text, paste the complete template including braces, then press Enter or Tab to apply it. It becomes draggable text and variable blocks; check the updated preview before continuing.",
 							"Load metadata if the files have reliable audio tags.",
-							"Use a template such as {media.track}. {media.artist} - {media.title}.",
+							"Add a Sequence rule and set its template to {media.track}. {media.artist} - {media.title}. A non-empty template replaces the whole name; this template uses tag track numbers, not generated {n} numbers.",
 							"Keep Scope set to Name so audio extensions remain unchanged.",
-							"Preview missing artist or title values before executing.",
+							"Metadata cannot be loaded from pasted sample names. For real files, load audio tags first. Missing tags leave literal placeholders; fix the tags or use a separate {n}. {name} template before executing.",
 						],
 						examples: [
 							{
 								before: "love story.mp3",
 								after: "01. Taylor Swift - Love Story.mp3",
+								note: "Requires tags: track 1, artist Taylor Swift, title Love Story.",
 							},
 							{
 								before: "track_07.flac",
 								after: "07. Artist - Song Title.flac",
+								note: "Requires tags: track 7, artist Artist, title Song Title.",
 							},
 						],
 					},
@@ -995,16 +1026,16 @@ export const guides: Guide[] = [
 							"For media servers, consistency matters more than clever wording. Choose one pattern for a library and reuse it across seasons.",
 						],
 						image: {
-							src: "/guides/screenshots/app-regex-preview.png",
-							alt: "Rename.Tools regex preview converting a noisy episode filename into a cleaner S01E03 name",
+							src: "/guides/screenshots/media-en.png",
+							alt: "Regex, separator cleanup and Title Case produce Show Name S01E03.mkv. Scroll the rule panel to see all three rules.",
 							caption:
-								"Start with one episode pattern, confirm the preview, then apply the same rule to the rest of the season.",
+								"Regex, separator cleanup and Title Case produce Show Name S01E03.mkv. Scroll the rule panel to see all three rules.",
 						},
 						steps: [
-							"Normalize separators by replacing dots or underscores with spaces.",
-							"Use regex to preserve S01E03 style episode numbers.",
-							"Remove quality tags like 720p, 1080p, WEB-DL, or BluRay when they are not needed.",
-							"Use Title Case only after regex extraction, so show names become readable.",
+							"Keep Scope on Name. Add Regex Replace: ^(.+)\\.s(\\d+)e(\\d+).*$, replacement $1 S$2E$3, flags i.",
+							"Add Find & Replace: find a literal dot, replace with a space, Match all on. The .mkv extension is unchanged because Scope is Name.",
+							"Add Case/Style: Title Case, style None. This makes the show name readable while preserving S01E03.",
+							"This recipe expects a dot before the episode code. Files with different separators need their own pattern; preview unmatched files.",
 							"Preview the full season before executing.",
 						],
 						examples: [
@@ -1038,7 +1069,7 @@ export const guides: Guide[] = [
 							{
 								before: "show.name.s01e03.1080p.en.srt",
 								after: "Show Name S01E03.en.srt",
-								note: "The subtitle base name still matches the cleaned episode name.",
+								note: "Use a separate subtitle chain: Name scope; regex ^(.+)\\.s(\\d+)e(\\d+).*\\.([a-z]{2})$, replacement $1 S$2E$3, flags i; replace dots with spaces; Title Case; finally Insert .en at End for this English subtitle batch.",
 							},
 						],
 					},
@@ -1061,19 +1092,22 @@ export const guides: Guide[] = [
 						],
 						steps: [
 							"曲目顺序重要时，一次只导入一个专辑。",
+							"输入下文模板时，点击“添加文本”，粘贴含花括号的完整模板，再按 Enter 或 Tab 确认。模板会拆成可拖动的文本与变量块；确认预览已更新后再继续。",
 							"如果音频标签可靠，先加载元数据。",
-							"使用类似 {media.track}. {media.artist} - {media.title} 的模板。",
+							"添加序号规则，将模板设为 {media.track}. {media.artist} - {media.title}。非空模板替换整个名称；这里使用标签中的曲目编号，不是新生成的 {n}。",
 							"保持作用域为“名称”，避免音频扩展名被修改。",
-							"执行前预览是否有缺失的艺术家或标题值。",
+							"粘贴的示例文件名没有可读取的元数据。真实文件需先加载音频标签。缺失标签会保留占位符，请修复标签或另用 {n}. {name} 模板，再执行。",
 						],
 						examples: [
 							{
 								before: "love story.mp3",
 								after: "01. Taylor Swift - Love Story.mp3",
+								note: "需要标签：曲目 1、艺术家 Taylor Swift、标题 Love Story。",
 							},
 							{
 								before: "track_07.flac",
 								after: "07. Artist - Song Title.flac",
+								note: "需要标签：曲目 7、艺术家 Artist、标题 Song Title。",
 							},
 						],
 					},
@@ -1085,16 +1119,17 @@ export const guides: Guide[] = [
 							"对媒体服务器来说，一致性比聪明的命名更重要。给一个媒体库选择一种格式，并跨季复用。",
 						],
 						image: {
-							src: "/guides/screenshots/app-regex-preview.png",
-							alt: "Rename.Tools 正则预览，把杂乱的剧集文件名转换成更清晰的 S01E03 名称",
-							caption: "先从一个剧集模式开始，确认预览正确后，再应用到整季文件。",
+							src: "/guides/screenshots/media-zh.png",
+							alt: "正则、分隔符清理和标题式大小写生成 Show Name S01E03.mkv。滚动规则面板可查看全部三条规则。",
+							caption:
+								"正则、分隔符清理和标题式大小写生成 Show Name S01E03.mkv。滚动规则面板可查看全部三条规则。",
 						},
 						steps: [
-							"把点号或下划线替换为空格，统一分隔符。",
-							"用正则保留 S01E03 这种剧集编号。",
-							"在不需要时移除 720p、1080p、WEB-DL、BluRay 等质量标签。",
-							"在正则提取之后再使用 Title Case，让剧名更易读。",
-							"执行前先预览完整季的文件。",
+							"保持作用域为“名称”。添加正则替换：模式 ^(.+)\\.s(\\d+)e(\\d+).*$，替换为 $1 S$2E$3，标志 i。",
+							"添加查找替换：查找一个点号，替换为一个空格，开启全部匹配。“名称”作用域会保留 .mkv 扩展名。",
+							"添加大小写/风格：标题式，风格选无。这样规范剧名并保留 S01E03。",
+							"该配方要求剧集编号前是点号；其他分隔符需要调整模式，请检查未匹配的文件。",
+							"执行前预览整季文件。",
 						],
 						examples: [
 							{
@@ -1127,7 +1162,7 @@ export const guides: Guide[] = [
 							{
 								before: "show.name.s01e03.1080p.en.srt",
 								after: "Show Name S01E03.en.srt",
-								note: "字幕基础名仍然和清理后的剧集名称保持一致。",
+								note: "字幕使用独立规则链：名称作用域；正则 ^(.+)\\.s(\\d+)e(\\d+).*\\.([a-z]{2})$，替换为 $1 S$2E$3，标志 i；点号替换为空格；标题式；最后为这批英文字幕在末尾插入 .en。",
 							},
 						],
 					},
@@ -1135,6 +1170,7 @@ export const guides: Guide[] = [
 			},
 		},
 	},
+	...taskGuides,
 ];
 
 export function isIndexableGuideLocale(locale: string): locale is GuideLocale {
@@ -1178,6 +1214,7 @@ function localizeGuide(guide: Guide, locale: GuideLocale): LocalizedGuide {
 	return {
 		slug: guide.slug,
 		category: guide.category,
+		publishedAt: guide.publishedAt,
 		updatedAt: guide.updatedAt,
 		readingTime: guide.readingTime,
 		relatedSlugs: guide.relatedSlugs,

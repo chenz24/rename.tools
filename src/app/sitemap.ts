@@ -35,7 +35,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 	for (const locale of GUIDE_LOCALES) {
 		entries.push({
 			url: `${SITE_URL}/${locale}/guides`,
-			lastModified: new Date("2026-05-22"),
+			lastModified: new Date(
+				Math.max(...guides.map((guide) => new Date(guide.updatedAt).getTime())),
+			),
 			changeFrequency: "monthly",
 			priority: 0.75,
 			alternates: {

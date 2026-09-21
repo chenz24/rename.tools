@@ -41,8 +41,10 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import type { LogEntry } from "@/hooks/useRenameStore";
+import { useRenameStore } from "@/hooks/useRenameStore";
 import { charDiff, type DiffSegment } from "@/lib/rename/diff";
 import type { PreviewResult } from "@/lib/rename/types";
+import { taskMode, trackTaskEvent } from "@/lib/task-analytics";
 
 interface Props {
 	preview: PreviewResult[];
@@ -415,6 +417,10 @@ export function PreviewPanel({
 	const exportBash = useCallback(() => {
 		const lines = affectedItems.map((r) => `mv "${esc(r.original)}" "${esc(r.newName)}"`);
 		downloadBlob(lines.join("\n"), "rename.sh", "text/plain");
+		trackTaskEvent("script_export", {
+			mode: taskMode(useRenameStore.getState().filteredFiles),
+			platform: "bash",
+		});
 	}, [affectedItems]);
 
 	const exportPowerShell = useCallback(() => {
@@ -422,6 +428,10 @@ export function PreviewPanel({
 			(r) => `Rename-Item -LiteralPath "${esc(r.original)}" -NewName "${esc(r.newName)}"`,
 		);
 		downloadBlob(lines.join("\n"), "rename.ps1", "text/plain");
+		trackTaskEvent("script_export", {
+			mode: taskMode(useRenameStore.getState().filteredFiles),
+			platform: "powershell",
+		});
 	}, [affectedItems]);
 
 	const exportCSV = useCallback(() => {
@@ -433,6 +443,10 @@ export function PreviewPanel({
 	const exportReverse = useCallback(() => {
 		const lines = affectedItems.map((r) => `mv "${esc(r.newName)}" "${esc(r.original)}"`);
 		downloadBlob(lines.join("\n"), "rename-undo.sh", "text/plain");
+		trackTaskEvent("script_export", {
+			mode: taskMode(useRenameStore.getState().filteredFiles),
+			platform: "undo",
+		});
 	}, [affectedItems]);
 
 	const showLog = progress !== null || log.length > 0;
