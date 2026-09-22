@@ -9,6 +9,7 @@ import {
 	getGuidePrimaryImage,
 	isIndexableGuideLocale,
 } from "@/lib/guides/content";
+import { getGuideLanguages } from "@/lib/guides/locales";
 import { SITE_URL } from "@/lib/site";
 
 type Props = {
@@ -29,11 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 		metadataBase: new URL(SITE_URL),
 		alternates: {
 			canonical,
-			languages: {
-				en: `${SITE_URL}/en/guides`,
-				zh: `${SITE_URL}/zh/guides`,
-				"x-default": `${SITE_URL}/en/guides`,
-			},
+			languages: getGuideLanguages("/guides"),
 		},
 		openGraph: {
 			title: copy.title,
@@ -47,7 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 					url: imageUrl,
 					width: 1200,
 					height: 630,
-					alt: "Rename.Tools - Practical file renaming guides",
+					alt: copy.heading,
 				},
 			],
 		},
@@ -89,12 +86,12 @@ export default async function GuidesPage({ params }: Props) {
 			</section>
 
 			<nav
-				aria-label={locale === "zh" ? "按任务与素材查找指南" : "Find guides by task and material"}
+				aria-label={copy.findGuides}
 				className="mx-auto grid max-w-5xl gap-4 px-4 sm:grid-cols-2 sm:px-6"
 			>
 				{[
 					{
-						title: locale === "zh" ? "按任务" : "By task",
+						title: copy.byTask,
 						slugs: [
 							"batch-file-rename-basics",
 							"regex-batch-rename",
@@ -104,7 +101,7 @@ export default async function GuidesPage({ params }: Props) {
 						],
 					},
 					{
-						title: locale === "zh" ? "按素材" : "By material",
+						title: copy.byMaterial,
 						slugs: ["organize-photos-by-date-sequence", "organize-music-video-files"],
 					},
 				].map((group) => (

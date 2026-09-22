@@ -15,7 +15,7 @@ export function GuideLink({ topic }: { topic: string }) {
 	const locale = useLocale();
 	const t = useTranslations("guideLinks");
 	const guide = TOPICS[topic] ?? { slug: "batch-file-rename-basics", label: "basics" };
-	const guideLocale = locale === "zh" ? "zh" : "en";
+	const guideLocale = locale;
 
 	return (
 		<Link
@@ -25,7 +25,6 @@ export function GuideLink({ topic }: { topic: string }) {
 			className="mt-3 inline-block text-sm font-medium underline underline-offset-4 hover:text-primary"
 		>
 			{t(guide.label)}
-			{locale !== "en" && locale !== "zh" ? ` (${t("english")})` : ""}
 		</Link>
 	);
 }

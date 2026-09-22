@@ -16,6 +16,7 @@ import {
 	getRelatedGuides,
 	isIndexableGuideLocale,
 } from "@/lib/guides/content";
+import { getGuideLanguages } from "@/lib/guides/locales";
 import { getRecipeForGuide } from "@/lib/guides/recipes";
 import { SITE_URL } from "@/lib/site";
 
@@ -56,11 +57,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 		metadataBase: new URL(SITE_URL),
 		alternates: {
 			canonical,
-			languages: {
-				en: `${SITE_URL}/en/guides/${guide.slug}`,
-				zh: `${SITE_URL}/zh/guides/${guide.slug}`,
-				"x-default": `${SITE_URL}/en/guides/${guide.slug}`,
-			},
+			languages: getGuideLanguages(`/guides/${guide.slug}`),
 		},
 		openGraph: {
 			title: guide.title,
@@ -94,7 +91,7 @@ export default async function GuideDetailPage({ params }: Props) {
 
 	const copy = getGuideIndexCopy(locale);
 	const recipe = getRecipeForGuide(slug);
-	const recipeLabel = locale === "zh" ? "试用这个示例" : "Try this example";
+	const recipeLabel = copy.tryExample;
 	const relatedGuides = getRelatedGuides(guide, locale);
 	const canonicalLocale = isIndexableGuideLocale(locale) ? locale : "en";
 	const url = `${SITE_URL}/${canonicalLocale}/guides/${guide.slug}`;

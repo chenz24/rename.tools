@@ -6,7 +6,7 @@ export function Footer() {
 	const t = useTranslations("footer");
 	const locale = useLocale();
 	const tHeader = useTranslations("header");
-	const guidesLocale = locale === "zh" ? "zh" : "en";
+	const guidesLocale = locale;
 	const year = new Date().getFullYear();
 
 	const _languages = [

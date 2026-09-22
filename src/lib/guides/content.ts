@@ -1,8 +1,13 @@
+import { type GuideLocale, getGuideLocale } from "./locales";
 import { taskGuides } from "./task-guides";
+import de from "./translations/de.json";
+import es from "./translations/es.json";
+import fr from "./translations/fr.json";
+import ja from "./translations/ja.json";
+import ko from "./translations/ko.json";
 
-export const GUIDE_LOCALES = ["en", "zh"] as const;
-
-export type GuideLocale = (typeof GUIDE_LOCALES)[number];
+export { getGuideIndexCopy, guideIndexCopy } from "./copy";
+export { GUIDE_LOCALES, getGuideLocale, isIndexableGuideLocale } from "./locales";
 
 export type GuideCategory = "getting-started" | "photos" | "patterns" | "numbering" | "media";
 
@@ -27,6 +32,8 @@ export interface GuideSection {
 }
 
 export interface LocalizedGuideContent {
+	publishedAt?: string;
+	updatedAt?: string;
 	title: string;
 	description: string;
 	intro: string;
@@ -34,14 +41,14 @@ export interface LocalizedGuideContent {
 	sections: GuideSection[];
 }
 
-export interface Guide {
+export interface Guide<L extends GuideLocale = GuideLocale> {
 	slug: string;
 	category: GuideCategory;
 	publishedAt: string;
 	updatedAt: string;
 	readingTime: number;
 	relatedSlugs: string[];
-	content: Record<GuideLocale, LocalizedGuideContent>;
+	content: Record<L, LocalizedGuideContent>;
 }
 
 export interface LocalizedGuide extends Omit<Guide, "content"> {
@@ -53,67 +60,9 @@ export interface LocalizedGuide extends Omit<Guide, "content"> {
 	sections: GuideSection[];
 }
 
-export const guideIndexCopy: Record<
-	GuideLocale,
-	{
-		title: string;
-		description: string;
-		eyebrow: string;
-		heading: string;
-		intro: string;
-		allGuides: string;
-		featured: string;
-		updated: string;
-		minRead: string;
-		relatedGuides: string;
-		startRenaming: string;
-		readGuide: string;
-		backToGuides: string;
-		ctaTitle: string;
-		ctaDesc: string;
-	}
-> = {
-	en: {
-		title: "File Renaming Guides & Tutorials | Rename.Tools",
-		description:
-			"Practical guides for bulk file renaming with Rename.Tools: regex, sequences, photo organization, music libraries, and batch rename workflows.",
-		eyebrow: "Guides",
-		heading: "Practical file renaming guides",
-		intro:
-			"Learn reliable workflows for cleaning up photos, media libraries, downloads, and archive folders with live preview and local processing.",
-		allGuides: "All guides",
-		featured: "Featured workflows",
-		updated: "Updated",
-		minRead: "min read",
-		relatedGuides: "Related guides",
-		startRenaming: "Start renaming",
-		readGuide: "Read guide",
-		backToGuides: "Back to guides",
-		ctaTitle: "Ready to try the workflow?",
-		ctaDesc:
-			"Open Rename.Tools, add a few sample files, and preview every rule before touching the real filenames.",
-	},
-	zh: {
-		title: "批量文件重命名指南与教程 | Rename.Tools",
-		description:
-			"Rename.Tools 批量文件重命名实用指南：正则表达式、序号、照片整理、音乐库和剧集文件名整理。",
-		eyebrow: "使用指南",
-		heading: "实用的文件重命名指南",
-		intro: "学习如何用实时预览和本地处理工作流，安全整理照片、媒体库、下载文件和归档文件夹。",
-		allGuides: "全部指南",
-		featured: "精选工作流",
-		updated: "更新于",
-		minRead: "分钟阅读",
-		relatedGuides: "相关指南",
-		startRenaming: "开始重命名",
-		readGuide: "阅读指南",
-		backToGuides: "返回指南",
-		ctaTitle: "准备试试这个工作流？",
-		ctaDesc: "打开 Rename.Tools，先添加几个示例文件，用预览确认每条规则后再处理真实文件名。",
-	},
-};
+export type BaseGuide = Guide<"en" | "zh">;
 
-export const guides: Guide[] = [
+const baseGuides: BaseGuide[] = [
 	{
 		slug: "batch-file-rename-basics",
 		category: "getting-started",
@@ -1173,17 +1122,22 @@ export const guides: Guide[] = [
 	...taskGuides,
 ];
 
-export function isIndexableGuideLocale(locale: string): locale is GuideLocale {
-	return GUIDE_LOCALES.includes(locale as GuideLocale);
-}
+const translations: Record<
+	Exclude<GuideLocale, "en" | "zh">,
+	Record<string, LocalizedGuideContent>
+> = { de, es, fr, ja, ko };
 
-export function getGuideLocale(locale: string): GuideLocale {
-	return locale === "zh" ? "zh" : "en";
-}
-
-export function getGuideIndexCopy(locale: string) {
-	return guideIndexCopy[getGuideLocale(locale)];
-}
+export const guides: Guide[] = baseGuides.map((guide) => ({
+	...guide,
+	content: {
+		...guide.content,
+		de: translations.de[guide.slug],
+		es: translations.es[guide.slug],
+		fr: translations.fr[guide.slug],
+		ja: translations.ja[guide.slug],
+		ko: translations.ko[guide.slug],
+	},
+}));
 
 export function getAllGuides(locale: string): LocalizedGuide[] {
 	const guideLocale = getGuideLocale(locale);
@@ -1214,8 +1168,8 @@ function localizeGuide(guide: Guide, locale: GuideLocale): LocalizedGuide {
 	return {
 		slug: guide.slug,
 		category: guide.category,
-		publishedAt: guide.publishedAt,
-		updatedAt: guide.updatedAt,
+		publishedAt: content.publishedAt ?? guide.publishedAt,
+		updatedAt: content.updatedAt ?? guide.updatedAt,
 		readingTime: guide.readingTime,
 		relatedSlugs: guide.relatedSlugs,
 		locale,

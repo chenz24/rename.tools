@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
 import { GUIDE_LOCALES, guides } from "@/lib/guides/content";
+import { getGuideLanguages } from "@/lib/guides/locales";
 import { SITE_URL } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -36,16 +37,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
 		entries.push({
 			url: `${SITE_URL}/${locale}/guides`,
 			lastModified: new Date(
-				Math.max(...guides.map((guide) => new Date(guide.updatedAt).getTime())),
+				Math.max(
+					...guides.map((guide) =>
+						new Date(guide.content[locale].updatedAt ?? guide.updatedAt).getTime(),
+					),
+				),
 			),
 			changeFrequency: "monthly",
 			priority: 0.75,
 			alternates: {
-				languages: {
-					en: `${SITE_URL}/en/guides`,
-					zh: `${SITE_URL}/zh/guides`,
-					"x-default": `${SITE_URL}/en/guides`,
-				},
+				languages: getGuideLanguages("/guides"),
 			},
 		});
 	}
@@ -54,15 +55,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
 		for (const locale of GUIDE_LOCALES) {
 			entries.push({
 				url: `${SITE_URL}/${locale}/guides/${guide.slug}`,
-				lastModified: new Date(guide.updatedAt),
+				lastModified: new Date(guide.content[locale].updatedAt ?? guide.updatedAt),
 				changeFrequency: "monthly",
 				priority: 0.7,
 				alternates: {
-					languages: {
-						en: `${SITE_URL}/en/guides/${guide.slug}`,
-						zh: `${SITE_URL}/zh/guides/${guide.slug}`,
-						"x-default": `${SITE_URL}/en/guides/${guide.slug}`,
-					},
+					languages: getGuideLanguages(`/guides/${guide.slug}`),
 				},
 			});
 		}
