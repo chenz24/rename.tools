@@ -1,0 +1,659 @@
+{
+	"batch-file-rename-basics": {
+		"title": "Dateien stapelweise umbenennen: importieren, prüfen, ausführen",
+		"description": "Dateien hinzufügen, Regeln kombinieren, Vorschau prüfen, Konflikte lösen und lokal umbenennen: der sichere Einstieg in Rename.Tools.",
+		"intro": "Importieren Sie zunächst wenige Dateien und ergänzen Sie jeweils nur eine Regel. Führen Sie die Umbenennung erst aus, wenn die Vorschau stimmt.",
+		"categoryLabel": "Erste Schritte",
+		"sections": [
+			{
+				"title": "Im Beispiel-Testmodus beginnen",
+				"body": [
+					"Der Beispiel-Testmodus benötigt keine Dateiberechtigung und verändert nichts auf dem Datenträger. Fügen Sie Dateinamen ein oder erzeugen Sie Beispiele, um dieselben Regeln wie bei echten Dateien zu testen.",
+					"Beginnen Sie mit IMG_0421.jpg und IMG_0422.jpg, jeweils in einer eigenen Zeile. So lassen sich die Abbildungen und die folgende Regelkette nachvollziehen. Ergänzen Sie später Dokument- und Videonamen für weitere Tests."
+				],
+				"image": {
+					"src": "/guides/screenshots/samples-en.png",
+					"alt": "Zwei importierte Kameradateinamen ohne Regeln. Abbildung der englischen Oberfläche.",
+					"caption": "Zwei importierte Kameradateinamen ohne Regeln. Abbildung der englischen Oberfläche."
+				},
+				"steps": [
+					"Öffnen Sie die App und wählen Sie im Dateibereich den Beispiel-Testmodus.",
+					"Fügen Sie pro Zeile einen Dateinamen einschließlich Erweiterung ein, etwa IMG_0421.jpg.",
+					"Klicken Sie im Beispielbereich auf Dateien importieren.",
+					"Prüfen Sie, ob Dateiliste und Vorschau dieselben unveränderten Namen zeigen.",
+					"Lassen Sie den Geltungsbereich auf Name, damit die Erweiterungen unverändert bleiben."
+				]
+			},
+			{
+				"title": "Regeln einzeln aufbauen",
+				"body": [
+					"Klicken Sie zum Eingeben einer Vorlage auf Text hinzufügen, fügen Sie die vollständige Vorlage mit geschweiften Klammern ein und bestätigen Sie mit Enter oder Tab. Daraus werden verschiebbare Text- und Variablenblöcke. Prüfen Sie anschließend die Vorschau.",
+					"Bauen Sie die Regelkette in kleinen Schritten auf: erst bereinigen, die Vorschau kontrollieren, dann nummerieren. Bei unerwarteten Änderungen prüfen Sie zuerst die zuletzt ergänzte Regel.",
+					"Die erste Regel zeigt, wie ein Präfix entfernt wird. Danach ersetzt die Sequenzvorlage den gesamten Namen durch ein festes Datum und eine aufgefüllte Nummer. Bei dieser Vorlage ist das Entfernen des Präfixes optional."
+				],
+				"image": {
+					"src": "/guides/screenshots/basics-en.png",
+					"alt": "Die feste Datumsvorlage erzeugt 2026-05-22_001.jpg und 2026-05-22_002.jpg. Für alle Regeln im Regelbereich scrollen. Englische Oberfläche.",
+					"caption": "Die feste Datumsvorlage erzeugt 2026-05-22_001.jpg und 2026-05-22_002.jpg. Für alle Regeln im Regelbereich scrollen. Englische Oberfläche."
+				},
+				"steps": [
+					"Geltungsbereich Name: Suchen & Ersetzen hinzufügen, nach IMG_ suchen und durch leeren Text ersetzen. Die erste Vorschau zeigt 0421.jpg.",
+					"Danach Sequenz hinzufügen: numerisch, Startwert 1, Schritt 1, drei Stellen, globaler Nummerierungsbereich. Ursprüngliche Nummern beibehalten und Sortieren vor der Nummerierung deaktiviert lassen.",
+					"Die Sequenzvorlage auf 2026-05-22_{n} setzen. Eine ausgefüllte Vorlage ersetzt den ganzen Namen: 0421 entfällt, .jpg bleibt durch den Geltungsbereich Name erhalten.",
+					"Das Datum ist ein fester Beispieltext. {date}_{n} verwendet stattdessen das heutige UTC-Datum; {exif.date}_{n} verwendet nach dem Laden der Fotometadaten das Aufnahmedatum.",
+					"IMG_0421.jpg und IMG_0422.jpg in dieser Reihenfolge importieren. Die Vorschau muss 2026-05-22_001.jpg und 2026-05-22_002.jpg zeigen."
+				],
+				"examples": [
+					{
+						"before": "IMG_0421.jpg",
+						"after": "2026-05-22_001.jpg",
+						"note": "Geltungsbereich Name; Sequenzvorlage 2026-05-22_{n}, Startwert 1, Schritt 1, drei Stellen."
+					},
+					{
+						"before": "IMG_0422.jpg",
+						"after": "2026-05-22_002.jpg"
+					}
+				]
+			},
+			{
+				"title": "Die Vorschau systematisch prüfen",
+				"body": [
+					"Die Vorschau ist der Kontrollschritt. Vergleichen Sie zuerst die ursprünglichen Namen mit der Spalte für neue Namen und suchen Sie nach Änderungen, die nicht zur gewünschten Regel passen.",
+					"Nur betroffene Dateien blendet unveränderte Dateien aus. Bei einem Konfliktzähler über null wählen Sie Nur Konflikte: Doppelte Zielnamen müssen vor der Ausführung behoben werden."
+				],
+				"steps": [
+					"Prüfen, ob jede geänderte Datei die richtige Erweiterung behält.",
+					"Prüfen, ob ein neuer Name leer ist oder nur aus einer Zahl besteht.",
+					"Prüfen, ob die Nummerierung der gewünschten Dateireihenfolge entspricht.",
+					"Vor der Ausführung auch bei unauffälliger Liste die Konfliktansicht prüfen."
+				],
+				"examples": [
+					{
+						"before": "report (final).docx",
+						"after": "005report (final).docx",
+						"note": "Separates Gegenbeispiel: Bei leerer Sequenzvorlage, Position Anfang, Startwert 1 und drei Stellen behält die fünfte ausgewählte Datei ihren Namen hinter 005."
+					}
+				]
+			},
+			{
+				"title": "Direkt ausführen oder Skript exportieren",
+				"body": [
+					"In Chromium-Browsern kann Rename.Tools Dateien direkt umbenennen, wenn sie über die File System Access API ausgewählt wurden. In Firefox oder Safari sowie für einen prüfbaren Terminalablauf exportieren Sie ein Skript.",
+					"Auch Teams können Skripte nutzen: Eine Person erstellt und prüft den Plan im Browser, anschließend wird das Bash- oder PowerShell-Skript in einem kontrollierten Ordner ausgeführt."
+				],
+				"steps": [
+					"Mit einem kleinen Ordner oder einer Kopie zum Testen beginnen.",
+					"Plan exportieren wählen, wenn eine Zuordnung alter und neuer Namen benötigt wird.",
+					"Skript exportieren wählen, wenn direktes Umbenennen nicht verfügbar oder eine Terminalausführung gewünscht ist.",
+					"Umbenennen ausführen erst wählen, wenn Vorschau und Konfliktprüfung stimmen.",
+					"Bei einem Fehler unmittelbar nach der Ausführung Rückgängig verwenden."
+				]
+			},
+			{
+				"title": "Typische Fehler beim ersten Versuch",
+				"body": [
+					"Oft wirkt eine Regel auf mehr Dateien als beabsichtigt. Sollen nur Fotos geändert werden, filtern Sie die Liste vorher oder beschränken Sie das Muster auf passende Fotonamen.",
+					"Ein weiterer Fehler ist die Bearbeitung des vollständigen Dateinamens statt nur des Namensteils. Meist ist Name richtig; Erw. oder Vollständig nur bewusst für eine entsprechende Aufgabe wählen."
+				],
+				"examples": [
+					{
+						"before": "movie.name.s01e03.1080p.mkv",
+						"after": "006movie.name.s01e03.1080p.mkv",
+						"note": "Separates Gegenbeispiel: Eine leere Sequenzvorlage mit Position Anfang, Startwert 1 und drei Stellen stellt der sechsten ausgewählten Datei 006 voran."
+					}
+				]
+			}
+		],
+		"publishedAt": "2026-09-22",
+		"updatedAt": "2026-09-22"
+	},
+	"organize-photos-by-date-sequence": {
+		"title": "Fotos nach Datum und laufender Nummer umbenennen",
+		"description": "Kamerafotos mit Datumspräfixen und aufgefüllten Nummern übersichtlich benennen und zuverlässig sortieren.",
+		"intro": "Kameranamen sagen wenig aus. Verwenden Sie ein festes Ereignisdatum oder das EXIF-Aufnahmedatum jedes Fotos und ergänzen Sie laufende Nummern. Das ausführbare Beispiel verwendet ein festes Datum, kein EXIF.",
+		"categoryLabel": "Fotos",
+		"sections": [
+			{
+				"title": "Ein dauerhaft verständliches Namensschema wählen",
+				"body": [
+					"Ein Fotodateiname sollte auch außerhalb von Rename.Tools verständlich bleiben. Beginnen Sie mit dem Datum, danach folgen eine aufgefüllte Nummer und optional Ort, Kunde, Ereignis oder Kamera.",
+					"Vierstellige Jahre sowie zweistellige Monate und Tage halten alphabetische und zeitliche Sortierung in Finder, Explorer, Cloud-Speichern, NAS-Ordnern und Sicherungen im Einklang.",
+					"Entscheiden Sie, ob der Name Aufnahmezeit, Zuordnung oder beides beschreiben soll. Für private Alben reichen oft Datum und Ort; bei Kundenaufträgen hält ein Projekt- oder Aufnahmename auch exportierte Dateien erkennbar."
+				],
+				"examples": [
+					{
+						"before": "DSC_0007.JPG",
+						"after": "2026-05-22_001_tokyo.JPG"
+					},
+					{
+						"before": "IMG_1842.HEIC",
+						"after": "2026-05-22_002_tokyo.HEIC"
+					}
+				]
+			},
+			{
+				"title": "Die Regelkette erstellen",
+				"body": [
+					"Klicken Sie auf Text hinzufügen, fügen Sie die vollständige Vorlage samt Klammern ein und bestätigen Sie mit Enter oder Tab. Prüfen Sie die Vorschau der daraus entstandenen Text- und Variablenblöcke.",
+					"Suchen & Ersetzen oder Entfernen beseitigt bedeutungslose Kamerapräfixe. Eine Sequenz mit führenden Nullen sorgt anschließend für einheitliche Nummern.",
+					"Beim Beispiel mit festem Datum bleibt die Importreihenfolge erhalten. Sequenz kann vor dem Nummerieren auch nach Dateiname oder Änderungszeit sortieren. EXIF-Datum ist als Vorlagenvariable verfügbar, derzeit jedoch nicht als Sortierkriterium."
+				],
+				"image": {
+					"src": "/guides/screenshots/photos-en.png",
+					"alt": "Die Tokyo-Vorlage mit festem Datum ersetzt den Namen und erhält .JPG und .HEIC. Englische Oberfläche.",
+					"caption": "Die Tokyo-Vorlage mit festem Datum ersetzt den Namen und erhält .JPG und .HEIC. Englische Oberfläche."
+				},
+				"steps": [
+					"DSC_0007.JPG und IMG_1842.HEIC in dieser Reihenfolge importieren; Geltungsbereich Name beibehalten.",
+					"Sequenz hinzufügen: numerisch, Startwert 1, Schritt 1, drei Stellen, global. Sortierung und Ursprüngliche Nummern beibehalten ausschalten.",
+					"Vorlage 2026-05-22_{n}_tokyo eingeben. Sie ersetzt den vollständigen Namen; ein zusätzlicher Schritt zum Entfernen des Kamerapräfixes ist nicht erforderlich.",
+					"Ergebnis: 2026-05-22_001_tokyo.JPG und 2026-05-22_002_tokyo.HEIC. Datum und tokyo sind feste Beispieltexte.",
+					"Für Aufnahmedaten Bildmetadaten laden und {exif.date}_{n}_tokyo verwenden. {date} liefert hingegen das heutige UTC-Datum.",
+					"Fehlt EXIF, bleibt {exif.date} wörtlich in der Vorschau stehen. Diese Dateien getrennt behandeln und ein bekanntes Datum verwenden; ungelöste Platzhalter nicht ausführen."
+				]
+			},
+			{
+				"title": "Wann EXIF-Metadaten helfen",
+				"body": [
+					"Wählen Sie die Datumsquelle bewusst: 2026-05-22 ist eingegebener Text; {exif.date} liest DateTimeOriginal, ersatzweise CreateDate; {date} liefert das heutige UTC-Datum. Die Änderungszeit der Datei ist eine eigene Eigenschaft und kann sich beim Kopieren ändern.",
+					"Ohne EXIF bleibt {exif.date} als Text stehen. Trennen Sie solche Dateien ab und verwenden Sie ein bekanntes Datum oder behalten Sie die alten Namen. Ersetzen Sie ein unbekanntes Aufnahmedatum nicht unbemerkt durch heute.",
+					"Das Umbenennen einer RAW-Datei bedeutet nicht, dass ihre Metadaten unterstützt werden. GPS-Variablen liefern Koordinaten, keine Städtenamen; tokyo ist hier ein selbst eingegebenes Etikett.",
+					"Bei vorhandenen EXIF-Daten laden Sie die Metadaten und verwenden Sie das Aufnahmedatum statt heute. Das hilft bei kopierten, heruntergeladenen, vom Telefon exportierten oder nachträglich bearbeiteten Bildern.",
+					"EXIF ist nicht garantiert: Screenshots, Exporte aus sozialen Medien, bearbeitete Bilder und manche HEIC-Konvertierungen können fehlende oder geänderte Daten haben. Ein bekanntes Ereignis ist dann eine sinnvolle Alternative.",
+					"Bei abweichender EXIF- und Änderungszeit zählt Ihr Ordnungsziel: Für Urlaubsalben meist das Aufnahmedatum, für einen Lieferordner möglicherweise das Exportdatum."
+				]
+			},
+			{
+				"title": "Fotos vor der Umbenennung prüfen",
+				"body": [
+					"Prüfen Sie die ersten und letzten Vorschauzeilen. So fallen Sortierfehler auf, besonders bei unterschiedlich langen Zahlen in Dateinamen.",
+					"Enthält die Vorschau andere Dateitypen, halten Sie an und filtern Sie die Liste. Fotos, Dokumente und Videos in einer Sequenz ergeben oft wenig hilfreiche Namen."
+				],
+				"steps": [
+					"Prüfen, ob alle Zielnamen mit dem beabsichtigten Datum beginnen.",
+					"Einheitlich aufgefüllte Nummern wie 001, 002 und 003 kontrollieren.",
+					"Sicherstellen, dass Erweiterungen wie .jpg, .png, .heic und RAW-Erweiterungen unverändert bleiben.",
+					"Nur betroffene Dateien auswählen und nach Dateien suchen, die unverändert bleiben sollten."
+				],
+				"examples": [
+					{
+						"before": "Vacation/IMG_0421.jpg",
+						"after": "Vacation/2026-05-22_001_tokyo.jpg",
+						"note": "Dieselbe feste Datumsvorlage auf eine neue Ein-Datei-Auswahl anwenden. Der Ordnerpfad bleibt unverändert; nur die Datei wird umbenannt."
+					}
+				]
+			},
+			{
+				"title": "Fotos bei Bedarf nach Herkunft trennen",
+				"body": [
+					"Telefonfotos, DSLR-Dateien, Screenshots, RAW-Exporte und bearbeitete Kopien brauchen oft unterschiedliche Regeln. Teilen Sie komplizierte Regelketten lieber auf kleinere Stapel auf.",
+					"Kamerafotos können EXIF-Datum und Sequenz nutzen, Screenshots die Änderungszeit und bearbeitete Exporte Projekt und Version. Kleine Stapel sind einfacher zu benennen und zu prüfen."
+				],
+				"steps": [
+					"Kamerafotos, Screenshots und bearbeitete Exporte durch Ordner oder Filter trennen.",
+					"Je eine Vorlage für aufnahmebezogene und exportbezogene Namen erstellen.",
+					"RAW und bearbeitete JPEGs getrennt behandeln, wenn sie keine gemeinsame Sequenz erhalten sollen.",
+					"Ein kurzes Ereignis ergänzen, wenn der Ordnername allein nicht genug Kontext bietet."
+				],
+				"examples": [
+					{
+						"before": "Edits/final_export_3.jpg",
+						"after": "Edits/client-a_2026-05-22_v03.jpg",
+						"note": "Separate Vorlage: Geltungsbereich Name; Sequenz mit zwei Stellen, Ursprüngliche Nummern beibehalten, Extraktionsmuster (\\d+), Vorlage client-a_2026-05-22_v{n}. Der Ordner Edits bleibt unverändert."
+					}
+				]
+			}
+		],
+		"publishedAt": "2026-09-22",
+		"updatedAt": "2026-09-22"
+	},
+	"regex-batch-rename": {
+		"title": "Dateien mit Regex umbenennen: Muster und Beispiele",
+		"description": "Reguläre Ausdrücke zum Bereinigen von Dateinamen, Umstellen von Datumsangaben und Extrahieren wichtiger Bestandteile.",
+		"intro": "Regex eignet sich besonders für Dateinamen mit gemeinsamen Mustern, wenn einfaches Suchen und Ersetzen die Änderung nicht genau genug beschreibt.",
+		"categoryLabel": "Muster",
+		"sections": [
+			{
+				"title": "Mit einem klaren Muster beginnen",
+				"body": [
+					"Einheitliche Dateinamen erleichtern Regex. Erfassen Sie nur den zu ändernden Teil und halten Sie die Ersetzung lesbar. Ein enges Muster lässt sich leichter prüfen als eine komplizierte Universallösung.",
+					"Mit Erfassungsgruppen können wichtige Bestandteile erhalten und umgeordnet werden. $1, $2 und weitere Gruppen setzen die erfassten Teile in den neuen Namen ein.",
+					"Beschreiben Sie zunächst Datum, Titel, Episodencode und zu entfernende Teile in Worten. Daraus lässt sich häufig direkt das Muster ableiten."
+				],
+				"examples": [
+					{
+						"before": "2026-05-22 invoice client-a.pdf",
+						"after": "invoice_client-a_2026-05-22.pdf",
+						"note": "Geltungsbereich Name. Regex ^(\\d{4}-\\d{2}-\\d{2})\\s+(.+)$, Ersetzung $2_$1, keine Flags; danach alle Leerzeichen mit Suchen & Ersetzen durch _ ersetzen."
+					},
+					{
+						"before": "movie.name.s01e03.1080p.mkv",
+						"after": "movie name S01E03.mkv",
+						"note": "Geltungsbereich Name. Regex ^(.+)\\.s(\\d+)e(\\d+).*$, Ersetzung $1 S$2E$3, Flag i; danach jeden Punkt durch ein Leerzeichen ersetzen."
+					}
+				]
+			},
+			{
+				"title": "Nützliche Regex-Muster",
+				"body": [
+					"Testen Sie diese Ausgangsmuster an wenigen Dateien, bevor Sie große Ordner bearbeiten. Empfindliche Muster lassen sich oft durch eine Regex-Regel mit anschließender einfacher Textbereinigung ersetzen.",
+					"Setzen Sie Flags gezielt: i ignoriert Groß-/Kleinschreibung, g ersetzt alle Treffer. m ist nur für mehrzeiligen Text in Dateinamen sinnvoll."
+				],
+				"image": {
+					"src": "/guides/screenshots/regex-en.png",
+					"alt": "Datumsgruppen und die Bereinigung von Leerzeichen ergeben invoice_client-a_2026-05-22.pdf. Englische Oberfläche.",
+					"caption": "Datumsgruppen und die Bereinigung von Leerzeichen ergeben invoice_client-a_2026-05-22.pdf. Englische Oberfläche."
+				},
+				"steps": [
+					"Geltungsbereich Name; Regex ersetzen hinzufügen und das Muster ohne umschließende / eingeben. Die folgenden Beispiele sind voneinander unabhängig.",
+					"Eckige Klammern samt Inhalt entfernen: Muster \\s*\\[[^\\]]+\\], leere Ersetzung, Flag g.",
+					"Führendes Datum ans Ende setzen: ^(\\d{4}-\\d{2}-\\d{2})\\s+(.+)$, Ersetzung $2_$1, keine Flags. Für durchgängige Unterstriche anschließend Leerzeichen ersetzen.",
+					"Episodenschreibweise vereinheitlichen: s(\\d+)e(\\d+), Ersetzung S$1E$2, Flags gi.",
+					"Mehrfache Leerraumzeichen zusammenfassen: \\s+, Ersetzung ein tatsächliches Leerzeichen, Flag g.",
+					"Passende und nicht passende Namen prüfen, bevor Sie echte Ordner bearbeiten."
+				]
+			},
+			{
+				"title": "Regex kontrollierbar halten",
+				"body": [
+					"Vermeiden Sie sehr breite Muster wie .*, sofern nicht wirklich alles ersetzt werden soll. Bei leeren oder doppelten Zielnamen oder zu viel entferntem Text müssen Sie das Muster einschränken.",
+					"Schwer verständliche Regeln besser in zwei oder drei einfache Schritte teilen. Das erleichtert die Prüfung und die spätere Pflege der Vorlage.",
+					"Regex muss nicht zuerst stehen: erst offensichtlichen Text mit Suchen & Ersetzen bereinigen, dann die Struktur per Regex ändern und zum Schluss Groß-/Kleinschreibung oder Sequenz anwenden."
+				]
+			},
+			{
+				"title": "Mit der Vorschau Fehler finden",
+				"body": [
+					"Wird ein Muster nicht wie erwartet angewendet, machen Sie es nicht sofort komplexer. Ersetzen Sie vorübergehend durch eine sichtbare Markierung wie MATCH_$1, um die erfassten Teile zu sehen.",
+					"Sobald die Gruppen stimmen, setzen Sie die tatsächliche Ersetzung wieder ein. Bei großen Dateimengen spart diese zusätzliche Kontrolle Zeit."
+				],
+				"steps": [
+					"Zuerst drei bis fünf repräsentative Dateinamen testen.",
+					"Vorübergehend eine Markierung wie match_$1_$2 als Ersetzung verwenden.",
+					"Prüfen, ob die Vorschau die erwarteten erfassten Bestandteile zeigt.",
+					"Nach der Prüfung die endgültige Ersetzung wiederherstellen.",
+					"Mit Nur betroffene Dateien prüfen, ob unbeteiligte Namen erfasst wurden."
+				],
+				"examples": [
+					{
+						"before": "client-a_invoice_2026-05-22_final.pdf",
+						"after": "invoice_client-a_2026-05-22.pdf",
+						"note": "Geltungsbereich Name. Muster ^([^_]+)_([^_]+)_(\\d{4}-\\d{2}-\\d{2})_final$, Ersetzung $2_$1_$3, keine Flags."
+					}
+				]
+			},
+			{
+				"title": "Wann eine andere Regel einfacher ist",
+				"body": [
+					"Für ein festes Wort genügt Suchen & Ersetzen, für Nummern Sequenz und für Groß-/Kleinschreibung die entsprechende Stilregel.",
+					"Kombinieren Sie einfache Regeln für einfache Änderungen und Regex für die Struktur. Prüfen Sie das Gesamtergebnis, damit Vorlagen auch bei späteren Stapeln verständlich bleiben."
+				],
+				"steps": [
+					"Feste Wörter oder Trennzeichen mit Suchen & Ersetzen bearbeiten.",
+					"Wiederkehrende Klammern und Symbole mit Entfernen/Bereinigen entfernen.",
+					"Regex ersetzen verwenden, wenn Teile erfasst und umgeordnet werden müssen.",
+					"Regex-Vorlagen erst nach Tests mit mehreren Namensvarianten speichern."
+				],
+				"examples": [
+					{
+						"before": "My Vacation Photos.jpg",
+						"after": "my-vacation-photos.jpg",
+						"note": "Hier genügt die Regel für Groß-/Kleinschreibung und Stil; Regex ist nicht erforderlich."
+					}
+				]
+			}
+		],
+		"publishedAt": "2026-09-22",
+		"updatedAt": "2026-09-22"
+	},
+	"sequence-file-numbering": {
+		"title": "Dateinamen mit laufenden Nummern zuverlässig ordnen",
+		"description": "Führende Nullen, Sortierung und Nummerierung pro Ordner für dauerhaft geordnete Dateinamen nutzen.",
+		"intro": "Bei Sequenzen bestimmen Stellenzahl, Sortierreihenfolge und Nummerierungsbereich, ob die Namen nach Export, Upload und Archivierung sinnvoll geordnet bleiben.",
+		"categoryLabel": "Nummerierung",
+		"sections": [
+			{
+				"title": "Führende Nullen für zuverlässige Sortierung",
+				"body": [
+					"Klicken Sie für eine Vorlage auf Text hinzufügen, fügen Sie den vollständigen Text mit Klammern ein und bestätigen Sie mit Enter oder Tab. Prüfen Sie die Vorschau der Text- und Variablenblöcke.",
+					"Ohne führende Nullen kann 10 vor 2 stehen. Gleich breite Nummern bringen alphabetische und numerische Reihenfolge in Einklang.",
+					"Zwei Stellen reichen für kleine Alben, drei für Hunderte Dateien, vier für wachsende Ordner. Eine zusätzliche Stelle schadet selten; zu wenige erfordern später womöglich eine neue Umbenennung.",
+					"Das ist besonders bei Cloud-Speichern, Kundenlieferungen, Schnittprogrammen und Archiven mit einfacher alphabetischer Sortierung nützlich."
+				],
+				"image": {
+					"src": "/guides/screenshots/sequence-en.png",
+					"alt": "Ursprüngliche Nummern beibehalten macht aus 1, 2 und 10 die Werte 001, 002 und 010. Englische Oberfläche.",
+					"caption": "Ursprüngliche Nummern beibehalten macht aus 1, 2 und 10 die Werte 001, 002 und 010. Englische Oberfläche."
+				},
+				"examples": [
+					{
+						"before": "photo 1.jpg, photo 2.jpg, photo 10.jpg",
+						"after": "001_photo.jpg, 002_photo.jpg, 010_photo.jpg",
+						"note": "Geltungsbereich Name; Sequenz mit drei Stellen, Ursprüngliche Nummern beibehalten, Muster (\\d+), Vorlage {n}_photo. Die 10 bleibt erhalten und wird nicht durch eine neue dritte Nummer ersetzt."
+					}
+				]
+			},
+			{
+				"title": "Den Nummerierungsbereich wählen",
+				"body": [
+					"Global eignet sich für eine gemeinsame Reihe. Pro Ordner ist besser für Alben, Kapitel, Exporte oder Kundenordner, die jeweils bei 001 beginnen sollen.",
+					"Pro Erweiterung oder Dateikategorie können unterschiedliche Dateitypen getrennt nummeriert werden, etwa Screenshots und Videos im selben Ordner."
+				],
+				"steps": [
+					"Global für ein Album oder einen Exportstapel wählen.",
+					"Pro Ordner wählen, wenn jeder Ordner eine eigene Sequenz benötigt.",
+					"Pro Erweiterung wählen, um Bilder, Videos und Dokumente getrennt zu nummerieren.",
+					"Vor dem Nummerieren sortieren, wenn die Importreihenfolge unzuverlässig ist.",
+					"Für file1, file2 und file10 die natürliche Sortierung verwenden."
+				]
+			},
+			{
+				"title": "Sequenzen mit Vorlagen kombinieren",
+				"body": [
+					"Kombinieren Sie {n}, {name}, Datumsangaben, Ordnernamen oder Metadatenvariablen für strukturierte und lesbare Namen.",
+					"Steht der Sortierteil zuerst, bleibt die Ordnung stabil: {date}_{n}_{name} ordnet nach Datum und Nummer, {name}_{n}_{date} dagegen zunächst nach dem ursprünglichen Namen."
+				],
+				"examples": [
+					{
+						"before": "scan.jpg",
+						"after": "archive_2026_001_scan.jpg",
+						"note": "Geltungsbereich Name; numerische Sequenz, Startwert 1, Schritt 1, drei Stellen, Vorlage archive_2026_{n}_{name}; Ursprüngliche Nummern beibehalten deaktiviert."
+					}
+				]
+			},
+			{
+				"title": "Vorhandene Nummern erhalten",
+				"body": [
+					"Scans, exportierte Einzelbilder, Kapitel und Serienfotos enthalten oft bereits sinnvolle Nummern. Diese sollen möglicherweise nicht durch die Importreihenfolge ersetzt werden.",
+					"Ursprüngliche Nummern beibehalten extrahiert vorhandene Zahlen und füllt sie einheitlich auf. So bleibt der Zusammenhang zwischen alten und neuen Namen erhalten."
+				],
+				"steps": [
+					"In der Sequenzregel Ursprüngliche Nummern beibehalten aktivieren.",
+					"Für einfache Namen mit einer Zahl das Extraktionsmuster (\\d+) verwenden.",
+					"Bei mehreren Zahlen ein genaueres Muster wie page-(\\d+) wählen.",
+					"Für das Beispiel drei Stellen und die Vorlage page_{n}_scan einstellen; Geltungsbereich Name.",
+					"Fehlgeschlagene Extraktionen prüfen: Diese Dateien erhalten stattdessen die normale laufende Nummer."
+				],
+				"examples": [
+					{
+						"before": "page-7-scan.jpg",
+						"after": "page_007_scan.jpg",
+						"note": "Die ursprüngliche Seitennummer verhindert eine unbeabsichtigte Änderung der Dokumentreihenfolge."
+					}
+				]
+			},
+			{
+				"title": "Die Reihenfolge vorab festlegen",
+				"body": [
+					"Eine Sequenz ist nur so zuverlässig wie ihre zugrunde liegende Reihenfolge. Die Importreihenfolge kann je nach Browser, Ordner und Betriebssystem abweichen.",
+					"Wählen Sie bewusst: Dateiname eignet sich oft für Kameradateien, Änderungszeit für Dokumente und Erweiterung für getrennte Nummerierungen nach Dateityp."
+				],
+				"steps": [
+					"Sortieren vor der Nummerierung aktivieren, wenn die Importreihenfolge keine Bedeutung hat.",
+					"Dateiname für bereits sinnvoll geordnete Kameranamen wählen.",
+					"Änderungszeit für zeitlich erstellte oder exportierte Dokumentstapel wählen.",
+					"Die ersten und letzten Nummern in der Vorschau kontrollieren."
+				],
+				"examples": [
+					{
+						"before": "scan10.jpg, scan2.jpg, scan1.jpg",
+						"after": "003_scan10.jpg, 002_scan2.jpg, 001_scan1.jpg",
+						"note": "Geltungsbereich Name; Startwert 1, Schritt 1, drei Stellen, Vorlage {n}_{name}, ursprüngliche Nummern nicht beibehalten. Vorher nach Dateiname, aufsteigend und natürlich sortieren. Die Ausgabe zeigt die ursprüngliche Eingabereihenfolge: scan10 erhält 003, nicht 010."
+					}
+				]
+			}
+		],
+		"publishedAt": "2026-09-22",
+		"updatedAt": "2026-09-22"
+	},
+	"organize-music-video-files": {
+		"title": "Musikbibliotheken und Serienfolgen einheitlich benennen",
+		"description": "Musik und Videos mit Metadatenvariablen, Sequenzen, Regex und optionaler TMDb-Zuordnung übersichtlich benennen.",
+		"intro": "Mediendateien haben oft unübersichtliche Release-Namen. Rename.Tools erstellt daraus vorhersehbare Namen für Player, Medienserver und gemeinsame Ordner.",
+		"categoryLabel": "Medien",
+		"sections": [
+			{
+				"title": "Musikdateien benennen",
+				"body": [
+					"Bei Alben sollen Dateinamen die Titelreihenfolge erhalten und auch außerhalb des Players verständlich sein. Laden Sie vorhandene Tags für Interpret, Titel, Album oder Titelnummer.",
+					"Ein praktisches Schema beginnt mit der Titelnummer, gefolgt von Interpret und Titel. Das funktioniert auch auf USB-Speichern, Telefonen, in DJ-Bibliotheken und auf Medienservern.",
+					"Bei unzuverlässigen Tags behalten Sie den vorhandenen Namen als Grundlage und verwenden Sequenz für die Reihenfolge. Trennzeichen und Schreibweise lassen sich auch ohne Metadaten bereinigen."
+				],
+				"steps": [
+					"Jeweils ein Album importieren, wenn die Titelreihenfolge wichtig ist.",
+					"Text hinzufügen wählen, die vollständige Vorlage mit Klammern einfügen und mit Enter oder Tab bestätigen. Anschließend die Vorschau prüfen.",
+					"Metadaten laden, sofern verlässliche Audiotags vorhanden sind.",
+					"Sequenz hinzufügen und {media.track}. {media.artist} - {media.title} als Vorlage verwenden. Sie ersetzt den ganzen Namen und nutzt Titelnummern aus Tags statt generierter {n}-Nummern.",
+					"Geltungsbereich Name beibehalten, damit Audioerweiterungen unverändert bleiben.",
+					"Eingefügte Beispieldateinamen liefern keine Metadaten. Bei echten Dateien zuerst Audiotags laden. Fehlende Tags hinterlassen Platzhalter; vor der Ausführung Tags korrigieren oder getrennt die Vorlage {n}. {name} nutzen."
+				],
+				"examples": [
+					{
+						"before": "love story.mp3",
+						"after": "01. Taylor Swift - Love Story.mp3",
+						"note": "Erforderliche Tags: Titelnummer 1, Interpret Taylor Swift, Titel Love Story."
+					},
+					{
+						"before": "track_07.flac",
+						"after": "07. Artist - Song Title.flac",
+						"note": "Erforderliche Tags: Titelnummer 7, Interpret Artist, Titel Song Title."
+					}
+				]
+			},
+			{
+				"title": "Videos und Episoden bereinigen",
+				"body": [
+					"Videonamen enthalten oft Punkte, Qualitätsangaben, Release-Gruppen und uneinheitliche Episodencodes. Extrahieren Sie Serie und Code mit Regex und bereinigen Sie danach die Trennzeichen.",
+					"Mit einem TMDb-API-Schlüssel kann der Medien-Scraper Episoden zuordnen und Titel ergänzen. Ohne TMDb lassen sich S01E03-Namen weiterhin allein mit Regex vereinheitlichen.",
+					"Für Medienserver zählt Konsistenz: Verwenden Sie innerhalb einer Bibliothek und über mehrere Staffeln hinweg dasselbe Schema."
+				],
+				"image": {
+					"src": "/guides/screenshots/media-en.png",
+					"alt": "Regex, bereinigte Trennzeichen und Titelschreibweise ergeben Show Name S01E03.mkv. Für alle drei Regeln scrollen. Englische Oberfläche.",
+					"caption": "Regex, bereinigte Trennzeichen und Titelschreibweise ergeben Show Name S01E03.mkv. Für alle drei Regeln scrollen. Englische Oberfläche."
+				},
+				"steps": [
+					"Geltungsbereich Name. Regex ersetzen: ^(.+)\\.s(\\d+)e(\\d+).*$, Ersetzung $1 S$2E$3, Flag i.",
+					"Suchen & Ersetzen hinzufügen: jeden tatsächlichen Punkt durch ein Leerzeichen ersetzen, alle Treffer aktivieren. Durch Name bleibt .mkv erhalten.",
+					"Groß-/Kleinschreibung: Titelschreibweise, Stil Keine. So wird der Serienname lesbar und S01E03 bleibt erhalten.",
+					"Das Muster erwartet einen Punkt vor dem Episodencode. Andere Trennzeichen benötigen ein angepasstes Muster; nicht passende Dateien prüfen.",
+					"Vor der Ausführung die gesamte Staffel in der Vorschau prüfen."
+				],
+				"examples": [
+					{
+						"before": "show.name.s01e03.1080p.web-dl.mkv",
+						"after": "Show Name S01E03.mkv"
+					}
+				]
+			},
+			{
+				"title": "Mit Medienservern kompatibel bleiben",
+				"body": [
+					"Nutzen Sie einheitliche Trennzeichen und lassen Sie Erweiterungen unverändert, sofern Sie die Dateien nicht separat konvertieren. Rename.Tools ändert Namen, keine Medienformate.",
+					"Vorhersehbare, korrekt sortierte Namen lassen sich leichter pflegen und von anderen Werkzeugen auswerten als originelle Sonderformate.",
+					"Testen Sie zunächst ein Album oder eine Staffel. Bonusstücke, Specials, Trailer, Kommentare, Untertitel und mehrteilige Episoden brauchen gegebenenfalls eigene Regeln."
+				]
+			},
+			{
+				"title": "Untertitel und Extras getrennt behandeln",
+				"body": [
+					"Untertitel brauchen einen zum Video passenden Basisnamen, damit Player sie erkennen. Wenden Sie Videoregeln nur auf .srt oder .ass an, wenn die resultierenden Basisnamen weiterhin übereinstimmen.",
+					"Trailer, Interviews, Samples und Hintergrundclips folgen oft keinem S01E03-Schema. Filtern Sie sie normalerweise in einen eigenen Stapel."
+				],
+				"steps": [
+					"Videos und Untertitel getrennt filtern, wenn unterschiedliche Regeln nötig sind.",
+					"Nach dem Umbenennen die Untertitelbasisnamen mit den zugehörigen Videos vergleichen.",
+					"Extras separat ablegen oder ein deutliches Suffix wie extras oder trailer ergänzen.",
+					"Vor dem Umbenennen gemischter Medienordner einen Plan exportieren."
+				],
+				"examples": [
+					{
+						"before": "show.name.s01e03.1080p.en.srt",
+						"after": "Show Name S01E03.en.srt",
+						"note": "Separate Untertitelkette: Geltungsbereich Name; Regex ^(.+)\\.s(\\d+)e(\\d+).*\\.([a-z]{2})$, Ersetzung $1 S$2E$3, Flag i; Punkte durch Leerzeichen ersetzen; Titelschreibweise; schließlich .en am Ende für diesen Stapel englischer Untertitel einfügen."
+					}
+				]
+			}
+		],
+		"publishedAt": "2026-09-22",
+		"updatedAt": "2026-09-22"
+	},
+	"add-prefix-suffix-to-filenames": {
+		"title": "Mehreren Dateinamen ein Präfix oder Suffix hinzufügen",
+		"description": "Projektnamen, Kundenpräfixe oder Versionssuffixe stapelweise ergänzen und ursprüngliche Namen sowie Erweiterungen erhalten. Zuerst mit Beispieldateinamen testen.",
+		"intro": "Erhalten Sie den wichtigen Teil des Namens und ergänzen Sie eine gemeinsame Kennzeichnung. Ein Projektpräfix gruppiert Dokumente, ein Versionssuffix kennzeichnet einen Prüfstand.",
+		"categoryLabel": "Alltägliche Aufgaben",
+		"sections": [
+			{
+				"title": "Projektpräfix und Prüfsuffix hinzufügen",
+				"body": [
+					"Dieses Beispiel fügt client-a_ vorne und _review am Ende des Namensteils vor der Erweiterung ein. Beide Texte lassen sich an Kunde und Version anpassen; jede Regel ist auch einzeln nutzbar.",
+					"Lassen Sie den Geltungsbereich auf Name. Ende meint das Ende des bearbeiteten Teils; bei Vollständig würde das Suffix hinter .pdf stehen. Name schützt die Erweiterung."
+				],
+				"steps": [
+					"Oben Dieses Beispiel testen wählen, die beiden Hinzufügen/Einfügen-Regeln prüfen und Mit Beispieldateinamen testen wählen.",
+					"Für eine eigene Regelkette Name einstellen. Hinzufügen/Einfügen ergänzen, client-a_ eingeben und Anfang wählen.",
+					"Eine zweite Einfügeregel mit _review und Position Ende nach der Präfixregel hinzufügen.",
+					"proposal.pdf → client-a_proposal_review.pdf prüfen. Beide Textfelder können angepasst werden."
+				],
+				"examples": [
+					{
+						"before": "proposal.pdf",
+						"after": "client-a_proposal_review.pdf"
+					},
+					{
+						"before": "budget.xlsx",
+						"after": "client-a_budget_review.xlsx"
+					}
+				]
+			},
+			{
+				"title": "Trennzeichen und aussagekräftige Namen erhalten",
+				"body": [
+					"Das Trennzeichen gehört zum eingefügten Text. Für einen Unterstrich nach dem Präfix geben Sie client-a_ statt client-a ein. Entsprechend gilt dies für _review.",
+					"Einfügen nummeriert nicht neu und ersetzt den alten Namen nicht. Für nur ein Präfix genügt Anfang, für nur ein Suffix Ende. Für vollständig neue nummerierte Namen verwenden Sie die Sequenzanleitung."
+				],
+				"examples": [
+					{
+						"before": "proposal.pdf",
+						"after": "client-a_proposal.pdf",
+						"note": "Nur die Regel am Anfang: client-a_."
+					},
+					{
+						"before": "proposal.pdf",
+						"after": "proposal_review.pdf",
+						"note": "Nur die Regel am Ende: _review."
+					}
+				]
+			},
+			{
+				"title": "Kennzeichnungen nicht doppelt einfügen",
+				"body": [
+					"Einfügen ergänzt Text auch dann, wenn er bereits vorhanden ist. Erneutes Anwenden auf client-a_proposal.pdf ergibt client-a_client-a_proposal.pdf. Bereits markierte Dateien ausschließen oder getrennt prüfen.",
+					"Für gemischte Stapel verhindert das bedingte Muster ^(?!client-a_) mit Ersetzung client-a_, ohne Flags und mit Geltungsbereich Name genau dieses doppelte Präfix. Es unterscheidet Groß-/Kleinschreibung: Client-A_ ist etwas anderes. Beide Varianten vorher testen."
+				],
+				"examples": [
+					{
+						"before": "proposal.pdf",
+						"after": "client-a_proposal.pdf",
+						"note": "Bedingte Regex ^(?!client-a_) → client-a_, keine Flags."
+					},
+					{
+						"before": "client-a_proposal.pdf",
+						"after": "client-a_proposal.pdf",
+						"note": "Dieselbe bedingte Regex lässt das vorhandene Präfix unverändert."
+					}
+				]
+			},
+			{
+				"title": "Von Beispielen zu echten Dateien wechseln",
+				"body": [
+					"Beispielnamen dienen nur der Vorschau und erteilen keinen Dateizugriff. Leeren Sie die Beispielliste, behalten Sie die Regeln und wählen Sie echte Dateien. Prüfen Sie erneut alle Namen, vorhandene Kennzeichnungen, lange Namen und Konflikte.",
+					"Unterstützte Desktop-Versionen von Chrome und Edge können nach erteiltem Zugriff lokal umbenennen. Ohne direkten Dateizugriff erstellen Sie im Beispielmodus ein Skript, prüfen es und führen es im Ordner der entsprechenden Dateien aus.",
+					"Die Umbenennung ändert weder Dokumentinhalt noch Format, kann aber Verweise anderer Programme auf alte Namen beeinträchtigen. Sichern Sie wichtige Originale und führen Sie nur geprüfte Änderungen aus."
+				]
+			}
+		],
+		"publishedAt": "2026-09-22",
+		"updatedAt": "2026-09-22"
+	},
+	"replace-spaces-in-filenames": {
+		"title": "Leerzeichen in Dateinamen durch Unterstriche oder Bindestriche ersetzen",
+		"description": "Leerzeichen stapelweise ersetzen oder entfernen, Erweiterungen erhalten und mehrfachen Leerraum behandeln: getestete Beispiele für Textsuche und Regex.",
+		"intro": "Vereinheitlichen Sie Trennzeichen vor dem Teilen eines Ordners oder der Nutzung in einem Projekt. Wählen Sie Unterstrich, Bindestrich oder Entfernung und prüfen Sie mehrfache Leerzeichen sowie Namenskonflikte.",
+		"categoryLabel": "Alltägliche Aufgaben",
+		"sections": [
+			{
+				"title": "Jedes normale Leerzeichen durch einen Unterstrich ersetzen",
+				"body": [
+					"Verwenden Sie Suchen & Ersetzen für ein tatsächliches Leerzeichen. Im Suchfeld einmal die Leertaste drücken, nicht das Wort Leerzeichen oder die Zeichen \\s eingeben. Alle ersetzen aktivieren.",
+					"Dieses Beispiel testen öffnet genau diese Regel. Mit Beispieldateinamen testen zeigt einen normalen Namen und einen mit zwei aufeinanderfolgenden Leerzeichen, ohne Dateizugriff."
+				],
+				"steps": [
+					"Geltungsbereich Name einstellen, damit Erweiterungen unverändert bleiben.",
+					"Suchen & Ersetzen hinzufügen: ein normales Leerzeichen suchen und durch _ ersetzen.",
+					"Alle ersetzen aktivieren und Nach Position deaktiviert lassen.",
+					"Vorschau prüfen: Zwei Leerzeichen ergeben zwei Unterstriche, da jedes Zeichen einzeln ersetzt wird."
+				],
+				"examples": [
+					{
+						"before": "Quarterly Report 2026.pdf",
+						"after": "Quarterly_Report_2026.pdf"
+					},
+					{
+						"before": "draft  final.txt",
+						"after": "draft__final.txt"
+					}
+				]
+			},
+			{
+				"title": "Bindestriche verwenden oder Leerzeichen entfernen",
+				"body": [
+					"Für Bindestriche die Ersetzung auf - setzen. Zum Entfernen das Ersetzungsfeld leer lassen. Groß-/Kleinschreibung und andere Satzzeichen bleiben bei beiden Varianten erhalten.",
+					"Ohne Trennzeichen können Namen schwerer lesbar sein: My Report wird MyReport. Leerzeichen ersetzen ist nicht dasselbe wie snake_case, das auch Wörter trennen und vorhandene Trennzeichen ändern kann."
+				],
+				"examples": [
+					{
+						"before": "My Report.pdf",
+						"after": "My-Report.pdf",
+						"note": "Ein normales Leerzeichen suchen und alle Treffer durch - ersetzen."
+					},
+					{
+						"before": "My Report.pdf",
+						"after": "MyReport.pdf",
+						"note": "Ein normales Leerzeichen suchen und alle Treffer durch leeren Text ersetzen."
+					}
+				]
+			},
+			{
+				"title": "Mehrfachen Leerraum mit Regex zusammenfassen",
+				"body": [
+					"Für mehrere aufeinanderfolgende Leerraumzeichen verwenden Sie Regex ersetzen: Muster \\s+, Ersetzung _, Flag g. Das erfasst auch Tabulatoren, sofern das Dateisystem sie zulässt.",
+					"Leerraum am Anfang und Ende wird ebenfalls zu _. Zum vorherigen Trimmen eine eigene Regex-Regel davor setzen: ^\\s+|\\s+$, leere Ersetzung, Flag g. Dieser optionale Schritt ist nicht im einfachen Beispiel enthalten."
+				],
+				"examples": [
+					{
+						"before": "draft  final.txt",
+						"after": "draft_final.txt",
+						"note": "Nur Regex ersetzen: \\s+ → _, Flag g."
+					},
+					{
+						"before": "  My Report  .pdf",
+						"after": "My_Report.pdf",
+						"note": "Zuerst ^\\s+|\\s+$ mit leerer Ersetzung und Flag g entfernen, danach \\s+ → _ mit Flag g anwenden."
+					}
+				]
+			},
+			{
+				"title": "Konflikte und gemischte Namensstile prüfen",
+				"body": [
+					"Report Final.pdf und Report_Final.pdf ergeben beide Report_Final.pdf. Wählen Sie eine andere Kennzeichnung, schließen Sie eine Datei aus oder lösen Sie den Konflikt vor der Ausführung. Auch das Zusammenfassen von Leerraum kann solche Konflikte erzeugen.",
+					"Die Bereinigung ändert Dateinamen, nicht Ordnernamen oder Inhalte. Name erhält .pdf und andere Erweiterungen und konvertiert keine Formate. Verweise auf alte Dateinamen müssen eventuell aktualisiert werden.",
+					"Nach dem Test die Beispielliste leeren und echte Dateien in einem unterstützten Desktop-Browser wie Chrome oder Edge importieren. Alles prüfen und erst dann ausführen. Ohne direkten Zugriff ein Skript aus Beispieldateinamen erstellen, prüfen und im passenden Ordner ausführen."
+				]
+			}
+		],
+		"publishedAt": "2026-09-22",
+		"updatedAt": "2026-09-22"
+	}
+}

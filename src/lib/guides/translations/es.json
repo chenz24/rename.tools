@@ -1,0 +1,659 @@
+{
+	"batch-file-rename-basics": {
+		"title": "Renombrar archivos por lotes: importar, revisar y ejecutar",
+		"description": "Añade archivos, combina reglas, revisa la vista previa, resuelve conflictos y ejecuta el cambio de nombres localmente.",
+		"intro": "Empieza con pocos archivos, añade una regla cada vez y ejecuta el cambio solo cuando la vista previa sea correcta.",
+		"categoryLabel": "Primeros pasos",
+		"sections": [
+			{
+				"title": "Empezar en el modo de prueba",
+				"body": [
+					"El modo de prueba no pide permisos ni modifica el disco. Pega o genera nombres para probar las mismas reglas que usarías con archivos reales.",
+					"Empieza con IMG_0421.jpg e IMG_0422.jpg, uno por línea, para reproducir las capturas y las reglas siguientes. Añade después nombres de documentos y vídeos para comprobar otros casos."
+				],
+				"image": {
+					"src": "/guides/screenshots/samples-en.png",
+					"alt": "Dos nombres de fotos importados antes de añadir reglas. Captura de la interfaz en inglés.",
+					"caption": "Dos nombres de fotos importados antes de añadir reglas. Captura de la interfaz en inglés."
+				},
+				"steps": [
+					"Abre la aplicación y elige el modo de prueba en el panel de archivos.",
+					"Pega un nombre por línea con su extensión, por ejemplo IMG_0421.jpg.",
+					"Pulsa Importar archivos dentro del panel de prueba.",
+					"Comprueba que la lista y la vista previa muestran los mismos nombres sin cambios.",
+					"Mantén el ámbito Nombre para no modificar las extensiones."
+				]
+			},
+			{
+				"title": "Añadir las reglas una a una",
+				"body": [
+					"Para introducir una plantilla, pulsa Añadir texto, pega la plantilla completa con llaves y confirma con Intro o Tab. Se convertirá en bloques de texto y variables que puedes arrastrar. Revisa la vista previa.",
+					"Trabaja con cambios pequeños: limpia, revisa y después numera. Si aparece algo inesperado, empieza por comprobar la última regla añadida.",
+					"La primera regla enseña a quitar un prefijo. La plantilla de secuencia sustituye después todo el nombre por una fecha fija y un número con ceros; con esta plantilla, quitar el prefijo es opcional."
+				],
+				"image": {
+					"src": "/guides/screenshots/basics-en.png",
+					"alt": "La plantilla con fecha fija produce 2026-05-22_001.jpg y 2026-05-22_002.jpg. Desplázate por el panel para revisar las reglas. Interfaz en inglés.",
+					"caption": "La plantilla con fecha fija produce 2026-05-22_001.jpg y 2026-05-22_002.jpg. Desplázate por el panel para revisar las reglas. Interfaz en inglés."
+				},
+				"steps": [
+					"Ámbito Nombre: añade Buscar y reemplazar, busca IMG_ y deja vacío el reemplazo. La primera vista previa será 0421.jpg.",
+					"Añade Secuencia después: numérica, inicio 1, paso 1, tres dígitos y ámbito global. Desactiva conservar números originales y ordenar antes de numerar.",
+					"Usa la plantilla 2026-05-22_{n}. Una plantilla no vacía sustituye todo el nombre: elimina 0421, mientras Nombre conserva .jpg.",
+					"La fecha es texto fijo para reproducir el ejemplo. {date}_{n} usa la fecha UTC actual; {exif.date}_{n} usa la fecha de captura tras cargar los metadatos.",
+					"Importa IMG_0421.jpg e IMG_0422.jpg en ese orden. Comprueba 2026-05-22_001.jpg y 2026-05-22_002.jpg."
+				],
+				"examples": [
+					{
+						"before": "IMG_0421.jpg",
+						"after": "2026-05-22_001.jpg",
+						"note": "Ámbito Nombre; plantilla de secuencia 2026-05-22_{n}, inicio 1, paso 1 y tres dígitos."
+					},
+					{
+						"before": "IMG_0422.jpg",
+						"after": "2026-05-22_002.jpg"
+					}
+				]
+			},
+			{
+				"title": "Revisar la vista previa con una lista de control",
+				"body": [
+					"La vista previa es el paso de revisión. Compara la columna original con los nombres nuevos y busca cambios que no correspondan a la regla prevista.",
+					"El filtro de archivos afectados oculta los que no cambian. Si hay conflictos, muestra solo los conflictos y corrige los destinos duplicados antes de ejecutar."
+				],
+				"steps": [
+					"Comprueba que cada archivo mantiene la extensión correcta.",
+					"Comprueba que ningún nombre nuevo esté vacío o contenga solo un número.",
+					"Verifica que la numeración sigue el orden deseado.",
+					"Revisa los conflictos antes de ejecutar aunque la lista parezca correcta."
+				],
+				"examples": [
+					{
+						"before": "report (final).docx",
+						"after": "005report (final).docx",
+						"note": "Contraejemplo independiente: con plantilla de secuencia vacía, posición Inicio, valor inicial 1 y tres dígitos, el quinto archivo conserva su nombre después de 005."
+					}
+				]
+			},
+			{
+				"title": "Ejecutar directamente o exportar un script",
+				"body": [
+					"En navegadores Chromium, Rename.Tools puede renombrar directamente archivos seleccionados mediante File System Access API. En Firefox o Safari, o si prefieres una terminal, exporta un script.",
+					"Un equipo puede preparar y revisar el plan en el navegador y luego ejecutar el script Bash o PowerShell en una carpeta controlada."
+				],
+				"steps": [
+					"Empieza con una carpeta pequeña o una copia de prueba.",
+					"Exporta el plan para obtener la correspondencia entre nombres antiguos y nuevos.",
+					"Exporta un script si no hay acceso directo o prefieres ejecutar en una terminal.",
+					"Ejecuta el renombrado solo después de revisar nombres y conflictos.",
+					"Si detectas un error tras ejecutar, utiliza Deshacer inmediatamente."
+				]
+			},
+			{
+				"title": "Errores habituales al empezar",
+				"body": [
+					"Una regla puede afectar a más archivos de los previstos. Si solo quieres cambiar fotos, filtra la lista o limita el patrón a sus nombres.",
+					"No confundas el nombre con el nombre completo y su extensión. Normalmente conviene Nombre; usa Ext o Completo solo cuando la tarea lo requiera."
+				],
+				"examples": [
+					{
+						"before": "movie.name.s01e03.1080p.mkv",
+						"after": "006movie.name.s01e03.1080p.mkv",
+						"note": "Contraejemplo independiente: una secuencia con plantilla vacía, posición Inicio, inicio 1 y tres dígitos antepone 006 al sexto archivo seleccionado."
+					}
+				]
+			}
+		],
+		"publishedAt": "2026-09-22",
+		"updatedAt": "2026-09-22"
+	},
+	"organize-photos-by-date-sequence": {
+		"title": "Renombrar fotos por fecha y número de secuencia",
+		"description": "Añade fechas y números con ceros iniciales a tus fotos para mantener álbumes legibles y fáciles de ordenar.",
+		"intro": "Los nombres de cámara dicen poco. Usa una fecha fija del evento o la fecha EXIF de cada foto y añade números. El ejemplo ejecutable utiliza una fecha fija, no EXIF.",
+		"categoryLabel": "Fotos",
+		"sections": [
+			{
+				"title": "Elegir un formato duradero",
+				"body": [
+					"Un nombre debe seguir siendo comprensible fuera de Rename.Tools. Pon primero la fecha, luego un número con ceros y, si hace falta, lugar, cliente, evento o cámara.",
+					"Usa años de cuatro cifras y meses y días de dos. Así el orden alfabético coincide con el temporal en Finder, el Explorador, la nube, los NAS y las copias de seguridad.",
+					"Decide si el nombre describe la captura, la clasificación o ambas. Fecha y lugar suelen bastar para álbumes personales; un proyecto o sesión identifica mejor las entregas a clientes."
+				],
+				"examples": [
+					{
+						"before": "DSC_0007.JPG",
+						"after": "2026-05-22_001_tokyo.JPG"
+					},
+					{
+						"before": "IMG_1842.HEIC",
+						"after": "2026-05-22_002_tokyo.HEIC"
+					}
+				]
+			},
+			{
+				"title": "Construir la cadena de reglas",
+				"body": [
+					"Pulsa Añadir texto, pega la plantilla completa con llaves y confirma con Intro o Tab. Revisa la vista previa de los bloques de texto y variables.",
+					"Buscar y reemplazar o Eliminar permite quitar prefijos de cámara sin significado. Secuencia aporta después números uniformes con ceros iniciales.",
+					"Para este ejemplo conserva el orden de importación. Secuencia también puede ordenar por nombre o modificación. La fecha EXIF puede usarse en plantillas, pero actualmente no como criterio de ordenación."
+				],
+				"image": {
+					"src": "/guides/screenshots/photos-en.png",
+					"alt": "La plantilla Tokyo de fecha fija sustituye el nombre y mantiene .JPG y .HEIC. Interfaz en inglés.",
+					"caption": "La plantilla Tokyo de fecha fija sustituye el nombre y mantiene .JPG y .HEIC. Interfaz en inglés."
+				},
+				"steps": [
+					"Importa DSC_0007.JPG e IMG_1842.HEIC en ese orden y mantén el ámbito Nombre.",
+					"Añade Secuencia: numérica, inicio 1, paso 1, tres dígitos, global. Desactiva la ordenación y conservar números originales.",
+					"Introduce 2026-05-22_{n}_tokyo. Sustituye todo el nombre, por lo que no necesitas quitar antes el prefijo.",
+					"Comprueba 2026-05-22_001_tokyo.JPG y 2026-05-22_002_tokyo.HEIC. La fecha y tokyo son textos fijos.",
+					"Para fechas reales, carga los metadatos y usa {exif.date}_{n}_tokyo. {date} devuelve la fecha UTC actual.",
+					"Si falta EXIF, {exif.date} queda como texto literal. Separa esos archivos y usa una fecha conocida; no ejecutes nombres con variables sin resolver."
+				]
+			},
+			{
+				"title": "Cuándo ayudan los metadatos EXIF",
+				"body": [
+					"Elige la fuente: 2026-05-22 es texto escrito; {exif.date} lee DateTimeOriginal o, en su defecto, CreateDate; {date} usa la fecha UTC actual. La modificación del archivo es otro dato y puede cambiar al copiarlo.",
+					"Sin EXIF, {exif.date} permanece literal. Trata esos archivos por separado con una fecha conocida o conserva sus nombres. No sustituyas silenciosamente una fecha desconocida por la de hoy.",
+					"Renombrar un RAW no implica poder leer sus metadatos. Las variables GPS devuelven coordenadas, no ciudades; tokyo es una etiqueta introducida manualmente.",
+					"Si hay fechas EXIF, carga los metadatos y prioriza la captura sobre hoy, especialmente en fotos copiadas, descargadas, exportadas del móvil o editadas.",
+					"Capturas de pantalla, exportaciones de redes sociales, imágenes editadas y algunas conversiones HEIC pueden perder o alterar EXIF. Un evento conocido sirve como alternativa.",
+					"Si EXIF y modificación difieren, elige según el objetivo: captura para vacaciones, quizá exportación para una entrega."
+				]
+			},
+			{
+				"title": "Comprobar las fotos antes de renombrar",
+				"body": [
+					"Revisa las primeras y últimas filas para detectar fallos de ordenación, sobre todo con números de distinta longitud.",
+					"Si aparecen otros tipos de archivo, detente y filtra. Mezclar fotos, documentos y vídeos en una misma secuencia suele producir nombres poco útiles."
+				],
+				"steps": [
+					"Comprueba que cada destino comienza con la fecha prevista.",
+					"Verifica números con la misma anchura, como 001, 002 y 003.",
+					"Comprueba que .jpg, .png, .heic y las extensiones RAW no cambian.",
+					"Muestra solo los afectados y busca archivos que deberían permanecer intactos."
+				],
+				"examples": [
+					{
+						"before": "Vacation/IMG_0421.jpg",
+						"after": "Vacation/2026-05-22_001_tokyo.jpg",
+						"note": "Aplica la misma plantilla de fecha fija a un lote nuevo de un solo archivo. La ruta de la carpeta no cambia; solo se renombra el archivo."
+					}
+				]
+			},
+			{
+				"title": "Separar las fotos según su origen",
+				"body": [
+					"Fotos del móvil, DSLR, capturas, exportaciones RAW y copias editadas suelen necesitar reglas diferentes. Divide una cadena complicada en lotes pequeños.",
+					"Las fotos pueden usar EXIF y secuencia; las capturas, modificación; las ediciones, proyecto y versión. Los lotes pequeños simplifican también la revisión."
+				],
+				"steps": [
+					"Separa fotos, capturas y ediciones mediante carpetas o filtros.",
+					"Crea un preajuste para capturas fotográficas y otro para exportaciones.",
+					"Separa RAW y JPEG editados si no deben compartir secuencia.",
+					"Añade un evento corto solo cuando la carpeta no aporte suficiente contexto."
+				],
+				"examples": [
+					{
+						"before": "Edits/final_export_3.jpg",
+						"after": "Edits/client-a_2026-05-22_v03.jpg",
+						"note": "Preajuste independiente: ámbito Nombre, secuencia de dos dígitos, conservar números originales, patrón (\\d+), plantilla client-a_2026-05-22_v{n}. La carpeta Edits no cambia."
+					}
+				]
+			}
+		],
+		"publishedAt": "2026-09-22",
+		"updatedAt": "2026-09-22"
+	},
+	"regex-batch-rename": {
+		"title": "Renombrar archivos con regex: patrones y ejemplos",
+		"description": "Patrones de expresiones regulares para eliminar texto innecesario, reorganizar fechas y extraer partes útiles del nombre.",
+		"intro": "Usa regex cuando los nombres comparten una estructura que la búsqueda y el reemplazo simples no pueden describir con precisión.",
+		"categoryLabel": "Patrones",
+		"sections": [
+			{
+				"title": "Empezar con un patrón claro",
+				"body": [
+					"Regex funciona mejor con nombres coherentes. Haz coincidir solo la parte deseada y mantén legible el reemplazo. Un patrón específico es más fácil de revisar que una solución universal compleja.",
+					"Los grupos de captura conservan partes útiles y permiten reorganizarlas. Usa $1, $2 y los grupos siguientes en el reemplazo.",
+					"Describe primero dónde están la fecha, el título, el episodio y el texto que sobra. Esa descripción ayuda a construir el patrón."
+				],
+				"examples": [
+					{
+						"before": "2026-05-22 invoice client-a.pdf",
+						"after": "invoice_client-a_2026-05-22.pdf",
+						"note": "Ámbito Nombre. Regex ^(\\d{4}-\\d{2}-\\d{2})\\s+(.+)$, reemplazo $2_$1, sin indicadores; después sustituye todos los espacios por _."
+					},
+					{
+						"before": "movie.name.s01e03.1080p.mkv",
+						"after": "movie name S01E03.mkv",
+						"note": "Ámbito Nombre. Regex ^(.+)\\.s(\\d+)e(\\d+).*$, reemplazo $1 S$2E$3, indicador i; después sustituye cada punto por un espacio."
+					}
+				]
+			},
+			{
+				"title": "Patrones útiles",
+				"body": [
+					"Prueba estos puntos de partida con pocos archivos antes de aplicarlos a miles. Una regex seguida de una limpieza simple suele ser más clara que un patrón frágil.",
+					"Elige los indicadores: i ignora mayúsculas, g reemplaza todas las coincidencias. Evita m salvo que trabajes con texto multilínea en los nombres."
+				],
+				"image": {
+					"src": "/guides/screenshots/regex-en.png",
+					"alt": "Los grupos de fecha y la limpieza de espacios producen invoice_client-a_2026-05-22.pdf. Interfaz en inglés.",
+					"caption": "Los grupos de fecha y la limpieza de espacios producen invoice_client-a_2026-05-22.pdf. Interfaz en inglés."
+				},
+				"steps": [
+					"Mantén Nombre y añade Reemplazo Regex sin / alrededor del patrón. Las siguientes recetas son independientes.",
+					"Quitar notas entre corchetes: \\s*\\[[^\\]]+\\], reemplazo vacío, indicador g.",
+					"Mover una fecha inicial al final: ^(\\d{4}-\\d{2}-\\d{2})\\s+(.+)$, reemplazo $2_$1, sin indicadores. Sustituye después los espacios si quieres guiones bajos.",
+					"Normalizar episodios: s(\\d+)e(\\d+), reemplazo S$1E$2, indicadores gi.",
+					"Reducir espacios en blanco repetidos: \\s+, reemplazo por un espacio real, indicador g.",
+					"Comprueba nombres coincidentes y no coincidentes antes de aplicar a una carpeta real."
+				]
+			},
+			{
+				"title": "Mantener las regex bajo control",
+				"body": [
+					"Evita patrones demasiado amplios como .* salvo que quieras reemplazarlo todo. Si aparecen nombres vacíos, duplicados o demasiado recortados, limita la coincidencia.",
+					"Divide las reglas difíciles en dos o tres operaciones sencillas. Facilita tanto la revisión como el mantenimiento del preajuste.",
+					"Regex no tiene que ir primero: limpia el texto evidente, transforma la estructura con regex y termina con mayúsculas/minúsculas o una secuencia."
+				]
+			},
+			{
+				"title": "Depurar mediante la vista previa",
+				"body": [
+					"Si un patrón falla, no lo compliques enseguida. Usa temporalmente un marcador visible como MATCH_$1 para ver qué se captura.",
+					"Restaura el reemplazo real cuando los grupos sean correctos. Esta comprobación adicional ahorra tiempo en carpetas grandes."
+				],
+				"steps": [
+					"Prueba primero entre tres y cinco nombres representativos.",
+					"Sustituye temporalmente por match_$1_$2.",
+					"Comprueba las partes capturadas en la vista previa.",
+					"Restaura el reemplazo final tras verificar los grupos.",
+					"Muestra los afectados para detectar nombres ajenos que hayan coincidido."
+				],
+				"examples": [
+					{
+						"before": "client-a_invoice_2026-05-22_final.pdf",
+						"after": "invoice_client-a_2026-05-22.pdf",
+						"note": "Ámbito Nombre. Patrón ^([^_]+)_([^_]+)_(\\d{4}-\\d{2}-\\d{2})_final$, reemplazo $2_$1_$3, sin indicadores."
+					}
+				]
+			},
+			{
+				"title": "Cuándo elegir una regla más sencilla",
+				"body": [
+					"Para una palabra fija usa Buscar y reemplazar; para numerar, Secuencia; para cambiar mayúsculas y minúsculas, la regla de estilo correspondiente.",
+					"Combina reglas simples para cambios simples y regex para la estructura. Revisa el resultado completo para mantener preajustes comprensibles en futuros lotes."
+				],
+				"steps": [
+					"Usa Buscar y reemplazar para palabras o separadores fijos.",
+					"Usa Eliminar/Limpiar para corchetes y símbolos repetidos.",
+					"Usa Reemplazo Regex para capturar y reorganizar partes.",
+					"Guarda preajustes regex solo después de probar varias formas de nombre."
+				],
+				"examples": [
+					{
+						"before": "My Vacation Photos.jpg",
+						"after": "my-vacation-photos.jpg",
+						"note": "Este cambio corresponde a mayúsculas/minúsculas y estilo; no necesita regex."
+					}
+				]
+			}
+		],
+		"publishedAt": "2026-09-22",
+		"updatedAt": "2026-09-22"
+	},
+	"sequence-file-numbering": {
+		"title": "Crear nombres estables con números de secuencia",
+		"description": "Usa ceros iniciales, ordenación y numeración por carpeta para mantener tus archivos organizados.",
+		"intro": "La anchura de los números, el orden y el ámbito de numeración determinan si los nombres siguen ordenados tras exportar, subir o archivar.",
+		"categoryLabel": "Numeración",
+		"sections": [
+			{
+				"title": "Usar ceros iniciales para ordenar",
+				"body": [
+					"Pulsa Añadir texto, pega la plantilla completa con llaves y confirma con Intro o Tab. Revisa la vista previa de sus bloques de texto y variables.",
+					"Sin relleno, 10 puede aparecer antes de 2 en orden alfabético. Los números de igual anchura hacen coincidir ambos órdenes.",
+					"Usa dos dígitos para álbumes pequeños, tres para cientos de archivos y cuatro si la carpeta va a crecer. Un dígito de margen suele evitar otra reorganización futura.",
+					"Es especialmente útil en la nube, entregas a clientes, programas de edición y archivos con ordenación alfabética simple."
+				],
+				"image": {
+					"src": "/guides/screenshots/sequence-en.png",
+					"alt": "Conservar números originales transforma 1, 2 y 10 en 001, 002 y 010. Interfaz en inglés.",
+					"caption": "Conservar números originales transforma 1, 2 y 10 en 001, 002 y 010. Interfaz en inglés."
+				},
+				"examples": [
+					{
+						"before": "photo 1.jpg, photo 2.jpg, photo 10.jpg",
+						"after": "001_photo.jpg, 002_photo.jpg, 010_photo.jpg",
+						"note": "Ámbito Nombre; secuencia de tres dígitos, conservar números originales, patrón (\\d+), plantilla {n}_photo. Conserva 10 en lugar de asignar un nuevo tercer número."
+					}
+				]
+			},
+			{
+				"title": "Elegir el ámbito de numeración",
+				"body": [
+					"Global sirve para una única serie. Por carpeta permite que álbumes, capítulos, exportaciones o clientes empiecen cada uno en 001.",
+					"Por extensión o categoría numera por separado distintos tipos de una misma carpeta, como capturas y vídeos."
+				],
+				"steps": [
+					"Usa Global para un álbum o lote de exportación.",
+					"Usa Por carpeta para secuencias independientes.",
+					"Usa Por extensión para separar imágenes, vídeos y documentos.",
+					"Ordena antes de numerar si el orden de importación no es fiable.",
+					"Usa orden natural para file1, file2 y file10."
+				]
+			},
+			{
+				"title": "Combinar secuencias y plantillas",
+				"body": [
+					"Combina {n}, {name}, fechas, carpetas o variables de metadatos para crear nombres estructurados y legibles.",
+					"Coloca primero el criterio de clasificación: {date}_{n}_{name} ordena por fecha y número; {name}_{n}_{date} agrupa antes por el nombre original."
+				],
+				"examples": [
+					{
+						"before": "scan.jpg",
+						"after": "archive_2026_001_scan.jpg",
+						"note": "Ámbito Nombre; secuencia numérica, inicio 1, paso 1, tres dígitos, plantilla archive_2026_{n}_{name}, sin conservar números originales."
+					}
+				]
+			},
+			{
+				"title": "Conservar los números existentes",
+				"body": [
+					"Páginas escaneadas, fotogramas, capítulos y ráfagas suelen contener números útiles. No siempre conviene sustituirlos según la importación.",
+					"Conservar números originales extrae el número existente, lo rellena con ceros y mantiene clara la relación entre nombres antiguos y nuevos."
+				],
+				"steps": [
+					"Activa Conservar números originales en Secuencia.",
+					"Mantén (\\d+) para nombres simples con un número.",
+					"Si hay varios, usa un patrón más específico como page-(\\d+).",
+					"Para el ejemplo, usa tres dígitos y page_{n}_scan con ámbito Nombre.",
+					"Revisa los fallos de extracción: esos archivos recurren a la numeración normal."
+				],
+				"examples": [
+					{
+						"before": "page-7-scan.jpg",
+						"after": "page_007_scan.jpg",
+						"note": "Mantener el número de página original evita cambiar el orden del documento."
+					}
+				]
+			},
+			{
+				"title": "Decidir el orden antes de numerar",
+				"body": [
+					"La secuencia depende del orden de los archivos. La importación puede variar entre navegadores, carpetas y sistemas operativos.",
+					"Elige el criterio conscientemente: nombre para cámaras, modificación para algunos documentos y extensión para numeraciones por tipo."
+				],
+				"steps": [
+					"Activa ordenar antes de numerar si la importación no tiene un orden significativo.",
+					"Elige nombre de archivo para nombres de cámara ya ordenados correctamente.",
+					"Elige fecha de modificación para documentos creados o exportados en orden.",
+					"Revisa los primeros y últimos números."
+				],
+				"examples": [
+					{
+						"before": "scan10.jpg, scan2.jpg, scan1.jpg",
+						"after": "003_scan10.jpg, 002_scan2.jpg, 001_scan1.jpg",
+						"note": "Ámbito Nombre; inicio 1, paso 1, tres dígitos, plantilla {n}_{name}, sin conservar números originales. Ordena antes por nombre, ascendente y natural. Los resultados se muestran en orden de entrada: scan10 recibe 003, no 010."
+					}
+				]
+			}
+		],
+		"publishedAt": "2026-09-22",
+		"updatedAt": "2026-09-22"
+	},
+	"organize-music-video-files": {
+		"title": "Organizar nombres de música y episodios de vídeo",
+		"description": "Limpia nombres de música y vídeos con metadatos, secuencias, regex y coincidencias opcionales de TMDb.",
+		"intro": "Los archivos multimedia suelen tener nombres de publicación poco claros. Rename.Tools los convierte en nombres predecibles para reproductores, servidores y carpetas compartidas.",
+		"categoryLabel": "Multimedia",
+		"sections": [
+			{
+				"title": "Nombrar una biblioteca musical",
+				"body": [
+					"Conserva el orden de pistas y la legibilidad fuera del reproductor. Si hay etiquetas, carga artista, título, álbum o número de pista.",
+					"Un formato práctico pone primero el número, después artista y título. Sigue siendo útil en USB, teléfonos, bibliotecas de DJ y servidores.",
+					"Si las etiquetas no son fiables, parte del nombre existente y usa Secuencia. Puedes limpiar separadores y mayúsculas sin metadatos."
+				],
+				"steps": [
+					"Importa un álbum cada vez cuando importe el orden de pistas.",
+					"Pulsa Añadir texto, pega la plantilla completa con llaves, confirma con Intro o Tab y revisa la vista previa.",
+					"Carga metadatos si las etiquetas de audio son fiables.",
+					"Añade Secuencia con {media.track}. {media.artist} - {media.title}. Sustituye todo el nombre y usa los números de las etiquetas, no números {n} generados.",
+					"Mantén Nombre para conservar las extensiones de audio.",
+					"Los nombres pegados de ejemplo no aportan metadatos. Carga primero las etiquetas de los archivos reales. Si faltan, quedan variables literales: corrige las etiquetas o usa por separado {n}. {name} antes de ejecutar."
+				],
+				"examples": [
+					{
+						"before": "love story.mp3",
+						"after": "01. Taylor Swift - Love Story.mp3",
+						"note": "Requiere etiquetas: pista 1, artista Taylor Swift, título Love Story."
+					},
+					{
+						"before": "track_07.flac",
+						"after": "07. Artist - Song Title.flac",
+						"note": "Requiere etiquetas: pista 7, artista Artist, título Song Title."
+					}
+				]
+			},
+			{
+				"title": "Limpiar vídeos y episodios",
+				"body": [
+					"Los vídeos suelen incluir puntos, calidad, grupos de publicación y códigos inconsistentes. Extrae la serie y el episodio con regex y limpia después los separadores.",
+					"Con una clave API de TMDb, el buscador multimedia puede asociar episodios y mejorar títulos. Sin TMDb puedes normalizar S01E03 mediante regex.",
+					"La coherencia ayuda a los servidores multimedia. Reutiliza un formato para toda la biblioteca y sus temporadas."
+				],
+				"image": {
+					"src": "/guides/screenshots/media-en.png",
+					"alt": "Regex, limpieza de separadores y formato de título producen Show Name S01E03.mkv. Desplázate para ver las tres reglas. Interfaz en inglés.",
+					"caption": "Regex, limpieza de separadores y formato de título producen Show Name S01E03.mkv. Desplázate para ver las tres reglas. Interfaz en inglés."
+				},
+				"steps": [
+					"Ámbito Nombre. Reemplazo Regex: ^(.+)\\.s(\\d+)e(\\d+).*$, reemplazo $1 S$2E$3, indicador i.",
+					"Añade Buscar y reemplazar: todos los puntos reales por espacios. El ámbito Nombre conserva .mkv.",
+					"Añade mayúsculas/minúsculas y estilo: modo Título, estilo Ninguno. El nombre queda legible y S01E03 permanece intacto.",
+					"El patrón espera un punto antes del episodio. Otros separadores necesitan un patrón adaptado; revisa los archivos sin coincidencia.",
+					"Revisa la temporada completa antes de ejecutar."
+				],
+				"examples": [
+					{
+						"before": "show.name.s01e03.1080p.web-dl.mkv",
+						"after": "Show Name S01E03.mkv"
+					}
+				]
+			},
+			{
+				"title": "Mantener la compatibilidad multimedia",
+				"body": [
+					"Usa separadores consistentes y no cambies extensiones salvo que conviertas los archivos por separado. Rename.Tools cambia nombres, no formatos.",
+					"Los formatos predecibles y bien ordenados son más fáciles de mantener y de interpretar por otras herramientas.",
+					"Prueba primero un álbum o una temporada. Pistas extra, especiales, tráileres, comentarios, subtítulos y episodios múltiples pueden necesitar reglas propias."
+				]
+			},
+			{
+				"title": "Separar subtítulos y extras",
+				"body": [
+					"Los subtítulos deben conservar un nombre base compatible con el vídeo para que el reproductor los detecte. No apliques reglas de vídeo a .srt o .ass si dejan de coincidir.",
+					"Tráileres, entrevistas, muestras y clips adicionales no suelen seguir S01E03. Filtra estos archivos en un lote aparte."
+				],
+				"steps": [
+					"Separa vídeos y subtítulos cuando sus reglas difieran.",
+					"Compara los nombres base de subtítulos y vídeos tras renombrar.",
+					"Coloca extras aparte o añade un sufijo claro como extras o trailer.",
+					"Exporta un plan antes de tratar una carpeta multimedia mixta."
+				],
+				"examples": [
+					{
+						"before": "show.name.s01e03.1080p.en.srt",
+						"after": "Show Name S01E03.en.srt",
+						"note": "Cadena separada para subtítulos: ámbito Nombre; regex ^(.+)\\.s(\\d+)e(\\d+).*\\.([a-z]{2})$, reemplazo $1 S$2E$3, indicador i; puntos por espacios; formato de título; por último, inserta .en al final para este lote de subtítulos en inglés."
+					}
+				]
+			}
+		],
+		"publishedAt": "2026-09-22",
+		"updatedAt": "2026-09-22"
+	},
+	"add-prefix-suffix-to-filenames": {
+		"title": "Añadir un prefijo o sufijo a varios nombres de archivo",
+		"description": "Añade proyectos, prefijos de cliente o sufijos de versión conservando nombres y extensiones. Prueba primero con nombres de ejemplo.",
+		"intro": "Conserva la parte útil del nombre y añade una etiqueta común. Un prefijo agrupa el proyecto y un sufijo identifica una versión para revisión.",
+		"categoryLabel": "Tareas habituales",
+		"sections": [
+			{
+				"title": "Añadir un prefijo de proyecto y un sufijo de revisión",
+				"body": [
+					"Esta receta inserta client-a_ al principio y _review al final del nombre, antes de la extensión. Adapta ambos textos al cliente y versión; cada regla también funciona sola.",
+					"Mantén Nombre. Final significa el final de la parte editada; con Completo, el sufijo iría después de .pdf. Nombre protege la extensión."
+				],
+				"steps": [
+					"Elige Probar este ejemplo, revisa las dos reglas Agregar / Insertar y prueba con nombres de ejemplo.",
+					"Para tu cadena, selecciona Nombre, añade Agregar / Insertar, introduce client-a_ y elige Inicio.",
+					"Añade otra regla con _review y posición Final, después de la regla de prefijo.",
+					"Comprueba proposal.pdf → client-a_proposal_review.pdf y ajusta los textos si hace falta."
+				],
+				"examples": [
+					{
+						"before": "proposal.pdf",
+						"after": "client-a_proposal_review.pdf"
+					},
+					{
+						"before": "budget.xlsx",
+						"after": "client-a_budget_review.xlsx"
+					}
+				]
+			},
+			{
+				"title": "Elegir separadores y conservar nombres útiles",
+				"body": [
+					"El separador forma parte del texto insertado. Escribe client-a_ en lugar de client-a para incluir el guion bajo. Lo mismo se aplica a _review.",
+					"Insertar no renumera ni sustituye el nombre. Usa solo Inicio para un prefijo o Final para un sufijo. Para nombres nuevos numerados, consulta la guía de secuencias."
+				],
+				"examples": [
+					{
+						"before": "proposal.pdf",
+						"after": "client-a_proposal.pdf",
+						"note": "Solo la regla de Inicio: client-a_."
+					},
+					{
+						"before": "proposal.pdf",
+						"after": "proposal_review.pdf",
+						"note": "Solo la regla de Final: _review."
+					}
+				]
+			},
+			{
+				"title": "Evitar etiquetas duplicadas",
+				"body": [
+					"Insertar añade texto aunque ya exista: client-a_proposal.pdf pasa a client-a_client-a_proposal.pdf. Excluye los archivos ya etiquetados o revísalos aparte.",
+					"En lotes mixtos, ^(?!client-a_), reemplazo client-a_, sin indicadores y con ámbito Nombre evita duplicar ese prefijo concreto. Distingue mayúsculas: Client-A_ es distinto. Prueba nombres con y sin prefijo."
+				],
+				"examples": [
+					{
+						"before": "proposal.pdf",
+						"after": "client-a_proposal.pdf",
+						"note": "Regex condicional ^(?!client-a_) → client-a_, sin indicadores."
+					},
+					{
+						"before": "client-a_proposal.pdf",
+						"after": "client-a_proposal.pdf",
+						"note": "La misma regex condicional conserva el prefijo existente."
+					}
+				]
+			},
+			{
+				"title": "Pasar a archivos reales",
+				"body": [
+					"Los nombres de ejemplo solo sirven para previsualizar y no conceden acceso. Vacía la lista, conserva las reglas y selecciona los archivos reales. Revisa nombres largos, etiquetas existentes y conflictos.",
+					"Chrome y Edge de escritorio compatibles pueden renombrar localmente tras dar permiso. Sin acceso directo, genera un script desde ejemplos, revísalo y ejecútalo en la carpeta correspondiente.",
+					"Renombrar no modifica contenidos ni formatos, pero puede afectar a referencias a los nombres antiguos. Guarda copias de originales importantes y ejecuta solo tras comprobar el resultado."
+				]
+			}
+		],
+		"publishedAt": "2026-09-22",
+		"updatedAt": "2026-09-22"
+	},
+	"replace-spaces-in-filenames": {
+		"title": "Sustituir espacios en nombres por guiones bajos o guiones",
+		"description": "Reemplaza o elimina espacios por lotes, conserva extensiones y trata espacios repetidos con ejemplos de texto literal y regex.",
+		"intro": "Normaliza los separadores antes de compartir una carpeta o usarla en un proyecto. Elige guion bajo, guion o eliminación y comprueba repeticiones y conflictos.",
+		"categoryLabel": "Tareas habituales",
+		"sections": [
+			{
+				"title": "Cambiar cada espacio normal por un guion bajo",
+				"body": [
+					"Usa Buscar y reemplazar con un espacio real: pulsa la barra espaciadora una vez, no escribas la palabra espacio ni \\s. Activa reemplazar todas las coincidencias.",
+					"Probar este ejemplo abre esa regla. La prueba muestra un nombre normal y otro con dos espacios seguidos, sin pedir acceso a archivos."
+				],
+				"steps": [
+					"Elige Nombre para conservar las extensiones.",
+					"Añade Buscar y reemplazar: busca un espacio normal y reemplázalo por _.",
+					"Activa Reemplazar todo y deja desactivado Por posición.",
+					"Revisa el resultado: dos espacios se convierten en dos guiones bajos porque se sustituye cada carácter."
+				],
+				"examples": [
+					{
+						"before": "Quarterly Report 2026.pdf",
+						"after": "Quarterly_Report_2026.pdf"
+					},
+					{
+						"before": "draft  final.txt",
+						"after": "draft__final.txt"
+					}
+				]
+			},
+			{
+				"title": "Usar guiones o eliminar espacios",
+				"body": [
+					"Para guiones usa -; para eliminar espacios deja vacío el reemplazo. No cambian las mayúsculas ni los demás signos.",
+					"Eliminar separadores puede dificultar la lectura: My Report se convierte en MyReport. Esto es distinto de snake_case, que también puede dividir palabras y cambiar otros separadores."
+				],
+				"examples": [
+					{
+						"before": "My Report.pdf",
+						"after": "My-Report.pdf",
+						"note": "Busca un espacio normal y sustituye todas las coincidencias por -."
+					},
+					{
+						"before": "My Report.pdf",
+						"after": "MyReport.pdf",
+						"note": "Busca un espacio normal y sustituye todas las coincidencias por texto vacío."
+					}
+				]
+			},
+			{
+				"title": "Reducir espacios en blanco repetidos con regex",
+				"body": [
+					"Para convertir una serie de espacios en blanco en un solo separador, usa Reemplazo Regex: \\s+, reemplazo _, indicador g. Incluye tabulaciones cuando el sistema de archivos las permite.",
+					"Los espacios iniciales y finales también se convierten en _. Para quitarlos primero, añade antes ^\\s+|\\s+$, reemplazo vacío, indicador g. Este paso opcional no está incluido en el ejemplo básico."
+				],
+				"examples": [
+					{
+						"before": "draft  final.txt",
+						"after": "draft_final.txt",
+						"note": "Solo Reemplazo Regex: \\s+ → _, indicador g."
+					},
+					{
+						"before": "  My Report  .pdf",
+						"after": "My_Report.pdf",
+						"note": "Primero elimina ^\\s+|\\s+$ con reemplazo vacío y g; después aplica \\s+ → _ con g."
+					}
+				]
+			},
+			{
+				"title": "Revisar colisiones y estilos mezclados",
+				"body": [
+					"Report Final.pdf y Report_Final.pdf acaban como Report_Final.pdf. Cambia la etiqueta, excluye un archivo o resuelve el conflicto antes de ejecutar. Reducir espacios repetidos puede causar colisiones similares.",
+					"La limpieza cambia nombres de archivo, no carpetas ni contenidos. Nombre conserva .pdf y otras extensiones sin convertir formatos. Puede ser necesario actualizar referencias antiguas.",
+					"Tras probar, vacía los ejemplos e importa archivos reales en Chrome o Edge de escritorio compatibles. Revisa todo antes de ejecutar. Sin acceso directo, genera un script desde los nombres de ejemplo, revísalo y ejecútalo en la carpeta correspondiente."
+				]
+			}
+		],
+		"publishedAt": "2026-09-22",
+		"updatedAt": "2026-09-22"
+	}
+}

@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { taskGuides } from "@/lib/guides/task-guides";
+import { GUIDE_LOCALES, guides } from "@/lib/guides/content";
+const taskGuides = guides.filter((guide) => ["add-prefix-suffix-to-filenames", "replace-spaces-in-filenames"].includes(guide.slug));
 import { getRecipeForGuide } from "@/lib/guides/recipes";
 import { computePreview } from "@/lib/rename/rules";
 import { getDefaultConfig, type RuleConfig } from "@/lib/rename/types";
@@ -16,7 +17,7 @@ const recipes: RuleConfig[][][][] = [
 	[[getRecipeForGuide(taskGuides[1].slug)!.rules], [[replace("-")], [replace("")]], [[regex("\\s+", "_", "g")], [regex("^\\s+|\\s+$", "", "g"), regex("\\s+", "_", "g")]]],
 ];
 
-describe.each(["en", "zh"] as const)("New %s task guide examples", (locale) => {
+describe.each(GUIDE_LOCALES)("New %s task guide examples", (locale) => {
 	for (const [guideIndex, guide] of taskGuides.entries()) {
 		for (const [sectionIndex, section] of guide.content[locale].sections.entries()) {
 			for (const [exampleIndex, example] of (section.examples ?? []).entries()) {

@@ -3,7 +3,6 @@ import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
 
 const intlMiddleware = createMiddleware(routing);
-const GUIDE_LOCALES = new Set<string>(["en", "zh"]);
 
 export default function middleware(request: NextRequest) {
 	const { pathname } = request.nextUrl;
@@ -21,12 +20,6 @@ export default function middleware(request: NextRequest) {
 		return NextResponse.redirect(url, 308);
 	}
 
-	if (!GUIDE_LOCALES.has(locale) && isGuidePath(pathname, locale)) {
-		const url = request.nextUrl.clone();
-		url.pathname = `/${routing.defaultLocale}${pathname.slice(locale.length + 1)}`;
-		return NextResponse.redirect(url, 308);
-	}
-
 	return intlMiddleware(request);
 }
 
@@ -40,11 +33,6 @@ function redirectToDefaultLocale(request: NextRequest): NextResponse {
 	const url = request.nextUrl.clone();
 	url.pathname = `/${routing.defaultLocale}${url.pathname === "/" ? "" : url.pathname}`;
 	return NextResponse.redirect(url, 308);
-}
-
-function isGuidePath(pathname: string, locale: string): boolean {
-	const pathWithoutLocale = pathname.slice(locale.length + 1);
-	return pathWithoutLocale === "/guides" || pathWithoutLocale.startsWith("/guides/");
 }
 
 export const config = {

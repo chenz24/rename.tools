@@ -1,6 +1,6 @@
-import type { Guide } from "./content";
+import type { BaseGuide } from "./content";
 
-export const taskGuides: Guide[] = [
+export const taskGuides: BaseGuide[] = [
 	{
 		slug: "add-prefix-suffix-to-filenames",
 		category: "getting-started",

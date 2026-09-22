@@ -15,13 +15,14 @@ import {
 } from "@/components/ui/dialog";
 import { usePresetsStore } from "@/hooks/usePresetsStore";
 import { useRenameStore } from "@/hooks/useRenameStore";
+import { getGuideLocale } from "@/lib/guides/locales";
 import { type GuideRecipe, getGuideRecipe } from "@/lib/guides/recipes";
 import { decodeSharedPreset, type SharedPreset } from "@/lib/rename/shared-presets";
 import { taskMode, trackTaskEvent } from "@/lib/task-analytics";
 
 export function PresetLinkDialog() {
 	const params = useSearchParams();
-	const locale = useLocale() === "zh" ? "zh" : "en";
+	const locale = getGuideLocale(useLocale());
 	const recipeId = params.get("recipe");
 	const encoded = params.get("preset");
 	const recipe = recipeId ? getGuideRecipe(recipeId) : undefined;

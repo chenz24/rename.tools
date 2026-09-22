@@ -8,7 +8,7 @@ import { ThemeToggle } from "./ThemeToggle";
 export function Header() {
 	const t = useTranslations("header");
 	const locale = useLocale();
-	const guidesLocale = locale === "zh" ? "zh" : "en";
+	const guidesLocale = locale;
 
 	return (
 		<header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">

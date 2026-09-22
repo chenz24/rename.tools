@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { guides } from "@/lib/guides/content";
+import { GUIDE_LOCALES, guides } from "@/lib/guides/content";
 import { computePreview } from "@/lib/rename/rules";
 import { getDefaultConfig } from "@/lib/rename/types";
 import type { FileEntry, RenameRule, RuleConfig, SequenceConfig } from "@/lib/rename/types";
@@ -44,7 +44,7 @@ function preview(names: string[], configs: RuleConfig[], metadata?: FileEntry["m
 	});
 }
 
-// Exercise the actual filenames published in both translations, using the documented settings.
+// Exercise the actual filenames published in all translations, using the documented settings.
 const examples: {
 	guide: number; section: number; example?: number; rules: RuleConfig[];
 	metadata?: FileEntry["metadata"][];
@@ -73,7 +73,7 @@ const examples: {
 
 afterEach(() => vi.useRealTimers());
 
-describe.each(["en", "zh"] as const)("Published %s guide examples", (locale) => {
+describe.each(GUIDE_LOCALES)("Published %s guide examples", (locale) => {
 	for (const recipe of examples) {
 		const guide = guides[recipe.guide];
 		const section = guide.content[locale].sections[recipe.section];

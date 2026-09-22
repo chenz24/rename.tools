@@ -530,7 +530,13 @@
 				"hyphenToSpace": "ハイフン → スペース",
 				"hyphenToUnderscore": "ハイフン → アンダースコア",
 				"underscoreToSpace": "アンダースコア → スペース",
-				"underscoreToHyphen": "アンダースコア → ハイフン"
+				"underscoreToHyphen": "アンダースコア → ハイフン",
+				"kebab-case": "ケバブケース",
+				"snake_case": "スネークケース",
+				"style": "スタイル変換",
+				"none": "なし",
+				"spaceToDash": "スペース → ハイフン",
+				"dashToSpace": "ハイフン → スペース"
 			},
 			"regex": {
 				"pattern": "パターン",
