@@ -70,12 +70,12 @@ export function RulePanel({
 	const t = useTranslations("rename.rules");
 
 	return (
-		<div className="flex h-full flex-col">
+		<div data-tour="rules" className="flex h-full flex-col">
 			{/* Panel Header */}
-			<div className="panel-header border-b bg-muted/30 justify-between">
+			<div className="panel-header flex-wrap gap-y-2 border-b bg-muted/30 justify-between">
 				<div className="flex items-center gap-2">
 					<Layers className="h-4 w-4 text-primary" />
-					<h2 className="text-foreground">{t("title")}</h2>
+					<h2 className="text-foreground whitespace-nowrap">{t("title")}</h2>
 				</div>
 				<div className="flex items-center gap-1">
 					<TemplateLibrary
@@ -107,9 +107,9 @@ export function RulePanel({
 			</div>
 
 			{/* Extension Handling */}
-			<div className="flex items-center gap-2 border-b px-3 py-1.5 bg-muted/10">
+			<div className="flex flex-wrap items-center gap-2 border-b px-3 py-1.5 bg-muted/10">
 				<Settings2 className="h-3.5 w-3.5 text-muted-foreground" />
-				<Label className="text-xs">{t("extensionScope")}</Label>
+				<Label className="text-xs whitespace-nowrap">{t("extensionScope")}</Label>
 				<ToggleGroup
 					type="single"
 					value={extensionScope}

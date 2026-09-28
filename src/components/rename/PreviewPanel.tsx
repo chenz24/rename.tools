@@ -43,10 +43,12 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import type { LogEntry } from "@/hooks/useRenameStore";
 import { useRenameStore } from "@/hooks/useRenameStore";
 import { charDiff, type DiffSegment } from "@/lib/rename/diff";
+import type { GuidanceState } from "@/lib/rename/guidance";
 import type { PreviewResult } from "@/lib/rename/types";
 import { taskMode, trackTaskEvent } from "@/lib/task-analytics";
 
 interface Props {
+	guidanceState: GuidanceState;
 	preview: PreviewResult[];
 	isPreviewComputing?: boolean;
 	applyAutoFix?: () => void;
@@ -361,6 +363,7 @@ function downloadBlob(content: string, filename: string, type: string) {
 }
 
 export function PreviewPanel({
+	guidanceState,
 	preview,
 	isPreviewComputing = false,
 	applyAutoFix,
@@ -380,6 +383,7 @@ export function PreviewPanel({
 }: Props) {
 	const t = useTranslations("rename.preview");
 	const tExecute = useTranslations("rename.execute");
+	const tGuide = useTranslations("rename.guidance");
 	const [filter, setFilter] = useState<Filter>("all");
 	const [warningChecked, setWarningChecked] = useState(false);
 
@@ -402,7 +406,16 @@ export function PreviewPanel({
 	const hasTree = previewTree.children.size > 0;
 
 	const affectedCount = affected.length;
-	const hasConflicts = conflicts.length > 0;
+	const canExecute = guidanceState === "ready" || guidanceState === "mixed";
+	const emptyMessage =
+		preview.length === 0
+			? tGuide(`status.${guidanceState}`, { count: conflicts.length })
+			: filter === "conflicts"
+				? t("noConflict")
+				: tGuide(
+						`status.${guidanceState === "ready" || guidanceState === "mixed" ? "noChanges" : guidanceState}`,
+						{ count: conflicts.length },
+					);
 	const affectedItems = affected;
 
 	const exportJSON = useCallback(() => {
@@ -452,9 +465,9 @@ export function PreviewPanel({
 	const showLog = progress !== null || log.length > 0;
 
 	return (
-		<div className="flex h-full flex-col">
+		<div data-tour="preview" className="flex h-full flex-col">
 			{/* Header */}
-			<div className="panel-header border-b bg-muted/30 px-4 flex items-center justify-between py-3!">
+			<div className="panel-header flex-wrap gap-y-2 border-b bg-muted/30 px-4 flex items-center justify-between py-3!">
 				<div className="flex items-center gap-2">
 					<Eye className="h-4 w-4 text-primary" />
 					<h2 className="text-foreground">{t("title")}</h2>
@@ -530,9 +543,12 @@ export function PreviewPanel({
 				<TooltipProvider delayDuration={200}>
 					<div className="px-1 py-1">
 						{displayed.length === 0 ? (
-							<div className="flex flex-col items-center justify-center py-12 text-muted-foreground">
+							<div className="flex flex-col items-center justify-center gap-2 px-6 py-12 text-center text-muted-foreground">
 								<Eye className="h-8 w-8 text-muted-foreground/30 mb-2" />
-								<span className="text-xs">{preview.length === 0 ? "—" : t("noConflict")}</span>
+								<p className="text-sm">{emptyMessage}</p>
+								{preview.length === 0 && (
+									<p className="max-w-sm text-xs leading-relaxed">{tGuide("previewHint")}</p>
+								)}
 							</div>
 						) : !hasTree ? (
 							<div className="space-y-px">
@@ -561,9 +577,42 @@ export function PreviewPanel({
 				/>
 			)}
 
+			<div
+				className={
+					guidanceState === "noFiles"
+						? "sr-only"
+						: "flex flex-wrap items-center gap-x-3 gap-y-1 border-t bg-muted/20 px-4 py-2"
+				}
+			>
+				<output
+					id="rename-execution-hint"
+					className="text-xs leading-relaxed text-muted-foreground"
+				>
+					{tGuide(`status.${guidanceState}`, { count: conflicts.length })}
+				</output>
+				{guidanceState === "conflicts" && (
+					<Button size="xs" variant="link" onClick={() => setFilter("conflicts")}>
+						{tGuide("viewConflicts")}
+					</Button>
+				)}
+				{guidanceState === "noSelection" && (
+					<Button
+						size="xs"
+						variant="link"
+						onClick={() => {
+							const state = useRenameStore.getState();
+							state.clearFilter();
+							state.selectAll(true);
+						}}
+					>
+						{tGuide("selectFiles")}
+					</Button>
+				)}
+			</div>
+
 			{/* Bottom Action Bar */}
 			<div className="flex items-center gap-2 border-t bg-card px-4 py-2 shadow-[0_-2px_10px_hsl(var(--border)/0.5)]">
-				<div className="ml-auto flex items-center gap-2">
+				<div className="ml-auto flex flex-wrap justify-end items-center gap-2">
 					{onUndo && (
 						<Button
 							variant="outline"
@@ -629,58 +678,62 @@ export function PreviewPanel({
 						</DropdownMenuContent>
 					</DropdownMenu>
 
-					<AlertDialog>
-						<AlertDialogTrigger asChild>
-							<button
-								type="button"
-								className="inline-flex items-center gap-1.5 rounded-md brand-gradient px-4 py-2 text-sm font-medium text-white shadow-sm transition-all hover:shadow-lg disabled:opacity-50 disabled:pointer-events-none"
-								disabled={affectedCount === 0 || hasConflicts || isExecuting || isPreviewComputing}
-							>
-								<Play className="h-3.5 w-3.5" />
-								{tExecute("execute")} ({affectedCount})
-							</button>
-						</AlertDialogTrigger>
-						<AlertDialogContent>
-							<AlertDialogHeader>
-								<AlertDialogTitle>{tExecute("confirmTitle")}</AlertDialogTitle>
-								<AlertDialogDescription>
-									{tExecute("confirmDesc", {
-										count: String(affectedCount),
-									})}
-								</AlertDialogDescription>
-							</AlertDialogHeader>
-
-							<div className="flex items-start gap-2 rounded-md border border-warning/30 bg-warning/5 p-3">
-								<Checkbox
-									id="timestamp-warning"
-									checked={warningChecked}
-									onCheckedChange={(v) => setWarningChecked(!!v)}
-									className="mt-0.5"
-								/>
-								<label
-									htmlFor="timestamp-warning"
-									className="text-xs text-muted-foreground leading-relaxed cursor-pointer"
+					<div data-tour="execute">
+						<AlertDialog>
+							<AlertDialogTrigger asChild>
+								<button
+									type="button"
+									className="inline-flex items-center gap-1.5 rounded-md brand-gradient px-4 py-2 text-sm font-medium text-white shadow-sm transition-all hover:shadow-lg disabled:opacity-50 disabled:pointer-events-none"
+									aria-describedby="rename-execution-hint"
+									disabled={!canExecute}
 								>
-									{tExecute("timestampWarning")}
-								</label>
-							</div>
+									<Play className="h-3.5 w-3.5" />
+									{tExecute("execute")} ({affectedCount})
+								</button>
+							</AlertDialogTrigger>
+							<AlertDialogContent data-tour="execution-confirmation">
+								<AlertDialogHeader>
+									<AlertDialogTitle>{tExecute("confirmTitle")}</AlertDialogTitle>
+									<AlertDialogDescription>
+										{tExecute("confirmDesc", {
+											count: String(affectedCount),
+										})}
+									</AlertDialogDescription>
+								</AlertDialogHeader>
+								<div data-tour="confirmation-hint" className="empty:hidden" />
 
-							<AlertDialogFooter>
-								<AlertDialogCancel onClick={() => setWarningChecked(false)}>
-									{tExecute("cancel")}
-								</AlertDialogCancel>
-								<AlertDialogAction
-									onClick={() => {
-										onExecute();
-										setWarningChecked(false);
-									}}
-									disabled={!warningChecked}
-								>
-									{tExecute("confirm")}
-								</AlertDialogAction>
-							</AlertDialogFooter>
-						</AlertDialogContent>
-					</AlertDialog>
+								<div className="flex items-start gap-2 rounded-md border border-warning/30 bg-warning/5 p-3">
+									<Checkbox
+										id="timestamp-warning"
+										checked={warningChecked}
+										onCheckedChange={(v) => setWarningChecked(!!v)}
+										className="mt-0.5"
+									/>
+									<label
+										htmlFor="timestamp-warning"
+										className="text-xs text-muted-foreground leading-relaxed cursor-pointer"
+									>
+										{tExecute("timestampWarning")}
+									</label>
+								</div>
+
+								<AlertDialogFooter>
+									<AlertDialogCancel onClick={() => setWarningChecked(false)}>
+										{tExecute("cancel")}
+									</AlertDialogCancel>
+									<AlertDialogAction
+										onClick={() => {
+											onExecute();
+											setWarningChecked(false);
+										}}
+										disabled={!warningChecked}
+									>
+										{tExecute("confirm")}
+									</AlertDialogAction>
+								</AlertDialogFooter>
+							</AlertDialogContent>
+						</AlertDialog>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -383,7 +383,10 @@
 				"errorNetwork": "Network error, please retry",
 				"errorTimeout": "Validation timed out",
 				"errorUnknown": "Unknown error"
-			}
+			},
+			"feedback": "Feedback",
+			"feedbackTooltip": "Send a problem or suggestion by email",
+			"feedbackSubject": "Rename.Tools feedback"
 		},
 		"files": {
 			"title": "File List",
@@ -883,6 +886,56 @@
 			"yes": "Yes",
 			"no": "No",
 			"empty": "(empty)"
+		},
+		"guidance": {
+			"tryDemo": "Try a demo",
+			"demoSafe": "3 sample photos · no files changed",
+			"demoLabel": "Demo files",
+			"demoHint": "Adjust the numbering rule and watch the preview. Import your files to replace these samples and keep the rule.",
+			"previewHint": "Import files and add a rule to compare names here. Previewing does not change your files.",
+			"viewConflicts": "View conflicts",
+			"selectFiles": "Show and select all files",
+			"status": {
+				"noFiles": "Import files to get started.",
+				"noSelection": "No files selected. Select files or clear your filters.",
+				"noRules": "Add a rule to start renaming.",
+				"disabledRules": "All rules are off. Enable a rule to continue.",
+				"conflicts": "Resolve {count} naming conflicts before executing.",
+				"noChanges": "No names changed. Adjust your rules or their scope.",
+				"previewOnly": "Preview only: import files with write access to rename them, or export a script.",
+				"ready": "Review the new names, then execute when ready.",
+				"mixed": "Some entries are preview-only and will be skipped during execution.",
+				"computing": "Updating preview…",
+				"executing": "Renaming files…"
+			}
+		},
+		"tour": {
+			"start": "Quick tour",
+			"skip": "Skip",
+			"next": "Continue",
+			"done": "Finish tour",
+			"tryDemo": "Try samples",
+			"addNumbering": "Add numbering",
+			"seePreview": "View preview",
+			"editRules": "Edit rules",
+			"loadError": "Could not load the tour. Please try again.",
+			"importTitle": "Start with a few files",
+			"importBody": "Import files or a folder, or drop them here. You can also try 3 sample photos without changing any real files.",
+			"rulesTitle": "Choose how to rename",
+			"addRuleBody": "Choose an operation from Add Rule, or start with numbering. You can adjust the rule at any time.",
+			"editRuleBody": "Try changing the start value, text, or other options. When you finish editing, we’ll show the result. You can also choose View preview.",
+			"previewTitle": "Compare before and after",
+			"previewBody": "Original names are on the left, new names on the right. This is only a preview; your files have not changed.",
+			"conflictBody": "Some names conflict. Adjust the rules or use Auto-fix, then review the results before continuing.",
+			"demoDoneTitle": "Try your own files",
+			"demoDoneBody": "These entries are preview-only. Import your files to replace the samples and keep your rules, or export a script or plan.",
+			"executeTitle": "Click Rename to review",
+			"executeBody": "Check the preview, then click the highlighted Rename button or Review confirmation below. This only opens the confirmation dialog; files have not changed yet.",
+			"demoExecuteBody": "This is the Rename button. Samples are preview-only, so it is disabled. Import writable files of your own to review and confirm the rename.",
+			"useOwnFiles": "Use your own files",
+			"reviewExecution": "Review confirmation",
+			"confirmTitle": "Check and confirm",
+			"confirmBody": "Check the file count above, read and check the notice below, then click Confirm to modify files. Cancel returns to the previous step."
 		}
 	},
 	"about": {

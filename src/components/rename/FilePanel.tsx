@@ -35,6 +35,8 @@ import type { SortMode } from "@/hooks/useRenameStore";
 import type { FileEntry, FilterCondition } from "@/lib/rename/types";
 
 interface Props {
+	onTryDemo?: () => Promise<void>;
+	isDemo?: boolean;
 	allFiles: FileEntry[];
 	filteredFiles: FileEntry[];
 	onAddFiles: (
@@ -64,6 +66,8 @@ interface Props {
 }
 
 export function FilePanel({
+	onTryDemo,
+	isDemo,
 	allFiles,
 	filteredFiles,
 	onAddFiles,
@@ -88,6 +92,7 @@ export function FilePanel({
 	hasVideoFiles,
 }: Props) {
 	const t = useTranslations("rename.files");
+	const tGuide = useTranslations("rename.guidance");
 	const [sampleMode, setSampleMode] = useState(false);
 	const [sampleText, setSampleText] = useState("");
 	const [apiSupported, setApiSupported] = useState(false);
@@ -316,7 +321,7 @@ export function FilePanel({
 	const hasActiveFilter = filterConditions.length > 0;
 
 	return (
-		<div className="flex h-full flex-col border-r">
+		<div data-tour="files" className="flex h-full flex-col border-r">
 			{/* Panel Header + Import Buttons */}
 			<div className="border-b bg-muted/20 px-3 py-3 flex items-center gap-2">
 				<h2 className="text-sm font-medium text-foreground">{t("title")}</h2>
@@ -325,7 +330,13 @@ export function FilePanel({
 						<>
 							<Tooltip>
 								<TooltipTrigger asChild>
-									<Button size="sm" variant="outline" className="h-7 w-7 p-0" onClick={importFiles}>
+									<Button
+										size="sm"
+										variant="outline"
+										className="h-7 w-7 p-0"
+										aria-label={t("importFiles")}
+										onClick={importFiles}
+									>
 										<FileUp className="h-3.5 w-3.5" />
 									</Button>
 								</TooltipTrigger>
@@ -340,6 +351,7 @@ export function FilePanel({
 										variant="outline"
 										className="h-7 w-7 p-0"
 										onClick={importFolder}
+										aria-label={t("importFolder")}
 									>
 										<FolderOpen className="h-3.5 w-3.5" />
 									</Button>
@@ -357,6 +369,8 @@ export function FilePanel({
 								variant={sampleMode ? "default" : "outline"}
 								className="h-7 w-7 p-0"
 								onClick={() => setSampleMode(!sampleMode)}
+								aria-label={t("sampleMode")}
+								aria-expanded={sampleMode}
 							>
 								<FlaskConical className="h-3.5 w-3.5" />
 							</Button>
@@ -416,7 +430,13 @@ export function FilePanel({
 					{allFiles.length > 0 && (
 						<Tooltip>
 							<TooltipTrigger asChild>
-								<Button size="sm" variant="ghost" onClick={onClear} className="h-7 w-7 p-0">
+								<Button
+									size="sm"
+									variant="ghost"
+									aria-label={t("clear")}
+									onClick={onClear}
+									className="h-7 w-7 p-0"
+								>
 									<Trash2 className="h-3.5 w-3.5 text-destructive" />
 								</Button>
 							</TooltipTrigger>
@@ -428,6 +448,13 @@ export function FilePanel({
 				</div>
 			</div>
 
+			{isDemo && (
+				<div className="border-b bg-primary/5 px-3 py-3 text-xs leading-relaxed">
+					<p className="font-medium text-primary">{tGuide("demoLabel")}</p>
+					<p className="mt-1 text-muted-foreground">{tGuide("demoHint")}</p>
+				</div>
+			)}
+
 			{/* Sample Mode */}
 			{sampleMode && (
 				<div className="border-b px-3 py-2 space-y-2 animate-fade-in">
@@ -436,7 +463,8 @@ export function FilePanel({
 						value={sampleText}
 						onChange={(e) => setSampleText(e.target.value)}
 						placeholder={t("samplePlaceholder")}
-						className="text-xs min-h-[80px]"
+						aria-label={t("sampleHint")}
+						className="text-xs min-h-[80px] max-h-40 overflow-y-auto"
 					/>
 					<div className="flex gap-2">
 						<Button
@@ -578,7 +606,7 @@ export function FilePanel({
 
 				{/* Loading State */}
 				{isLoadingFiles ? (
-					<div className="flex-1 flex items-center justify-center p-6">
+					<div className="flex-1 flex items-center justify-center p-3 overflow-y-auto">
 						<div className="flex flex-col items-center gap-3 text-center">
 							<Loader2 className="h-8 w-8 animate-spin text-primary" />
 							<p className="text-sm text-muted-foreground">
@@ -592,7 +620,7 @@ export function FilePanel({
 				allFiles.length === 0 ? (
 					<div className="flex-1 flex items-center justify-center p-6">
 						<div
-							className={`flex flex-col items-center gap-3 rounded-xl border-2 border-dashed p-6 text-center transition-colors ${
+							className={`flex flex-col items-center gap-3 w-full rounded-xl border-2 border-dashed px-3 py-6 text-center transition-colors ${
 								dragging ? "border-primary bg-primary/5" : "border-muted-foreground/20"
 							}`}
 						>
@@ -603,7 +631,7 @@ export function FilePanel({
 								{apiSupported ? t("dropHint") : t("noFiles")}
 							</p>
 							{apiSupported && (
-								<div className="flex gap-2 mt-2">
+								<div className="flex flex-wrap justify-center gap-2 mt-2">
 									<Button
 										size="sm"
 										variant="outline"
@@ -622,14 +650,31 @@ export function FilePanel({
 									</Button>
 								</div>
 							)}
-							<Button
-								variant="link"
-								size="sm"
-								className="gap-1.5 text-xs text-muted-foreground mt-1"
-								onClick={() => setSampleMode(true)}
-							>
-								<FlaskConical className="h-3.5 w-3.5" /> {t("trySampleMode")}
-							</Button>
+							{onTryDemo && (
+								<div className="w-full border-t pt-3 mt-1">
+									<Button
+										variant="secondary"
+										size="sm"
+										onClick={onTryDemo}
+										className="w-full text-xs"
+									>
+										<FlaskConical className="size-3.5" /> {tGuide("tryDemo")}
+									</Button>
+									<p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+										{tGuide("demoSafe")}
+									</p>
+								</div>
+							)}
+							{!onTryDemo && (
+								<Button
+									variant="link"
+									size="sm"
+									className="gap-1.5 text-xs text-muted-foreground mt-1"
+									onClick={() => setSampleMode(true)}
+								>
+									<FlaskConical className="h-3.5 w-3.5" /> {t("trySampleMode")}
+								</Button>
+							)}
 						</div>
 					</div>
 				) : (

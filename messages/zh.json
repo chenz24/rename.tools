@@ -383,7 +383,10 @@
 				"errorNetwork": "网络错误，请重试",
 				"errorTimeout": "验证超时",
 				"errorUnknown": "未知错误"
-			}
+			},
+			"feedback": "反馈",
+			"feedbackTooltip": "通过邮件反馈问题或建议",
+			"feedbackSubject": "Rename.Tools 问题与建议"
 		},
 		"files": {
 			"title": "文件列表",
@@ -883,6 +886,56 @@
 			"yes": "是",
 			"no": "否",
 			"empty": "（空）"
+		},
+		"guidance": {
+			"tryDemo": "一键体验",
+			"demoSafe": "3 个示例照片 · 不修改文件",
+			"demoLabel": "正在体验示例",
+			"demoHint": "调整编号规则，看看预览如何变化。导入自己的文件会替换这些示例，并保留规则。",
+			"previewHint": "导入文件并添加规则后，这里会显示改名前后的对比。预览不会修改文件。",
+			"viewConflicts": "查看冲突",
+			"selectFiles": "显示并选中全部文件",
+			"status": {
+				"noFiles": "请先导入文件。",
+				"noSelection": "没有选中的文件，请选择文件或清除筛选条件。",
+				"noRules": "请先添加一条重命名规则。",
+				"disabledRules": "所有规则均已停用，请启用至少一条规则。",
+				"conflicts": "请先处理 {count} 个命名冲突。",
+				"noChanges": "当前规则没有改变文件名，请调整规则或作用域。",
+				"previewOnly": "当前仅可预览：请导入可写入的文件后执行，或导出脚本使用。",
+				"ready": "请检查新名称，确认后再执行重命名。",
+				"mixed": "部分文件仅可预览，执行时将跳过这些文件。",
+				"computing": "正在更新预览…",
+				"executing": "正在重命名文件…"
+			}
+		},
+		"tour": {
+			"start": "操作引导",
+			"skip": "跳过",
+			"next": "继续",
+			"done": "完成引导",
+			"tryDemo": "使用示例",
+			"addNumbering": "添加编号",
+			"seePreview": "查看预览",
+			"editRules": "调整规则",
+			"loadError": "引导暂时无法加载，请稍后重试。",
+			"importTitle": "先选几个文件",
+			"importBody": "导入文件、文件夹，或拖放到这里。也可以先用 3 个示例照片体验，不会修改真实文件。",
+			"rulesTitle": "设置你想要的改名方式",
+			"addRuleBody": "点击“添加规则”选择一种操作，或先试试添加编号。规则添加后可以随时调整。",
+			"editRuleBody": "试着调整起始值、文字或其他参数。完成输入后，引导会带你查看结果，也可以直接点击“查看预览”。",
+			"previewTitle": "看看改名前后的变化",
+			"previewBody": "左边是原始名，右边是新名称。这里只是预览，真实文件还没有改变。",
+			"conflictBody": "预览中有命名冲突。请调整规则或使用“自动修复”，确认结果后再继续。",
+			"demoDoneTitle": "用自己的文件试试",
+			"demoDoneBody": "这些文件仅用于预览。导入自己的文件会替换示例，并保留当前规则；也可以先导出脚本或方案。",
+			"executeTitle": "点击执行，进入确认",
+			"executeBody": "检查预览后，点击高亮的“执行重命名”或下方“查看执行确认”。这一步只打开确认框，还不会修改文件。",
+			"demoExecuteBody": "执行按钮在这里。示例文件只能预览，所以按钮暂不可用；导入自己的可写入文件后，点击它即可进入确认，再正式改名。",
+			"useOwnFiles": "导入自己的文件",
+			"reviewExecution": "查看执行确认",
+			"confirmTitle": "最后，核对并确认",
+			"confirmBody": "核对上方的文件数量，阅读并勾选下方说明，再点击“确认”才会修改文件。点击“取消”可返回上一步。"
 		}
 	},
 	"about": {

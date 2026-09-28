@@ -379,7 +379,10 @@
 				"errorNetwork": "Network error, please retry",
 				"errorTimeout": "Validation timed out",
 				"errorUnknown": "Unknown error"
-			}
+			},
+			"feedback": "Votre avis",
+			"feedbackTooltip": "Envoyer un problème ou une suggestion par e-mail",
+			"feedbackSubject": "Retour sur Rename.Tools"
 		},
 		"files": {
 			"title": "Liste de Fichiers",
@@ -881,6 +884,56 @@
 			"yes": "Oui",
 			"no": "Non",
 			"empty": "(vide)"
+		},
+		"guidance": {
+			"tryDemo": "Essayer la démo",
+			"demoSafe": "3 photos d’exemple · aucun fichier modifié",
+			"demoLabel": "Fichiers de démonstration",
+			"demoHint": "Ajustez la numérotation et observez l’aperçu. Importer vos fichiers remplace les exemples tout en conservant la règle.",
+			"previewHint": "Importez des fichiers et ajoutez une règle pour comparer les noms. L’aperçu ne modifie pas vos fichiers.",
+			"viewConflicts": "Voir les conflits",
+			"selectFiles": "Afficher et sélectionner tous les fichiers",
+			"status": {
+				"noFiles": "Importez des fichiers pour commencer.",
+				"noSelection": "Aucun fichier sélectionné. Sélectionnez des fichiers ou effacez les filtres.",
+				"noRules": "Ajoutez une règle pour commencer.",
+				"disabledRules": "Toutes les règles sont désactivées. Activez une règle pour continuer.",
+				"conflicts": "Résolvez les {count} conflits de noms avant l’exécution.",
+				"noChanges": "Aucun nom modifié. Ajustez les règles ou leur portée.",
+				"previewOnly": "Aperçu uniquement : importez des fichiers avec accès en écriture ou exportez un script.",
+				"ready": "Vérifiez les nouveaux noms avant d’exécuter le renommage.",
+				"mixed": "Certaines entrées sont réservées à l’aperçu et seront ignorées lors de l’exécution.",
+				"computing": "Mise à jour de l’aperçu…",
+				"executing": "Renommage en cours…"
+			}
+		},
+		"tour": {
+			"start": "Guide rapide",
+			"skip": "Passer",
+			"next": "Continuer",
+			"done": "Terminer",
+			"tryDemo": "Essayer les exemples",
+			"addNumbering": "Numéroter",
+			"seePreview": "Voir l’aperçu",
+			"editRules": "Ajuster les règles",
+			"loadError": "Impossible de charger le guide. Veuillez réessayer.",
+			"importTitle": "Commencez par des fichiers",
+			"importBody": "Importez des fichiers ou un dossier, ou déposez-les ici. Vous pouvez aussi essayer trois photos d’exemple sans modifier de vrais fichiers.",
+			"rulesTitle": "Choisissez la modification",
+			"addRuleBody": "Choisissez une opération dans Ajouter une règle ou commencez par une numérotation. La règle reste modifiable à tout moment.",
+			"editRuleBody": "Modifiez la valeur de départ, le texte ou d’autres options. Une fois la saisie terminée, nous afficherons le résultat. Vous pouvez aussi choisir Voir l’aperçu.",
+			"previewTitle": "Comparez avant et après",
+			"previewBody": "Les noms d’origine sont à gauche, les nouveaux à droite. Il s’agit seulement d’un aperçu ; vos fichiers n’ont pas changé.",
+			"conflictBody": "Certains noms sont en conflit. Ajustez les règles ou utilisez la correction automatique, puis vérifiez le résultat.",
+			"demoDoneTitle": "Essayez vos propres fichiers",
+			"demoDoneBody": "Ces entrées servent uniquement à l’aperçu. Importez vos fichiers pour remplacer les exemples en conservant les règles, ou exportez un script ou un plan.",
+			"executeTitle": "Vérifier avant de renommer",
+			"executeBody": "Vérifiez l’aperçu, puis cliquez sur le bouton de renommage en surbrillance ou sur «Voir la confirmation». Cela ouvre seulement la boîte de confirmation ; aucun fichier n’est encore modifié.",
+			"demoExecuteBody": "Voici le bouton de renommage. Les exemples servent uniquement à l’aperçu, il est donc désactivé. Importez vos fichiers accessibles en écriture pour vérifier et confirmer le renommage.",
+			"useOwnFiles": "Utiliser vos fichiers",
+			"reviewExecution": "Voir la confirmation",
+			"confirmTitle": "Vérifier et confirmer",
+			"confirmBody": "Vérifiez le nombre de fichiers, lisez l’avertissement et cochez la case. Les fichiers ne seront modifiés qu’après confirmation. Annuler revient à l’étape précédente."
 		}
 	},
 	"about": {

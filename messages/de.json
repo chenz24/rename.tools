@@ -379,7 +379,10 @@
 				"errorNetwork": "Netzwerkfehler, bitte erneut versuchen",
 				"errorTimeout": "Validierung abgelaufen",
 				"errorUnknown": "Unbekannter Fehler"
-			}
+			},
+			"feedback": "Feedback",
+			"feedbackTooltip": "Probleme oder Vorschläge per E-Mail senden",
+			"feedbackSubject": "Rename.Tools Feedback"
 		},
 		"files": {
 			"title": "Dateiliste",
@@ -879,6 +882,56 @@
 			"yes": "Ja",
 			"no": "Nein",
 			"empty": "(leer)"
+		},
+		"guidance": {
+			"tryDemo": "Demo ausprobieren",
+			"demoSafe": "3 Beispielfotos · keine Dateiänderungen",
+			"demoLabel": "Demodateien",
+			"demoHint": "Passe die Nummerierung an und beobachte die Vorschau. Beim Import eigener Dateien werden die Beispiele ersetzt und die Regel bleibt erhalten.",
+			"previewHint": "Importiere Dateien und füge eine Regel hinzu, um Namen zu vergleichen. Die Vorschau ändert keine Dateien.",
+			"viewConflicts": "Konflikte anzeigen",
+			"selectFiles": "Alle Dateien anzeigen und auswählen",
+			"status": {
+				"noFiles": "Importiere zuerst Dateien.",
+				"noSelection": "Keine Dateien ausgewählt. Wähle Dateien aus oder entferne die Filter.",
+				"noRules": "Füge zuerst eine Regel hinzu.",
+				"disabledRules": "Alle Regeln sind deaktiviert. Aktiviere mindestens eine Regel.",
+				"conflicts": "Behebe vor dem Ausführen {count} Namenskonflikte.",
+				"noChanges": "Keine Namen geändert. Passe die Regeln oder ihren Geltungsbereich an.",
+				"previewOnly": "Nur Vorschau: Importiere Dateien mit Schreibzugriff oder exportiere ein Skript.",
+				"ready": "Prüfe die neuen Namen und führe die Umbenennung aus.",
+				"mixed": "Einige Einträge sind nur zur Vorschau und werden beim Ausführen übersprungen.",
+				"computing": "Vorschau wird aktualisiert…",
+				"executing": "Dateien werden umbenannt…"
+			}
+		},
+		"tour": {
+			"start": "Kurzanleitung",
+			"skip": "Überspringen",
+			"next": "Weiter",
+			"done": "Tour beenden",
+			"tryDemo": "Beispiele testen",
+			"addNumbering": "Nummern hinzufügen",
+			"seePreview": "Vorschau ansehen",
+			"editRules": "Regeln anpassen",
+			"loadError": "Die Tour konnte nicht geladen werden. Bitte erneut versuchen.",
+			"importTitle": "Mit Dateien beginnen",
+			"importBody": "Importiere Dateien oder einen Ordner oder ziehe sie hierher. Du kannst auch drei Beispielfotos testen, ohne echte Dateien zu ändern.",
+			"rulesTitle": "Umbenennung festlegen",
+			"addRuleBody": "Wähle unter Regel hinzufügen eine Aktion oder beginne mit einer Nummerierung. Die Regel lässt sich jederzeit anpassen.",
+			"editRuleBody": "Ändere den Startwert, Text oder andere Optionen. Nach der Eingabe zeigen wir das Ergebnis. Du kannst auch Vorschau ansehen wählen.",
+			"previewTitle": "Vorher und nachher vergleichen",
+			"previewBody": "Links stehen die ursprünglichen, rechts die neuen Namen. Dies ist nur eine Vorschau; deine Dateien wurden noch nicht geändert.",
+			"conflictBody": "Einige Namen stehen im Konflikt. Passe die Regeln an oder nutze die automatische Korrektur und prüfe das Ergebnis.",
+			"demoDoneTitle": "Eigene Dateien ausprobieren",
+			"demoDoneBody": "Diese Einträge dienen nur zur Vorschau. Importiere eigene Dateien, um die Beispiele zu ersetzen und die Regeln zu behalten, oder exportiere ein Skript oder einen Plan.",
+			"executeTitle": "Umbenennen prüfen",
+			"executeBody": "Prüfe die Vorschau und klicke auf die hervorgehobene Schaltfläche zum Umbenennen oder auf „Bestätigung öffnen“. Das öffnet nur den Dialog; Dateien werden noch nicht geändert.",
+			"demoExecuteBody": "Hier ist die Schaltfläche zum Umbenennen. Beispieldateien erlauben nur eine Vorschau. Importiere eigene beschreibbare Dateien, um die Umbenennung zu prüfen und zu bestätigen.",
+			"useOwnFiles": "Eigene Dateien verwenden",
+			"reviewExecution": "Bestätigung öffnen",
+			"confirmTitle": "Prüfen und bestätigen",
+			"confirmBody": "Prüfe oben die Dateianzahl, lies den Hinweis unten und aktiviere das Kontrollkästchen. Erst mit der Bestätigung werden Dateien geändert. Abbrechen führt zum vorherigen Schritt zurück."
 		}
 	},
 	"about": {
