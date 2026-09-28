@@ -876,6 +876,45 @@
 			"yes": "Sí",
 			"no": "No",
 			"empty": "(vacío)"
+		},
+		"guidance": {
+			"workflow": "Renombrar en tres pasos",
+			"import": "Importar archivos",
+			"configure": "Configurar reglas",
+			"review": "Revisar y renombrar",
+			"hideGuide": "Ocultar consejos",
+			"showGuide": "Mostrar consejos",
+			"stepHelp0": "Importa archivos o una carpeta, o prueba la demo. Tus archivos permanecen en tu dispositivo.",
+			"stepHelp1": "Elige qué quieres cambiar. Añade una regla y ajusta sus opciones para ver el resultado en la vista previa.",
+			"stepHelp2": "Compara los nombres originales y nuevos. Solo ejecutar el renombrado modifica tus archivos; editar reglas solo actualiza la vista previa.",
+			"tryDemo": "Probar demo",
+			"demoSafe": "3 fotos de ejemplo · sin modificar archivos",
+			"demoLabel": "Archivos de demostración",
+			"demoHint": "Ajusta la numeración y observa la vista previa. Al importar tus archivos se reemplazan los ejemplos y se conserva la regla.",
+			"chooseTask": "¿Qué quieres cambiar?",
+			"rulesHint": "Empieza con una tarea habitual o explora más opciones en Añadir regla.",
+			"ruleOrder": "Las reglas se aplican de arriba abajo. Arrástralas para cambiar el orden.",
+			"previewHint": "Importa archivos y añade una regla para comparar los nombres. La vista previa no modifica tus archivos.",
+			"viewConflicts": "Ver conflictos",
+			"selectFiles": "Mostrar y seleccionar todos",
+			"status": {
+				"noFiles": "Importa archivos para empezar.",
+				"noSelection": "No hay archivos seleccionados. Selecciona archivos o borra los filtros.",
+				"noRules": "Añade una regla para empezar.",
+				"disabledRules": "Todas las reglas están desactivadas. Activa una para continuar.",
+				"conflicts": "Resuelve {count} conflictos de nombres antes de ejecutar.",
+				"noChanges": "Ningún nombre ha cambiado. Ajusta las reglas o su ámbito.",
+				"previewOnly": "Solo vista previa: importa archivos con permiso de escritura o exporta un script.",
+				"ready": "Revisa los nuevos nombres antes de ejecutar.",
+				"mixed": "Algunas entradas son solo de vista previa y se omitirán al ejecutar.",
+				"computing": "Actualizando la vista previa…",
+				"executing": "Renombrando archivos…"
+			},
+			"tasks": {
+				"sequence": "Añadir numeración",
+				"findReplace": "Reemplazar texto",
+				"removeCleanup": "Limpiar nombres"
+			}
 		}
 	},
 	"about": {

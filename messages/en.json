@@ -883,6 +883,45 @@
 			"yes": "Yes",
 			"no": "No",
 			"empty": "(empty)"
+		},
+		"guidance": {
+			"workflow": "Rename in three steps",
+			"import": "Import files",
+			"configure": "Set up rules",
+			"review": "Preview & rename",
+			"hideGuide": "Hide tips",
+			"showGuide": "Show tips",
+			"stepHelp0": "Start by importing files or a folder, or try the demo. Your files stay on your device.",
+			"stepHelp1": "Choose what you want to change. Add a rule and adjust its options to see the result in the preview.",
+			"stepHelp2": "Compare the original and new names. Only Execute rename changes your files; editing rules only updates the preview.",
+			"tryDemo": "Try a demo",
+			"demoSafe": "3 sample photos · no files changed",
+			"demoLabel": "Demo files",
+			"demoHint": "Adjust the numbering rule and watch the preview. Import your files to replace these samples and keep the rule.",
+			"chooseTask": "What would you like to change?",
+			"rulesHint": "Start with a common task below, or explore more options in Add rule.",
+			"ruleOrder": "Rules run from top to bottom. Drag to change their order.",
+			"previewHint": "Import files and add a rule to compare names here. Previewing does not change your files.",
+			"viewConflicts": "View conflicts",
+			"selectFiles": "Show and select all files",
+			"status": {
+				"noFiles": "Import files to get started.",
+				"noSelection": "No files selected. Select files or clear your filters.",
+				"noRules": "Add a rule to start renaming.",
+				"disabledRules": "All rules are off. Enable a rule to continue.",
+				"conflicts": "Resolve {count} naming conflicts before executing.",
+				"noChanges": "No names changed. Adjust your rules or their scope.",
+				"previewOnly": "Preview only: import files with write access to rename them, or export a script.",
+				"ready": "Review the new names, then execute when ready.",
+				"mixed": "Some entries are preview-only and will be skipped during execution.",
+				"computing": "Updating preview…",
+				"executing": "Renaming files…"
+			},
+			"tasks": {
+				"sequence": "Add numbering",
+				"findReplace": "Replace text",
+				"removeCleanup": "Clean up names"
+			}
 		}
 	},
 	"about": {

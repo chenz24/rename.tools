@@ -43,10 +43,12 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import type { LogEntry } from "@/hooks/useRenameStore";
 import { useRenameStore } from "@/hooks/useRenameStore";
 import { charDiff, type DiffSegment } from "@/lib/rename/diff";
+import type { GuidanceState } from "@/lib/rename/guidance";
 import type { PreviewResult } from "@/lib/rename/types";
 import { taskMode, trackTaskEvent } from "@/lib/task-analytics";
 
 interface Props {
+	guidanceState: GuidanceState;
 	preview: PreviewResult[];
 	isPreviewComputing?: boolean;
 	applyAutoFix?: () => void;
@@ -361,6 +363,7 @@ function downloadBlob(content: string, filename: string, type: string) {
 }
 
 export function PreviewPanel({
+	guidanceState,
 	preview,
 	isPreviewComputing = false,
 	applyAutoFix,
@@ -380,6 +383,7 @@ export function PreviewPanel({
 }: Props) {
 	const t = useTranslations("rename.preview");
 	const tExecute = useTranslations("rename.execute");
+	const tGuide = useTranslations("rename.guidance");
 	const [filter, setFilter] = useState<Filter>("all");
 	const [warningChecked, setWarningChecked] = useState(false);
 
@@ -402,7 +406,16 @@ export function PreviewPanel({
 	const hasTree = previewTree.children.size > 0;
 
 	const affectedCount = affected.length;
-	const hasConflicts = conflicts.length > 0;
+	const canExecute = guidanceState === "ready" || guidanceState === "mixed";
+	const emptyMessage =
+		preview.length === 0
+			? tGuide(`status.${guidanceState}`, { count: conflicts.length })
+			: filter === "conflicts"
+				? t("noConflict")
+				: tGuide(
+						`status.${guidanceState === "ready" || guidanceState === "mixed" ? "noChanges" : guidanceState}`,
+						{ count: conflicts.length },
+					);
 	const affectedItems = affected;
 
 	const exportJSON = useCallback(() => {
@@ -454,7 +467,7 @@ export function PreviewPanel({
 	return (
 		<div className="flex h-full flex-col">
 			{/* Header */}
-			<div className="panel-header border-b bg-muted/30 px-4 flex items-center justify-between py-3!">
+			<div className="panel-header flex-wrap gap-y-2 border-b bg-muted/30 px-4 flex items-center justify-between py-3!">
 				<div className="flex items-center gap-2">
 					<Eye className="h-4 w-4 text-primary" />
 					<h2 className="text-foreground">{t("title")}</h2>
@@ -530,9 +543,12 @@ export function PreviewPanel({
 				<TooltipProvider delayDuration={200}>
 					<div className="px-1 py-1">
 						{displayed.length === 0 ? (
-							<div className="flex flex-col items-center justify-center py-12 text-muted-foreground">
+							<div className="flex flex-col items-center justify-center gap-2 px-6 py-12 text-center text-muted-foreground">
 								<Eye className="h-8 w-8 text-muted-foreground/30 mb-2" />
-								<span className="text-xs">{preview.length === 0 ? "—" : t("noConflict")}</span>
+								<p className="text-sm">{emptyMessage}</p>
+								{preview.length === 0 && (
+									<p className="max-w-sm text-xs leading-relaxed">{tGuide("previewHint")}</p>
+								)}
 							</div>
 						) : !hasTree ? (
 							<div className="space-y-px">
@@ -561,9 +577,36 @@ export function PreviewPanel({
 				/>
 			)}
 
+			<div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-t bg-muted/20 px-4 py-2">
+				<output
+					id="rename-execution-hint"
+					className="text-xs leading-relaxed text-muted-foreground"
+				>
+					{tGuide(`status.${guidanceState}`, { count: conflicts.length })}
+				</output>
+				{guidanceState === "conflicts" && (
+					<Button size="xs" variant="link" onClick={() => setFilter("conflicts")}>
+						{tGuide("viewConflicts")}
+					</Button>
+				)}
+				{guidanceState === "noSelection" && (
+					<Button
+						size="xs"
+						variant="link"
+						onClick={() => {
+							const state = useRenameStore.getState();
+							state.clearFilter();
+							state.selectAll(true);
+						}}
+					>
+						{tGuide("selectFiles")}
+					</Button>
+				)}
+			</div>
+
 			{/* Bottom Action Bar */}
 			<div className="flex items-center gap-2 border-t bg-card px-4 py-2 shadow-[0_-2px_10px_hsl(var(--border)/0.5)]">
-				<div className="ml-auto flex items-center gap-2">
+				<div className="ml-auto flex flex-wrap justify-end items-center gap-2">
 					{onUndo && (
 						<Button
 							variant="outline"
@@ -634,7 +677,8 @@ export function PreviewPanel({
 							<button
 								type="button"
 								className="inline-flex items-center gap-1.5 rounded-md brand-gradient px-4 py-2 text-sm font-medium text-white shadow-sm transition-all hover:shadow-lg disabled:opacity-50 disabled:pointer-events-none"
-								disabled={affectedCount === 0 || hasConflicts || isExecuting || isPreviewComputing}
+								aria-describedby="rename-execution-hint"
+								disabled={!canExecute}
 							>
 								<Play className="h-3.5 w-3.5" />
 								{tExecute("execute")} ({affectedCount})

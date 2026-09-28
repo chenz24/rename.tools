@@ -12,12 +12,14 @@ import { PreviewPanel } from "@/components/rename/PreviewPanel";
 import { RenameHeader } from "@/components/rename/RenameHeader";
 import { RulePanel } from "@/components/rename/RulePanel";
 import { TaskMeasurement } from "@/components/rename/TaskMeasurement";
+import { WorkflowGuide } from "@/components/rename/WorkflowGuide";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
 import { useMediaScraper } from "@/hooks/useMediaScraper";
 import { useMetadataLoader } from "@/hooks/useMetadataLoader";
 import { usePresetsStore } from "@/hooks/usePresetsStore";
 import { useRenameStore } from "@/hooks/useRenameStore";
 import { useTmdbConfig } from "@/hooks/useTmdbConfig";
+import { getGuidanceState } from "@/lib/rename/guidance";
 
 const MediaScraperDialog = dynamic(() =>
 	import("@/components/rename/MediaScraperDialog").then((m) => m.MediaScraperDialog),
@@ -173,9 +175,35 @@ export default function RenameAppPage() {
 		[tmdbConfig.saveApiKey],
 	);
 
+	const guidanceState = getGuidanceState({
+		files,
+		selectedCount: filteredFiles.filter((file) => file.selected).length,
+		rules,
+		preview,
+		isExecuting,
+		isPreviewComputing,
+	});
+	const isDemo = files.some((file) => file.isDemo);
+	const guideStep =
+		guidanceState === "noFiles" || guidanceState === "noSelection"
+			? 0
+			: ["noRules", "disabledRules", "noChanges"].includes(guidanceState)
+				? 1
+				: 2;
+	const successfulRenames = new Map(
+		executionLog
+			.filter((entry) => entry.status === "success")
+			.map((entry) => [entry.fileId, entry.newName]),
+	);
+	const completed =
+		guidanceState === "noChanges" &&
+		preview.length > 0 &&
+		preview.every((row) => successfulRenames.get(row.fileId) === row.original);
+
 	return (
 		<div className="flex h-screen flex-col bg-background">
 			<RenameHeader />
+			<WorkflowGuide step={guideStep} completed={completed} />
 			<Suspense fallback={null}>
 				<PresetLinkDialog />
 				<TaskMeasurement />
@@ -184,6 +212,12 @@ export default function RenameAppPage() {
 				<ResizablePanel defaultSize={20} minSize={12}>
 					<FilePanel
 						allFiles={files}
+						onTryDemo={
+							files.length === 0 && rules.length === 0
+								? useRenameStore.getState().loadDemo
+								: undefined
+						}
+						isDemo={isDemo}
 						filteredFiles={filteredFiles}
 						onAddFiles={addFiles}
 						onToggle={toggleFileSelection}
@@ -210,11 +244,13 @@ export default function RenameAppPage() {
 				<ResizableHandle />
 				<ResizablePanel defaultSize={25} minSize={15}>
 					<div className="flex h-full flex-col">
-						<IntelligentSuggestions
-							files={filteredFiles}
-							onApplySuggestion={addRulesFromTemplate}
-							onOpenScraper={handleOpenScraper}
-						/>
+						{!isDemo && (
+							<IntelligentSuggestions
+								files={filteredFiles}
+								onApplySuggestion={addRulesFromTemplate}
+								onOpenScraper={handleOpenScraper}
+							/>
+						)}
 						<div className="flex-1 min-h-0">
 							<RulePanel
 								rules={rules}
@@ -246,6 +282,7 @@ export default function RenameAppPage() {
 				<ResizablePanel defaultSize={55} minSize={20}>
 					<PreviewPanel
 						preview={preview}
+						guidanceState={guidanceState}
 						isPreviewComputing={isPreviewComputing}
 						applyAutoFix={applyAutoFix}
 						resetAutoFix={resetAutoFix}

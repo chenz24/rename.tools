@@ -300,6 +300,7 @@ interface RenameState {
 		relativePaths?: string[],
 	) => Promise<void>;
 	clearFiles: () => void;
+	loadDemo: () => Promise<void>;
 	toggleFileSelection: (id: string) => void;
 	selectAll: (selected: boolean, filteredIds?: string[]) => void;
 	sortFiles: (mode: SortMode) => void;
@@ -457,6 +458,33 @@ export const useRenameStore = create<RenameState>()((set, get) => {
 		canRedo: false,
 
 		// ── File actions ──
+		loadDemo: async () => {
+			if (get().files.length || get().rules.length || get().isExecuting) return;
+			const entries = await Promise.all(
+				["IMG_2048.jpg", "IMG_2051.jpg", "IMG_2063.jpg"].map((name) => parseFileEntry(name)),
+			);
+			setAndQueuePreview((state) => {
+				// Do not replace work added while the demo was being prepared.
+				if (state.files.length || state.rules.length || state.isExecuting) return state;
+				const files = entries.map((file) => ({ ...file, isDemo: true }));
+				const sequence = getDefaultConfig("sequence");
+				if (sequence.type !== "sequence") return state;
+				sequence.config.position = "replaceAll";
+				sequence.config.template = "Photo_{n}";
+				const rules = [{ id: genId(), enabled: true, ruleConfig: sequence }];
+				const next = {
+					...state,
+					files,
+					rules,
+					extensionScope: "name" as const,
+					filter: { conditions: [], logic: "AND" as const },
+					sortMode: "import" as const,
+					_previewOverride: null,
+					hasAutoFix: false,
+				};
+				return { ...next, ...recomputeDerived(next) };
+			});
+		},
 
 		addFiles: async (names, handles?, relativePaths?) => {
 			try {
@@ -464,15 +492,24 @@ export const useRenameStore = create<RenameState>()((set, get) => {
 					names.map((n, i) => parseFileEntry(n, handles?.[i], relativePaths?.[i])),
 				);
 				setAndQueuePreview((state) => {
-					const existingKeys = new Set(state.files.map((f) => f.relativePath || f.name));
+					if (newEntries.length === 0) return state;
+					const existingFiles = state.files.filter((file) => !file.isDemo);
+					const existingKeys = new Set(existingFiles.map((f) => f.relativePath || f.name));
 					const uniqueEntries = newEntries.filter((entry) => {
 						const key = entry.relativePath || entry.name;
 						if (existingKeys.has(key)) return false;
 						existingKeys.add(key);
 						return true;
 					});
-					const files = [...state.files, ...uniqueEntries];
-					return { files, ...recomputeDerived({ ...state, files }) };
+					const files = [...existingFiles, ...uniqueEntries];
+					const replacingDemo = existingFiles.length !== state.files.length;
+					const next = {
+						...state,
+						files,
+						_previewOverride: replacingDemo ? null : state._previewOverride,
+						hasAutoFix: replacingDemo ? false : state.hasAutoFix,
+					};
+					return { ...next, ...recomputeDerived(next) };
 				});
 			} catch (error) {
 				console.error("Failed to add files:", error);
@@ -482,7 +519,12 @@ export const useRenameStore = create<RenameState>()((set, get) => {
 		clearFiles: () =>
 			setAndQueuePreview((state) => {
 				const files: FileEntry[] = [];
-				return { files, ...recomputeDerived({ ...state, files }) };
+				return {
+					files,
+					_previewOverride: null,
+					hasAutoFix: false,
+					...recomputeDerived({ ...state, files, _previewOverride: null }),
+				};
 			}),
 
 		toggleFileSelection: (id) =>

@@ -4,6 +4,7 @@ export interface FileEntry {
 	baseName: string; // name without extension
 	extension: string; // extension with dot, e.g. ".jpg"
 	selected: boolean;
+	isDemo?: boolean;
 	handle?: FileSystemFileHandle;
 	relativePath?: string; // relative path from imported folder root, e.g. "sub/dir/file.jpg"
 	size?: number; // file size in bytes

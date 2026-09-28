@@ -881,6 +881,45 @@
 			"yes": "Oui",
 			"no": "Non",
 			"empty": "(vide)"
+		},
+		"guidance": {
+			"workflow": "Renommer en trois étapes",
+			"import": "Importer des fichiers",
+			"configure": "Configurer les règles",
+			"review": "Vérifier et renommer",
+			"hideGuide": "Masquer les conseils",
+			"showGuide": "Afficher les conseils",
+			"stepHelp0": "Importez des fichiers ou un dossier, ou essayez la démo. Vos fichiers restent sur votre appareil.",
+			"stepHelp1": "Choisissez la modification souhaitée. Ajoutez une règle et ajustez ses options pour voir le résultat dans l’aperçu.",
+			"stepHelp2": "Comparez les noms d’origine et les nouveaux noms. Seule l’exécution modifie vos fichiers ; les règles mettent uniquement l’aperçu à jour.",
+			"tryDemo": "Essayer la démo",
+			"demoSafe": "3 photos d’exemple · aucun fichier modifié",
+			"demoLabel": "Fichiers de démonstration",
+			"demoHint": "Ajustez la numérotation et observez l’aperçu. Importer vos fichiers remplace les exemples tout en conservant la règle.",
+			"chooseTask": "Que souhaitez-vous modifier ?",
+			"rulesHint": "Choisissez une tâche courante ou explorez les options dans Ajouter une règle.",
+			"ruleOrder": "Les règles s’appliquent de haut en bas. Faites-les glisser pour changer leur ordre.",
+			"previewHint": "Importez des fichiers et ajoutez une règle pour comparer les noms. L’aperçu ne modifie pas vos fichiers.",
+			"viewConflicts": "Voir les conflits",
+			"selectFiles": "Afficher et sélectionner tous les fichiers",
+			"status": {
+				"noFiles": "Importez des fichiers pour commencer.",
+				"noSelection": "Aucun fichier sélectionné. Sélectionnez des fichiers ou effacez les filtres.",
+				"noRules": "Ajoutez une règle pour commencer.",
+				"disabledRules": "Toutes les règles sont désactivées. Activez une règle pour continuer.",
+				"conflicts": "Résolvez les {count} conflits de noms avant l’exécution.",
+				"noChanges": "Aucun nom modifié. Ajustez les règles ou leur portée.",
+				"previewOnly": "Aperçu uniquement : importez des fichiers avec accès en écriture ou exportez un script.",
+				"ready": "Vérifiez les nouveaux noms avant d’exécuter le renommage.",
+				"mixed": "Certaines entrées sont réservées à l’aperçu et seront ignorées lors de l’exécution.",
+				"computing": "Mise à jour de l’aperçu…",
+				"executing": "Renommage en cours…"
+			},
+			"tasks": {
+				"sequence": "Ajouter une numérotation",
+				"findReplace": "Remplacer du texte",
+				"removeCleanup": "Nettoyer les noms"
+			}
 		}
 	},
 	"about": {

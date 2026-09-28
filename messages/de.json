@@ -879,6 +879,45 @@
 			"yes": "Ja",
 			"no": "Nein",
 			"empty": "(leer)"
+		},
+		"guidance": {
+			"workflow": "In drei Schritten umbenennen",
+			"import": "Dateien importieren",
+			"configure": "Regeln festlegen",
+			"review": "Prüfen & umbenennen",
+			"hideGuide": "Tipps ausblenden",
+			"showGuide": "Tipps anzeigen",
+			"stepHelp0": "Importiere Dateien oder einen Ordner oder probiere die Demo. Deine Dateien bleiben auf deinem Gerät.",
+			"stepHelp1": "Wähle die gewünschte Änderung. Füge eine Regel hinzu und passe sie an, um das Ergebnis in der Vorschau zu sehen.",
+			"stepHelp2": "Vergleiche alte und neue Namen. Erst das Ausführen ändert deine Dateien; Regeländerungen aktualisieren nur die Vorschau.",
+			"tryDemo": "Demo ausprobieren",
+			"demoSafe": "3 Beispielfotos · keine Dateiänderungen",
+			"demoLabel": "Demodateien",
+			"demoHint": "Passe die Nummerierung an und beobachte die Vorschau. Beim Import eigener Dateien werden die Beispiele ersetzt und die Regel bleibt erhalten.",
+			"chooseTask": "Was möchtest du ändern?",
+			"rulesHint": "Wähle eine häufige Aufgabe oder entdecke weitere Optionen unter Regel hinzufügen.",
+			"ruleOrder": "Regeln werden von oben nach unten angewendet. Ziehe sie, um die Reihenfolge zu ändern.",
+			"previewHint": "Importiere Dateien und füge eine Regel hinzu, um Namen zu vergleichen. Die Vorschau ändert keine Dateien.",
+			"viewConflicts": "Konflikte anzeigen",
+			"selectFiles": "Alle Dateien anzeigen und auswählen",
+			"status": {
+				"noFiles": "Importiere zuerst Dateien.",
+				"noSelection": "Keine Dateien ausgewählt. Wähle Dateien aus oder entferne die Filter.",
+				"noRules": "Füge zuerst eine Regel hinzu.",
+				"disabledRules": "Alle Regeln sind deaktiviert. Aktiviere mindestens eine Regel.",
+				"conflicts": "Behebe vor dem Ausführen {count} Namenskonflikte.",
+				"noChanges": "Keine Namen geändert. Passe die Regeln oder ihren Geltungsbereich an.",
+				"previewOnly": "Nur Vorschau: Importiere Dateien mit Schreibzugriff oder exportiere ein Skript.",
+				"ready": "Prüfe die neuen Namen und führe die Umbenennung aus.",
+				"mixed": "Einige Einträge sind nur zur Vorschau und werden beim Ausführen übersprungen.",
+				"computing": "Vorschau wird aktualisiert…",
+				"executing": "Dateien werden umbenannt…"
+			},
+			"tasks": {
+				"sequence": "Nummerierung hinzufügen",
+				"findReplace": "Text ersetzen",
+				"removeCleanup": "Namen bereinigen"
+			}
 		}
 	},
 	"about": {
