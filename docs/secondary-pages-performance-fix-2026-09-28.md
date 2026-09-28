@@ -56,3 +56,9 @@ On-demand features require connectivity on their first use. Once fetched and cac
 No online Lighthouse score is claimed. After deployment, compare repeated Lighthouse runs with identical device/network settings. Third-party analytics and network/edge latency remain outside the first-party bundle figures above.
 
 Detailed browser JSON, screenshots and the verification script are saved in the task's `rename-performance` artifact directory.
+
+## Turbopack development follow-up
+
+The existing development server logged a missing module factory for the synthetic `export * as Slot` module after the import changes. A fresh browser context loaded all three checked routes even before the follow-up, so a persistent cold-load failure was not reproduced. Replace namespace imports with the package's named `Slot` export in Button and both Badge components; `Slot` and `Root` refer to the same implementation. This avoids the synthetic namespace dependency while keeping the smaller direct package import.
+
+Validated on the running Next.js 16.1.6 Turbopack server: homepage, about and tool cold loads; live Button edits and reversions in both server and client contexts; asChild link navigation; dialog trigger and focus restoration. No runtime errors and only the initial document request were observed during the HMR scenario. TypeScript and Biome checks passed. An already-failed browser session should be refreshed once to discard its old module graph.
