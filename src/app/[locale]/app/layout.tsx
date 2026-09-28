@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
-import { hasLocale } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
+import { getMessages, setRequestLocale } from "next-intl/server";
 import type { ReactNode } from "react";
+import { getClientMessages } from "@/i18n/client-messages";
 import { routing } from "@/i18n/routing";
 import { generatePageMetadata } from "@/lib/metadata";
 
@@ -26,5 +27,10 @@ export default async function AppLayout({ children, params }: Props) {
 
 	// The /app route uses its own full-screen layout (RenameHeader inside the page)
 	// so we skip the default Header/Footer wrapper
-	return <>{children}</>;
+	const messages = await getMessages();
+	return (
+		<NextIntlClientProvider messages={getClientMessages(messages, ["rename"])}>
+			{children}
+		</NextIntlClientProvider>
+	);
 }

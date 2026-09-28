@@ -12,9 +12,10 @@ import {
 	Undo2,
 } from "lucide-react";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { NextIntlClientProvider, useMessages, useTranslations } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import type { FAQPage, WebApplication, WithContext } from "schema-dts";
+import { ProductScreenshot } from "@/components/home/ProductScreenshot";
 import { UseCaseDemo } from "@/components/home/UseCaseDemo";
 import { JsonLd } from "@/components/JsonLd";
 import { RecipeExample } from "@/components/RecipeExample";
@@ -56,6 +57,7 @@ function IconItem({
 /* ═══════════════════════════════════════════════════════════════════ */
 function LandingContent({ locale }: { locale: string }) {
 	const t = useTranslations("home");
+	const messages = useMessages();
 
 	const webAppSchema: WithContext<WebApplication> = {
 		"@context": "https://schema.org",
@@ -249,28 +251,16 @@ function LandingContent({ locale }: { locale: string }) {
 					{/* product screenshot */}
 					<div className="mt-12 overflow-hidden rounded-2xl bg-muted/50 p-1.5 shadow-sm ring-1 ring-border/50 sm:mt-16 sm:rounded-3xl sm:p-2">
 						<div className="overflow-hidden rounded-xl sm:rounded-2xl">
-							<Image
-								src="/screenshots/product_screenshot.png"
-								alt="Rename.Tools Rule Chain Interface"
-								width={3348}
-								height={1844}
-								sizes="(max-width: 639px) calc(100vw - 44px), (max-width: 1023px) calc(100vw - 64px), 960px"
-								className="block h-auto w-full dark:hidden"
-							/>
-							<Image
-								src="/screenshots/product_screenshot_dark.png"
-								alt="Rename.Tools Rule Chain Interface"
-								width={3354}
-								height={1852}
-								sizes="(max-width: 639px) calc(100vw - 44px), (max-width: 1023px) calc(100vw - 64px), 960px"
-								className="hidden h-auto w-full dark:block"
-							/>
+							<ProductScreenshot theme="light" className="block h-auto w-full dark:hidden" />
+							<ProductScreenshot theme="dark" className="hidden h-auto w-full dark:block" />
 						</div>
 					</div>
 				</section>
 
 				{/* ─── Use Case Showcase ──────────────────── */}
-				<UseCaseDemo />
+				<NextIntlClientProvider messages={{ home: messages.home, guideLinks: messages.guideLinks }}>
+					<UseCaseDemo />
+				</NextIntlClientProvider>
 
 				{/* ─── Divider ───────────────────────────────── */}
 				<div className="mx-auto max-w-5xl px-4 sm:px-6">
