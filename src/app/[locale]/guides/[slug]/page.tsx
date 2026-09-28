@@ -1,9 +1,9 @@
 import { ArrowLeft, ArrowRight, CalendarDays, Clock3 } from "lucide-react";
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import type { Article, BreadcrumbList, HowTo, WithContext } from "schema-dts";
+import { GuideScreenshot } from "@/components/guides/GuideScreenshot";
 import { JsonLd } from "@/components/JsonLd";
 import { RecipeExample } from "@/components/RecipeExample";
 import { Link } from "@/i18n/navigation";
@@ -186,6 +186,7 @@ export default async function GuideDetailPage({ params }: Props) {
 			<article className="min-h-screen bg-background text-foreground">
 				<header className="mx-auto max-w-5xl px-4 pt-12 pb-10 sm:px-6 sm:pt-16 md:pt-20">
 					<Link
+						prefetch={false}
 						href="/guides"
 						className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
 					>
@@ -209,7 +210,7 @@ export default async function GuideDetailPage({ params }: Props) {
 							</div>
 						)}
 						<div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-							<Link href="/about" className="underline underline-offset-4">
+							<Link prefetch={false} href="/about" className="underline underline-offset-4">
 								Rename.Tools
 							</Link>
 							<span className="inline-flex items-center gap-1.5">
@@ -238,11 +239,9 @@ export default async function GuideDetailPage({ params }: Props) {
 
 									{section.image && (
 										<figure className="mt-6 overflow-hidden rounded-lg border bg-card">
-											<Image
+											<GuideScreenshot
 												src={section.image.src}
 												alt={section.image.alt}
-												width={1280}
-												height={720}
 												sizes="(max-width: 639px) calc(100vw - 32px), (max-width: 1023px) calc(100vw - 48px), 676px"
 												className="block h-auto w-full"
 											/>
@@ -304,6 +303,7 @@ export default async function GuideDetailPage({ params }: Props) {
 								<div className="mt-4 space-y-3">
 									{relatedGuides.map((relatedGuide) => (
 										<Link
+											prefetch={false}
 											key={relatedGuide.slug}
 											href={`/guides/${relatedGuide.slug}`}
 											className="block text-sm font-medium leading-snug transition-colors hover:text-muted-foreground"

@@ -1,2 +1,5 @@
 /screenshots/optimized/*
   Cache-Control: public, max-age=31536000, immutable
+
+/guides/screenshots/optimized/*
+  Cache-Control: public, max-age=31536000, immutable

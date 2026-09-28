@@ -1,7 +1,7 @@
 import { ArrowRight, BookOpen, CalendarDays, Clock3, Sparkles } from "lucide-react";
 import type { Metadata } from "next";
-import Image from "next/image";
 import { setRequestLocale } from "next-intl/server";
+import { GuideScreenshot } from "@/components/guides/GuideScreenshot";
 import { Link } from "@/i18n/navigation";
 import {
 	getAllGuides,
@@ -113,6 +113,7 @@ export default async function GuidesPage({ params }: Props) {
 								return guide ? (
 									<li key={slug}>
 										<Link
+											prefetch={false}
 											href={`/guides/${slug}`}
 											locale={guideLinkLocale}
 											className="underline underline-offset-4"
@@ -138,17 +139,16 @@ export default async function GuidesPage({ params }: Props) {
 						const primaryImage = getGuidePrimaryImage(guide);
 						return (
 							<Link
+								prefetch={false}
 								key={guide.slug}
 								href={`/guides/${guide.slug}`}
 								locale={guideLinkLocale}
 								className="group overflow-hidden rounded-lg border bg-card shadow-sm transition-colors hover:border-foreground/30"
 							>
 								{primaryImage && (
-									<Image
+									<GuideScreenshot
 										src={primaryImage.src}
 										alt={primaryImage.alt}
-										width={1280}
-										height={720}
 										sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1023px) 33vw, 314px"
 										className="aspect-video w-full object-cover"
 									/>
@@ -189,6 +189,7 @@ export default async function GuidesPage({ params }: Props) {
 				<div className="divide-y rounded-lg border bg-card">
 					{guides.map((guide) => (
 						<Link
+							prefetch={false}
 							key={guide.slug}
 							href={`/guides/${guide.slug}`}
 							locale={guideLinkLocale}

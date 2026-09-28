@@ -1,0 +1,218 @@
+{
+	"/guides/screenshots/basics-en.png": {
+		"width": 1280,
+		"height": 720,
+		"variants": [
+			{
+				"src": "/guides/screenshots/optimized/basics-en-384-817dc152383b.webp",
+				"width": 384
+			},
+			{
+				"src": "/guides/screenshots/optimized/basics-en-768-f2fddc124148.webp",
+				"width": 768
+			},
+			{
+				"src": "/guides/screenshots/optimized/basics-en-1280-db5c530fa66d.webp",
+				"width": 1280
+			}
+		]
+	},
+	"/guides/screenshots/basics-zh.png": {
+		"width": 1280,
+		"height": 720,
+		"variants": [
+			{
+				"src": "/guides/screenshots/optimized/basics-zh-384-dc666b2b1768.webp",
+				"width": 384
+			},
+			{
+				"src": "/guides/screenshots/optimized/basics-zh-768-39f11905b8da.webp",
+				"width": 768
+			},
+			{
+				"src": "/guides/screenshots/optimized/basics-zh-1280-4318e5af3e1e.webp",
+				"width": 1280
+			}
+		]
+	},
+	"/guides/screenshots/media-en.png": {
+		"width": 1280,
+		"height": 720,
+		"variants": [
+			{
+				"src": "/guides/screenshots/optimized/media-en-384-fddab68fa558.webp",
+				"width": 384
+			},
+			{
+				"src": "/guides/screenshots/optimized/media-en-768-9de1056a518d.webp",
+				"width": 768
+			},
+			{
+				"src": "/guides/screenshots/optimized/media-en-1280-d28bfe4cc041.webp",
+				"width": 1280
+			}
+		]
+	},
+	"/guides/screenshots/media-zh.png": {
+		"width": 1280,
+		"height": 720,
+		"variants": [
+			{
+				"src": "/guides/screenshots/optimized/media-zh-384-6a0e37486532.webp",
+				"width": 384
+			},
+			{
+				"src": "/guides/screenshots/optimized/media-zh-768-d9833d844875.webp",
+				"width": 768
+			},
+			{
+				"src": "/guides/screenshots/optimized/media-zh-1280-b13ea8d9da1e.webp",
+				"width": 1280
+			}
+		]
+	},
+	"/guides/screenshots/photos-en.png": {
+		"width": 1280,
+		"height": 720,
+		"variants": [
+			{
+				"src": "/guides/screenshots/optimized/photos-en-384-8d292c2d9cfe.webp",
+				"width": 384
+			},
+			{
+				"src": "/guides/screenshots/optimized/photos-en-768-ee016c940fa6.webp",
+				"width": 768
+			},
+			{
+				"src": "/guides/screenshots/optimized/photos-en-1280-70d6e4813603.webp",
+				"width": 1280
+			}
+		]
+	},
+	"/guides/screenshots/photos-zh.png": {
+		"width": 1280,
+		"height": 720,
+		"variants": [
+			{
+				"src": "/guides/screenshots/optimized/photos-zh-384-451d050afcc3.webp",
+				"width": 384
+			},
+			{
+				"src": "/guides/screenshots/optimized/photos-zh-768-cffe04eb255c.webp",
+				"width": 768
+			},
+			{
+				"src": "/guides/screenshots/optimized/photos-zh-1280-e69d855c1320.webp",
+				"width": 1280
+			}
+		]
+	},
+	"/guides/screenshots/regex-en.png": {
+		"width": 1280,
+		"height": 720,
+		"variants": [
+			{
+				"src": "/guides/screenshots/optimized/regex-en-384-bccb54b844b6.webp",
+				"width": 384
+			},
+			{
+				"src": "/guides/screenshots/optimized/regex-en-768-9cc9a851e43d.webp",
+				"width": 768
+			},
+			{
+				"src": "/guides/screenshots/optimized/regex-en-1280-a8debefa6d8d.webp",
+				"width": 1280
+			}
+		]
+	},
+	"/guides/screenshots/regex-zh.png": {
+		"width": 1280,
+		"height": 720,
+		"variants": [
+			{
+				"src": "/guides/screenshots/optimized/regex-zh-384-2acfa1b4d92b.webp",
+				"width": 384
+			},
+			{
+				"src": "/guides/screenshots/optimized/regex-zh-768-5c706fffd2ce.webp",
+				"width": 768
+			},
+			{
+				"src": "/guides/screenshots/optimized/regex-zh-1280-f3da48f30b5c.webp",
+				"width": 1280
+			}
+		]
+	},
+	"/guides/screenshots/samples-en.png": {
+		"width": 1280,
+		"height": 720,
+		"variants": [
+			{
+				"src": "/guides/screenshots/optimized/samples-en-384-c64f6d1d74b6.webp",
+				"width": 384
+			},
+			{
+				"src": "/guides/screenshots/optimized/samples-en-768-fc85ca70f203.webp",
+				"width": 768
+			},
+			{
+				"src": "/guides/screenshots/optimized/samples-en-1280-b4ab4b1718b9.webp",
+				"width": 1280
+			}
+		]
+	},
+	"/guides/screenshots/samples-zh.png": {
+		"width": 1280,
+		"height": 720,
+		"variants": [
+			{
+				"src": "/guides/screenshots/optimized/samples-zh-384-41db6b3d8b44.webp",
+				"width": 384
+			},
+			{
+				"src": "/guides/screenshots/optimized/samples-zh-768-3774cebcff48.webp",
+				"width": 768
+			},
+			{
+				"src": "/guides/screenshots/optimized/samples-zh-1280-38878b97a26e.webp",
+				"width": 1280
+			}
+		]
+	},
+	"/guides/screenshots/sequence-en.png": {
+		"width": 1280,
+		"height": 720,
+		"variants": [
+			{
+				"src": "/guides/screenshots/optimized/sequence-en-384-352df3a9aed6.webp",
+				"width": 384
+			},
+			{
+				"src": "/guides/screenshots/optimized/sequence-en-768-491805e2d4b0.webp",
+				"width": 768
+			},
+			{
+				"src": "/guides/screenshots/optimized/sequence-en-1280-4665d9a8127f.webp",
+				"width": 1280
+			}
+		]
+	},
+	"/guides/screenshots/sequence-zh.png": {
+		"width": 1280,
+		"height": 720,
+		"variants": [
+			{
+				"src": "/guides/screenshots/optimized/sequence-zh-384-adce7614bd80.webp",
+				"width": 384
+			},
+			{
+				"src": "/guides/screenshots/optimized/sequence-zh-768-8e26452dac41.webp",
+				"width": 768
+			},
+			{
+				"src": "/guides/screenshots/optimized/sequence-zh-1280-39d2289f49eb.webp",
+				"width": 1280
+			}
+		]
+	}
+}

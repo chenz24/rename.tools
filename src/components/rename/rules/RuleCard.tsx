@@ -1,12 +1,12 @@
 import { Reorder, useDragControls } from "framer-motion";
 import { Copy, GripVertical, Trash2 } from "lucide-react";
+import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import type { RenameRule } from "@/lib/rename/types";
 import { CaseStyleEditor } from "./CaseStyleEditor";
-import { CustomJsEditor } from "./CustomJsEditor";
 import {
 	RULE_BADGE_COLORS,
 	RULE_BG_COLORS,
@@ -20,6 +20,10 @@ import { InsertEditor } from "./InsertEditor";
 import { RegexEditor } from "./RegexEditor";
 import { RemoveCleanupEditor } from "./RemoveCleanupEditor";
 import { SequenceEditor } from "./SequenceEditor";
+
+const CustomJsEditor = dynamic(() => import("./CustomJsEditor").then((m) => m.CustomJsEditor), {
+	loading: () => <div className="h-40 animate-pulse rounded-md bg-muted" aria-busy="true" />,
+});
 
 interface RuleCardProps {
 	rule: RenameRule;

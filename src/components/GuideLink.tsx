@@ -19,6 +19,7 @@ export function GuideLink({ topic }: { topic: string }) {
 
 	return (
 		<Link
+			prefetch={false}
 			href={`/guides/${guide.slug}`}
 			locale={guideLocale}
 			hrefLang={guideLocale}
