@@ -133,6 +133,8 @@ Errors offer **Try again** and **Repair and reload**. A small inline fallback al
 
 Already-open pages from before this feature cannot acquire a new error UI without reloading; the direct recovery URL remains available once deployed. This is a cache recovery mechanism, not a remedy for server outages or application logic bugs.
 
+Navigation requests fall back to the current offline cache after 10 seconds without a network response. Offline fallback pages come only from the current static cache. Update actions handle workers already activated by another tab; a refresh fallback runs only after the user accepts the update. Repair checks for concurrent re-registration before deleting caches. Failed production builds leave the previous generated worker untouched.
+
 ## 🔒 Privacy
 
 Rename.Tools is built with a **privacy-first architecture**:

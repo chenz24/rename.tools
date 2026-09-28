@@ -5,6 +5,7 @@ import { describe, expect, it, vi } from "vitest";
 const template = readFileSync("scripts/service-worker.js", "utf8");
 function setup() {
 	const stores = new Map<string, Map<string, Response>>();
+	const cacheKey = (request: Request | string) => new URL(typeof request === "string" ? request : request.url, "https://rename.tools").href;
 	const caches = {
 		keys: async () => [...stores.keys()],
 		delete: vi.fn(async (name: string) => stores.delete(name)),
@@ -12,20 +13,20 @@ function setup() {
 			if (!stores.has(name)) stores.set(name, new Map());
 			const store = stores.get(name)!;
 			return {
-				match: async (request: Request | string) => store.get(typeof request === "string" ? request : request.url)?.clone(),
-				put: async (request: Request | string, response: Response) => { store.set(typeof request === "string" ? request : request.url, response.clone()); },
+				match: async (request: Request | string) => store.get(cacheKey(request))?.clone(),
+				put: async (request: Request | string, response: Response) => { store.set(cacheKey(request), response.clone()); },
 				addAll: vi.fn(),
 			};
 		},
 		match: async (request: Request | string, options?: { cacheName: string }) => {
-			const key = typeof request === "string" ? request : request.url;
+			const key = cacheKey(request);
 			for (const [name, store] of stores) if ((!options || name === options.cacheName) && store.has(key)) return store.get(key)!.clone();
 		},
 	};
-	const fetch = vi.fn(async () => new Response("new release", { headers: { "Content-Type": "text/html" } }));
+	const fetch = vi.fn(async (_request?: unknown, _options?: { signal?: AbortSignal }) => new Response("new release", { headers: { "Content-Type": "text/html" } }));
 	const handlers: Record<string, (event: unknown) => void> = {};
 	const self = { location: { origin: "https://rename.tools" }, clients: { claim: vi.fn() }, skipWaiting: vi.fn(), addEventListener: (name: string, handler: (event: unknown) => void) => { handlers[name] = handler; } };
-	const load = (release: string) => runInNewContext(template.replaceAll("__RENAME_RELEASE__", release), { self, caches, fetch, URL, Response });
+	const load = (release: string) => runInNewContext(template.replaceAll("__RENAME_RELEASE__", release), { self, caches, fetch, URL, Response, AbortController, setTimeout, clearTimeout });
 	const request = async (path: string, options: { mode?: string; headers?: Record<string, string> } = {}) => {
 		const req = { url: `https://rename.tools${path}`, method: "GET", mode: options.mode || "cors", headers: new Headers(options.headers) };
 		const pending: Promise<unknown>[] = [];
@@ -82,6 +83,29 @@ describe("production SW deployment compatibility", () => {
 		s.load("release-b");
 		await s.activate();
 		expect((await s.request("/en", { mode: "navigate" }))?.status).toBe(503);
+	});
+
+	it("serves the current offline page instead of the legacy page without repair", async () => {
+		const s = setup();
+		await s.seed("rename-tools-static-v1.1", "/offline.html", "legacy offline page");
+		await s.seed("rename-tools-static-v2", "/offline.html", "offline with repair link");
+		s.fetch.mockRejectedValue(new Error("offline"));
+		expect(await (await s.request("/zh/app", { mode: "navigate" }))?.text()).toBe("offline with repair link");
+	});
+
+	it("falls back to cached HTML if the navigation network never responds", async () => {
+		vi.useFakeTimers();
+		try {
+			const s = setup();
+			await s.seed("rename-tools-pages-release-a", "/en", "usable cached page");
+			s.fetch.mockImplementation((_request, options) => new Promise((_resolve, reject) => {
+				options?.signal?.addEventListener("abort", () => reject(new Error("aborted")));
+			}));
+			const result = s.request("/en", { mode: "navigate" });
+			await vi.advanceTimersByTimeAsync(10000);
+			expect(await (await result)?.text()).toBe("usable cached page");
+			expect(vi.getTimerCount()).toBe(0);
+		} finally { vi.useRealTimers(); }
 	});
 
 	it("still loads online when CacheStorage is unavailable", async () => {

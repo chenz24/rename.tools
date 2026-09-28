@@ -9,26 +9,50 @@ export function registerServiceWorker(
 	let updateRequested = false;
 	let reloaded = false;
 	let interval: ReturnType<typeof setInterval> | undefined;
+	let reloadTimeout: ReturnType<typeof setTimeout> | undefined;
+	let currentRegistration: ServiceWorkerRegistration | undefined;
 	const cleanup: (() => void)[] = [];
 	const observed = new Set<ServiceWorker>();
 	const notified = new Set<ServiceWorker>();
+	const reloadOnce = () => {
+		if (disposed || reloaded) return;
+		reloaded = true;
+		clearTimeout(reloadTimeout);
+		reload();
+	};
 
 	const notifyUpdate = (worker: ServiceWorker) => {
 		if (disposed || !container.controller || notified.has(worker)) return;
 		notified.add(worker);
 		onUpdate(() => {
-			if (disposed) return;
+			if (disposed || updateRequested) return;
 			updateRequested = true;
-			worker.postMessage("SKIP_WAITING");
+			// The toast can outlive its worker: another tab may have updated, or a
+			// newer release may now be waiting. Act on the current registration.
+			const target = currentRegistration?.waiting ?? worker;
+			if (
+				target.state === "activated" ||
+				target.state === "redundant" ||
+				container.controller === target
+			) {
+				reloadOnce();
+				return;
+			}
+			try {
+				target.postMessage("SKIP_WAITING");
+				// Activation or clients.claim() can fail. This fallback is armed only
+				// after the user explicitly chooses Refresh, and runs at most once.
+				reloadTimeout = setTimeout(reloadOnce, 10000);
+			} catch (error) {
+				onError(error);
+				reloadOnce();
+			}
 		});
 	};
 
 	const onControllerChange = () => {
 		// clients.claim() also fires on the first visit. Never reload for that.
-		if (!disposed && updateRequested && !reloaded) {
-			reloaded = true;
-			reload();
-		}
+		if (updateRequested) reloadOnce();
 	};
 	container.addEventListener("controllerchange", onControllerChange);
 	cleanup.push(() => container.removeEventListener("controllerchange", onControllerChange));
@@ -37,6 +61,7 @@ export function registerServiceWorker(
 		.register("/sw.js", { scope: "/", updateViaCache: "none" })
 		.then((registration) => {
 			if (disposed) return;
+			currentRegistration = registration;
 			const observeInstalling = () => {
 				const worker = registration.installing;
 				if (!worker || observed.has(worker)) return;
@@ -69,6 +94,7 @@ export function registerServiceWorker(
 	return () => {
 		disposed = true;
 		clearInterval(interval);
+		clearTimeout(reloadTimeout);
 		for (const removeListener of cleanup) removeListener();
 	};
 }

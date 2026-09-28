@@ -35,7 +35,7 @@
   let target = new URL('/en', location.origin);
   try {
     const candidate = new URL(requested, location.origin);
-    if (candidate.origin === location.origin && /^\/(en|zh|ja|ko|es|fr|de)(\/|$)/.test(candidate.pathname)) target = candidate;
+    if (candidate.origin === location.origin && !candidate.username && !candidate.password && /^\/(en|zh|ja|ko|es|fr|de)(\/|$)/.test(candidate.pathname)) target = candidate;
   } catch {}
   const locale = target.pathname.split('/')[1];
   const t = copy[locale] || copy.en;
@@ -55,6 +55,9 @@
     const url = new URL(worker.scriptURL);
     return url.origin === location.origin && url.pathname === '/sw.js';
   }
+  function ourRegistration(registration) {
+    return registration.scope === location.origin + '/' && [registration.active, registration.waiting, registration.installing].some(ours);
+  }
   button.onclick = async () => {
     if (running) return;
     running = true;
@@ -69,8 +72,11 @@
       if (!(await bounded(response.text())).includes('id="repair"')) throw new Error('unexpected response');
       if ('serviceWorker' in navigator) {
         const registrations = await bounded(navigator.serviceWorker.getRegistrations());
-        const results = await bounded(Promise.all(registrations.filter((r) => r.scope === location.origin + '/' && [r.active, r.waiting, r.installing].some(ours)).map((r) => r.unregister())));
+        const results = await bounded(Promise.all(registrations.filter(ourRegistration).map((r) => r.unregister())));
         if (results.some((removed) => !removed)) throw new Error('unregister failed');
+        // unregister() can resolve true while another tab registers the same scope.
+        // Do not clear caches or claim success if that race is already observable.
+        if ((await bounded(navigator.serviceWorker.getRegistrations())).some(ourRegistration)) throw new Error('worker registered again');
       }
       if ('caches' in window) {
         const names = await bounded(caches.keys());

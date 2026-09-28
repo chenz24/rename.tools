@@ -69,8 +69,10 @@ async function cacheAsset(request, event, allowLegacy = true) {
 }
 
 async function navigate(request, event) {
+  const abort = new AbortController();
+  const timeout = setTimeout(() => abort.abort(), 10000);
   try {
-    const response = await fetch(request);
+    const response = await fetch(request, { signal: abort.signal });
     if (response.ok && (response.headers.get('Content-Type') || '').includes('text/html')) {
       const copy = response.clone();
       event.waitUntil(caches.open(DYNAMIC_CACHE).then((cache) => cache.put(request, copy)).catch(() => {}));
@@ -79,10 +81,13 @@ async function navigate(request, event) {
   } catch {
     try {
       const cache = await caches.open(DYNAMIC_CACHE);
-      const cached = (await cache.match(request)) || (await caches.match(OFFLINE_URL));
+      const cached = (await cache.match(request)) ||
+        (await caches.match(OFFLINE_URL, { cacheName: STATIC_CACHE }));
       if (cached) return cached;
     } catch { /* Offline and storage unavailable: return an explicit failure. */ }
     return new Response('Offline. Reconnect and reload.', { status: 503 });
+  } finally {
+    clearTimeout(timeout);
   }
 }
 

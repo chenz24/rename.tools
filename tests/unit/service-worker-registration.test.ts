@@ -87,6 +87,49 @@ describe("service worker lifecycle", () => {
 		dispose();
 	});
 
+	it("allows manual refresh after another tab has already activated the offered worker", async () => {
+		const s = setup({ controlled: true, waiting: true });
+		const dispose = s.start();
+		await Promise.resolve();
+		s.worker.state = "activated";
+		s.registration.waiting = null;
+		s.container.controller = s.worker;
+		s.container.dispatchEvent(new Event("controllerchange"));
+		expect(s.reload).not.toHaveBeenCalled();
+		s.onUpdate.mock.calls[0][0]();
+		expect(s.reload).toHaveBeenCalledOnce();
+		expect(s.worker.postMessage).not.toHaveBeenCalled();
+		dispose();
+	});
+
+	it("accepts the latest waiting version when an older update notice is clicked", async () => {
+		const s = setup({ controlled: true, waiting: true });
+		const dispose = s.start();
+		await Promise.resolve();
+		s.worker.state = "redundant";
+		const latest = new Worker();
+		latest.state = "installed";
+		s.registration.waiting = latest;
+		s.onUpdate.mock.calls[0][0]();
+		expect(latest.postMessage).toHaveBeenCalledWith("SKIP_WAITING");
+		expect(s.worker.postMessage).not.toHaveBeenCalled();
+		dispose();
+	});
+
+	it("reloads once after an accepted update stalls, but never before user consent", async () => {
+		const s = setup({ controlled: true, waiting: true });
+		const dispose = s.start();
+		await Promise.resolve();
+		await vi.advanceTimersByTimeAsync(10000);
+		expect(s.reload).not.toHaveBeenCalled();
+		s.onUpdate.mock.calls[0][0]();
+		await vi.advanceTimersByTimeAsync(10000);
+		s.container.dispatchEvent(new Event("controllerchange"));
+		expect(s.reload).toHaveBeenCalledOnce();
+		dispose();
+		expect(vi.getTimerCount()).toBe(0);
+	});
+
 	it("cleans up listeners, polling and stale toast actions on unmount", async () => {
 		const s = setup({ controlled: true });
 		const dispose = s.start();

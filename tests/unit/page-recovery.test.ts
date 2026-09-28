@@ -64,6 +64,7 @@ function repairSetup(returnTo = "/zh/app?preset=123#rules") {
 	const ownRegistration = { scope: `${origin}/`, active: { scriptURL: `${origin}/sw.js` }, unregister: vi.fn().mockResolvedValue(true) };
 	const unrelated = { scope: `${origin}/another/`, active: { scriptURL: `${origin}/another/sw.js` }, unregister: vi.fn() };
 	const serviceWorker = { getRegistrations: vi.fn().mockResolvedValue([ownRegistration, unrelated]) };
+	ownRegistration.unregister.mockImplementation(async () => { serviceWorker.getRegistrations.mockResolvedValue([unrelated]); return true; });
 	const caches = { keys: vi.fn().mockResolvedValue(["rename-tools-static-v1.1", "rename-tools-pages-old", "other-app"]), delete: vi.fn().mockResolvedValue(true) };
 	const fetch = vi.fn().mockImplementation(async () => new Response(html, { headers: { "Content-Type": "text/html" } }));
 	const location = { origin, href: `${origin}/repair.html?returnTo=${encodeURIComponent(returnTo)}`, replace: vi.fn() };
@@ -90,6 +91,15 @@ describe("standalone repair", () => {
 		expect(target.searchParams.has("_repair")).toBe(true);
 		expect(target.hash).toBe("#rules");
 	});
+	it("does not clear caches when another tab re-registers the worker during repair", async () => {
+		const s = repairSetup();
+		s.ownRegistration.unregister.mockImplementation(async () => true);
+		await s.repair();
+		expect(s.caches.delete).not.toHaveBeenCalled();
+		expect(s.location.replace).not.toHaveBeenCalled();
+		expect(s.elements.get("repair")!.disabled).toBe(false);
+	});
+
 	it("does not destroy offline caches when connectivity verification fails", async () => {
 		const s = repairSetup();
 		s.fetch.mockRejectedValue(new Error("offline"));
@@ -110,7 +120,7 @@ describe("standalone repair", () => {
 		await s.repair();
 		expect(s.location.replace).toHaveBeenCalledOnce();
 	});
-	it.each(["https://evil.example/zh", "//evil.example/en", "/repair.html", "/api/delete", "javascript:alert(1)"])("rejects unsafe/recursive return target %s", async (target) => {
+	it.each(["https://user:password@rename.tools/en", "https://evil.example/zh", "//evil.example/en", "/repair.html", "/api/delete", "javascript:alert(1)"])("rejects unsafe/recursive return target %s", async (target) => {
 		const s = repairSetup(target);
 		await s.repair();
 		expect(new URL(s.location.replace.mock.calls[0][0]).pathname).toBe("/en");
