@@ -11,6 +11,7 @@ import { UmamiAnalytics } from "@/components/UmamiAnalytics";
 import { Toaster } from "@/components/ui/sonner";
 import { getClientMessages } from "@/i18n/client-messages";
 import { routing } from "@/i18n/routing";
+import { developmentServiceWorkerCleanup } from "@/lib/development-service-worker-cleanup";
 import { generatePageMetadata } from "@/lib/metadata";
 import "../globals.css";
 
@@ -52,6 +53,12 @@ export default async function LocaleLayout({ children, params }: Props) {
 	return (
 		<html lang={locale} suppressHydrationWarning>
 			<head>
+				{process.env.NODE_ENV === "development" && (
+					<script
+						// biome-ignore lint/security/noDangerouslySetInnerHtml: Fixed local bootstrap with no interpolated data; must run even if React cannot hydrate.
+						dangerouslySetInnerHTML={{ __html: developmentServiceWorkerCleanup }}
+					/>
+				)}
 				<link rel="icon" href="/logo.svg" type="image/svg+xml" />
 				<link rel="apple-touch-icon" href="/logo.svg" />
 			</head>
