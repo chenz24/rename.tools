@@ -379,7 +379,10 @@
 				"errorNetwork": "Network error, please retry",
 				"errorTimeout": "Validation timed out",
 				"errorUnknown": "Unknown error"
-			}
+			},
+			"feedback": "Votre avis",
+			"feedbackTooltip": "Envoyer un problème ou une suggestion par e-mail",
+			"feedbackSubject": "Retour sur Rename.Tools"
 		},
 		"files": {
 			"title": "Liste de Fichiers",

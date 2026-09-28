@@ -379,7 +379,10 @@
 				"errorNetwork": "ネットワークエラー、再試行してください",
 				"errorTimeout": "検証がタイムアウトしました",
 				"errorUnknown": "不明なエラー"
-			}
+			},
+			"feedback": "フィードバック",
+			"feedbackTooltip": "問題やご提案をメールで送る",
+			"feedbackSubject": "Rename.Tools フィードバック"
 		},
 		"files": {
 			"title": "ファイルリスト",

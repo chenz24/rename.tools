@@ -379,7 +379,10 @@
 				"errorNetwork": "Error de red, por favor reintente",
 				"errorTimeout": "Tiempo de validación agotado",
 				"errorUnknown": "Error desconocido"
-			}
+			},
+			"feedback": "Comentarios",
+			"feedbackTooltip": "Enviar un problema o sugerencia por correo",
+			"feedbackSubject": "Comentarios sobre Rename.Tools"
 		},
 		"files": {
 			"title": "Lista de Archivos",

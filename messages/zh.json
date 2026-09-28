@@ -383,7 +383,10 @@
 				"errorNetwork": "网络错误，请重试",
 				"errorTimeout": "验证超时",
 				"errorUnknown": "未知错误"
-			}
+			},
+			"feedback": "反馈",
+			"feedbackTooltip": "通过邮件反馈问题或建议",
+			"feedbackSubject": "Rename.Tools 问题与建议"
 		},
 		"files": {
 			"title": "文件列表",

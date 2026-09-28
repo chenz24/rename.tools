@@ -383,7 +383,10 @@
 				"errorNetwork": "Network error, please retry",
 				"errorTimeout": "Validation timed out",
 				"errorUnknown": "Unknown error"
-			}
+			},
+			"feedback": "Feedback",
+			"feedbackTooltip": "Send a problem or suggestion by email",
+			"feedbackSubject": "Rename.Tools feedback"
 		},
 		"files": {
 			"title": "File List",

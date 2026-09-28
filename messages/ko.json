@@ -379,7 +379,10 @@
 				"errorNetwork": "네트워크 오류, 다시 시도하세요",
 				"errorTimeout": "확인 시간 초과",
 				"errorUnknown": "알 수 없는 오류"
-			}
+			},
+			"feedback": "피드백",
+			"feedbackTooltip": "문제나 제안을 이메일로 보내기",
+			"feedbackSubject": "Rename.Tools 피드백"
 		},
 		"files": {
 			"title": "파일 목록",

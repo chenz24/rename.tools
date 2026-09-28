@@ -1,6 +1,6 @@
 "use client";
 
-import { Coffee, Film, Moon, Settings, Sun } from "lucide-react";
+import { Coffee, Film, MessageSquare, Moon, Settings, Sun } from "lucide-react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
@@ -81,6 +81,28 @@ export function RenameHeader() {
 				{/* Right: Controls */}
 				<div className="flex items-center gap-0.5">
 					<RenameTour />
+					<Tooltip>
+						<TooltipTrigger asChild>
+							<Button
+								variant="ghost"
+								size="sm"
+								asChild
+								className="h-8 gap-1.5 text-xs text-slate-300 hover:bg-slate-800 hover:text-slate-100"
+								aria-label={t("feedback")}
+							>
+								<a
+									href={`mailto:flowmind2026@gmail.com?subject=${encodeURIComponent(t("feedbackSubject"))}`}
+								>
+									<MessageSquare className="size-4" />
+									<span className="hidden sm:inline">{t("feedback")}</span>
+								</a>
+							</Button>
+						</TooltipTrigger>
+						<TooltipContent>
+							<p>{t("feedbackTooltip")}</p>
+							<p>flowmind2026@gmail.com</p>
+						</TooltipContent>
+					</Tooltip>
 					<Tooltip>
 						<TooltipTrigger asChild>
 							<Button

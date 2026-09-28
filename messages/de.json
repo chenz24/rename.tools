@@ -379,7 +379,10 @@
 				"errorNetwork": "Netzwerkfehler, bitte erneut versuchen",
 				"errorTimeout": "Validierung abgelaufen",
 				"errorUnknown": "Unbekannter Fehler"
-			}
+			},
+			"feedback": "Feedback",
+			"feedbackTooltip": "Probleme oder Vorschläge per E-Mail senden",
+			"feedbackSubject": "Rename.Tools Feedback"
 		},
 		"files": {
 			"title": "Dateiliste",
