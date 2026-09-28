@@ -1,6 +1,6 @@
 export const RENAME_TOUR_STORAGE_KEY = "rename-tools:tour:v1";
 
-export type TourStep = 0 | 1 | 2 | 3;
+export type TourStep = 0 | 1 | 2 | 3 | 4;
 
 export interface TourSnapshot {
 	fileCount: number;

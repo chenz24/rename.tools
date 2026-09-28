@@ -691,7 +691,7 @@ export function PreviewPanel({
 									{tExecute("execute")} ({affectedCount})
 								</button>
 							</AlertDialogTrigger>
-							<AlertDialogContent>
+							<AlertDialogContent data-tour="execution-confirmation">
 								<AlertDialogHeader>
 									<AlertDialogTitle>{tExecute("confirmTitle")}</AlertDialogTitle>
 									<AlertDialogDescription>
@@ -700,6 +700,7 @@ export function PreviewPanel({
 										})}
 									</AlertDialogDescription>
 								</AlertDialogHeader>
+								<div data-tour="confirmation-hint" className="empty:hidden" />
 
 								<div className="flex items-start gap-2 rounded-md border border-warning/30 bg-warning/5 p-3">
 									<Checkbox

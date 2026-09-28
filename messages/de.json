@@ -922,8 +922,13 @@
 			"conflictBody": "Einige Namen stehen im Konflikt. Passe die Regeln an oder nutze die automatische Korrektur und prüfe das Ergebnis.",
 			"demoDoneTitle": "Eigene Dateien ausprobieren",
 			"demoDoneBody": "Diese Einträge dienen nur zur Vorschau. Importiere eigene Dateien, um die Beispiele zu ersetzen und die Regeln zu behalten, oder exportiere ein Skript oder einen Plan.",
-			"executeTitle": "Bereit zum Umbenennen",
-			"executeBody": "Prüfe das Ergebnis und klicke auf Umbenennen. Vor der Änderung bestätigst du erneut. Die Tour führt keine Umbenennung für dich aus."
+			"executeTitle": "Umbenennen prüfen",
+			"executeBody": "Prüfe die Vorschau und klicke auf die hervorgehobene Schaltfläche zum Umbenennen oder auf „Bestätigung öffnen“. Das öffnet nur den Dialog; Dateien werden noch nicht geändert.",
+			"demoExecuteBody": "Hier ist die Schaltfläche zum Umbenennen. Beispieldateien erlauben nur eine Vorschau. Importiere eigene beschreibbare Dateien, um die Umbenennung zu prüfen und zu bestätigen.",
+			"useOwnFiles": "Eigene Dateien verwenden",
+			"reviewExecution": "Bestätigung öffnen",
+			"confirmTitle": "Prüfen und bestätigen",
+			"confirmBody": "Prüfe oben die Dateianzahl, lies den Hinweis unten und aktiviere das Kontrollkästchen. Erst mit der Bestätigung werden Dateien geändert. Abbrechen führt zum vorherigen Schritt zurück."
 		}
 	},
 	"about": {

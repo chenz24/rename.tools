@@ -31,5 +31,6 @@ describe("Rename tour progression", () => {
 	it("requires an explicit action to leave preview and never advances beyond confirmation", () => {
 		expect(nextTourStep(2, ready, true)).toBe(2);
 		expect(nextTourStep(3, ready, true)).toBe(3);
+		expect(nextTourStep(4, ready, true)).toBe(4);
 	});
 });

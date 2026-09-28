@@ -926,8 +926,13 @@
 			"conflictBody": "Some names conflict. Adjust the rules or use Auto-fix, then review the results before continuing.",
 			"demoDoneTitle": "Try your own files",
 			"demoDoneBody": "These entries are preview-only. Import your files to replace the samples and keep your rules, or export a script or plan.",
-			"executeTitle": "Ready to rename",
-			"executeBody": "After checking the results, click Execute Rename. You’ll confirm before any files change. This tour never executes a rename for you."
+			"executeTitle": "Click Rename to review",
+			"executeBody": "Check the preview, then click the highlighted Rename button or Review confirmation below. This only opens the confirmation dialog; files have not changed yet.",
+			"demoExecuteBody": "This is the Rename button. Samples are preview-only, so it is disabled. Import writable files of your own to review and confirm the rename.",
+			"useOwnFiles": "Use your own files",
+			"reviewExecution": "Review confirmation",
+			"confirmTitle": "Check and confirm",
+			"confirmBody": "Check the file count above, read and check the notice below, then click Confirm to modify files. Cancel returns to the previous step."
 		}
 	},
 	"about": {

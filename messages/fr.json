@@ -924,8 +924,13 @@
 			"conflictBody": "Certains noms sont en conflit. Ajustez les règles ou utilisez la correction automatique, puis vérifiez le résultat.",
 			"demoDoneTitle": "Essayez vos propres fichiers",
 			"demoDoneBody": "Ces entrées servent uniquement à l’aperçu. Importez vos fichiers pour remplacer les exemples en conservant les règles, ou exportez un script ou un plan.",
-			"executeTitle": "Prêt à renommer",
-			"executeBody": "Vérifiez le résultat, puis lancez le renommage. Une confirmation précède toute modification. Le guide n’exécute jamais le renommage à votre place."
+			"executeTitle": "Vérifier avant de renommer",
+			"executeBody": "Vérifiez l’aperçu, puis cliquez sur le bouton de renommage en surbrillance ou sur «Voir la confirmation». Cela ouvre seulement la boîte de confirmation ; aucun fichier n’est encore modifié.",
+			"demoExecuteBody": "Voici le bouton de renommage. Les exemples servent uniquement à l’aperçu, il est donc désactivé. Importez vos fichiers accessibles en écriture pour vérifier et confirmer le renommage.",
+			"useOwnFiles": "Utiliser vos fichiers",
+			"reviewExecution": "Voir la confirmation",
+			"confirmTitle": "Vérifier et confirmer",
+			"confirmBody": "Vérifiez le nombre de fichiers, lisez l’avertissement et cochez la case. Les fichiers ne seront modifiés qu’après confirmation. Annuler revient à l’étape précédente."
 		}
 	},
 	"about": {

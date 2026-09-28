@@ -919,8 +919,13 @@
 			"conflictBody": "Hay conflictos de nombres. Ajusta las reglas o usa la corrección automática y revisa el resultado antes de continuar.",
 			"demoDoneTitle": "Prueba tus propios archivos",
 			"demoDoneBody": "Estas entradas son solo de vista previa. Importa tus archivos para reemplazar los ejemplos y conservar las reglas, o exporta un script o un plan.",
-			"executeTitle": "Listo para renombrar",
-			"executeBody": "Comprueba el resultado y pulsa Ejecutar renombrado. Confirmarás antes de modificar archivos. Esta guía nunca ejecuta el renombrado por ti."
+			"executeTitle": "Revisa antes de renombrar",
+			"executeBody": "Revisa la vista previa y pulsa el botón resaltado para renombrar o «Revisar confirmación». Solo se abrirá el diálogo; los archivos aún no cambian.",
+			"demoExecuteBody": "Este es el botón para renombrar. Los ejemplos solo permiten vista previa, por eso está desactivado. Importa archivos propios con permiso de escritura para revisar y confirmar el cambio.",
+			"useOwnFiles": "Usar tus archivos",
+			"reviewExecution": "Revisar confirmación",
+			"confirmTitle": "Revisa y confirma",
+			"confirmBody": "Revisa la cantidad de archivos, lee el aviso y marca la casilla. Los archivos se modificarán al confirmar. Cancelar te devuelve al paso anterior."
 		}
 	},
 	"about": {

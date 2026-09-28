@@ -4,6 +4,7 @@ import type { Driver } from "driver.js";
 import { CircleHelp } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { toast } from "sonner";
 import { useShallow } from "zustand/react/shallow";
 import { Button } from "@/components/ui/button";
@@ -26,6 +27,7 @@ export function RenameTour() {
 	const [step, setStep] = useState<TourStep>(0);
 	const [instance, setInstance] = useState<Driver | null>(null);
 	const [suspended, setSuspended] = useState(false);
+	const [confirmationHint, setConfirmationHint] = useState<HTMLElement | null>(null);
 	const trigger = useRef<HTMLButtonElement>(null);
 	const stepRef = useRef<TourStep>(0);
 	const ruleEdited = useRef(false);
@@ -128,6 +130,10 @@ export function RenameTour() {
 		let blurTimer: ReturnType<typeof setTimeout> | undefined;
 		const update = () => {
 			const state = useRenameStore.getState();
+			if (state.isExecuting) {
+				finish();
+				return;
+			}
 			if (
 				stepRef.current === 1 &&
 				(previous.rules !== state.rules || previous.extensionScope !== state.extensionScope)
@@ -163,38 +169,43 @@ export function RenameTour() {
 				trigger.current?.focus();
 			}
 		};
-		const onClick = (event: MouseEvent) => {
-			if (
-				event.target instanceof Element &&
-				event.target.closest('[data-tour="execute"]') &&
-				event.target.closest("button:not(:disabled)") &&
-				useRenameStore.getState().preview.some((row) => row.hasChange)
-			)
-				finish();
+		let hadConfirmation = false;
+		const observeLayers = () => {
+			const hint = document.querySelector<HTMLElement>(
+				'[data-tour="execution-confirmation"][data-state="open"] [data-tour="confirmation-hint"]',
+			);
+			setConfirmationHint(hint);
+			if (hint && !hadConfirmation) moveTo(4);
+			else if (!hint && hadConfirmation) moveTo(3);
+			hadConfirmation = !!hint;
+			setSuspended(hasOpenLayer());
 		};
-		const observer = new MutationObserver(() => setSuspended(hasOpenLayer()));
+		const observer = new MutationObserver(observeLayers);
 		observer.observe(document.body, {
 			childList: true,
 			subtree: true,
 			attributes: true,
 			attributeFilter: ["data-state"],
 		});
+		observeLayers();
 		document.addEventListener("focusout", onBlur);
 		// Check for an open menu before Radix handles Escape and closes it.
 		document.addEventListener("keydown", onKey, true);
-		document.addEventListener("click", onClick, true);
 		return () => {
 			unsubscribe();
 			observer.disconnect();
 			clearTimeout(blurTimer);
 			document.removeEventListener("focusout", onBlur);
 			document.removeEventListener("keydown", onKey, true);
-			document.removeEventListener("click", onClick, true);
+			setConfirmationHint(null);
 		};
 	}, [active, finish, moveTo]);
 
 	const noRules = rules.length === 0;
 	const canDemo = files.length === 0 && noRules;
+	useEffect(() => {
+		if (active && step === 4 && !previewOnly && !confirmationHint && !suspended) moveTo(3);
+	}, [active, step, previewOnly, confirmationHint, suspended, moveTo]);
 	useEffect(() => {
 		if (!instance || !active) return;
 		if (suspended || isExecuting) {
@@ -208,9 +219,9 @@ export function RenameTour() {
 					? "rules"
 					: step === 2
 						? "preview"
-						: previewOnly
-							? "files"
-							: "execute";
+						: step === 3
+							? "execute"
+							: "files";
 		const element = document.querySelector<HTMLElement>(`[data-tour="${target}"]`);
 		if (!element) return;
 		const focusedInput =
@@ -219,12 +230,9 @@ export function RenameTour() {
 			document.activeElement.matches("input, textarea, [contenteditable=true]")
 				? document.activeElement
 				: null;
-		const titleKey = [
-			"importTitle",
-			"rulesTitle",
-			"previewTitle",
-			previewOnly ? "demoDoneTitle" : "executeTitle",
-		][step];
+		const titleKey = ["importTitle", "rulesTitle", "previewTitle", "executeTitle", "demoDoneTitle"][
+			step
+		];
 		const bodyKey =
 			step === 0
 				? "importBody"
@@ -236,9 +244,11 @@ export function RenameTour() {
 						? hasConflicts
 							? "conflictBody"
 							: "previewBody"
-						: previewOnly
+						: step === 4
 							? "demoDoneBody"
-							: "executeBody";
+							: previewOnly
+								? "demoExecuteBody"
+								: "executeBody";
 		const nextLabel =
 			step === 0
 				? "tryDemo"
@@ -250,19 +260,23 @@ export function RenameTour() {
 						? hasConflicts
 							? "editRules"
 							: "next"
-						: "done";
+						: step === 3
+							? previewOnly
+								? "useOwnFiles"
+								: "reviewExecution"
+							: "done";
 		const nextDisabled = step === 0 ? !canDemo : step === 1 ? !noRules && !canPreview : false;
 		instance.highlight({
 			element,
 			popover: {
 				title: t(titleKey),
 				description: t(bodyKey),
-				side: step === 3 && !previewOnly ? "top" : step === 2 ? "left" : "right",
+				side: step === 3 ? "top" : step === 2 ? "left" : "right",
 				align: "start",
 				showButtons: step === 0 && !canDemo ? ["previous", "close"] : ["previous", "next", "close"],
 				disableButtons: nextDisabled ? ["next"] : [],
 				showProgress: true,
-				progressText: `${step + 1} / 4`,
+				progressText: `${step + 1} / 5`,
 				prevBtnText: t("skip"),
 				nextBtnText: t(nextLabel),
 				onPrevClick: finish,
@@ -273,7 +287,11 @@ export function RenameTour() {
 					else if (step === 1 && noRules) useRenameStore.getState().addRule("sequence");
 					else if (step === 1) moveTo(2);
 					else if (step === 2) moveTo(hasConflicts ? 1 : 3);
-					else {
+					else if (step === 3 && previewOnly) moveTo(4);
+					else if (step === 3) {
+						// Open the existing confirmation only. The user still checks and confirms.
+						element.querySelector<HTMLButtonElement>("button:not(:disabled)")?.click();
+					} else {
 						finish();
 						trigger.current?.focus();
 					}
@@ -311,17 +329,34 @@ export function RenameTour() {
 	]);
 
 	return (
-		<Button
-			ref={trigger}
-			variant="ghost"
-			size="sm"
-			onClick={start}
-			disabled={isExecuting}
-			className="h-8 gap-1.5 text-xs text-slate-300 hover:bg-slate-800 hover:text-slate-100"
-			aria-label={t("start")}
-		>
-			<CircleHelp className="size-4" />
-			<span className="hidden sm:inline">{t("start")}</span>
-		</Button>
+		<>
+			{active &&
+				confirmationHint &&
+				createPortal(
+					<div className="rounded-lg border border-primary/20 bg-primary/5 p-3 text-sm">
+						<div className="mb-1 flex items-center justify-between gap-3">
+							<p className="font-medium">{t("confirmTitle")}</p>
+							<span className="shrink-0 text-xs text-muted-foreground">5 / 5</span>
+						</div>
+						<p className="text-xs leading-relaxed text-muted-foreground">{t("confirmBody")}</p>
+						<Button variant="link" size="sm" className="mt-1 h-auto p-0 text-xs" onClick={finish}>
+							{t("done")}
+						</Button>
+					</div>,
+					confirmationHint,
+				)}
+			<Button
+				ref={trigger}
+				variant="ghost"
+				size="sm"
+				onClick={start}
+				disabled={isExecuting}
+				className="h-8 gap-1.5 text-xs text-slate-300 hover:bg-slate-800 hover:text-slate-100"
+				aria-label={t("start")}
+			>
+				<CircleHelp className="size-4" />
+				<span className="hidden sm:inline">{t("start")}</span>
+			</Button>
+		</>
 	);
 }
