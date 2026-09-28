@@ -883,22 +883,10 @@
 			"empty": "(vide)"
 		},
 		"guidance": {
-			"workflow": "Renommer en trois étapes",
-			"import": "Importer des fichiers",
-			"configure": "Configurer les règles",
-			"review": "Vérifier et renommer",
-			"hideGuide": "Masquer les conseils",
-			"showGuide": "Afficher les conseils",
-			"stepHelp0": "Importez des fichiers ou un dossier, ou essayez la démo. Vos fichiers restent sur votre appareil.",
-			"stepHelp1": "Choisissez la modification souhaitée. Ajoutez une règle et ajustez ses options pour voir le résultat dans l’aperçu.",
-			"stepHelp2": "Comparez les noms d’origine et les nouveaux noms. Seule l’exécution modifie vos fichiers ; les règles mettent uniquement l’aperçu à jour.",
 			"tryDemo": "Essayer la démo",
 			"demoSafe": "3 photos d’exemple · aucun fichier modifié",
 			"demoLabel": "Fichiers de démonstration",
 			"demoHint": "Ajustez la numérotation et observez l’aperçu. Importer vos fichiers remplace les exemples tout en conservant la règle.",
-			"chooseTask": "Que souhaitez-vous modifier ?",
-			"rulesHint": "Choisissez une tâche courante ou explorez les options dans Ajouter une règle.",
-			"ruleOrder": "Les règles s’appliquent de haut en bas. Faites-les glisser pour changer leur ordre.",
 			"previewHint": "Importez des fichiers et ajoutez une règle pour comparer les noms. L’aperçu ne modifie pas vos fichiers.",
 			"viewConflicts": "Voir les conflits",
 			"selectFiles": "Afficher et sélectionner tous les fichiers",
@@ -914,12 +902,30 @@
 				"mixed": "Certaines entrées sont réservées à l’aperçu et seront ignorées lors de l’exécution.",
 				"computing": "Mise à jour de l’aperçu…",
 				"executing": "Renommage en cours…"
-			},
-			"tasks": {
-				"sequence": "Ajouter une numérotation",
-				"findReplace": "Remplacer du texte",
-				"removeCleanup": "Nettoyer les noms"
 			}
+		},
+		"tour": {
+			"start": "Guide rapide",
+			"skip": "Passer",
+			"next": "Continuer",
+			"done": "Terminer",
+			"tryDemo": "Essayer les exemples",
+			"addNumbering": "Numéroter",
+			"seePreview": "Voir l’aperçu",
+			"editRules": "Ajuster les règles",
+			"loadError": "Impossible de charger le guide. Veuillez réessayer.",
+			"importTitle": "Commencez par des fichiers",
+			"importBody": "Importez des fichiers ou un dossier, ou déposez-les ici. Vous pouvez aussi essayer trois photos d’exemple sans modifier de vrais fichiers.",
+			"rulesTitle": "Choisissez la modification",
+			"addRuleBody": "Choisissez une opération dans Ajouter une règle ou commencez par une numérotation. La règle reste modifiable à tout moment.",
+			"editRuleBody": "Modifiez la valeur de départ, le texte ou d’autres options. Une fois la saisie terminée, nous afficherons le résultat. Vous pouvez aussi choisir Voir l’aperçu.",
+			"previewTitle": "Comparez avant et après",
+			"previewBody": "Les noms d’origine sont à gauche, les nouveaux à droite. Il s’agit seulement d’un aperçu ; vos fichiers n’ont pas changé.",
+			"conflictBody": "Certains noms sont en conflit. Ajustez les règles ou utilisez la correction automatique, puis vérifiez le résultat.",
+			"demoDoneTitle": "Essayez vos propres fichiers",
+			"demoDoneBody": "Ces entrées servent uniquement à l’aperçu. Importez vos fichiers pour remplacer les exemples en conservant les règles, ou exportez un script ou un plan.",
+			"executeTitle": "Prêt à renommer",
+			"executeBody": "Vérifiez le résultat, puis lancez le renommage. Une confirmation précède toute modification. Le guide n’exécute jamais le renommage à votre place."
 		}
 	},
 	"about": {

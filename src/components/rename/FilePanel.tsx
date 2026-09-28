@@ -321,7 +321,7 @@ export function FilePanel({
 	const hasActiveFilter = filterConditions.length > 0;
 
 	return (
-		<div className="flex h-full flex-col border-r">
+		<div data-tour="files" className="flex h-full flex-col border-r">
 			{/* Panel Header + Import Buttons */}
 			<div className="border-b bg-muted/20 px-3 py-3 flex items-center gap-2">
 				<h2 className="text-sm font-medium text-foreground">{t("title")}</h2>
@@ -665,14 +665,16 @@ export function FilePanel({
 									</p>
 								</div>
 							)}
-							<Button
-								variant="link"
-								size="sm"
-								className="gap-1.5 text-xs text-muted-foreground mt-1"
-								onClick={() => setSampleMode(true)}
-							>
-								<FlaskConical className="h-3.5 w-3.5" /> {t("trySampleMode")}
-							</Button>
+							{!onTryDemo && (
+								<Button
+									variant="link"
+									size="sm"
+									className="gap-1.5 text-xs text-muted-foreground mt-1"
+									onClick={() => setSampleMode(true)}
+								>
+									<FlaskConical className="h-3.5 w-3.5" /> {t("trySampleMode")}
+								</Button>
+							)}
 						</div>
 					</div>
 				) : (

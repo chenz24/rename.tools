@@ -885,22 +885,10 @@
 			"empty": "(empty)"
 		},
 		"guidance": {
-			"workflow": "Rename in three steps",
-			"import": "Import files",
-			"configure": "Set up rules",
-			"review": "Preview & rename",
-			"hideGuide": "Hide tips",
-			"showGuide": "Show tips",
-			"stepHelp0": "Start by importing files or a folder, or try the demo. Your files stay on your device.",
-			"stepHelp1": "Choose what you want to change. Add a rule and adjust its options to see the result in the preview.",
-			"stepHelp2": "Compare the original and new names. Only Execute rename changes your files; editing rules only updates the preview.",
 			"tryDemo": "Try a demo",
 			"demoSafe": "3 sample photos · no files changed",
 			"demoLabel": "Demo files",
 			"demoHint": "Adjust the numbering rule and watch the preview. Import your files to replace these samples and keep the rule.",
-			"chooseTask": "What would you like to change?",
-			"rulesHint": "Start with a common task below, or explore more options in Add rule.",
-			"ruleOrder": "Rules run from top to bottom. Drag to change their order.",
 			"previewHint": "Import files and add a rule to compare names here. Previewing does not change your files.",
 			"viewConflicts": "View conflicts",
 			"selectFiles": "Show and select all files",
@@ -916,12 +904,30 @@
 				"mixed": "Some entries are preview-only and will be skipped during execution.",
 				"computing": "Updating preview…",
 				"executing": "Renaming files…"
-			},
-			"tasks": {
-				"sequence": "Add numbering",
-				"findReplace": "Replace text",
-				"removeCleanup": "Clean up names"
 			}
+		},
+		"tour": {
+			"start": "Quick tour",
+			"skip": "Skip",
+			"next": "Continue",
+			"done": "Finish tour",
+			"tryDemo": "Try samples",
+			"addNumbering": "Add numbering",
+			"seePreview": "View preview",
+			"editRules": "Edit rules",
+			"loadError": "Could not load the tour. Please try again.",
+			"importTitle": "Start with a few files",
+			"importBody": "Import files or a folder, or drop them here. You can also try 3 sample photos without changing any real files.",
+			"rulesTitle": "Choose how to rename",
+			"addRuleBody": "Choose an operation from Add Rule, or start with numbering. You can adjust the rule at any time.",
+			"editRuleBody": "Try changing the start value, text, or other options. When you finish editing, we’ll show the result. You can also choose View preview.",
+			"previewTitle": "Compare before and after",
+			"previewBody": "Original names are on the left, new names on the right. This is only a preview; your files have not changed.",
+			"conflictBody": "Some names conflict. Adjust the rules or use Auto-fix, then review the results before continuing.",
+			"demoDoneTitle": "Try your own files",
+			"demoDoneBody": "These entries are preview-only. Import your files to replace the samples and keep your rules, or export a script or plan.",
+			"executeTitle": "Ready to rename",
+			"executeBody": "After checking the results, click Execute Rename. You’ll confirm before any files change. This tour never executes a rename for you."
 		}
 	},
 	"about": {

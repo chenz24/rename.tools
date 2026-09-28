@@ -465,7 +465,7 @@ export function PreviewPanel({
 	const showLog = progress !== null || log.length > 0;
 
 	return (
-		<div className="flex h-full flex-col">
+		<div data-tour="preview" className="flex h-full flex-col">
 			{/* Header */}
 			<div className="panel-header flex-wrap gap-y-2 border-b bg-muted/30 px-4 flex items-center justify-between py-3!">
 				<div className="flex items-center gap-2">
@@ -577,7 +577,13 @@ export function PreviewPanel({
 				/>
 			)}
 
-			<div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-t bg-muted/20 px-4 py-2">
+			<div
+				className={
+					guidanceState === "noFiles"
+						? "sr-only"
+						: "flex flex-wrap items-center gap-x-3 gap-y-1 border-t bg-muted/20 px-4 py-2"
+				}
+			>
 				<output
 					id="rename-execution-hint"
 					className="text-xs leading-relaxed text-muted-foreground"
@@ -672,59 +678,61 @@ export function PreviewPanel({
 						</DropdownMenuContent>
 					</DropdownMenu>
 
-					<AlertDialog>
-						<AlertDialogTrigger asChild>
-							<button
-								type="button"
-								className="inline-flex items-center gap-1.5 rounded-md brand-gradient px-4 py-2 text-sm font-medium text-white shadow-sm transition-all hover:shadow-lg disabled:opacity-50 disabled:pointer-events-none"
-								aria-describedby="rename-execution-hint"
-								disabled={!canExecute}
-							>
-								<Play className="h-3.5 w-3.5" />
-								{tExecute("execute")} ({affectedCount})
-							</button>
-						</AlertDialogTrigger>
-						<AlertDialogContent>
-							<AlertDialogHeader>
-								<AlertDialogTitle>{tExecute("confirmTitle")}</AlertDialogTitle>
-								<AlertDialogDescription>
-									{tExecute("confirmDesc", {
-										count: String(affectedCount),
-									})}
-								</AlertDialogDescription>
-							</AlertDialogHeader>
-
-							<div className="flex items-start gap-2 rounded-md border border-warning/30 bg-warning/5 p-3">
-								<Checkbox
-									id="timestamp-warning"
-									checked={warningChecked}
-									onCheckedChange={(v) => setWarningChecked(!!v)}
-									className="mt-0.5"
-								/>
-								<label
-									htmlFor="timestamp-warning"
-									className="text-xs text-muted-foreground leading-relaxed cursor-pointer"
+					<div data-tour="execute">
+						<AlertDialog>
+							<AlertDialogTrigger asChild>
+								<button
+									type="button"
+									className="inline-flex items-center gap-1.5 rounded-md brand-gradient px-4 py-2 text-sm font-medium text-white shadow-sm transition-all hover:shadow-lg disabled:opacity-50 disabled:pointer-events-none"
+									aria-describedby="rename-execution-hint"
+									disabled={!canExecute}
 								>
-									{tExecute("timestampWarning")}
-								</label>
-							</div>
+									<Play className="h-3.5 w-3.5" />
+									{tExecute("execute")} ({affectedCount})
+								</button>
+							</AlertDialogTrigger>
+							<AlertDialogContent>
+								<AlertDialogHeader>
+									<AlertDialogTitle>{tExecute("confirmTitle")}</AlertDialogTitle>
+									<AlertDialogDescription>
+										{tExecute("confirmDesc", {
+											count: String(affectedCount),
+										})}
+									</AlertDialogDescription>
+								</AlertDialogHeader>
 
-							<AlertDialogFooter>
-								<AlertDialogCancel onClick={() => setWarningChecked(false)}>
-									{tExecute("cancel")}
-								</AlertDialogCancel>
-								<AlertDialogAction
-									onClick={() => {
-										onExecute();
-										setWarningChecked(false);
-									}}
-									disabled={!warningChecked}
-								>
-									{tExecute("confirm")}
-								</AlertDialogAction>
-							</AlertDialogFooter>
-						</AlertDialogContent>
-					</AlertDialog>
+								<div className="flex items-start gap-2 rounded-md border border-warning/30 bg-warning/5 p-3">
+									<Checkbox
+										id="timestamp-warning"
+										checked={warningChecked}
+										onCheckedChange={(v) => setWarningChecked(!!v)}
+										className="mt-0.5"
+									/>
+									<label
+										htmlFor="timestamp-warning"
+										className="text-xs text-muted-foreground leading-relaxed cursor-pointer"
+									>
+										{tExecute("timestampWarning")}
+									</label>
+								</div>
+
+								<AlertDialogFooter>
+									<AlertDialogCancel onClick={() => setWarningChecked(false)}>
+										{tExecute("cancel")}
+									</AlertDialogCancel>
+									<AlertDialogAction
+										onClick={() => {
+											onExecute();
+											setWarningChecked(false);
+										}}
+										disabled={!warningChecked}
+									>
+										{tExecute("confirm")}
+									</AlertDialogAction>
+								</AlertDialogFooter>
+							</AlertDialogContent>
+						</AlertDialog>
+					</div>
 				</div>
 			</div>
 		</div>

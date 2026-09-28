@@ -878,22 +878,10 @@
 			"empty": "(vacío)"
 		},
 		"guidance": {
-			"workflow": "Renombrar en tres pasos",
-			"import": "Importar archivos",
-			"configure": "Configurar reglas",
-			"review": "Revisar y renombrar",
-			"hideGuide": "Ocultar consejos",
-			"showGuide": "Mostrar consejos",
-			"stepHelp0": "Importa archivos o una carpeta, o prueba la demo. Tus archivos permanecen en tu dispositivo.",
-			"stepHelp1": "Elige qué quieres cambiar. Añade una regla y ajusta sus opciones para ver el resultado en la vista previa.",
-			"stepHelp2": "Compara los nombres originales y nuevos. Solo ejecutar el renombrado modifica tus archivos; editar reglas solo actualiza la vista previa.",
 			"tryDemo": "Probar demo",
 			"demoSafe": "3 fotos de ejemplo · sin modificar archivos",
 			"demoLabel": "Archivos de demostración",
 			"demoHint": "Ajusta la numeración y observa la vista previa. Al importar tus archivos se reemplazan los ejemplos y se conserva la regla.",
-			"chooseTask": "¿Qué quieres cambiar?",
-			"rulesHint": "Empieza con una tarea habitual o explora más opciones en Añadir regla.",
-			"ruleOrder": "Las reglas se aplican de arriba abajo. Arrástralas para cambiar el orden.",
 			"previewHint": "Importa archivos y añade una regla para comparar los nombres. La vista previa no modifica tus archivos.",
 			"viewConflicts": "Ver conflictos",
 			"selectFiles": "Mostrar y seleccionar todos",
@@ -909,12 +897,30 @@
 				"mixed": "Algunas entradas son solo de vista previa y se omitirán al ejecutar.",
 				"computing": "Actualizando la vista previa…",
 				"executing": "Renombrando archivos…"
-			},
-			"tasks": {
-				"sequence": "Añadir numeración",
-				"findReplace": "Reemplazar texto",
-				"removeCleanup": "Limpiar nombres"
 			}
+		},
+		"tour": {
+			"start": "Guía rápida",
+			"skip": "Omitir",
+			"next": "Continuar",
+			"done": "Finalizar guía",
+			"tryDemo": "Probar ejemplos",
+			"addNumbering": "Añadir números",
+			"seePreview": "Ver vista previa",
+			"editRules": "Ajustar reglas",
+			"loadError": "No se pudo cargar la guía. Inténtalo de nuevo.",
+			"importTitle": "Empieza con unos archivos",
+			"importBody": "Importa archivos o una carpeta, o arrástralos aquí. También puedes probar tres fotos de ejemplo sin modificar archivos reales.",
+			"rulesTitle": "Elige cómo renombrar",
+			"addRuleBody": "Elige una operación en Añadir regla o empieza con una numeración. Puedes ajustar la regla en cualquier momento.",
+			"editRuleBody": "Prueba a cambiar el valor inicial, el texto u otras opciones. Al terminar de editar, te mostraremos el resultado. También puedes elegir Ver vista previa.",
+			"previewTitle": "Compara antes y después",
+			"previewBody": "Los nombres originales están a la izquierda y los nuevos a la derecha. Es solo una vista previa; tus archivos no han cambiado.",
+			"conflictBody": "Hay conflictos de nombres. Ajusta las reglas o usa la corrección automática y revisa el resultado antes de continuar.",
+			"demoDoneTitle": "Prueba tus propios archivos",
+			"demoDoneBody": "Estas entradas son solo de vista previa. Importa tus archivos para reemplazar los ejemplos y conservar las reglas, o exporta un script o un plan.",
+			"executeTitle": "Listo para renombrar",
+			"executeBody": "Comprueba el resultado y pulsa Ejecutar renombrado. Confirmarás antes de modificar archivos. Esta guía nunca ejecuta el renombrado por ti."
 		}
 	},
 	"about": {

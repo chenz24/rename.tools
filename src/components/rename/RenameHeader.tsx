@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 import { useState } from "react";
+import { RenameTour } from "@/components/rename/RenameTour";
 import { Button } from "@/components/ui/button";
 import {
 	Dialog,
@@ -79,6 +80,7 @@ export function RenameHeader() {
 
 				{/* Right: Controls */}
 				<div className="flex items-center gap-0.5">
+					<RenameTour />
 					<Tooltip>
 						<TooltipTrigger asChild>
 							<Button

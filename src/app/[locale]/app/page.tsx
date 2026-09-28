@@ -12,7 +12,6 @@ import { PreviewPanel } from "@/components/rename/PreviewPanel";
 import { RenameHeader } from "@/components/rename/RenameHeader";
 import { RulePanel } from "@/components/rename/RulePanel";
 import { TaskMeasurement } from "@/components/rename/TaskMeasurement";
-import { WorkflowGuide } from "@/components/rename/WorkflowGuide";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
 import { useMediaScraper } from "@/hooks/useMediaScraper";
 import { useMetadataLoader } from "@/hooks/useMetadataLoader";
@@ -184,26 +183,10 @@ export default function RenameAppPage() {
 		isPreviewComputing,
 	});
 	const isDemo = files.some((file) => file.isDemo);
-	const guideStep =
-		guidanceState === "noFiles" || guidanceState === "noSelection"
-			? 0
-			: ["noRules", "disabledRules", "noChanges"].includes(guidanceState)
-				? 1
-				: 2;
-	const successfulRenames = new Map(
-		executionLog
-			.filter((entry) => entry.status === "success")
-			.map((entry) => [entry.fileId, entry.newName]),
-	);
-	const completed =
-		guidanceState === "noChanges" &&
-		preview.length > 0 &&
-		preview.every((row) => successfulRenames.get(row.fileId) === row.original);
 
 	return (
 		<div className="flex h-screen flex-col bg-background">
 			<RenameHeader />
-			<WorkflowGuide step={guideStep} completed={completed} />
 			<Suspense fallback={null}>
 				<PresetLinkDialog />
 				<TaskMeasurement />

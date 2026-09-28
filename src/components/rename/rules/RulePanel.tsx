@@ -68,10 +68,9 @@ export function RulePanel({
 	hasMetadata,
 }: Props) {
 	const t = useTranslations("rename.rules");
-	const tGuide = useTranslations("rename.guidance");
 
 	return (
-		<div className="flex h-full flex-col">
+		<div data-tour="rules" className="flex h-full flex-col">
 			{/* Panel Header */}
 			<div className="panel-header flex-wrap gap-y-2 border-b bg-muted/30 justify-between">
 				<div className="flex items-center gap-2">
@@ -133,30 +132,13 @@ export function RulePanel({
 			</div>
 
 			{/* Rules List */}
-			{rules.length > 1 && (
-				<p className="border-b px-3 py-2 text-xs text-muted-foreground">{tGuide("ruleOrder")}</p>
-			)}
 			<ScrollArea className="flex-1">
 				{rules.length === 0 ? (
 					<div className="flex flex-col items-center gap-3 py-10 text-center p-3">
 						<div className="flex h-12 w-12 items-center justify-center rounded-full bg-muted">
 							<Layers className="h-6 w-6 text-muted-foreground" />
 						</div>
-						<p className="text-sm font-medium">{tGuide("chooseTask")}</p>
-						<p className="text-xs leading-relaxed text-muted-foreground">{tGuide("rulesHint")}</p>
-						<div className="flex w-full flex-col gap-2">
-							{(["sequence", "findReplace", "removeCleanup"] as const).map((type) => (
-								<Button
-									key={type}
-									variant="outline"
-									size="sm"
-									onClick={() => onAddRule(type)}
-									className="h-auto whitespace-normal py-2 text-xs"
-								>
-									<Plus className="size-3.5" /> {tGuide(`tasks.${type}`)}
-								</Button>
-							))}
-						</div>
+						<p className="text-xs text-muted-foreground">{t("noRules")}</p>
 					</div>
 				) : (
 					<Reorder.Group
