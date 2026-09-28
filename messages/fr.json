@@ -329,7 +329,7 @@
 			},
 			"offlineReady": {
 				"title": "Fonctionne Hors Ligne",
-				"desc": "Après le chargement initial de la page, Rename.Tools fonctionne entièrement hors ligne. Aucune connexion Internet requise pour les opérations de renommage."
+				"desc": "Le renommage s’effectue localement, sans connexion réseau. Ouvrez une fois l’outil et les fonctions optionnelles dont vous avez besoin en ligne pour mettre leurs ressources en cache et les utiliser ensuite hors ligne."
 			},
 			"openSource": {
 				"title": "Entièrement Open Source",

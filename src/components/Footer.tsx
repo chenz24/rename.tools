@@ -27,6 +27,7 @@ export function Footer() {
 					{/* Brand Column */}
 					<div className="sm:col-span-2">
 						<Link
+							prefetch={false}
 							href="/"
 							className="inline-flex items-center gap-2 text-lg font-semibold text-foreground"
 						>
@@ -51,6 +52,7 @@ export function Footer() {
 						<ul className="space-y-2.5 text-sm">
 							<li>
 								<Link
+									prefetch={false}
 									href="/terms"
 									className="text-muted-foreground transition-colors hover:text-foreground"
 								>
@@ -59,6 +61,7 @@ export function Footer() {
 							</li>
 							<li>
 								<Link
+									prefetch={false}
 									href="/privacy"
 									className="text-muted-foreground transition-colors hover:text-foreground"
 								>
@@ -67,6 +70,7 @@ export function Footer() {
 							</li>
 							<li>
 								<Link
+									prefetch={false}
 									href="/disclaimer"
 									className="text-muted-foreground transition-colors hover:text-foreground"
 								>
@@ -82,6 +86,7 @@ export function Footer() {
 						<ul className="space-y-2.5 text-sm">
 							<li>
 								<Link
+									prefetch={false}
 									href="/about"
 									className="text-muted-foreground transition-colors hover:text-foreground"
 								>
@@ -90,6 +95,7 @@ export function Footer() {
 							</li>
 							<li>
 								<Link
+									prefetch={false}
 									href="/features"
 									className="text-muted-foreground transition-colors hover:text-foreground"
 								>
@@ -98,6 +104,7 @@ export function Footer() {
 							</li>
 							<li>
 								<Link
+									prefetch={false}
 									href="/guides"
 									locale={guidesLocale}
 									className="text-muted-foreground transition-colors hover:text-foreground"
@@ -149,6 +156,7 @@ export function Footer() {
 							{_languages.map((lang) => (
 								<li key={lang.code}>
 									<Link
+										prefetch={false}
 										href="/"
 										locale={lang.code}
 										className={`transition-colors hover:text-foreground ${

@@ -329,7 +329,7 @@
 			},
 			"offlineReady": {
 				"title": "Funktioniert offline",
-				"desc": "Nach dem ersten Laden der Seite funktioniert Rename.Tools vollständig offline. Keine Internetverbindung für Umbenennungsoperationen erforderlich."
+				"desc": "Das Umbenennen läuft lokal ohne Netzwerkverbindung. Öffne das Tool und die benötigten optionalen Funktionen einmal online, um ihre Ressourcen für die spätere Offline-Nutzung zu speichern."
 			},
 			"openSource": {
 				"title": "Vollständig Open Source",

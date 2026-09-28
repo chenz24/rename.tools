@@ -1,5 +1,3 @@
-"use client";
-
 import {
 	ArrowLeftRight,
 	ArrowRight,
@@ -33,8 +31,8 @@ import {
 	WifiOff,
 	Zap,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { useRef, useState } from "react";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { FeatureCategoryNav } from "@/components/features/FeatureCategoryNav";
 import { GuideLink } from "@/components/GuideLink";
 import { Link } from "@/i18n/navigation";
 
@@ -133,15 +131,10 @@ const PRIVACY_FEATURES = [
 ] as const;
 
 /* ═══════════════════════════════════════════════════════════════════ */
-export default function FeaturesPage() {
-	const t = useTranslations("features");
-	const [activeCategory, setActiveCategory] = useState<string>("rules");
-	const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
-
-	const scrollToSection = (categoryId: string) => {
-		setActiveCategory(categoryId);
-		sectionRefs.current[categoryId]?.scrollIntoView({ behavior: "smooth", block: "start" });
-	};
+export default async function FeaturesPage({ params }: { params: Promise<{ locale: string }> }) {
+	const { locale } = await params;
+	setRequestLocale(locale);
+	const t = await getTranslations("features");
 
 	return (
 		<div className="min-h-screen bg-background text-foreground">
@@ -171,37 +164,17 @@ export default function FeaturesPage() {
 			</section>
 
 			{/* ─── Sticky Tabs ───────────────────────────────────── */}
-			<div className="sticky top-14 z-40 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-				<div className="mx-auto max-w-5xl px-6">
-					<nav className="flex gap-1 overflow-x-auto py-3">
-						{CATEGORIES.map((cat) => (
-							<button
-								type="button"
-								key={cat.id}
-								onClick={() => scrollToSection(cat.id)}
-								className={`flex items-center gap-2 whitespace-nowrap rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
-									activeCategory === cat.id
-										? "bg-muted text-foreground"
-										: "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
-								}`}
-							>
-								<span className={`h-2 w-2 rounded-full ${cat.color}`} />
-								{t(`category.${cat.id}`)}
-							</button>
-						))}
-					</nav>
-				</div>
-			</div>
+			<FeatureCategoryNav
+				categories={CATEGORIES.map((category) => ({
+					...category,
+					label: t(`category.${category.id}`),
+				}))}
+			/>
 
 			{/* ══════════════════════════════════════════════════════ */}
 			{/* SECTION 1: Rule System                                */}
 			{/* ══════════════════════════════════════════════════════ */}
-			<section
-				ref={(el) => {
-					sectionRefs.current.rules = el;
-				}}
-				className="mx-auto max-w-5xl scroll-mt-32 px-6 py-24"
-			>
+			<section id="rules" className="mx-auto max-w-5xl scroll-mt-32 px-6 py-24">
 				{/* Section header */}
 				<div className="flex items-center gap-2 text-sm text-muted-foreground">
 					<span className="inline-block h-2.5 w-2.5 rounded-full bg-rose-500" />
@@ -304,12 +277,7 @@ export default function FeaturesPage() {
 			{/* ══════════════════════════════════════════════════════ */}
 			{/* SECTION 2: Preview & Workflow                         */}
 			{/* ══════════════════════════════════════════════════════ */}
-			<section
-				ref={(el) => {
-					sectionRefs.current.preview = el;
-				}}
-				className="mx-auto max-w-5xl scroll-mt-32 px-6 py-24"
-			>
+			<section id="preview" className="mx-auto max-w-5xl scroll-mt-32 px-6 py-24">
 				<div className="flex items-center gap-2 text-sm text-muted-foreground">
 					<span className="inline-block h-2.5 w-2.5 rounded-full bg-blue-500" />
 					<span className="font-medium">{t("category.preview")}</span>
@@ -346,12 +314,7 @@ export default function FeaturesPage() {
 			{/* ══════════════════════════════════════════════════════ */}
 			{/* SECTION 3: Templates & Automation                     */}
 			{/* ══════════════════════════════════════════════════════ */}
-			<section
-				ref={(el) => {
-					sectionRefs.current.automation = el;
-				}}
-				className="mx-auto max-w-5xl scroll-mt-32 px-6 py-24"
-			>
+			<section id="automation" className="mx-auto max-w-5xl scroll-mt-32 px-6 py-24">
 				<div className="flex items-center gap-2 text-sm text-muted-foreground">
 					<span className="inline-block h-2.5 w-2.5 rounded-full bg-violet-500" />
 					<span className="font-medium">{t("category.automation")}</span>
@@ -391,12 +354,7 @@ export default function FeaturesPage() {
 			{/* ══════════════════════════════════════════════════════ */}
 			{/* SECTION 4: Privacy & Security                         */}
 			{/* ══════════════════════════════════════════════════════ */}
-			<section
-				ref={(el) => {
-					sectionRefs.current.privacy = el;
-				}}
-				className="mx-auto max-w-5xl scroll-mt-32 px-6 py-24"
-			>
+			<section id="privacy" className="mx-auto max-w-5xl scroll-mt-32 px-6 py-24">
 				<div className="flex items-center gap-2 text-sm text-muted-foreground">
 					<span className="inline-block h-2.5 w-2.5 rounded-full bg-emerald-500" />
 					<span className="font-medium">{t("category.privacy")}</span>

@@ -1,24 +1,31 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { Suspense, useCallback, useMemo, useState } from "react";
 import { toast } from "sonner";
 import { useShallow } from "zustand/react/shallow";
 import { FilePanel } from "@/components/rename/FilePanel";
 import { IntelligentSuggestions } from "@/components/rename/IntelligentSuggestions";
-import { MediaScraperDialog } from "@/components/rename/MediaScraperDialog";
 import { PresetLinkDialog } from "@/components/rename/PresetLinkDialog";
 import { PreviewPanel } from "@/components/rename/PreviewPanel";
 import { RenameHeader } from "@/components/rename/RenameHeader";
 import { RulePanel } from "@/components/rename/RulePanel";
 import { TaskMeasurement } from "@/components/rename/TaskMeasurement";
-import { TmdbApiKeyDialog } from "@/components/rename/TmdbApiKeyDialog";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
 import { useMediaScraper } from "@/hooks/useMediaScraper";
 import { useMetadataLoader } from "@/hooks/useMetadataLoader";
 import { usePresetsStore } from "@/hooks/usePresetsStore";
 import { useRenameStore } from "@/hooks/useRenameStore";
 import { useTmdbConfig } from "@/hooks/useTmdbConfig";
+
+const MediaScraperDialog = dynamic(() =>
+	import("@/components/rename/MediaScraperDialog").then((m) => m.MediaScraperDialog),
+);
+
+const TmdbApiKeyDialog = dynamic(() =>
+	import("@/components/rename/TmdbApiKeyDialog").then((m) => m.TmdbApiKeyDialog),
+);
 
 const VIDEO_EXTS = new Set([".mp4", ".mov", ".avi", ".mkv", ".wmv", ".flv", ".webm", ".m4v"]);
 
@@ -134,6 +141,8 @@ export default function RenameAppPage() {
 	const scraper = useMediaScraper();
 
 	const [scraperOpen, setScraperOpen] = useState(false);
+	const [scraperLoaded, setScraperLoaded] = useState(false);
+	const [apiKeyDialogLoaded, setApiKeyDialogLoaded] = useState(false);
 	const [apiKeyDialogOpen, setApiKeyDialogOpen] = useState(false);
 
 	const hasVideoFiles = useMemo(
@@ -143,8 +152,10 @@ export default function RenameAppPage() {
 
 	const handleOpenScraper = useCallback(() => {
 		if (!tmdbConfig.isConfigured) {
+			setApiKeyDialogLoaded(true);
 			setApiKeyDialogOpen(true);
 		} else {
+			setScraperLoaded(true);
 			setScraperOpen(true);
 		}
 	}, [tmdbConfig.isConfigured]);
@@ -154,6 +165,7 @@ export default function RenameAppPage() {
 			const valid = await tmdbConfig.saveApiKey(key);
 			if (valid) {
 				setApiKeyDialogOpen(false);
+				setScraperLoaded(true);
 				setScraperOpen(true);
 			}
 			return valid;
@@ -254,13 +266,15 @@ export default function RenameAppPage() {
 			</ResizablePanelGroup>
 
 			{/* Media Scraper Dialogs */}
-			<TmdbApiKeyDialog
-				open={apiKeyDialogOpen}
-				onOpenChange={setApiKeyDialogOpen}
-				onSave={handleApiKeySaved}
-				isValidating={tmdbConfig.isValidating}
-			/>
-			{tmdbConfig.apiKey && (
+			{apiKeyDialogLoaded && (
+				<TmdbApiKeyDialog
+					open={apiKeyDialogOpen}
+					onOpenChange={setApiKeyDialogOpen}
+					onSave={handleApiKeySaved}
+					isValidating={tmdbConfig.isValidating}
+				/>
+			)}
+			{scraperLoaded && tmdbConfig.apiKey && (
 				<MediaScraperDialog
 					open={scraperOpen}
 					onOpenChange={setScraperOpen}

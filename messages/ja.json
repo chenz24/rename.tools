@@ -329,7 +329,7 @@
 			},
 			"offlineReady": {
 				"title": "Works Offline",
-				"desc": "After the initial page load, Rename.Tools works fully offline. No internet connection required for renaming operations."
+				"desc": "名前の変更はネットワーク接続なしでローカルに実行されます。ツールと必要な追加機能を一度オンラインで開き、リソースをキャッシュしてからオフラインでご利用ください。"
 			},
 			"openSource": {
 				"title": "Fully Open Source",

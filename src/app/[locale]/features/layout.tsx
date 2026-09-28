@@ -24,5 +24,5 @@ export default async function FeaturesLayout({ children, params }: Props) {
 
 	setRequestLocale(locale);
 
-	return <>{children}</>;
+	return children;
 }

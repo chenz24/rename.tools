@@ -329,7 +329,7 @@
 			},
 			"offlineReady": {
 				"title": "Works Offline",
-				"desc": "After the initial page load, Rename.Tools works fully offline. No internet connection required for renaming operations."
+				"desc": "El cambio de nombre se realiza localmente, sin conexión. Abre la herramienta y las funciones opcionales que necesites una vez con conexión para guardar sus recursos y usarlas después sin conexión."
 			},
 			"openSource": {
 				"title": "Fully Open Source",

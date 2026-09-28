@@ -1,0 +1,54 @@
+{
+	"light": {
+		"width": 3348,
+		"height": 1844,
+		"variants": [
+			{
+				"src": "/screenshots/optimized/product-light-384-173c876a5878.webp",
+				"width": 384
+			},
+			{
+				"src": "/screenshots/optimized/product-light-640-6326de625471.webp",
+				"width": 640
+			},
+			{
+				"src": "/screenshots/optimized/product-light-960-d644b6e46731.webp",
+				"width": 960
+			},
+			{
+				"src": "/screenshots/optimized/product-light-1440-48a8b4821fb4.webp",
+				"width": 1440
+			},
+			{
+				"src": "/screenshots/optimized/product-light-1920-70329b3cd9b8.webp",
+				"width": 1920
+			}
+		]
+	},
+	"dark": {
+		"width": 3354,
+		"height": 1852,
+		"variants": [
+			{
+				"src": "/screenshots/optimized/product-dark-384-7b4bb3f0ca0b.webp",
+				"width": 384
+			},
+			{
+				"src": "/screenshots/optimized/product-dark-640-9a8f5b46f066.webp",
+				"width": 640
+			},
+			{
+				"src": "/screenshots/optimized/product-dark-960-eb33105498b7.webp",
+				"width": 960
+			},
+			{
+				"src": "/screenshots/optimized/product-dark-1440-85b22f0a2770.webp",
+				"width": 1440
+			},
+			{
+				"src": "/screenshots/optimized/product-dark-1920-0fa62345e108.webp",
+				"width": 1920
+			}
+		]
+	}
+}
