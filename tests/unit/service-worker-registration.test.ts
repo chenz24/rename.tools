@@ -46,6 +46,7 @@ describe("service worker lifecycle", () => {
 	it("does not reload or show an update on the first installation and claim", async () => {
 		const s = setup();
 		const dispose = s.start();
+		expect(s.container.register).toHaveBeenCalledWith("/sw.js", { scope: "/", updateViaCache: "none" });
 		await Promise.resolve();
 		s.worker.install();
 		s.container.controller = s.worker;

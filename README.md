@@ -123,6 +123,16 @@ Use variables in Insert rules:
 | `pnpm format` | Format with Biome |
 | `pnpm check` | Lint + format (auto-fix) |
 
+### Releases and recovery
+
+Use `pnpm build`, `pnpm build:cf`, or `pnpm deploy` for production builds. The build wrapper generates `public/sw.js` from `scripts/service-worker.js` and shares a unique release ID with Next.js. If setting `NEXT_DEPLOYMENT_ID` in CI, use a different value for every release; do not run `next build` directly.
+
+The service worker never caches App Router/Flight responses. Offline HTML is isolated per release, while cached immutable chunks remain available to older tabs. An update waits for user acceptance. This retains cached assets, not every old asset on the server: an old tab requesting a previously uncached, removed chunk may still need to reload.
+
+Errors offer **Try again** and **Repair and reload**. A small inline fallback also offers repair when application scripts fail, or startup has not completed after 20 seconds. `/repair.html` is a standalone recovery page (Cloudflare may redirect it to `/repair`) with no React or external asset dependencies. After a user click and an online check, it unregisters only this site's root worker, clears only `rename-tools-` caches, and navigates once. It preserves saved presets/settings in localStorage and IndexedDB; unsaved in-memory work is lost on navigation. Close other site tabs before repairing. Offline/storage failures show a retryable message instead of repeatedly refreshing.
+
+Already-open pages from before this feature cannot acquire a new error UI without reloading; the direct recovery URL remains available once deployed. This is a cache recovery mechanism, not a remedy for server outages or application logic bugs.
+
 ## 🔒 Privacy
 
 Rename.Tools is built with a **privacy-first architecture**:

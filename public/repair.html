@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Repair — Rename.Tools</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;font:16px/1.7 system-ui;background:#f8fafc;color:#172033}main{max-width:540px;padding:32px;background:white;border:1px solid #cbd5e1;border-radius:16px}h1{font-size:26px;line-height:1.3}button,a{font:inherit}button{padding:12px 20px;border:0;border-radius:8px;background:#1d4ed8;color:white;cursor:pointer}button:disabled{opacity:.6;cursor:wait}a{color:#1d4ed8}#status{min-height:2em}small{display:block;margin:16px 0;color:#475569}
+</style>
+</head>
+<body>
+<main>
+<h1 id="title">Repair Rename.Tools</h1>
+<p id="description">Clear this site's cached application files and reload. Saved presets and settings are kept. Unsaved work on the page you left may be lost.</p>
+<small id="notice">An internet connection is required. If other Rename.Tools tabs are open, finish your work there and close them before repairing.</small>
+<button id="repair" type="button">Repair and reload</button>
+<p id="status" role="status" aria-live="polite"></p>
+<a id="back" href="/en">Back to the site</a>
+<noscript>JavaScript is disabled. Enable it to run the repair and use Rename.Tools.</noscript>
+</main>
+<script>
+// Self-contained on purpose: no Next/React chunks, stylesheet, or external script.
+(() => {
+  const copy = {
+    en: ['Repair Rename.Tools', "Clear this site's cached application files and reload. Saved presets and settings are kept. Unsaved work on the page you left may be lost.", 'An internet connection is required. If other Rename.Tools tabs are open, finish your work there and close them before repairing.', 'Repair and reload', 'Back to the site', 'Checking connection and repairing…', 'Repair could not finish. Check your connection, close other site tabs, and try again. Your saved presets and settings have not been deleted.'],
+    zh: ['修复 Rename.Tools', '清理本站缓存的程序文件并重新加载。已保存的预设和设置会保留；离开原页面时未保存的操作可能丢失。', '修复需要联网。如果还有其它 Rename.Tools 标签页，请先完成其中的操作并关闭它们。', '修复并重新加载', '返回网站', '正在检查网络并修复…', '修复未完成。请检查网络、关闭本站其它标签页后重试。已保存的预设和设置没有被删除。'],
+    ja: ['Rename.Tools を修復', 'キャッシュを削除して再読み込みします。保存済みの設定とプリセットは保持されます。未保存の作業は失われる場合があります。', 'インターネット接続が必要です。他のタブでの作業を完了して閉じてください。', '修復して再読み込み', 'サイトに戻る', '接続を確認して修復中…', '修復できませんでした。接続を確認し、他のタブを閉じて再試行してください。保存済みの設定は削除されていません。'],
+    ko: ['Rename.Tools 복구', '캐시를 삭제하고 새로고침합니다. 저장된 설정과 프리셋은 유지되지만 저장하지 않은 작업은 사라질 수 있습니다.', '인터넷 연결이 필요합니다. 다른 탭의 작업을 마치고 닫아 주세요.', '복구 후 새로고침', '사이트로 돌아가기', '연결 확인 및 복구 중…', '복구하지 못했습니다. 연결을 확인하고 다른 탭을 닫은 후 다시 시도하세요. 저장된 설정은 삭제되지 않았습니다.'],
+    es: ['Reparar Rename.Tools', 'Borra la caché de la aplicación y recarga. Los ajustes y preajustes guardados se conservan. El trabajo sin guardar puede perderse.', 'Se necesita internet. Termina tu trabajo en las otras pestañas del sitio y ciérralas.', 'Reparar y recargar', 'Volver al sitio', 'Comprobando conexión y reparando…', 'No se pudo completar la reparación. Comprueba la conexión, cierra las otras pestañas y reintenta. Los ajustes guardados no se han borrado.'],
+    fr: ['Réparer Rename.Tools', 'Efface le cache et recharge la page. Les réglages et préréglages enregistrés sont conservés. Le travail non enregistré peut être perdu.', 'Une connexion internet est nécessaire. Terminez votre travail dans les autres onglets du site et fermez-les.', 'Réparer et recharger', 'Retour au site', 'Vérification et réparation…', 'La réparation a échoué. Vérifiez la connexion, fermez les autres onglets et réessayez. Les réglages enregistrés ne sont pas supprimés.'],
+    de: ['Rename.Tools reparieren', 'Löscht den Anwendungscache und lädt neu. Gespeicherte Einstellungen und Vorlagen bleiben erhalten. Ungespeicherte Arbeit kann verloren gehen.', 'Eine Internetverbindung ist erforderlich. Beende deine Arbeit in anderen Tabs dieser Website und schließe sie.', 'Reparieren und neu laden', 'Zurück zur Website', 'Verbindung prüfen und reparieren…', 'Reparatur fehlgeschlagen. Prüfe die Verbindung, schließe andere Tabs und versuche es erneut. Gespeicherte Einstellungen wurden nicht gelöscht.']
+  };
+  const requested = new URL(location.href).searchParams.get('returnTo') || '/en';
+  let target = new URL('/en', location.origin);
+  try {
+    const candidate = new URL(requested, location.origin);
+    if (candidate.origin === location.origin && /^\/(en|zh|ja|ko|es|fr|de)(\/|$)/.test(candidate.pathname)) target = candidate;
+  } catch {}
+  const locale = target.pathname.split('/')[1];
+  const t = copy[locale] || copy.en;
+  document.documentElement.lang = locale || 'en';
+  ['title', 'description', 'notice', 'repair', 'back'].forEach((id, index) => { document.getElementById(id).textContent = t[index]; });
+  const button = document.getElementById('repair');
+  const status = document.getElementById('status');
+  document.getElementById('back').href = target.href;
+  let running = false;
+  async function bounded(promise) {
+    let timer;
+    try { return await Promise.race([promise, new Promise((_, reject) => { timer = setTimeout(() => reject(new Error('timeout')), 10000); })]); }
+    finally { clearTimeout(timer); }
+  }
+  function ours(worker) {
+    if (!worker) return false;
+    const url = new URL(worker.scriptURL);
+    return url.origin === location.origin && url.pathname === '/sw.js';
+  }
+  button.onclick = async () => {
+    if (running) return;
+    running = true;
+    button.disabled = true;
+    status.textContent = t[5];
+    const abort = new AbortController();
+    try {
+      // The legacy SW uses network-first for navigations and does not have this
+      // unique probe URL cached. Verify real HTML before deleting offline assets.
+      const response = await bounded(fetch('/repair.html?probe=' + Date.now(), { cache: 'no-store', signal: abort.signal }));
+      if (!response.ok || !(response.headers.get('Content-Type') || '').includes('text/html')) throw new Error('offline');
+      if (!(await bounded(response.text())).includes('id="repair"')) throw new Error('unexpected response');
+      if ('serviceWorker' in navigator) {
+        const registrations = await bounded(navigator.serviceWorker.getRegistrations());
+        const results = await bounded(Promise.all(registrations.filter((r) => r.scope === location.origin + '/' && [r.active, r.waiting, r.installing].some(ours)).map((r) => r.unregister())));
+        if (results.some((removed) => !removed)) throw new Error('unregister failed');
+      }
+      if ('caches' in window) {
+        const names = await bounded(caches.keys());
+        await bounded(Promise.all(names.filter((name) => name.startsWith('rename-tools-')).map((name) => caches.delete(name))));
+      }
+      // Exactly one navigation, only after an explicit click and successful repair.
+      // Never touch localStorage/IndexedDB, which contain the user's own data.
+      target.searchParams.set('_repair', String(Date.now()));
+      location.replace(target.href);
+    } catch {
+      status.textContent = t[6];
+      button.disabled = false;
+      running = false;
+    } finally { abort.abort(); }
+  };
+})();
+</script>
+</body>
+</html>

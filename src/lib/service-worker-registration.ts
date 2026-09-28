@@ -34,7 +34,7 @@ export function registerServiceWorker(
 	cleanup.push(() => container.removeEventListener("controllerchange", onControllerChange));
 
 	void container
-		.register("/sw.js", { scope: "/" })
+		.register("/sw.js", { scope: "/", updateViaCache: "none" })
 		.then((registration) => {
 			if (disposed) return;
 			const observeInstalling = () => {

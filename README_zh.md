@@ -123,6 +123,16 @@ pnpm dev
 | `pnpm format` | 使用 Biome 格式化代码 |
 | `pnpm check` | 检查 + 格式化（自动修复） |
 
+### 发布与故障恢复
+
+生产构建请使用 `pnpm build`、`pnpm build:cf` 或 `pnpm deploy`。构建脚本会从 `scripts/service-worker.js` 生成 `public/sw.js`，并与 Next.js 共用唯一发布 ID。CI 如设置 `NEXT_DEPLOYMENT_ID`，每次发布必须使用不同值；不要直接运行 `next build`。
+
+Service Worker 不缓存 App Router/Flight 数据；离线 HTML 按发布版本隔离，已缓存的哈希 JS 会保留供旧标签页使用，更新等待用户确认。这只保留浏览器已缓存的资源，并不保留服务器上的所有旧文件；旧页面首次请求已被服务器移除的 JS 时，仍可能需要重新加载。
+
+错误页提供“重试”和“修复并重新加载”。主程序脚本加载失败，或启动超过 20 秒仍未完成时，独立内联脚本也会提供修复入口。`/repair.html` 是不依赖 React 或外部资源的恢复页（Cloudflare 可能重定向到 `/repair`）：用户点击且联网检查成功后，只注销本站根作用域的 SW、清理 `rename-tools-` 缓存，然后跳转一次。localStorage、IndexedDB 中已保存的预设和设置会保留；跳转会丢失内存中未保存的操作。修复前请完成并关闭本站其它标签页的操作。断网或缓存访问失败时保留重试入口，不循环刷新。
+
+功能上线前已打开的旧页面，需要刷新后才能获得新的错误界面；上线后也可直接访问恢复页。该机制用于修复缓存问题，无法替代服务器故障或业务代码错误的修复。
+
 ## 🔒 隐私保护
 
 Rename.Tools 采用 **隐私优先架构**：

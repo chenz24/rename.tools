@@ -2,11 +2,17 @@
 
 import { RecoveryError } from "@/components/RecoveryError";
 
-export default function ErrorPage({
+export default function GlobalError({
 	reset,
 }: {
 	error: Error & { digest?: string };
 	reset: () => void;
 }) {
-	return <RecoveryError reset={reset} />;
+	return (
+		<html>
+			<body>
+				<RecoveryError reset={reset} />
+			</body>
+		</html>
+	);
 }

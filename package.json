@@ -7,7 +7,7 @@
 	},
 	"scripts": {
 		"dev": "next dev --turbopack",
-		"build": "next build --webpack",
+		"build": "node scripts/build.mjs",
 		"generate:og": "node --import tsx scripts/generate-opengraph-image.tsx",
 		"generate:screenshots": "node scripts/generate-product-screenshots.mjs && node scripts/generate-guide-screenshots.mjs",
 		"build:cf": "opennextjs-cloudflare build && opennextjs-cloudflare populateCache local",
